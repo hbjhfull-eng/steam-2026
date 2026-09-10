@@ -3,702 +3,349 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>디지털로 읽는 중화 반응</title>
-<meta name="description" content="통합과학·정보·수학 융합 STEAM 4차시 학생 활동지">
+<title>디지털로 읽는 중화 반응 — 학생 모집</title>
+<meta name="description" content="통합과학·정보·수학을 잇는 4차시 STEAM 융합수업. 중화 반응을 마이크로비트로 측정하고 함수로 표현합니다. 1학년 대상, 온라인 신청.">
 <link rel="icon" href="favicon.svg">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="디지털로 읽는 중화 반응 — STEAM 학생 활동지">
-<meta property="og:description" content="중화 반응 · 전기 전도도 측정(마이크로비트/자바실험실) · 절댓값 함수 모델링 4차시">
+<meta property="og:title" content="디지털로 읽는 중화 반응 — STEAM 융합수업 모집">
+<meta property="og:description" content="산과 염기가 만나면 전류는 어떻게 변할까? 실험·코딩·수학을 잇는 4차시 프로그램. 지금 신청하세요.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+<!-- =========================================================================
+  공개 전에 아래 〔  〕 표시된 부분을 실제 정보로 바꿔 주세요 (find & replace):
+   〔학교명〕            예) 한일여자고등학교
+   〔운영 요일·시간〕     예) 매주 화요일 18:00–21:30
+   〔운영 기간〕          예) 2026. 3.~6. (총 4주)
+   〔정원〕              예) 4명 (1개 반)
+   〔신청 마감〕          예) 2026. 3. 6.(금) 17:00
+   〔담당 교사〕          예) 통합과학 ○○○ · 정보 ○○○
+   〔장소〕              예) 창의융합실 1
+   〔문의〕              예) 과학실 / 내선 000
+   구글 폼 주소: 아래 id="apply" 섹션의 <a class="cta-big" href="..."> 한 곳만 바꾸면 됩니다.
+========================================================================== -->
+
 <style>
+*,*::before,*::after{box-sizing:border-box}
+html{color-scheme:light dark;scroll-behavior:smooth;scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+img{max-width:100%}
+[hidden]{display:none!important}
+
 :root{
-  --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#5a6673; --line:#d7dde3;
-  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --data:#3a4657;
-  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb; --data-bg:#e6e9ee;
-  --field:#eef4f2; --field-line:#9db8b0; --focus:#2f9c82;
-  --shadow:0 1px 2px rgba(27,37,48,.06),0 6px 20px rgba(27,37,48,.06);
+  --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#57636f; --line:#d7dde3;
+  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --neutral-deep:#237a66;
+  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb;
+  --tbd:#b06a2e; --tbd-bg:#f6ecdf;
+  --shadow:0 1px 2px rgba(27,37,48,.05),0 10px 30px rgba(27,37,48,.07);
   --f-disp:"Gothic A1","IBM Plex Sans KR",system-ui,sans-serif;
   --f-body:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
-  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6;
-  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a;
-  --field:#20303a; --field-line:#4a6b62; --focus:#5cc6a9;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+  --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027;
+  --tbd:#dba06a; --tbd-bg:#332a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
 }}
 :root[data-theme="dark"]{
-  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
-  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6;
-  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a;
-  --field:#20303a; --field-line:#4a6b62; --focus:#5cc6a9;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+  --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027;
+  --tbd:#dba06a; --tbd-bg:#332a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:88px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
   font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%}
-h1,h2,h3,h4{font-family:var(--f-disp);line-height:1.25;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--f-disp);line-height:1.22;margin:0;text-wrap:balance}
 p{margin:0}
 a{color:var(--base)}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.tbd{color:var(--tbd);background:var(--tbd-bg);border-radius:4px;padding:0 4px;
+  text-decoration:underline dotted;text-underline-offset:3px;white-space:nowrap;font-size:.94em}
 
-/* ---- top bar ---- */
-.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
-@supports (backdrop-filter:blur(1px)){.bar{background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(8px)}}
-.bar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.bar strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
-.steps{display:flex;gap:6px;margin-left:auto}
-.steps a{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;
-  font-family:var(--f-mono);font-size:13px;text-decoration:none;color:var(--ink-soft);
-  border:1px solid var(--line);background:var(--card)}
-.steps a[data-d="sci"]:hover,.steps a[data-d="sci"].on{border-color:var(--neutral);color:var(--neutral)}
-.steps a[data-d="info"]:hover,.steps a[data-d="info"].on{border-color:var(--base);color:var(--base)}
-.steps a[data-d="data"]:hover,.steps a[data-d="data"].on{border-color:var(--data);color:var(--ink)}
-.steps a[data-d="math"]:hover,.steps a[data-d="math"].on{border-color:var(--acid);color:var(--acid)}
-.prog{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
-.tools{display:flex;gap:8px}
-.tools button{font-family:var(--f-body);font-size:13px;padding:6px 12px;border-radius:8px;
-  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
-.tools button:hover{border-color:var(--focus)}
-.tools button:focus-visible,.steps a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+@supports (backdrop-filter:blur(1px)){.top{background:color-mix(in srgb,var(--paper) 84%,transparent);backdrop-filter:blur(9px)}}
+.top-in{max-width:960px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:14px}
+.top strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
+.top nav{margin-left:auto;display:flex;gap:16px;align-items:center}
+.top nav a{font-size:13.5px;color:var(--ink-soft);text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+.btn{font-family:var(--f-body);font-weight:600;font-size:14px;text-decoration:none;
+  border-radius:9px;padding:9px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--neutral);color:#fff}
+.btn-primary:hover{background:var(--neutral-deep)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--neutral)}
+.btn:focus-visible,.top nav a:focus-visible{outline:2px solid var(--neutral);outline-offset:2px}
+@media (max-width:640px){.top nav a.hide-sm{display:none}}
 
-/* ---- shell ---- */
-main{max-width:900px;margin:0 auto;padding:0 20px 90px}
-.hero{padding:44px 0 30px}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-.hero h1{font-size:clamp(28px,4.6vw,42px);font-weight:800;margin:12px 0 14px;letter-spacing:-.02em}
-.hero p{max-width:62ch;color:var(--ink-soft)}
-.who{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.who label{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
-.who input{font-family:var(--f-body);font-size:15px;color:var(--ink);background:var(--field);
-  border:1px solid var(--field-line);border-radius:7px;padding:8px 10px;min-width:150px}
-.who input:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+/* hero */
+.hero{padding:56px 0 40px}
+.hero h1{font-size:clamp(29px,5.2vw,46px);font-weight:800;letter-spacing:-.022em;margin:14px 0 16px}
+.hero .tag{color:var(--acid)}
+.hero p.sub{max-width:60ch;font-size:clamp(15px,2vw,17px);color:var(--ink-soft)}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero .btn{padding:12px 20px;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 13px;
+  font-size:13px;display:flex;flex-direction:column;gap:2px;box-shadow:var(--shadow)}
+.chip b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.chip span{font-weight:600}
 
-/* ---- section ---- */
-.cha{margin-top:34px;border-top:2px solid var(--line);padding-top:8px}
-.cha-head{display:flex;gap:16px;align-items:flex-start;padding:16px 0 6px}
-.cha-num{font-family:var(--f-mono);font-weight:600;font-size:13px;padding:5px 9px;border-radius:6px;white-space:nowrap;margin-top:3px}
-.cha-head h2{font-size:clamp(21px,3vw,27px);font-weight:800;letter-spacing:-.015em}
-.cha-head .sub{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-top:5px;letter-spacing:.02em}
-[data-d="sci"] .cha-num{background:var(--neutral-bg);color:var(--neutral)}
-[data-d="info"] .cha-num{background:var(--base-bg);color:var(--base)}
-[data-d="data"] .cha-num{background:var(--data-bg);color:var(--ink)}
-[data-d="math"] .cha-num{background:var(--acid-bg);color:var(--acid)}
-[data-d="sci"]{border-top-color:var(--neutral)}
-[data-d="info"]{border-top-color:var(--base)}
-[data-d="data"]{border-top-color:var(--data)}
-[data-d="math"]{border-top-color:var(--acid)}
+section.blk{padding:40px 0;border-top:1px solid var(--line)}
+section.blk > .wrap > h2{font-size:clamp(20px,3vw,27px);font-weight:800;letter-spacing:-.015em}
+section.blk > .wrap > p.intro{margin-top:12px;max-width:64ch;color:var(--ink-soft)}
 
-.act{background:var(--card);border:1px solid var(--line);border-radius:12px;
-  box-shadow:var(--shadow);padding:20px 22px;margin-top:16px}
-.act > h3{font-size:16px;font-weight:700;display:flex;gap:9px;align-items:baseline}
-.act > h3 .tag{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--ink-soft);
-  border:1px solid var(--line);border-radius:5px;padding:2px 6px;flex:none}
-.act p.lead{color:var(--ink-soft);font-size:14.5px;margin-top:6px}
-.mission{font-family:var(--f-body);font-size:14px;background:var(--field);border:1px solid var(--field-line);
-  border-radius:8px;padding:10px 13px;margin-top:12px}
-.mission b{font-family:var(--f-disp);font-weight:700}
+/* STEAM 매핑 */
+.steam{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}
+@media (max-width:860px){.steam{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:520px){.steam{grid-template-columns:1fr 1fr}}
+.steam div{border:1px solid var(--line);border-radius:10px;padding:13px;background:var(--card)}
+.steam .k{font-family:var(--f-disp);font-weight:800;font-size:20px;line-height:1}
+.steam .t{font-size:11px;font-family:var(--f-mono);color:var(--ink-soft);margin:3px 0 7px}
+.steam .d{font-size:12.5px;line-height:1.5}
+.steam div:nth-child(1) .k{color:var(--neutral)}
+.steam div:nth-child(2) .k{color:var(--base)}
+.steam div:nth-child(3) .k{color:var(--base)}
+.steam div:nth-child(4) .k{color:var(--ink)}
+.steam div:nth-child(5) .k{color:var(--acid)}
 
-ol.todo,ul.todo{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
-ol.todo li,ul.todo li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
-.todo input[type=checkbox]{flex:none;width:17px;height:17px;margin-top:3px;accent-color:var(--focus);cursor:pointer}
-.todo .n{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);flex:none;margin-top:2px;min-width:16px}
-.todo code,.act code{font-family:var(--f-mono);font-size:12.5px;background:var(--field);
-  border:1px solid var(--line);border-radius:5px;padding:1px 5px}
-.hint{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+/* 커리큘럼 */
+.curr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+@media (max-width:720px){.curr{grid-template-columns:1fr}}
+.lesson{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 19px;box-shadow:var(--shadow)}
+.lesson .h{display:flex;align-items:baseline;gap:9px}
+.lesson .n{font-family:var(--f-mono);font-weight:600;font-size:12px;padding:3px 8px;border-radius:6px;background:var(--neutral-bg);color:var(--neutral-deep)}
+.lesson:nth-child(2) .n{background:var(--base-bg);color:var(--base)}
+.lesson:nth-child(3) .n{background:var(--tbd-bg);color:var(--tbd)}
+.lesson:nth-child(4) .n{background:var(--acid-bg);color:var(--acid)}
+.lesson h3{font-size:15.5px;font-weight:700}
+.lesson .sub{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft);margin-top:3px}
+.lesson p{font-size:13.5px;color:var(--ink-soft);margin-top:9px}
+.lesson ul{margin:9px 0 0;padding-left:18px;font-size:13px}
+.lesson li{margin-top:3px}
 
-.write{display:block;font-family:var(--f-body);font-size:14.5px;line-height:1.6;color:var(--ink);
-  background:var(--field);border:1px solid var(--field-line);border-radius:8px;
-  padding:10px 12px;margin-top:10px;min-height:2.6em;white-space:pre-wrap;word-break:break-word}
-.write:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
-.write:empty:before{content:attr(data-ph);color:var(--ink-soft);opacity:.75}
-.qlabel{font-size:13.5px;font-weight:600;margin-top:16px;display:flex;gap:7px}
-.qlabel .b{color:var(--focus);font-family:var(--f-mono);flex:none}
-.qlabel:first-of-type{margin-top:12px}
+/* 리스트 카드 */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.three-col{grid-template-columns:1fr 1fr 1fr}
+@media (max-width:720px){.two-col,.three-col{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
+.panel h3{font-size:14.5px;font-weight:700;display:flex;gap:8px;align-items:center}
+.panel h3 .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.panel ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.panel li{font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
+.panel li::before{content:"";width:16px;height:16px;flex:none;margin-top:3px;border-radius:5px;
+  background:var(--neutral-bg);border:1px solid var(--neutral)}
+.panel.note li::before{background:var(--base-bg);border-color:var(--base)}
 
-.tbl-wrap{overflow-x:auto;margin-top:14px}
-table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:440px}
-caption{text-align:left;font-size:12.5px;color:var(--ink-soft);margin-bottom:7px}
-th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;font-variant-numeric:tabular-nums}
-thead th{background:var(--field);font-family:var(--f-disp);font-weight:700}
-tbody th{background:var(--field);font-weight:600;white-space:nowrap}
-td input{width:100%;min-width:44px;border:none;background:transparent;font-family:var(--f-mono);
-  font-size:13.5px;text-align:center;color:var(--ink);padding:3px 2px}
-td input:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:3px}
-td.fixed{background:var(--field);font-family:var(--f-mono);color:var(--ink-soft)}
+/* 운영 안내 표 */
+.tbl-wrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:420px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+tr:last-child th,tr:last-child td{border-bottom:none}
+th{width:34%;background:var(--card);font-family:var(--f-disp);font-weight:700;white-space:nowrap}
 
-.fml{font-family:var(--f-mono);font-size:14px;background:var(--field);border:1px solid var(--line);
-  border-radius:8px;padding:12px 14px;margin-top:12px;overflow-x:auto}
-.callout{font-size:13.5px;border-left:3px solid var(--focus);padding:4px 0 4px 13px;margin-top:14px;color:var(--ink-soft)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-@media (max-width:620px){.two{grid-template-columns:1fr}}
-.two .box{border:1px solid var(--line);border-radius:9px;padding:12px 13px;background:var(--paper)}
-.two .box h4{font-size:13px;font-weight:700;font-family:var(--f-disp)}
-.two .box p{font-size:13px;color:var(--ink-soft);margin-top:5px}
+/* 신청 */
+#apply .wrap{text-align:center}
+.deadline{font-family:var(--f-mono);font-size:13px;color:var(--acid);margin-top:10px}
+.cta-big{margin-top:18px;font-size:16px;font-weight:700;padding:15px 30px;background:var(--neutral);color:#fff;
+  text-decoration:none;border-radius:11px;display:inline-flex;gap:9px;align-items:center}
+.cta-big:hover{background:var(--neutral-deep)}
+.cta-big:focus-visible{outline:2px solid var(--neutral);outline-offset:3px}
+#apply .contact{font-size:13px;color:var(--ink-soft);margin-top:16px}
 
-figure{margin:16px 0 0}
-figure svg{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--line);border-radius:9px}
-figure svg .ax{stroke:var(--line)}
-figure svg .curve-data{stroke:var(--data)}
-figure svg .curve-fn{stroke:var(--acid)}
-figure svg .pt{fill:var(--neutral)}
-figure svg .lbl{fill:var(--ink-soft);font-family:var(--f-mono)}
-figure svg .lbl-n{fill:var(--neutral);font-family:var(--f-mono)}
-figure svg .lbl-a{fill:var(--acid);font-family:var(--f-mono)}
-figcaption{font-size:12px;color:var(--ink-soft);margin-top:6px}
+/* FAQ */
+.faq{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:2px 18px}
+summary{font-weight:600;font-size:14.5px;padding:14px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--ink-soft)}
+details[open] summary::after{content:"–"}
+details p{font-size:13.5px;color:var(--ink-soft);padding:0 0 16px}
 
-.selfcheck{margin-top:16px;border:1px dashed var(--field-line);border-radius:10px;padding:14px 16px;background:var(--field)}
-.selfcheck h4{font-family:var(--f-disp);font-size:13px;font-weight:700;letter-spacing:.02em}
-.selfcheck .row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin-top:9px}
-.selfcheck .opts{margin-left:auto;display:flex;gap:5px;flex:none}
-.selfcheck .opts label{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line);border-radius:6px;
-  padding:3px 7px;cursor:pointer;background:var(--card);color:var(--ink-soft)}
-.selfcheck .opts input{position:absolute;opacity:0;width:0;height:0}
-.selfcheck .opts input:checked + span{color:var(--focus);font-weight:600}
-.selfcheck .opts label:has(input:checked){border-color:var(--focus)}
-
-footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(--ink-soft);text-align:center}
-
-.saved{position:fixed;right:16px;bottom:16px;font-family:var(--f-mono);font-size:11px;
-  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 13px;
-  color:var(--ink-soft);box-shadow:var(--shadow);opacity:0;transition:opacity .3s;z-index:30}
-.saved.show{opacity:1}
-@media (prefers-reduced-motion:reduce){.saved{transition:none}}
-
-@media print{
-  .bar,.tools,.saved,.steps{display:none!important}
-  body{background:#fff;color:#000;font-size:11.5pt}
-  main{max-width:none;padding:0}
-  .act{box-shadow:none;break-inside:avoid;border-color:#bbb}
-  .cha{break-before:page}
-  .hero{padding:0 0 16px}
-  .write,.who input,td input{background:#fff;border-color:#999}
-  .write:empty:before{content:""}
-  figure svg{border-color:#999}
-}
-</style>
-<style>
-*,*::before,*::after{box-sizing:border-box}
-html{color-scheme:light dark}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
+footer{border-top:1px solid var(--line);padding:26px 22px 40px;text-align:center;font-size:12px;color:var(--ink-soft)}
+footer a{color:var(--ink-soft)}
 </style>
 </head>
 <body>
 
-<div class="bar">
-  <div class="bar-in">
+<header class="top">
+  <div class="top-in">
     <strong>디지털로 읽는 중화 반응</strong>
-    <span class="prog" id="prog">진행 0%</span>
-    <nav class="steps" aria-label="차시 이동">
-      <a href="#cha1" data-d="sci">1</a>
-      <a href="#cha2" data-d="info">2</a>
-      <a href="#cha3" data-d="data">3</a>
-      <a href="#cha4" data-d="math">4</a>
+    <nav>
+      <a href="#about" class="hide-sm">과정 소개</a>
+      <a href="#curriculum" class="hide-sm">4차시</a>
+      <a href="activity.html" class="hide-sm">활동지 미리보기</a>
+      <a href="#apply" class="btn btn-primary">신청하기</a>
     </nav>
-    <div class="tools">
-      <button id="btn-copy" type="button">답안 복사</button>
-      <button id="btn-print" type="button">인쇄 · PDF</button>
-    </div>
   </div>
-</div>
+</header>
 
 <main>
-  <header class="hero">
-    <div class="eyebrow">통합과학 · 정보 · 수학 융합 STEAM · 4차시</div>
-    <h1>산과 염기가 만나면 전류는 어떻게 변할까?</h1>
-    <p>중화 반응을 <b>화학 반응식</b>으로 쓰고, 마이크로비트로 만든 측정기와 자바실험실 시뮬레이션으로
-      <b>전기 전도도 데이터</b>를 모으고, 지오지브라로 그 데이터를 <b>절댓값 함수</b>로 표현합니다.
-      각 활동에서 "내가 직접 해야 할 일"을 순서대로 따라가며 빈칸을 채우세요. 입력한 내용은 이 기기에 자동 저장됩니다.</p>
-    <div class="who">
-      <label>학년 / 반 / 번호 <input id="w-id" data-field="w-id" autocomplete="off"></label>
-      <label>이름 <input id="w-name" data-field="w-name" autocomplete="off"></label>
-      <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
-    </div>
-  </header>
-
-  <!-- ================= 1차시 ================= -->
-  <section class="cha" id="cha1" data-d="sci">
-    <div class="cha-head">
-      <span class="cha-num">1차시</span>
-      <div>
-        <h2>산과 염기의 중화 반응</h2>
-        <div class="sub">통합과학 · [10통과2-01-04] · 학습 모형: 순환</div>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">STEAM 융합수업 · 1학년 신입 모집</div>
+      <h1>산과 염기가 만나면,<br><span class="tag">전류</span>는 어떻게 변할까?</h1>
+      <p class="sub">눈에 보이지 않는 <b>중화 반응</b>을 직접 만든 <b>마이크로비트 측정기</b>로 읽어 내고,
+        그 데이터를 <b>그래프와 함수</b>로 표현합니다. 통합과학·정보·수학이 한 실험 안에서 만나는 4차시 프로그램입니다.</p>
+      <div class="actions">
+        <a href="#apply" class="btn btn-primary">구글 폼으로 신청하기</a>
+        <a href="activity.html" class="btn btn-ghost">활동지 미리보기 →</a>
+      </div>
+      <div class="chips">
+        <div class="chip"><b>대상</b><span>1학년 (희망자)</span></div>
+        <div class="chip"><b>기간</b><span class="tbd">〔운영 기간〕</span></div>
+        <div class="chip"><b>시간</b><span class="tbd">〔운영 요일·시간〕</span></div>
+        <div class="chip"><b>장소</b><span class="tbd">〔장소〕</span></div>
+        <div class="chip"><b>정원</b><span class="tbd">〔정원〕</span></div>
+        <div class="chip"><b>준비</b><span>사전지식 불필요</span></div>
       </div>
     </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 산성·염기성이 나타나는 까닭을 이온으로 설명한다.
-      ② 중화 반응을 화학 반응식과 알짜 이온 반응식, 이온 모형으로 나타낸다.</p>
+  </section>
 
-    <div class="act">
-      <h3><span class="tag">열기</span> 개미 부대의 개미산 공격</h3>
-      <p class="lead">베르나르 베르베르 『개미』에서, 개미는 위협을 느끼면 <b>개미산</b>(산)을 내뿜습니다.
-        그런데도 청딱따구리는 개미를 쪼아 먹습니다.</p>
-      <div class="qlabel"><span class="b">Q</span> 딱따구리가 개미산에도 개미를 먹을 수 있는 까닭을 지금 생각으로 예상해 보세요.</div>
-      <div class="write" contenteditable="true" data-field="c1-hook" data-q="1차시 열기: 딱따구리가 개미를 먹을 수 있는 까닭 예상" data-ph="예: 딱따구리 몸속의 어떤 물질이 개미산을 …"></div>
+  <section class="blk" id="about">
+    <div class="wrap">
+      <h2>이 과정은</h2>
+      <p class="intro">"딱따구리는 왜 개미산을 내뿜는 개미를 먹을 수 있을까?"라는 질문에서 출발합니다.
+        산과 염기가 반응하면 이온이 사라지고, 그만큼 용액에 흐르는 전류가 약해집니다.
+        이 변화를 <b>측정 → 데이터 → 그래프 → 함수</b>의 순서로 따라가며,
+        과학 개념·코딩·수학이 사실은 하나의 문제를 푸는 서로 다른 도구라는 것을 경험합니다.</p>
+      <div class="steam">
+        <div><div class="k">S</div><div class="t">Science</div><div class="d">중화 반응, 알짜 이온 반응식, 이온 수 변화</div></div>
+        <div><div class="k">T</div><div class="t">Technology</div><div class="d">마이크로비트·MakeCode로 전기 전도도 측정</div></div>
+        <div><div class="k">E</div><div class="t">Engineering</div><div class="d">측정 알고리즘 설계와 장치 제작·디버깅</div></div>
+        <div><div class="k">A</div><div class="t">Arts</div><div class="d">데이터를 읽히는 그래프로 시각화</div></div>
+        <div><div class="k">M</div><div class="t">Mathematics</div><div class="d">절댓값을 포함한 함수로 모델링·예측</div></div>
+      </div>
     </div>
+  </section>
 
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 산과 염기의 공통 성질 정리</h3>
-      <p class="lead">교재 50쪽 표를 보고, 산성·염기성일 때의 반응을 채웁니다. 마지막 줄에 "왜 그런 성질이 나타나는지"를 이온으로 적습니다.</p>
+  <section class="blk" id="curriculum">
+    <div class="wrap">
+      <h2>4차시 커리큘럼</h2>
+      <p class="intro">한 시간(50분)씩 4차시. 모둠(3~4인)으로 함께 실험하고 각자 활동지를 완성합니다.</p>
+      <div class="curr">
+        <div class="lesson">
+          <div class="h"><span class="n">1차시</span><h3>산과 염기의 중화 반응</h3></div>
+          <div class="sub">통합과학</div>
+          <p>중화 반응을 식으로 쓰고, 시뮬레이션으로 이온이 어떻게 사라지고 남는지 관찰합니다.</p>
+          <ul><li>전체·알짜 이온 반응식</li><li>자바실험실로 이온 수 변화표 완성</li><li>중화점을 확인하는 3가지 방법</li></ul>
+        </div>
+        <div class="lesson">
+          <div class="h"><span class="n">2차시</span><h3>전기 전도도 측정기 만들기</h3></div>
+          <div class="sub">정보 · 공학</div>
+          <p>마이크로비트를 연결하고, 측정 순서를 알고리즘으로 설계해 직접 코딩합니다.</p>
+          <ul><li>하드웨어 배선(P0-SIG / GND)</li><li>5회 평균 측정 알고리즘 설계</li><li>MakeCode 코딩·업로드·디버깅</li></ul>
+        </div>
+        <div class="lesson">
+          <div class="h"><span class="n">3차시</span><h3>실험 &amp; 데이터 수집</h3></div>
+          <div class="sub">통합과학 · 데이터</div>
+          <p>산·염기를 조금씩 섞으며 전기 전도도를 측정하고, 스프레드시트로 그래프를 그립니다.</p>
+          <ul><li>회차별 전도도 측정·기록</li><li>꺾은선 / 분산형 그래프 생성</li><li>V자 그래프와 중화점 해석</li></ul>
+        </div>
+        <div class="lesson">
+          <div class="h"><span class="n">4차시</span><h3>지오지브라로 함수 모델링</h3></div>
+          <div class="sub">통합과학 · 공통수학</div>
+          <p>데이터에 맞는 절댓값 함수를 찾아 그래프로 검증하고, 넣지 않은 값을 예측합니다.</p>
+          <ul><li>y = a|x − p| + q 로 표현</li><li>함수로 전도도 예측·검증</li><li>중화열 그래프로 확장 토의</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>이런 학생에게 추천합니다</h2>
+      <div class="two-col">
+        <div class="panel">
+          <h3><span class="dot" style="background:var(--neutral)"></span>이런 관심이 있다면</h3>
+          <ul>
+            <li>실험 결과가 왜 그렇게 나오는지 끝까지 따지고 싶은 사람</li>
+            <li>코딩·피지컬 컴퓨팅(마이크로비트, 아두이노)에 관심 있는 사람</li>
+            <li>데이터·그래프·수학이 실제로 어디에 쓰이는지 보고 싶은 사람</li>
+            <li>모둠 활동으로 하나의 결과물을 만들어 보고 싶은 사람</li>
+          </ul>
+        </div>
+        <div class="panel note">
+          <h3><span class="dot" style="background:var(--base)"></span>미리 알아둘 점</h3>
+          <ul>
+            <li>사전 지식·선수 과목은 필요 없습니다. 개념은 수업에서 다룹니다.</li>
+            <li>코딩 경험이 없어도 됩니다. 블록 코딩부터 함께 시작합니다.</li>
+            <li>장비(마이크로비트·노트북)와 시약은 모두 제공됩니다.</li>
+            <li>정원이 있어 신청이 많으면 학년·지원 동기 등을 참고해 선발합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>수업이 끝나면 남는 것</h2>
+      <div class="two-col three-col">
+        <div class="panel"><h3>산출물</h3><ul><li>4차시 활동지(포트폴리오)</li><li>모둠 실험 보고서 1편</li><li>내가 만든 측정 코드</li></ul></div>
+        <div class="panel"><h3>생기부 연계</h3><ul><li>과목별 세부능력 및 특기사항</li><li>탐구·문제해결 과정 기록</li><li>협업·의사소통 활동</li></ul></div>
+        <div class="panel"><h3>기른 역량</h3><ul><li>과학적 탐구력</li><li>컴퓨팅 사고력</li><li>수학적 모델링·데이터 해석</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="info">
+    <div class="wrap">
+      <h2>운영 안내</h2>
       <div class="tbl-wrap">
         <table>
-          <caption>산성 / 염기성 용액의 반응 비교</caption>
-          <thead><tr><th>구분</th><th>산성</th><th>염기성</th></tr></thead>
           <tbody>
-            <tr><th>페놀프탈레인 용액</th><td><input data-field="c1t-a1" data-q="산-페놀프탈레인"></td><td><input data-field="c1t-b1" data-q="염기-페놀프탈레인"></td></tr>
-            <tr><th>리트머스 종이</th><td><input data-field="c1t-a2" data-q="산-리트머스"></td><td><input data-field="c1t-b2" data-q="염기-리트머스"></td></tr>
-            <tr><th>마그네슘 · 철</th><td><input data-field="c1t-a3" data-q="산-금속"></td><td><input data-field="c1t-b3" data-q="염기-금속"></td></tr>
-            <tr><th>단백질</th><td><input data-field="c1t-a4" data-q="산-단백질"></td><td><input data-field="c1t-b4" data-q="염기-단백질"></td></tr>
-            <tr><th>전류가 흐르는가?</th><td><input data-field="c1t-a5" data-q="산-전류"></td><td><input data-field="c1t-b5" data-q="염기-전류"></td></tr>
+            <tr><th>운영 학교</th><td><span class="tbd">〔학교명〕</span></td></tr>
+            <tr><th>대상</th><td>1학년 희망 학생 (신청 후 선발)</td></tr>
+            <tr><th>운영 기간</th><td><span class="tbd">〔운영 기간〕</span></td></tr>
+            <tr><th>요일 · 시간</th><td><span class="tbd">〔운영 요일·시간〕</span> · 1회 50분 × 4차시</td></tr>
+            <tr><th>장소</th><td><span class="tbd">〔장소〕</span></td></tr>
+            <tr><th>정원</th><td><span class="tbd">〔정원〕</span> · 모둠 3~4인</td></tr>
+            <tr><th>준비물</th><td>필기도구만 지참 (장비·시약·노트북 제공)</td></tr>
+            <tr><th>담당 교사</th><td><span class="tbd">〔담당 교사〕</span></td></tr>
+            <tr><th>비용</th><td>없음</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="qlabel"><span class="b">정리</span> 산성은 (&nbsp;&nbsp;&nbsp;) 이온 때문, 염기성은 (&nbsp;&nbsp;&nbsp;) 이온 때문이다.</div>
-      <div class="write" contenteditable="true" data-field="c1-ions" data-q="산성/염기성이 나타나는 까닭(이온)" data-ph="산성: … 이온 / 염기성: … 이온"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 중화 반응을 식으로 나타내기</h3>
-      <p class="lead">묽은 염산(HCl)과 수산화 나트륨(NaOH) 수용액이 반응할 때를 나타냅니다.</p>
-      <div class="qlabel"><span class="b">1</span> 말로 나타낸 반응</div>
-      <div class="fml">산 + 염기 &rarr; (&nbsp;<span style="color:var(--acid)">?</span>&nbsp;) + (&nbsp;<span style="color:var(--base)">?</span>&nbsp;) &nbsp;+&nbsp; (&nbsp;?&nbsp;) 발생</div>
-      <div class="write" contenteditable="true" data-field="c1-word" data-q="중화: 산+염기 → ? + ? + ? 발생" data-ph="산 + 염기 → 물 + 염 + 중화열 발생"></div>
-      <div class="qlabel"><span class="b">2</span> 전체 반응식 (화살표 양쪽 모두)</div>
-      <div class="write" contenteditable="true" data-field="c1-full" data-q="전체 반응식" data-ph="HCl + NaOH → …"></div>
-      <div class="qlabel"><span class="b">3</span> 알짜 이온 반응식 (실제로 반응에 참여한 이온만)</div>
-      <div class="write" contenteditable="true" data-field="c1-net" data-q="알짜 이온 반응식" data-ph="H⁺ + OH⁻ → …"></div>
-      <div class="qlabel"><span class="b">4</span> 산의 H⁺과 염기의 OH⁻은 항상 (&nbsp;&nbsp;:&nbsp;&nbsp;)의 비로 반응한다. 완전히 중화되려면?</div>
-      <div class="write" contenteditable="true" data-field="c1-ratio" data-q="H⁺:OH⁻ 비와 완전 중화 조건" data-ph="비율: 1 : 1 / 완전 중화: 산이 내놓은 H⁺의 수 = 염기가 내놓은 OH⁻의 수"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 3</span> 자바실험실로 이온 수 변화 관찰하기</h3>
-      <p class="lead">실물 실험 전에, 시뮬레이션으로 "이온이 어떻게 사라지고 남는지"를 먼저 봅니다.</p>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c1s-1"></label><div>검색창에 <code>자바실험실 중화반응</code>을 검색해 <b>중화 반응 모형</b> 시뮬레이션을 연다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c1s-2"></label><div>산 = <b>HCl</b>, 염기 = <b>NaOH</b> 선택. 산의 양이온·음이온, 염기의 양이온·음이온을 입력한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c1s-3"></label><div>수용액의 부피를 입력한다. <span class="hint">부피는 3~5 사이를 추천 (아래 표는 각 이온 2개로 시작하는 경우)</span></div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c1s-4"></label><div><b>실행</b>을 누르고, NaOH 수용액에 <b>HCl을 한 번에 하나씩</b> 넣으며 이온 수를 아래 표에 적는다.</div></li>
-      </ol>
-      <div class="tbl-wrap">
-        <table>
-          <caption>NaOH 수용액에 HCl 수용액을 조금씩 넣을 때 이온 수 변화</caption>
-          <thead><tr><th>단계</th><th>① 처음</th><th>②</th><th>③ 완전 중화</th><th>④ HCl 더 넣음</th></tr></thead>
-          <tbody>
-            <tr><th>액성</th><td><input data-field="c1i-p0" data-q="이온표 액성 ①"></td><td><input data-field="c1i-p1" data-q="이온표 액성 ②"></td><td><input data-field="c1i-p2" data-q="이온표 액성 ③"></td><td><input data-field="c1i-p3" data-q="이온표 액성 ④"></td></tr>
-            <tr><th>Na⁺</th><td class="fixed">2</td><td class="fixed">2</td><td class="fixed">2</td><td class="fixed">2</td></tr>
-            <tr><th>OH⁻</th><td><input data-field="c1i-oh0"></td><td><input data-field="c1i-oh1"></td><td><input data-field="c1i-oh2"></td><td><input data-field="c1i-oh3"></td></tr>
-            <tr><th>H⁺</th><td><input data-field="c1i-h0"></td><td><input data-field="c1i-h1"></td><td><input data-field="c1i-h2"></td><td><input data-field="c1i-h3"></td></tr>
-            <tr><th>Cl⁻</th><td><input data-field="c1i-cl0"></td><td><input data-field="c1i-cl1"></td><td><input data-field="c1i-cl2"></td><td><input data-field="c1i-cl3"></td></tr>
-            <tr><th>총 이온 수</th><td><input data-field="c1i-t0"></td><td><input data-field="c1i-t1"></td><td><input data-field="c1i-t2"></td><td><input data-field="c1i-t3"></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="callout">눈여겨볼 점 — 완전 중화될 때까지 <b>총 이온 수는 거의 변하지 않는다</b>(H⁺이 사라진 만큼 Cl⁻이 들어온다).
-        완전 중화 이후에 H⁺과 Cl⁻이 함께 늘면서 총 이온 수가 증가한다. 이 변화가 다음 차시 "전기 전도도"와 연결됩니다.</div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">닫기</span> 중화점을 확인하는 3가지 방법</h3>
-      <div class="write" contenteditable="true" data-field="c1-methods" data-q="중화점 확인 방법 3가지" data-ph="① 지시약의 색 변화  ② 혼합 용액의 온도 변화(중화열)  ③ 전기 전도도(전류 세기) 변화"></div>
-      <div class="qlabel"><span class="b">Q</span> 이제 처음 질문에 답해 보세요. 딱따구리가 개미를 먹을 수 있는 까닭은?</div>
-      <div class="write" contenteditable="true" data-field="c1-answer" data-q="1차시 닫기: 개미 질문 최종 답" data-ph="딱따구리의 침(또는 소화액)에 들어 있는 염기성 물질이 개미산을 중화하기 때문이다."></div>
-    </div>
-
-    <div class="selfcheck">
-      <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 산성·염기성이 나타나는 까닭을 이온으로 설명할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc1a" data-field="sc1a" value="우수"><span>우수</span></label><label><input type="radio" name="sc1a" data-field="sc1a" value="보통"><span>보통</span></label><label><input type="radio" name="sc1a" data-field="sc1a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 중화 반응을 화학 반응식·알짜 이온 반응식·이온 모형으로 나타낼 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc1b" data-field="sc1b" value="우수"><span>우수</span></label><label><input type="radio" name="sc1b" data-field="sc1b" value="보통"><span>보통</span></label><label><input type="radio" name="sc1b" data-field="sc1b" value="미흡"><span>미흡</span></label></span></div>
     </div>
   </section>
 
-  <!-- ================= 2차시 ================= -->
-  <section class="cha" id="cha2" data-d="info">
-    <div class="cha-head">
-      <span class="cha-num">2차시</span>
-      <div>
-        <h2>전기 전도도 측정기 만들기</h2>
-        <div class="sub">정보 · [12정03-07] · 마이크로비트 + MakeCode</div>
-      </div>
-    </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 문제 해결에 알맞은 피지컬 컴퓨팅 장치를 고른다.
-      ② 측정 알고리즘을 설계한다. ③ 장치를 제어하는 프로그램을 작성한다. ④ 완성하고 버그를 찾아 해결한다.</p>
-
-    <div class="act">
-      <h3><span class="tag">열기</span> 왜 전기 전도도로 중화점을 알 수 있을까?</h3>
-      <div class="callout">용액 속 <b>이온이 전류를 나른다</b>. 이온이 많을수록 전기 전도도가 크다.
-        1차시 표에서 총 이온 수가 가장 적은 지점 = 전기 전도도가 가장 (&nbsp;&nbsp;)은 지점 = 중화점.</div>
-      <div class="write" contenteditable="true" data-field="c2-hook" data-q="전기 전도도로 중화점을 아는 원리" data-ph="이온 수가 가장 적을 때 전기 전도도가 가장 작아지므로, 그 지점이 중화점이다."></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 피지컬 컴퓨팅 개념 정리</h3>
-      <p class="lead">[융합1 데이터의 일상화]에서 배운 내용을 떠올려 채웁니다.</p>
-      <div class="qlabel"><span class="b">개념</span> 피지컬 컴퓨팅이란?</div>
-      <div class="write" contenteditable="true" data-field="c2-concept" data-q="피지컬 컴퓨팅 개념" data-ph="디지털 세계의 프로그래밍 결과를 센서·모터·LED 등 다양한 입출력 장치를 통해 현실 세계로 직접 주고받는 컴퓨팅 기술"></div>
-      <div class="qlabel"><span class="b">도구</span> 대표적인 도구 3가지</div>
-      <div class="write" contenteditable="true" data-field="c2-tools" data-q="피지컬 컴퓨팅 도구 3가지" data-ph="아두이노, 마이크로비트, 라즈베리파이"></div>
-      <div class="qlabel"><span class="b">활용</span> 과학에서 쓰이는 예 (2가지 이상 조사)</div>
-      <div class="write" contenteditable="true" data-field="c2-use" data-q="과학에서의 피지컬 컴퓨팅 활용 예" data-ph="예: 미세먼지/이산화탄소 측정 장치, 중력 가속도 측정 장치, 스마트팜 …"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 재료 확인 (모둠별)</h3>
-      <ul class="todo">
-        <li><label><input type="checkbox" data-field="c2m-1"></label><div>마이크로비트 1개 · 커넥터(확장) 보드 1개</div></li>
-        <li><label><input type="checkbox" data-field="c2m-2"></label><div>마이크로 5핀 USB 케이블 1개 · 암/수 점퍼선 2개 (전극용)</div></li>
-        <li><label><input type="checkbox" data-field="c2m-3"></label><div>노트북(컴퓨터) 1대 — MakeCode 접속용</div></li>
-        <li><label><input type="checkbox" data-field="c2m-4"></label><div>비커 3개 · 스포이트 · 증류수 · 산성 용액 · 염기성 용액</div></li>
-      </ul>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 3</span> 하드웨어 연결</h3>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c2h-1"></label><div>마이크로비트를 커넥터 보드에 끼운다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c2h-2"></label><div>점퍼선 하나를 <code>P0-SIG</code>(노란색) 핀, 다른 하나를 <code>P0-GND</code>(검정색) 핀에 연결한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c2h-3"></label><div>두 선의 반대쪽 끝(전극)이 <b>서로 닿지 않게</b> 비커 안에 담근다.</div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c2h-4"></label><div>USB로 마이크로비트를 컴퓨터에 연결한다.</div></li>
-      </ol>
-      <div class="hint">전극이 서로 닿으면 물 없이도 값이 크게 나옵니다. 매 측정 전 전극을 증류수로 헹굽니다.</div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 4</span> 측정 알고리즘 설계 (순서도)</h3>
-      <p class="lead">코드를 쓰기 전에 "무엇을 어떤 순서로" 할지 글/그림으로 먼저 정리합니다.</p>
-      <div class="fml">시작 &rarr; P0 아날로그값 읽기 &rarr; 5회 반복해서 더하기 &rarr; 5로 나눠 <b>평균</b> &rarr; LED/시리얼로 값 표시 &rarr; (버튼 누르면 다시)</div>
-      <div class="qlabel"><span class="b">설계</span> 내 알고리즘을 순서대로 쓰기 (조건·반복 구조가 드러나게)</div>
-      <div class="write" contenteditable="true" data-field="c2-algo" data-q="측정 알고리즘 설계" data-ph="1) A 버튼을 누르면  2) 변수 합 = 0  3) 5번 반복: 합 = 합 + P0 아날로그값, 0.1초 대기  4) 평균 = 합 / 5  5) 평균을 화면에 출력 …" style="min-height:5em"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 5</span> MakeCode로 코딩 · 업로드</h3>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c2c-1"></label><div><code>makecode.microbit.org</code> 접속 &rarr; <b>새 프로젝트</b>.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c2c-2"></label><div>화면 하단 점 3개 &rarr; <b>장치 연결</b> &rarr; 안내에 따라 브라우저와 마이크로비트를 페어링한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c2c-3"></label><div>활동 4의 알고리즘대로 블록을 조립한다. <span class="hint">P0 아날로그 읽기 · 변수 · 반복(5) · 나눗셈 · 표시 블록</span></div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c2c-4"></label><div><b>다운로드</b>로 업로드한 뒤, 전극을 <b>증류수</b>에 담가 값이 뜨는지 확인한다.</div></li>
-      </ol>
-      <div class="qlabel"><span class="b">기록</span> 증류수에서 나온 값 = <input style="font-family:var(--f-mono);width:90px;background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:4px 8px;color:var(--ink)" data-field="c2-distilled" data-q="증류수 측정값"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 6</span> 디버깅 &amp; 나만의 창의 코드</h3>
-      <div class="qlabel"><span class="b">버그</span> 겪은 문제와 해결 과정</div>
-      <div class="write" contenteditable="true" data-field="c2-bug" data-q="버그와 디버깅 과정" data-ph="예: 값이 항상 1023으로 나옴 → 전극이 서로 닿아 있었음 → 간격을 벌려 해결"></div>
-      <div class="qlabel"><span class="b">창의</span> 내 코드에 추가한 나만의 요소 (아이콘 표시, 소리, 임계값 경고 등)</div>
-      <div class="write" contenteditable="true" data-field="c2-creative" data-q="나만의 창의적 코드 요소" data-ph="예: 전도도가 기준값보다 낮아지면 하트 아이콘을 띄워 '중화점 근처'임을 알림"></div>
-    </div>
-
-    <div class="selfcheck">
-      <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 문제 해결에 알맞은 피지컬 컴퓨팅 장치를 골라 설계할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc2a" data-field="sc2a" value="우수"><span>우수</span></label><label><input type="radio" name="sc2a" data-field="sc2a" value="보통"><span>보통</span></label><label><input type="radio" name="sc2a" data-field="sc2a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 장치를 제어하는 프로그램을 작성할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc2b" data-field="sc2b" value="우수"><span>우수</span></label><label><input type="radio" name="sc2b" data-field="sc2b" value="보통"><span>보통</span></label><label><input type="radio" name="sc2b" data-field="sc2b" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>③ 완성한 뒤 문제점을 찾아 해결할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc2c" data-field="sc2c" value="우수"><span>우수</span></label><label><input type="radio" name="sc2c" data-field="sc2c" value="보통"><span>보통</span></label><label><input type="radio" name="sc2c" data-field="sc2c" value="미흡"><span>미흡</span></label></span></div>
+  <section class="blk" id="apply">
+    <div class="wrap">
+      <h2>신청하기</h2>
+      <p class="intro" style="margin-left:auto;margin-right:auto">아래 버튼을 눌러 구글 폼을 작성하면 신청이 완료됩니다.
+        신청서에는 학번·이름·지원 동기(2~3줄)를 적습니다.</p>
+      <p class="deadline">신청 마감 · <span class="tbd">〔신청 마감〕</span></p>
+      <!-- ↓ 이 href 를 실제 구글 폼 주소로 바꾸세요 -->
+      <a class="cta-big" href="https://forms.gle/" target="_blank" rel="noopener">구글 폼으로 신청하기 →</a>
+      <p class="contact">문의 · <span class="tbd">〔문의〕</span></p>
     </div>
   </section>
 
-  <!-- ================= 3차시 ================= -->
-  <section class="cha" id="cha3" data-d="data">
-    <div class="cha-head">
-      <span class="cha-num">3차시</span>
-      <div>
-        <h2>중화 반응 실험 &amp; 데이터 수집</h2>
-        <div class="sub">통합과학 + 데이터 · 측정 → 표 → 그래프</div>
+  <section class="blk">
+    <div class="wrap">
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        <details><summary>과학·정보 성적이 좋아야 신청할 수 있나요?</summary><p>아니요. 성적 기준은 없습니다. 관심과 참여 의지가 더 중요합니다. 개념과 코딩은 모두 수업 시간에 처음부터 다룹니다.</p></details>
+        <details><summary>코딩을 한 번도 안 해봤는데 괜찮을까요?</summary><p>괜찮습니다. 마이크로비트 블록 코딩은 처음 하는 학생 기준으로 진행하며, "심화 알고리즘"이 아니라 "측정 순서를 논리로 설계하는 것"에 초점을 둡니다.</p></details>
+        <details><summary>장비나 재료를 사야 하나요?</summary><p>필요 없습니다. 마이크로비트, 노트북, 시약, 비커 등은 학교에서 제공합니다. 학생은 필기도구만 가져오면 됩니다.</p></details>
+        <details><summary>한 차시라도 빠지면 안 되나요?</summary><p>4차시가 "측정 → 데이터 → 함수"로 이어지므로 가능하면 모두 참석을 권합니다. 부득이한 결석은 담당 교사와 상의해 보강할 수 있습니다.</p></details>
+        <details><summary>활동지를 미리 볼 수 있나요?</summary><p>네. <a href="activity.html">활동지 미리보기</a>에서 실제로 채우게 될 내용을 확인할 수 있습니다.</p></details>
       </div>
-    </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — 산·염기를 섞으며 전기 전도도를 측정해 표로 정리하고, 스프레드시트로 그래프를 그려 중화점을 찾는다.</p>
-
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 실험 설계</h3>
-      <p class="lead">지도서 예시: 묽은 염산(HCl)을 비커에 담아 두고, 수산화 나트륨(NaOH) 용액을 일정량씩 넣으며 측정합니다.</p>
-      <div class="two">
-        <div class="box"><h4>한 번에 넣는 NaOH 양</h4><p><input style="width:100%;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:5px 8px;color:var(--ink)" data-field="c3-step" data-q="1회 NaOH 첨가량" placeholder="예: 1 mL (스포이트 1방울)"></p></div>
-        <div class="box"><h4>측정 방법</h4><p>마이크로비트 측정기(활동 5, 5회 평균)로 매 회차 기록. 전극은 매번 증류수로 헹굼.</p></div>
-      </div>
-      <div class="qlabel"><span class="b">가설</span> NaOH를 계속 넣으면 전기 전도도는 어떻게 변할까?</div>
-      <div class="write" contenteditable="true" data-field="c3-hypo" data-q="3차시 가설" data-ph="처음에는 줄어들다가 어떤 지점에서 가장 작아지고, 그 뒤로는 다시 커질 것이다."></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 2·3</span> 측정 &amp; 데이터 표</h3>
-      <p class="lead">0회차 = 넣기 전(증류수 또는 묽은 염산만). NaOH를 1회씩 더하며 채웁니다.
-        시간이 부족하면 <b>자바실험실 중화 반응 시뮬레이션</b>으로 이어서 값을 얻어도 됩니다(측정값과 비교).</p>
-      <div class="tbl-wrap">
-        <table>
-          <caption>NaOH 넣은 회차 → 전기 전도도 (내 측정값 / 시뮬레이션·참고값)</caption>
-          <thead><tr><th>회차</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
-          <tbody>
-            <tr><th>내 측정값</th>
-              <td><input data-field="c3d-1"></td><td><input data-field="c3d-2"></td><td><input data-field="c3d-3"></td><td><input data-field="c3d-4"></td><td><input data-field="c3d-5"></td><td><input data-field="c3d-6"></td><td><input data-field="c3d-7"></td><td><input data-field="c3d-8"></td><td><input data-field="c3d-9"></td><td><input data-field="c3d-10"></td><td><input data-field="c3d-11"></td><td><input data-field="c3d-12"></td></tr>
-            <tr><th>참고값</th>
-              <td class="fixed">15</td><td class="fixed">13</td><td class="fixed">11</td><td class="fixed">9</td><td class="fixed">7</td><td class="fixed">5</td><td class="fixed">3</td><td class="fixed">1</td><td class="fixed">3</td><td class="fixed">5</td><td class="fixed">7</td><td class="fixed">9</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="callout">참고값은 지도서 예시 데이터입니다. 내 측정값이 참고값과 달라도 괜찮습니다 —
-        <b>모양(줄었다가 최저점을 지나 다시 증가)</b>이 나타나는지가 중요합니다.</div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 4</span> 스프레드시트로 그래프 만들기</h3>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c3g-1"></label><div>스프레드시트에 "회차"와 "전기 전도도" 두 줄(또는 두 열)로 값을 입력한다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c3g-2"></label><div>입력한 영역을 <b>드래그</b>해서 선택한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c3g-3"></label><div><b>삽입 &rarr; 차트</b>를 누른다. 차트 종류를 <b>꺾은선</b> 또는 <b>분산형(산점도)</b>으로 바꾼다.</div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c3g-4"></label><div>축 제목(가로: 회차, 세로: 전기 전도도)과 범례를 정리하고, 그래프를 캡처해 보고서에 넣는다.</div></li>
-      </ol>
-      <figure>
-        <svg viewBox="0 0 420 200" role="img" aria-label="V자 모양 전기 전도도 그래프 예시">
-          <line class="ax" x1="45" y1="20" x2="45" y2="165"/>
-          <line class="ax" x1="45" y1="165" x2="400" y2="165"/>
-          <polyline class="curve-data" points="55,35 100,60 145,85 190,110 235,135 258,150 281,135 326,110 371,85 393,72" fill="none" stroke-width="2.5"/>
-          <circle class="pt" cx="258" cy="150" r="4"/>
-          <text class="lbl-n" x="258" y="140" text-anchor="middle" font-size="11">중화점</text>
-          <text class="lbl" x="16" y="95" font-size="10" transform="rotate(-90 16 95)">전기 전도도</text>
-          <text class="lbl" x="210" y="187" font-size="10">NaOH 넣은 회차 →</text>
-        </svg>
-        <figcaption>내 그래프도 이런 V자(또는 그에 가까운) 모양이 나와야 합니다.</figcaption>
-      </figure>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
-      <div class="qlabel"><span class="b">1</span> 전기 전도도가 가장 작은 회차는? 그때가 왜 중화점인가?</div>
-      <div class="write" contenteditable="true" data-field="c3-q1" data-q="토의1: 최저점과 중화점" data-ph="…회차. 이때 총 이온 수가 가장 적어서 전류를 나르는 이온이 가장 적기 때문."></div>
-      <div class="qlabel"><span class="b">2</span> 중화점 전과 후에 전기 전도도가 변하는 까닭을 이온 수로 설명하기 (1차시 표와 연결)</div>
-      <div class="write" contenteditable="true" data-field="c3-q2" data-q="토의2: 중화점 전후 이온 수 설명" data-ph="중화점 전: H⁺이 OH⁻로 바뀌며(물 생성) 이온이 줄어 전도도 감소 / 중화점 후: Na⁺·OH⁻이 늘어 전도도 증가"></div>
-      <div class="qlabel"><span class="b">3</span> 지시약(또는 온도)으로 찾은 중화점과 전기 전도도로 찾은 중화점이 같았는가? 차이가 있었다면 원인은?</div>
-      <div class="write" contenteditable="true" data-field="c3-q3" data-q="토의3: 방법 간 비교와 오차 원인" data-ph="예: 방울 크기가 일정하지 않음, 전극에 기포, 온도 변화 …"></div>
-    </div>
-
-    <div class="selfcheck">
-      <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 전기 전도도를 정확히 측정해 표로 정리할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc3a" data-field="sc3a" value="우수"><span>우수</span></label><label><input type="radio" name="sc3a" data-field="sc3a" value="보통"><span>보통</span></label><label><input type="radio" name="sc3a" data-field="sc3a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 그래프의 모양을 이온 수 변화와 연결해 중화점을 설명할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc3b" data-field="sc3b" value="우수"><span>우수</span></label><label><input type="radio" name="sc3b" data-field="sc3b" value="보통"><span>보통</span></label><label><input type="radio" name="sc3b" data-field="sc3b" value="미흡"><span>미흡</span></label></span></div>
     </div>
   </section>
-
-  <!-- ================= 4차시 ================= -->
-  <section class="cha" id="cha4" data-d="math">
-    <div class="cha-head">
-      <span class="cha-num">4차시</span>
-      <div>
-        <h2>지오지브라로 함수 모델링</h2>
-        <div class="sub">통합과학 + 공통수학 · 절댓값을 포함한 함수</div>
-      </div>
-    </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 컴퓨터 프로그램으로 절댓값을 포함한 함수를 표현한다.
-      ② 정량적 데이터를 분석하고 그 의미를 토의한다.</p>
-
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 모형으로 전기 전도도 변화 예측</h3>
-      <p class="lead">일정량의 묽은 염산에 NaOH 수용액을 조금씩 넣을 때, 이온 모형을 떠올려 변화를 예측합니다.</p>
-      <div class="qlabel"><span class="b">이온</span> 완전 중화보다 NaOH를 더 넣었을 때 마지막 수용액의 이온 구성은? <span class="hint">(예: 2H₂O, 2Cl⁻, 4Na⁺, 2OH⁻)</span></div>
-      <div class="write" contenteditable="true" data-field="c4-ions" data-q="마지막 수용액 이온 구성" data-ph="2H₂O, 2Cl⁻, 4Na⁺, 2OH⁻"></div>
-      <div class="tbl-wrap">
-        <table>
-          <caption>구간별 전기 전도도 변화 (증가 / 감소 / 감소하여 0에 가까움)</caption>
-          <thead><tr><th>구간</th><th>기준점 → A</th><th>A → B</th><th>B(중화점) → C</th><th>C → D</th></tr></thead>
-          <tbody><tr><th>전기 전도도</th>
-            <td><input data-field="c4p-1" data-q="예측 구간 기준점→A"></td>
-            <td><input data-field="c4p-2" data-q="예측 구간 A→B"></td>
-            <td><input data-field="c4p-3" data-q="예측 구간 B→C"></td>
-            <td><input data-field="c4p-4" data-q="예측 구간 C→D"></td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 지오지브라에 데이터 넣기</h3>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c4g-1"></label><div>검색창에 <code>geogebra.org</code>를 입력해 접속하고 <b>그래픽 계산기</b>를 연다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c4g-2"></label><div>보기 메뉴에서 <b>스프레드시트(표)</b> 창을 켜고, A열에 회차·B열에 전기 전도도를 입력한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c4g-3"></label><div>입력 범위를 선택하고 마우스 오른쪽 &rarr; <b>목록 만들기 → 점 목록</b>으로 점을 찍는다.</div></li>
-      </ol>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 3</span> 데이터에 맞는 함수 찾기</h3>
-      <p class="lead">일차함수 <code>y = ax + b</code>의 <b>a = 기울기</b>, <b>b = y절편</b>. 절댓값 <code>|x|</code>은 "0에서 꺾이는 V자".
-        둘을 합치면 <b>y = a|x − p| + q</b> — <b>(p, q)</b>가 꺾이는 점(중화점), a가 기울기입니다.</p>
-      <div class="fml">입력창에 예시로 &nbsp;<b>f(x) = 2 abs(x − 8) + 1</b>&nbsp; 을 입력해 점들과 겹치는지 확인</div>
-      <figure>
-        <svg viewBox="0 0 420 210" role="img" aria-label="절댓값 함수 y=a|x-p|+q 그래프">
-          <line class="ax" x1="45" y1="15" x2="45" y2="175"/>
-          <line class="ax" x1="45" y1="175" x2="405" y2="175"/>
-          <polyline class="curve-fn" points="60,40 235,160 410,40" fill="none" stroke-width="2.5"/>
-          <circle class="pt" cx="235" cy="160" r="4"/>
-          <text class="lbl-n" x="235" y="150" text-anchor="middle" font-size="11">(p, q) = 중화점</text>
-          <text class="lbl-a" x="300" y="95" font-size="11">기울기 a</text>
-        </svg>
-        <figcaption>꺾이는 점의 x좌표 = 중화가 완성된 회차, y좌표 = 그때의 (가장 작은) 전기 전도도.</figcaption>
-      </figure>
-      <div class="qlabel"><span class="b">내 함수</span> 내 데이터(또는 참고값)에 가장 잘 맞는 함수는?</div>
-      <div class="write" contenteditable="true" data-field="c4-fn" data-q="내 데이터에 맞는 절댓값 함수" data-ph="y = 2|x − 8| + 1"></div>
-      <div class="qlabel"><span class="b">해석</span> p, q, a가 각각 실험에서 무엇을 뜻하는지 쓰기</div>
-      <div class="write" contenteditable="true" data-field="c4-mean" data-q="p, q, a의 실험적 의미" data-ph="p = 완전 중화가 일어난 회차 / q = 중화점에서의 전기 전도도 / a = 회차당 전도도가 변하는 정도"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 4</span> 함수로 예측하기</h3>
-      <p class="lead">NaOH 용액을 <b>5회 더</b> 추가하면(총 17회) 전기 전도도는 얼마일까? 활동 3의 함수에 대입합니다.</p>
-      <div class="fml">y = 2 |17 − 8| + 1 = 2 × 9 + 1 = <b>19</b> &nbsp;<span style="color:var(--ink-soft)">← 예시 함수일 때</span></div>
-      <div class="qlabel"><span class="b">내 계산</span> 내 함수로 계산한 값과 과정</div>
-      <div class="write" contenteditable="true" data-field="c4-predict" data-q="함수로 예측한 값과 과정" data-ph="y = 2|17 − 8| + 1 = 19"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 5</span> 확장 — 중화열을 함수로 표현한다면?</h3>
-      <p class="lead">중화 반응이 일어날수록 중화열이 쌓이고, 완전 중화 지점에서 온도가 가장 높습니다.</p>
-      <div class="qlabel"><span class="b">Q</span> 전기 전도도 그래프와 비교해 중화열 그래프의 모양은? 함수 꼴로 예상해 보기</div>
-      <div class="write" contenteditable="true" data-field="c4-heat" data-q="중화열 그래프 모양과 함수 꼴" data-ph="중화점에서 최대인 ∧(뒤집힌 V) 모양. y = −a|x − p| + q 꼴로 표현할 수 있다."></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">마무리</span> 4차시 전체 되돌아보기</h3>
-      <div class="qlabel"><span class="b">연결</span> 화학 반응식 → 이온 수 → 전기 전도도 → 함수. 이 흐름을 내 말로 3~4문장으로 요약하기</div>
-      <div class="write" contenteditable="true" data-field="c4-summary" data-q="4차시 전체 흐름 요약" data-ph="산과 염기가 만나면 H⁺과 OH⁻이 물이 되어 이온이 줄고 …" style="min-height:5em"></div>
-      <div class="qlabel"><span class="b">동료평가</span> 우리 모둠에서 가장 도움을 준 친구와 그 이유</div>
-      <div class="write" contenteditable="true" data-field="c4-peer" data-q="동료평가" data-ph=""></div>
-    </div>
-
-    <div class="selfcheck">
-      <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 전기 전도도의 변화를 절댓값을 포함한 함수로 표현할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc4a" data-field="sc4a" value="우수"><span>우수</span></label><label><input type="radio" name="sc4a" data-field="sc4a" value="보통"><span>보통</span></label><label><input type="radio" name="sc4a" data-field="sc4a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 지오지브라로 정량적 데이터를 분석하고 그 의미를 토의할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc4b" data-field="sc4b" value="우수"><span>우수</span></label><label><input type="radio" name="sc4b" data-field="sc4b" value="보통"><span>보통</span></label><label><input type="radio" name="sc4b" data-field="sc4b" value="미흡"><span>미흡</span></label></span></div>
-    </div>
-  </section>
-
-  <footer>
-    이 활동지의 입력 내용은 사용 중인 기기의 브라우저에만 저장됩니다(다른 기기·친구에게 전송되지 않음).
-    제출은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
-  </footer>
 </main>
 
-<div class="saved" id="saved">저장됨</div>
-
-<script>
-(function(){
-  "use strict";
-  var KEY="ddr-jungwha-v1";
-  var store={};
-  try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
-  var savedEl=document.getElementById("saved"), savedT;
-  function flash(){ if(!savedEl)return; savedEl.classList.add("show"); clearTimeout(savedT);
-    savedT=setTimeout(function(){ savedEl.classList.remove("show"); },1100); }
-  function persist(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); flash(); }catch(e){} }
-
-  var fields=Array.prototype.slice.call(document.querySelectorAll("[data-field]"));
-  fields.forEach(function(el){
-    var k=el.getAttribute("data-field");
-    if(el.type==="checkbox"){
-      if(store[k]===true) el.checked=true;
-      el.addEventListener("change",function(){ store[k]=el.checked; persist(); updateProgress(); });
-    } else if(el.type==="radio"){
-      if(store[k]===el.value) el.checked=true;
-      el.addEventListener("change",function(){ if(el.checked){ store[k]=el.value; persist(); updateProgress(); } });
-    } else if(el.isContentEditable){
-      if(typeof store[k]==="string") el.textContent=store[k];
-      el.addEventListener("input",function(){ store[k]=el.textContent; persist(); updateProgress(); });
-    } else {
-      if(typeof store[k]==="string") el.value=store[k];
-      el.addEventListener("input",function(){ store[k]=el.value; persist(); updateProgress(); });
-    }
-  });
-
-  // progress: distinct field keys with a non-empty value
-  var keys={};
-  fields.forEach(function(el){ keys[el.getAttribute("data-field")]=true; });
-  var totalKeys=Object.keys(keys).length;
-  var progEl=document.getElementById("prog");
-  function filledCount(){
-    var n=0;
-    for(var k in keys){
-      var v=store[k];
-      if(v===true) n++;
-      else if(typeof v==="string" && v.trim()!=="") n++;
-    }
-    return n;
-  }
-  function updateProgress(){
-    if(!progEl)return;
-    var pct=totalKeys? Math.round(filledCount()/totalKeys*100):0;
-    progEl.textContent="진행 "+pct+"%";
-  }
-  updateProgress();
-
-  // section highlight in nav
-  var links=Array.prototype.slice.call(document.querySelectorAll(".steps a"));
-  var secs=links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
-  if("IntersectionObserver" in window){
-    var io=new IntersectionObserver(function(ents){
-      ents.forEach(function(en){
-        var i=secs.indexOf(en.target);
-        if(i>-1 && en.isIntersecting){ links.forEach(function(l){ l.classList.remove("on"); }); links[i].classList.add("on"); }
-      });
-    },{rootMargin:"-40% 0px -55% 0px"});
-    secs.forEach(function(s){ if(s) io.observe(s); });
-  }
-
-  // print
-  var bp=document.getElementById("btn-print");
-  if(bp) bp.addEventListener("click",function(){ window.print(); });
-
-  // copy answers
-  var bc=document.getElementById("btn-copy");
-  if(bc) bc.addEventListener("click",function(){
-    var lines=[];
-    var head=[];
-    ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
-    lines.push("디지털로 읽는 중화 반응 — 활동지 답안");
-    if(head.length) lines.push(head.join(" / "));
-    lines.push("");
-    document.querySelectorAll("section.cha").forEach(function(sec){
-      var h2=sec.querySelector(".cha-head h2");
-      lines.push("=== "+(sec.querySelector(".cha-num").textContent)+" "+(h2?h2.textContent:"")+" ===");
-      sec.querySelectorAll("[data-field]").forEach(function(el){
-        var k=el.getAttribute("data-field"), q=el.getAttribute("data-q")||k, v=store[k];
-        if(el.type==="checkbox"){ if(v===true) lines.push("[v] "+ (el.closest("li")? el.closest("li").innerText.replace(/\s+/g," ").trim() : q)); return; }
-        if(el.type==="radio"){ if(el.checked) lines.push("· "+q+": "+v); return; }
-        if(v && String(v).trim()!==""){ lines.push("· "+q+":\n  "+String(v).trim().replace(/\n/g,"\n  ")); }
-      });
-      lines.push("");
-    });
-    var text=lines.join("\n");
-    function done(ok){ bc.textContent= ok? "복사됨!" : "복사 실패"; setTimeout(function(){ bc.textContent="답안 복사"; },1400); }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){ done(true); },function(){ fallback(); });
-    } else { fallback(); }
-    function fallback(){
-      try{
-        var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
-        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(true);
-      }catch(e){ done(false); }
-    }
-  });
-
-  // expand contenteditable for print
-  window.addEventListener("beforeprint",function(){
-    document.querySelectorAll(".write").forEach(function(el){ el.setAttribute("data-min",el.style.minHeight||""); el.style.minHeight="0"; });
-  });
-})();
-</script>
+<footer>
+  <p>디지털로 읽는 산과 염기의 중화 반응 · 통합과학 + 정보 + 수학 STEAM 융합수업</p>
+  <p style="margin-top:6px">자료 출처: 한국과학창의재단(KOFAC) 2022 개정 교육과정 융합교육(STEAM) 교재 ·
+    <a href="activity.html">학생 활동지</a> · 라이선스 CC BY-NC-SA 4.0</p>
+</footer>
 
 </body>
 </html>
