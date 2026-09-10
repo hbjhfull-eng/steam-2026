@@ -17,11 +17,16 @@
    〔운영 요일·시간〕     예) 매주 화요일 18:00–21:30
    〔운영 기간〕          예) 2026. 3.~6. (총 4주)
    〔정원〕              예) 4명 (1개 반)
-   〔신청 마감〕          예) 2026. 3. 6.(금) 17:00
+   〔신청 기간〕          예) 2026. 3. 2.(월) ~ 3. 6.(금) 17:00
+   〔O월 중〕             예) 2월
    〔담당 교사〕          예) 통합과학 ○○○ · 정보 ○○○
    〔장소〕              예) 창의융합실 1
    〔문의〕              예) 과학실 / 내선 000
-   구글 폼 주소: 아래 id="apply" 섹션의 <a class="cta-big" href="..."> 한 곳만 바꾸면 됩니다.
+
+  신청 접수:
+   - 접수는 리로스쿨에서 4개 과정을 함께 안내하며 일괄 진행합니다.
+   - 접수를 시작하면 id="apply" 섹션의 '신청 준비 중' <span> 과 <p class="soon"> 을 지우고,
+     그 아래 주석 처리된 <a class="cta-big"> 의 href 에 리로스쿨 신청 페이지 주소를 넣으세요.
 ========================================================================== -->
 
 <style>
@@ -156,6 +161,9 @@ th{width:34%;background:var(--card);font-family:var(--f-disp);font-weight:700;wh
   text-decoration:none;border-radius:11px;display:inline-flex;gap:9px;align-items:center}
 .cta-big:hover{background:var(--neutral-deep)}
 .cta-big:focus-visible{outline:2px solid var(--neutral);outline-offset:3px}
+.cta-big.disabled{background:var(--line);color:var(--ink-soft);cursor:default;pointer-events:none}
+.soon{max-width:46ch;margin:14px auto 0;font-size:13.5px;color:var(--ink-soft);
+  background:var(--neutral-bg);border:1px solid var(--neutral);border-radius:10px;padding:11px 15px}
 #apply .contact{font-size:13px;color:var(--ink-soft);margin-top:16px}
 
 /* FAQ */
@@ -180,7 +188,7 @@ footer a{color:var(--ink-soft)}
       <a href="#about" class="hide-sm">과정 소개</a>
       <a href="#curriculum" class="hide-sm">4차시</a>
       <a href="activity.html" class="hide-sm">활동지 미리보기</a>
-      <a href="#apply" class="btn btn-primary">신청하기</a>
+      <a href="#apply" class="btn btn-primary">신청 안내</a>
     </nav>
   </div>
 </header>
@@ -193,7 +201,7 @@ footer a{color:var(--ink-soft)}
       <p class="sub">눈에 보이지 않는 <b>중화 반응</b>을 직접 만든 <b>마이크로비트 측정기</b>로 읽어 내고,
         그 데이터를 <b>그래프와 함수</b>로 표현합니다. 통합과학·정보·수학이 한 실험 안에서 만나는 4차시 프로그램입니다.</p>
       <div class="actions">
-        <a href="#apply" class="btn btn-primary">구글 폼으로 신청하기</a>
+        <a href="#apply" class="btn btn-primary">신청 안내 보기</a>
         <a href="activity.html" class="btn btn-ghost">활동지 미리보기 →</a>
       </div>
       <div class="chips">
@@ -317,12 +325,21 @@ footer a{color:var(--ink-soft)}
 
   <section class="blk" id="apply">
     <div class="wrap">
-      <h2>신청하기</h2>
-      <p class="intro" style="margin-left:auto;margin-right:auto">아래 버튼을 눌러 구글 폼을 작성하면 신청이 완료됩니다.
-        신청서에는 학번·이름·지원 동기(2~3줄)를 적습니다.</p>
-      <p class="deadline">신청 마감 · <span class="tbd">〔신청 마감〕</span></p>
-      <!-- ↓ 이 href 를 실제 구글 폼 주소로 바꾸세요 -->
-      <a class="cta-big" href="https://forms.gle/" target="_blank" rel="noopener">구글 폼으로 신청하기 →</a>
+      <h2>신청 안내</h2>
+      <p class="intro" style="margin-left:auto;margin-right:auto">이 과정은 <b>2026 STEAM 융합수업</b>의 4개 과정 중 하나입니다.
+        신청은 4개 과정을 함께 안내하며 <b>리로스쿨</b>에서 일괄 접수하고, 지원할 때 희망 과정을 1·2순위로 선택합니다.</p>
+      <p class="deadline">접수처 · 리로스쿨 &nbsp;|&nbsp; 신청 기간 · <span class="tbd">〔신청 기간〕</span></p>
+
+      <!-- 접수 시작 전: '준비 중' 상태 -->
+      <span class="cta-big disabled" aria-disabled="true">신청 준비 중</span>
+      <p class="soon">4개 과정 안내가 모두 준비되면 <b>리로스쿨</b>에서 일괄 접수합니다 ·
+        <span class="tbd">〔O월 중〕</span> 공지 예정</p>
+
+      <!-- ▼ 접수 시작 시: 위 <span> 과 <p class="soon"> 을 지우고 아래 줄의 주석을 풀어
+             href 에 리로스쿨 신청 페이지 주소를 넣으세요.
+      <a class="cta-big" href="리로스쿨_신청_페이지_URL" target="_blank" rel="noopener">리로스쿨에서 신청하기 →</a>
+      -->
+
       <p class="contact">문의 · <span class="tbd">〔문의〕</span></p>
     </div>
   </section>
