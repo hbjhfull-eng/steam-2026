@@ -1,7 +1,9 @@
-# 디지털로 읽는 중화 반응 — STEAM 융합수업
+# 전기 전도도로 읽는 중화 반응 — 센서 제작과 함수 모델링
 
-고등학교 1학년 **통합과학 · 정보 · 수학 융합교육(STEAM)** 프로그램
-「디지털로 읽는 산과 염기의 중화 반응」의 **학생 모집 페이지 + 50분 × 4차시 웹 활동지**입니다.
+고등학교 1학년 **통합과학 · 정보 · 수학 융합교육(STEAM)** 프로그램입니다.
+직접 만든 마이크로비트 전기 전도도 센서로 중화점을 찾고, 그 데이터를 절댓값 함수로 표현합니다.
+**학생 모집 페이지 + 50분 × 4차시 웹 활동지**로 구성됩니다.
+(원 자료: KOFAC 융합교육 교재 「융합9. 디지털로 읽는 산과 염기의 중화 반응」)
 
 * 정적 HTML 두 파일 — 빌드 과정 없음
 * 외부 의존성은 Google Fonts CDN 하나뿐, 오프라인이면 시스템 글꼴로 대체
@@ -15,8 +17,8 @@
 GitHub Pages 배포 후 주소:
 
 ```
-https://<GitHub 사용자명>.github.io/neutralization-steam/            → 모집 페이지
-https://<GitHub 사용자명>.github.io/neutralization-steam/activity.html → 학생 활동지
+https://<GitHub 사용자명>.github.io/conductivity-neutralization-steam/            → 모집 페이지
+https://<GitHub 사용자명>.github.io/conductivity-neutralization-steam/activity.html → 학생 활동지
 ```
 
 ---
@@ -24,7 +26,7 @@ https://<GitHub 사용자명>.github.io/neutralization-steam/activity.html → �
 ## 저장소 구조
 
 ```
-neutralization-steam/
+conductivity-neutralization-steam/
 ├─ index.html        # 모집·소개 랜딩 페이지 (진입점)
 ├─ activity.html     # 학생 활동지 (4차시, localStorage 자동 저장)
 ├─ favicon.svg       # 브라우저 탭 아이콘
@@ -71,7 +73,7 @@ neutralization-steam/
 
 ### 1. 저장소 만들기
 
-GitHub에서 새 저장소를 만듭니다. 이름은 자유이며, 예시는 `neutralization-steam` 입니다.
+GitHub에서 새 저장소를 만듭니다. 이름은 자유이며, 예시는 `conductivity-neutralization-steam` 입니다.
 (이름을 바꾸면 위 미리보기 주소의 마지막 경로도 그 이름으로 바뀝니다.)
 
 ### 2. 파일 올리기
@@ -87,12 +89,12 @@ GitHub에서 새 저장소를 만듭니다. 이름은 자유이며, 예시는 `n
 **B. git 명령으로 올리기**
 
 ```bash
-cd neutralization-steam
+cd conductivity-neutralization-steam
 git init
 git add .
-git commit -m "학생 활동지: 디지털로 읽는 중화 반응 (4차시)"
+git commit -m "전기 전도도로 읽는 중화 반응 — 모집 페이지 + 4차시 활동지"
 git branch -M main
-git remote add origin https://github.com/<사용자명>/neutralization-steam.git
+git remote add origin https://github.com/<사용자명>/conductivity-neutralization-steam.git
 git push -u origin main
 ```
 
@@ -112,13 +114,13 @@ git push -u origin main
 ## 모집 단계 사용법
 
 1. `index.html` 의 `〔  〕` 항목을 채우고 커밋 (신청은 리로스쿨에서 4개 과정 일괄 접수)
-2. 배포 주소(`…/neutralization-steam/`)를 QR·가정통신문·리로스쿨 공지에 함께 안내
+2. 배포 주소(`…/conductivity-neutralization-steam/`)를 QR·가정통신문·리로스쿨 공지에 함께 안내
 3. 학생은 페이지에서 과정을 확인하고 **리로스쿨**에서 희망 과정을 선택해 지원
 4. 리로스쿨 접수가 열리면 위 "신청 접수" 안내대로 `id="apply"` 섹션을 링크 버튼으로 교체
 
 ## 수업 단계 사용법 (활동지)
 
-1. `…/neutralization-steam/activity.html` 주소를 공유
+1. `…/conductivity-neutralization-steam/activity.html` 주소를 공유
 2. 학생은 **각자 기기**에서 접속 → 상단에 학번·이름·모둠 입력
 3. 차시별(1\~4 버튼)로 이동하며 빈칸·표·체크리스트 작성 (입력 자동 저장, 진행률 표시)
 4. 제출은 **[답안 복사]** (정리된 텍스트가 클립보드로) 또는 **[인쇄 · PDF]**
