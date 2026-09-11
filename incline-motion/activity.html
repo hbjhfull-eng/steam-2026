@@ -355,7 +355,11 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
     <div class="act">
       <h3><span class="tag">활동 4</span> 두 데이터 한 표로 정리</h3>
-      <p class="lead">같은 시각에서 두 방법의 위치를 나란히 적습니다. 참고값은 θ=10°(a≈1.70 m/s²)로 계산한 이론값입니다.</p>
+      <p class="lead">같은 시각에서 두 방법의 위치를 나란히 적습니다. 맨 아랫줄 "이론(참고)" 값은 아래 순서로 계산한 것입니다.</p>
+      <div class="fml">① 가속도 &nbsp; a = g·sinθ = 9.8 × sin 10° ≈ <b>1.70 m/s²</b><br>
+        ② 정지 상태(v₀ = 0)에서 출발 → 이동 거리 &nbsp; x = ½·a·t²<br>
+        ③ 각 시각 대입 &nbsp; (예) t = 0.2 s → x = ½ × 1.70 × 0.2² = ½ × 1.70 × 0.04 = <b>0.034 m</b></div>
+      <div class="hint">θ(빗면 각도)가 10°가 아니면 ①에서 각도만 바꿔 다시 계산합니다. sin 값은 계산기의 sin 기능(각도 모드)으로 구합니다.</div>
       <div class="tbl-wrap">
         <table>
           <caption>시간 t(s)에 따른 수레의 이동 거리 x(m)</caption>
@@ -370,6 +374,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
           </tbody>
         </table>
       </div>
+      <div class="qlabel"><span class="b">직접 확인</span> 위 방법으로 <b>t = 0.4 s</b>의 이론값을 직접 계산해 표의 값과 맞는지 확인하기</div>
+      <div class="write" contenteditable="true" data-field="m2-theory-check" data-q="t=0.4 s 이론값 직접 계산" data-ph="x = ½ × 1.70 × 0.4² = ½ × 1.70 × 0.16 = 0.136 m  → 표의 값과 같다"></div>
       <div class="callout">측정값이 이론값과 조금 달라도 괜찮습니다. <b>왜 다른지</b>를 3·4차시에서 따져 봅니다.</div>
     </div>
 
