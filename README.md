@@ -141,7 +141,11 @@ git push -u origin main  # 원격은 이미 https://github.com/JIN/steam-2026.gi
 * **색상·글꼴**: 각 파일 `<style>` 안 `:root` 의 CSS 변수 (허브·주제1은 teal, 주제2는 blue 계열)
 * **활동지 참고값**: `activity.html` 표의 `class="fixed"` 셀
 * **활동지 저장 키 초기화**: 브라우저 콘솔 —
-  주제1 `localStorage.removeItem('ddr-jungwha-v1')`, 주제2 `localStorage.removeItem('steam-incline-v1')`
+  주제1 `localStorage.removeItem('ddr-jungwha-v1')`,
+  주제2 `localStorage.removeItem('steam-incline-v1')` (그래프는 `steam-incline-plot-xt` / `-vt` / `-at` 별도)
+* **주제2 그래프 위젯**: `incline-motion/activity.html` 3·4차시. 시간축은 0.05 s 눈금 고정,
+  그래프별 y축은 `<div class="plot" data-ymax data-ystep data-ylabelstep …>` 속성에서 조정.
+  학생은 모눈 클릭 → **완료**(선 잇기) / **되돌리기** / **초기화** / **이론값 곡선 보기·숨기기**
 
 ---
 
