@@ -165,6 +165,26 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 .saved.show{opacity:1}
 @media (prefers-reduced-motion:reduce){.saved{transition:none}}
 
+/* ---- 직접 그리는 그래프 ---- */
+.plot{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:14px}
+.plot-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.plot-bar button{font-family:var(--f-body);font-size:12.5px;padding:6px 11px;border-radius:7px;
+  border:1px solid var(--field-line);background:var(--field);color:var(--ink);cursor:pointer}
+.plot-bar button:hover{border-color:var(--focus)}
+.plot-bar button.on{background:var(--acid);color:#fff;border-color:var(--acid)}
+.plot-bar button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.plot-svg{width:100%;height:auto;aspect-ratio:8/5;min-height:200px;display:block;background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;touch-action:manipulation;cursor:crosshair}
+.plot-svg .pg{stroke:var(--line);stroke-width:1}
+.plot-svg .pg.maj{stroke:var(--field-line);stroke-width:1}
+.plot-svg .pax{stroke:var(--ink-soft);stroke-width:1.5}
+.plot-svg .plb{fill:var(--ink-soft);font-family:var(--f-mono);font-size:10px}
+.plot-svg .pt-title{font-weight:600}
+.plot-svg .pth{stroke:var(--acid);stroke-width:2;stroke-dasharray:5 4;fill:none}
+.plot-svg .psl{stroke:var(--focus);stroke-width:2.5;fill:none}
+.plot-svg .psp{fill:var(--focus);stroke:var(--card);stroke-width:1}
+.plot-hint{font-size:12px;color:var(--ink-soft);margin-top:8px}
+
 @media print{
   .bar,.tools,.saved,.steps{display:none!important}
   body{background:#fff;color:#000;font-size:11.5pt}
@@ -174,7 +194,9 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
   .hero{padding:0 0 16px}
   .write,.who input,td input{background:#fff;border-color:#999}
   .write:empty:before{content:""}
-  figure svg{border-color:#999}
+  figure svg,.plot-svg{border-color:#999}
+  .plot-bar,.plot-hint{display:none}
+  .plot-svg{cursor:auto}
 }
 </style>
 </head>
@@ -355,11 +377,13 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
     <div class="act">
       <h3><span class="tag">활동 4</span> 두 데이터 한 표로 정리</h3>
-      <p class="lead">같은 시각에서 두 방법의 위치를 나란히 적습니다. 맨 아랫줄 "이론(참고)" 값은 아래 순서로 계산한 것입니다.</p>
-      <div class="fml">① 가속도 &nbsp; a = g·sinθ = 9.8 × sin 10° ≈ <b>1.70 m/s²</b><br>
-        ② 정지 상태(v₀ = 0)에서 출발 → 이동 거리 &nbsp; x = ½·a·t²<br>
-        ③ 각 시각 대입 &nbsp; (예) t = 0.2 s → x = ½ × 1.70 × 0.2² = ½ × 1.70 × 0.04 = <b>0.034 m</b></div>
-      <div class="hint">θ(빗면 각도)가 10°가 아니면 ①에서 각도만 바꿔 다시 계산합니다. sin 값은 계산기의 sin 기능(각도 모드)으로 구합니다.</div>
+      <p class="lead">같은 시각에서 두 방법의 위치를 나란히 적습니다. 맨 아랫줄 "이론(참고)" 값은 아래 식으로 계산한 것입니다.</p>
+      <div class="fml"><b>■ 이론값 계산 — 이 네 식만 쓰면 됩니다 (3·4차시에서 다시 유도하지 않음)</b><br>
+        ① 가속도 &nbsp;&nbsp; <b>a = g·sinθ</b> = 9.8 × sin 10° ≈ <b>1.70 m/s²</b> &nbsp;<span style="color:var(--ink-soft)">(θ가 10°가 아니면 각도만 바꿔 다시 — sin은 계산기 각도 모드)</span><br>
+        ② 속도 &nbsp;&nbsp;&nbsp;&nbsp; 정지 출발(v₀ = 0) → <b>v = a·t</b><br>
+        ③ 이동 거리 &nbsp; <b>x = ½·a·t²</b><br>
+        ④ 가속도 &nbsp;&nbsp; 운동하는 동안 <b>일정</b> (a–t 그래프는 수평선)<br>
+        <span style="color:var(--ink-soft)">계산 예) t = 0.2 s → x = ½ × 1.70 × 0.2² = ½ × 1.70 × 0.04 = <b>0.034 m</b>, &nbsp; v = 1.70 × 0.2 = <b>0.34 m/s</b></span></div>
       <div class="tbl-wrap">
         <table>
           <caption>시간 t(s)에 따른 수레의 이동 거리 x(m)</caption>
@@ -423,9 +447,20 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act">
       <h3><span class="tag">활동 1</span> x–t 그래프 그리고 평균 속도 구하기</h3>
       <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="m3g-1"></label><div>2차시 표의 값을 스프레드시트(또는 지오지브라)에 넣고 <b>x–t 산점도</b>를 그린다. (PASCO·Tracker 각각)</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="m3g-2"></label><div>아래 표에서 각 구간의 평균 속도 = (끝 x − 처음 x) ÷ (끝 t − 처음 t) 를 계산한다.</div></li>
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m3g-1"></label><div>2차시 표(활동 4)의 (t, x) 값을 아래 모눈에 <b>직접 점을 찍어</b> 그린다. <b>완료</b>를 누르면 점이 이어진다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m3g-2"></label><div><b>이론값 곡선</b> 버튼을 눌러 내 그래프와 비교한다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="m3g-3"></label><div>아래 표에서 각 구간의 평균 속도 = (끝 x − 처음 x) ÷ (끝 t − 처음 t) 를 계산한다.</div></li>
       </ol>
+      <div class="plot" data-plot="xt" data-ymax="0.35" data-ystep="0.05" data-ylabelstep="0.05" data-yunit="x (m)" data-a="1.70" data-fn="x">
+        <div class="plot-bar">
+          <button type="button" data-act="done">완료 · 선 잇기</button>
+          <button type="button" data-act="undo">되돌리기</button>
+          <button type="button" data-act="reset">초기화</button>
+          <button type="button" data-act="theory">이론값 곡선 보기</button>
+        </div>
+        <svg class="plot-svg" viewBox="0 0 480 300" role="img" aria-label="x-t 그래프를 직접 그리는 모눈"></svg>
+        <p class="plot-hint">가로 = 시간(눈금 0.05 s, 숫자 0.1 s), 세로 = 이동 거리 x(m). 모눈을 클릭해 점을 찍고 <b>완료</b>. 같은 시각을 다시 클릭하면 그 점이 옮겨집니다.</p>
+      </div>
       <div class="tbl-wrap">
         <table>
           <caption>구간별 평균 속도 (원하는 데이터 하나를 골라서)</caption>
@@ -438,7 +473,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
           </tbody>
         </table>
       </div>
-      <div class="hint">이론값은 각 구간의 <b>가운데 시각</b>에서의 속도 v = a·t (a=1.70)로 계산한 값입니다.</div>
+      <div class="hint">이론값 = 각 구간의 <b>가운데 시각</b>에서 <code>v = a·t</code> (2차시 활동 4 ②식). 예: 0.0→0.2 구간의 가운데 0.1 s → 1.70 × 0.1 = 0.17</div>
     </div>
 
     <div class="act">
@@ -458,9 +493,20 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act">
       <h3><span class="tag">활동 3</span> v–t 그래프의 기울기 = 가속도</h3>
       <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="m3a-1"></label><div>활동 1·2에서 구한 속도들로 <b>v–t 그래프</b>를 그린다. 거의 직선인지 확인.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="m3a-2"></label><div>직선 위 두 점을 골라 기울기 = (v₂ − v₁) ÷ (t₂ − t₁) = <b>가속도</b>를 구한다.</div></li>
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m3a-1"></label><div>활동 1·2에서 구한 속도들을 아래 모눈에 <b>점을 찍어</b> 그린다. <b>완료</b> 후 거의 직선인지 확인.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m3a-2"></label><div><b>이론값 곡선</b>(v = a·t)과 겹쳐 본다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="m3a-3"></label><div>직선 위 두 점을 골라 기울기 = (v₂ − v₁) ÷ (t₂ − t₁) = <b>가속도</b>를 구한다.</div></li>
       </ol>
+      <div class="plot" data-plot="vt" data-ymax="1.2" data-ystep="0.1" data-ylabelstep="0.2" data-yunit="v (m/s)" data-a="1.70" data-fn="v">
+        <div class="plot-bar">
+          <button type="button" data-act="done">완료 · 선 잇기</button>
+          <button type="button" data-act="undo">되돌리기</button>
+          <button type="button" data-act="reset">초기화</button>
+          <button type="button" data-act="theory">이론값 곡선 보기</button>
+        </div>
+        <svg class="plot-svg" viewBox="0 0 480 300" role="img" aria-label="v-t 그래프를 직접 그리는 모눈"></svg>
+        <p class="plot-hint">가로 = 시간(눈금 0.05 s, 숫자 0.1 s), 세로 = 속도 v(m/s). 모눈을 클릭해 점을 찍고 <b>완료</b>.</p>
+      </div>
       <div class="qlabel"><span class="b">계산</span> 고른 두 점과 가속도 계산 과정</div>
       <div class="write" contenteditable="true" data-field="m3-acc-calc" data-q="v-t 기울기로 가속도 계산" data-ph="(0.1 s, 0.17 m/s), (0.5 s, 0.85 m/s) → a = (0.85−0.17)/(0.5−0.1) = 1.7 m/s²"></div>
     </div>
@@ -539,7 +585,18 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
     <div class="act">
       <h3><span class="tag">활동 2</span> a–t 넓이로 속도 변화 구하기</h3>
-      <p class="lead">가속도가 일정(수평선)하므로 a–t 그래프 아래는 직사각형입니다.</p>
+      <p class="lead">가속도가 일정(수평선)하므로 a–t 그래프 아래는 직사각형입니다. 아래 모눈에 3차시에서 구한 가속도를
+        시각마다 같은 높이로 점 찍어 그려 보세요(수평선).</p>
+      <div class="plot" data-plot="at" data-ymax="2" data-ystep="0.25" data-ylabelstep="0.5" data-yunit="a (m/s²)" data-a="1.70" data-fn="a">
+        <div class="plot-bar">
+          <button type="button" data-act="done">완료 · 선 잇기</button>
+          <button type="button" data-act="undo">되돌리기</button>
+          <button type="button" data-act="reset">초기화</button>
+          <button type="button" data-act="theory">이론값 곡선 보기</button>
+        </div>
+        <svg class="plot-svg" viewBox="0 0 480 300" role="img" aria-label="a-t 그래프를 직접 그리는 모눈"></svg>
+        <p class="plot-hint">가로 = 시간(눈금 0.05 s, 숫자 0.1 s), 세로 = 가속도 a(m/s²). 이론값(g·sinθ ≈ 1.70)과 겹쳐 보세요.</p>
+      </div>
       <div class="fml">0 ~ 0.5 s 넓이 = a × 0.5 = (3차시에서 구한 a) × 0.5 = ?  →  이 값 = v(0.5) − v(0)</div>
       <div class="qlabel"><span class="b">계산·확인</span> 위 값과, v–t 그래프에서 읽은 v(0.5) − v(0)이 같은가?</div>
       <div class="write" contenteditable="true" data-field="m4-dv" data-q="a-t 넓이 = 속도 변화 확인" data-ph="a × 0.5 ≈ 1.70 × 0.5 = 0.85 m/s. v-t 그래프의 v(0.5) − v(0)도 약 0.85 m/s로 일치."></div>
@@ -694,6 +751,122 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
   window.addEventListener("beforeprint",function(){
     document.querySelectorAll(".write").forEach(function(el){ el.setAttribute("data-min",el.style.minHeight||""); el.style.minHeight="0"; });
   });
+})();
+</script>
+
+<script>
+/* ---- 직접 그리는 그래프 (x–t, v–t, a–t) ---- */
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var XMAX=0.6, XMINOR=0.05, XLABEL=0.1;
+  var W=480, H=300, mL=54, mR=16, mT=16, mB=38;
+  var pw=W-mL-mR, ph=H-mT-mB;
+
+  function el(tag,attrs,text){
+    var e=document.createElementNS(NS,tag);
+    for(var k in attrs) e.setAttribute(k,attrs[k]);
+    if(text!=null) e.textContent=text;
+    return e;
+  }
+  function almostMultiple(v,step){ var r=v/step; return Math.abs(r-Math.round(r))<1e-6; }
+  function fmt(n){ var s=n.toFixed(2); return s.indexOf(".")>-1 ? s.replace(/0+$/,"").replace(/\.$/,"") : s; }
+
+  function initPlot(root){
+    var id=root.getAttribute("data-plot");
+    var ymax=parseFloat(root.getAttribute("data-ymax"));
+    var ystep=parseFloat(root.getAttribute("data-ystep"));
+    var ylab=parseFloat(root.getAttribute("data-ylabelstep"));
+    var yunit=root.getAttribute("data-yunit")||"y";
+    var a=parseFloat(root.getAttribute("data-a"))||1.70;
+    var fn=root.getAttribute("data-fn");
+    var KEY="steam-incline-plot-"+id;
+    var svg=root.querySelector(".plot-svg");
+
+    var state={pts:[],done:false,theory:false};
+    try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&typeof s==="object"){
+      state.pts=Array.isArray(s.pts)?s.pts:[]; state.done=!!s.done; state.theory=!!s.theory;
+    } }catch(e){}
+    var undo=[];
+
+    function X(t){ return mL + (t/XMAX)*pw; }
+    function Y(v){ v=Math.max(0,Math.min(v,ymax)); return mT + ph - (v/ymax)*ph; }
+    function theoryVal(t){ return fn==="x" ? 0.5*a*t*t : fn==="v" ? a*t : a; }
+    function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+    function push(){ undo.push(JSON.stringify(state.pts)); if(undo.length>40) undo.shift(); }
+
+    function addPoint(t,v){
+      t=Math.round(t/XMINOR)*XMINOR; t=Math.max(0,Math.min(t,XMAX)); t=Math.round(t*100)/100;
+      var q=ystep/2;
+      v=Math.round(v/q)*q; v=Math.max(0,Math.min(v,ymax)); v=Math.round(v*1000)/1000;
+      push();
+      var hit=-1;
+      for(var i=0;i<state.pts.length;i++){ if(Math.abs(state.pts[i][0]-t)<1e-6){ hit=i; break; } }
+      if(hit>=0) state.pts[hit][1]=v; else state.pts.push([t,v]);
+      state.pts.sort(function(p,r){ return p[0]-r[0]; });
+      save(); render();
+    }
+
+    svg.addEventListener("click",function(ev){
+      var r=svg.getBoundingClientRect();
+      if(!r.width) return;
+      var px=(ev.clientX-r.left)/r.width*W;
+      var py=(ev.clientY-r.top)/r.height*H;
+      if(px<mL-8||px>W-mR+8||py<mT-8||py>mT+ph+8) return;
+      addPoint((px-mL)/pw*XMAX, (mT+ph-py)/ph*ymax);
+    });
+
+    root.querySelectorAll(".plot-bar button").forEach(function(b){
+      b.addEventListener("click",function(){
+        var act=b.getAttribute("data-act");
+        if(act==="done"){ state.done=!state.done; save(); render(); }
+        else if(act==="undo"){ if(undo.length){ try{ state.pts=JSON.parse(undo.pop()); }catch(e){} save(); render(); } }
+        else if(act==="reset"){ push(); state.pts=[]; state.done=false; save(); render(); }
+        else if(act==="theory"){ state.theory=!state.theory; save(); render(); }
+      });
+    });
+
+    function render(){
+      while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+      for(var gy=0; gy<=ymax+1e-9; gy+=ystep)
+        svg.appendChild(el("line",{"class":"pg"+(almostMultiple(gy,ylab)?" maj":""),x1:mL,y1:Y(gy),x2:W-mR,y2:Y(gy)}));
+      for(var gx=0; gx<=XMAX+1e-9; gx+=XMINOR)
+        svg.appendChild(el("line",{"class":"pg"+(almostMultiple(gx,XLABEL)?" maj":""),x1:X(gx),y1:mT,x2:X(gx),y2:mT+ph}));
+
+      svg.appendChild(el("line",{"class":"pax",x1:mL,y1:mT,x2:mL,y2:mT+ph}));
+      svg.appendChild(el("line",{"class":"pax",x1:mL,y1:mT+ph,x2:W-mR,y2:mT+ph}));
+
+      for(var lx=0; lx<=XMAX+1e-9; lx+=XLABEL)
+        svg.appendChild(el("text",{"class":"plb",x:X(Math.round(lx*10)/10),y:mT+ph+16,"text-anchor":"middle"}, (Math.round(lx*10)/10).toFixed(1)));
+      for(var ly=0; ly<=ymax+1e-9; ly+=ylab)
+        svg.appendChild(el("text",{"class":"plb",x:mL-8,y:Y(Math.round(ly*1000)/1000)+3,"text-anchor":"end"}, fmt(Math.round(ly*1000)/1000)));
+
+      svg.appendChild(el("text",{"class":"plb pt-title",x:W-mR,y:mT+ph+31,"text-anchor":"end"},"t (s)"));
+      svg.appendChild(el("text",{"class":"plb pt-title",x:mL-8,y:mT-4,"text-anchor":"end"},yunit));
+
+      if(state.theory){
+        var d="";
+        for(var tt=0; tt<=XMAX+1e-9; tt+=XMAX/80)
+          d+=(d?" L":"M")+X(tt).toFixed(1)+","+Y(theoryVal(tt)).toFixed(1);
+        svg.appendChild(el("path",{"class":"pth",d:d}));
+      }
+      if(state.done && state.pts.length>1){
+        svg.appendChild(el("polyline",{"class":"psl",points:state.pts.map(function(p){ return X(p[0]).toFixed(1)+","+Y(p[1]).toFixed(1); }).join(" ")}));
+      }
+      state.pts.forEach(function(p){ svg.appendChild(el("circle",{"class":"psp",cx:X(p[0]),cy:Y(p[1]),r:4})); });
+
+      root.querySelectorAll(".plot-bar button").forEach(function(b){
+        var act=b.getAttribute("data-act");
+        if(act==="theory"){ b.classList.toggle("on",state.theory); b.textContent=state.theory?"이론값 곡선 숨기기":"이론값 곡선 보기"; }
+        if(act==="done") b.textContent=state.done?"선 지우기":"완료 · 선 잇기";
+      });
+    }
+
+    render();
+  }
+
+  document.querySelectorAll(".plot").forEach(initPlot);
 })();
 </script>
 
