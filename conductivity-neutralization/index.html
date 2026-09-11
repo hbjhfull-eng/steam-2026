@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전기 전도도로 읽는 중화 반응 — 센서 제작과 함수 모델링</title>
+<meta name="description" content="통합과학·정보·수학을 잇는 4차시 STEAM 융합수업. 전기 전도도 측정기를 직접 만들어 중화점을 찾고, 데이터를 절댓값 함수로 표현합니다. 1학년 대상.">
+<link rel="icon" href="../favicon.svg">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="전기 전도도로 읽는 중화 반응 — 센서 제작과 함수 모델링">
+<meta property="og:description" content="직접 만든 마이크로비트 센서로 중화점을 찾고, 데이터를 절댓값 함수로 표현하는 4차시 STEAM 융합수업.">
+<meta property="og:type" content="website">
+
+<!-- =========================================================================
+  이 페이지는 STEAM 융합수업의 '주제 1' 상세 소개입니다.
+  일정·정원·담당·신청 등 공통 정보와 신청 접수는 상위 허브(../index.html)에서 관리합니다.
+  이 페이지에서 바꿀 것은 〔담당 교사〕〔장소〕 정도이며, 나머지는 허브에서 채우세요.
+========================================================================== -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{color-scheme:light dark;scroll-behavior:smooth;scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+:root{
+  --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#57636f; --line:#d7dde3;
+  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --neutral-deep:#237a66;
+  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb;
+  --tbd:#b06a2e; --tbd-bg:#f6ecdf;
+  --shadow:0 1px 2px rgba(27,37,48,.05),0 10px 30px rgba(27,37,48,.07);
+  --f-disp:"Gothic A1","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027;
+  --tbd:#dba06a; --tbd-bg:#332a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027;
+  --tbd:#dba06a; --tbd-bg:#332a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
+}
+
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
+  font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:var(--f-disp);line-height:1.22;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--base)}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.tbd{color:var(--tbd);background:var(--tbd-bg);border-radius:4px;padding:0 4px;
+  text-decoration:underline dotted;text-underline-offset:3px;white-space:nowrap;font-size:.94em}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+@supports (backdrop-filter:blur(1px)){.top{background:color-mix(in srgb,var(--paper) 84%,transparent);backdrop-filter:blur(9px)}}
+.top-in{max-width:960px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:14px}
+.top strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
+.top nav{margin-left:auto;display:flex;gap:16px;align-items:center}
+.top nav a{font-size:13.5px;color:var(--ink-soft);text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+.btn{font-family:var(--f-body);font-weight:600;font-size:14px;text-decoration:none;
+  border-radius:9px;padding:9px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--neutral);color:#fff}
+.btn-primary:hover{background:var(--neutral-deep)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--neutral)}
+.btn:focus-visible,.top nav a:focus-visible{outline:2px solid var(--neutral);outline-offset:2px}
+@media (max-width:640px){.top nav a.hide-sm{display:none}}
+
+/* hero */
+.hero{padding:56px 0 40px}
+.hero h1{font-size:clamp(29px,5.2vw,46px);font-weight:800;letter-spacing:-.022em;margin:14px 0 10px}
+.hero .tag{color:var(--acid)}
+.hero .title-line{font-family:var(--f-disp);font-weight:700;font-size:clamp(15px,2.1vw,18px);
+  color:var(--neutral-deep);margin:0 0 16px}
+.hero .title-line span{color:var(--ink-soft);font-weight:500}
+.hero p.sub{max-width:60ch;font-size:clamp(15px,2vw,17px);color:var(--ink-soft)}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero .btn{padding:12px 20px;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 13px;
+  font-size:13px;display:flex;flex-direction:column;gap:2px;box-shadow:var(--shadow)}
+.chip b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.chip span{font-weight:600}
+
+section.blk{padding:40px 0;border-top:1px solid var(--line)}
+section.blk > .wrap > h2{font-size:clamp(20px,3vw,27px);font-weight:800;letter-spacing:-.015em}
+section.blk > .wrap > p.intro{margin-top:12px;max-width:64ch;color:var(--ink-soft)}
+
+/* STEAM 매핑 */
+.steam{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}
+@media (max-width:860px){.steam{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:520px){.steam{grid-template-columns:1fr 1fr}}
+.steam div{border:1px solid var(--line);border-radius:10px;padding:13px;background:var(--card)}
+.steam .k{font-family:var(--f-disp);font-weight:800;font-size:20px;line-height:1}
+.steam .t{font-size:11px;font-family:var(--f-mono);color:var(--ink-soft);margin:3px 0 7px}
+.steam .d{font-size:12.5px;line-height:1.5}
+.steam div:nth-child(1) .k{color:var(--neutral)}
+.steam div:nth-child(2) .k{color:var(--base)}
+.steam div:nth-child(3) .k{color:var(--base)}
+.steam div:nth-child(4) .k{color:var(--ink)}
+.steam div:nth-child(5) .k{color:var(--acid)}
+
+/* 커리큘럼 */
+.curr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+@media (max-width:720px){.curr{grid-template-columns:1fr}}
+.lesson{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 19px;box-shadow:var(--shadow)}
+.lesson .h{display:flex;align-items:baseline;gap:9px}
+.lesson .n{font-family:var(--f-mono);font-weight:600;font-size:12px;padding:3px 8px;border-radius:6px;background:var(--neutral-bg);color:var(--neutral-deep)}
+.lesson:nth-child(2) .n{background:var(--base-bg);color:var(--base)}
+.lesson:nth-child(3) .n{background:var(--tbd-bg);color:var(--tbd)}
+.lesson:nth-child(4) .n{background:var(--acid-bg);color:var(--acid)}
+.lesson h3{font-size:15.5px;font-weight:700}
+.lesson .sub{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft);margin-top:3px}
+.lesson p{font-size:13.5px;color:var(--ink-soft);margin-top:9px}
+.lesson ul{margin:9px 0 0;padding-left:18px;font-size:13px}
+.lesson li{margin-top:3px}
+
+/* 리스트 카드 */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.three-col{grid-template-columns:1fr 1fr 1fr}
+@media (max-width:720px){.two-col,.three-col{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
+.panel h3{font-size:14.5px;font-weight:700;display:flex;gap:8px;align-items:center}
+.panel h3 .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.panel ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.panel li{font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
+.panel li::before{content:"";width:16px;height:16px;flex:none;margin-top:3px;border-radius:5px;
+  background:var(--neutral-bg);border:1px solid var(--neutral)}
+.panel.note li::before{background:var(--base-bg);border-color:var(--base)}
+
+/* 운영 안내 표 */
+.tbl-wrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:420px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+tr:last-child th,tr:last-child td{border-bottom:none}
+th{width:34%;background:var(--card);font-family:var(--f-disp);font-weight:700;white-space:nowrap}
+
+/* 신청 */
+#apply .wrap{text-align:center}
+.deadline{font-family:var(--f-mono);font-size:13px;color:var(--acid);margin-top:10px}
+.cta-big{margin-top:18px;font-size:16px;font-weight:700;padding:15px 30px;background:var(--neutral);color:#fff;
+  text-decoration:none;border-radius:11px;display:inline-flex;gap:9px;align-items:center}
+.cta-big:hover{background:var(--neutral-deep)}
+.cta-big:focus-visible{outline:2px solid var(--neutral);outline-offset:3px}
+.cta-big.disabled{background:var(--line);color:var(--ink-soft);cursor:default;pointer-events:none}
+.soon{max-width:46ch;margin:14px auto 0;font-size:13.5px;color:var(--ink-soft);
+  background:var(--neutral-bg);border:1px solid var(--neutral);border-radius:10px;padding:11px 15px}
+#apply .contact{font-size:13px;color:var(--ink-soft);margin-top:16px}
+
+/* FAQ */
+.faq{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:2px 18px}
+summary{font-weight:600;font-size:14.5px;padding:14px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--ink-soft)}
+details[open] summary::after{content:"–"}
+details p{font-size:13.5px;color:var(--ink-soft);padding:0 0 16px}
+
+footer{border-top:1px solid var(--line);padding:26px 22px 40px;text-align:center;font-size:12px;color:var(--ink-soft)}
+footer a{color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <strong>전기 전도도로 읽는 중화 반응</strong>
+    <nav>
+      <a href="../">← STEAM 융합수업</a>
+      <a href="#curriculum" class="hide-sm">4차시</a>
+      <a href="activity.html" class="hide-sm">활동지 미리보기</a>
+      <a href="../#apply" class="btn btn-primary">신청 안내</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">2026 STEAM 융합수업 · 주제 1</div>
+      <h1>산과 염기가 만나면,<br><span class="tag">전류</span>는 어떻게 변할까?</h1>
+      <p class="title-line">전기 전도도로 읽는 중화 반응 <span>— 센서 제작과 함수 모델링</span></p>
+      <p class="sub">눈에 보이지 않는 <b>중화 반응</b>을 직접 만든 <b>마이크로비트 측정기</b>로 읽어 내고,
+        그 데이터를 <b>그래프와 함수</b>로 표현합니다. 통합과학·정보·수학이 한 실험 안에서 만나는 4차시 프로그램입니다.</p>
+      <div class="actions">
+        <a href="../#apply" class="btn btn-primary">신청 안내 보기</a>
+        <a href="activity.html" class="btn btn-ghost">활동지 미리보기 →</a>
+      </div>
+      <div class="chips">
+        <div class="chip"><b>교과</b><span>통합과학 · 정보 · 공통수학</span></div>
+        <div class="chip"><b>차시</b><span>50분 × 4차시</span></div>
+        <div class="chip"><b>도구</b><span>마이크로비트 · 지오지브라</span></div>
+        <div class="chip"><b>준비</b><span>사전지식 불필요</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="about">
+    <div class="wrap">
+      <h2>이 과정은</h2>
+      <p class="intro">"딱따구리는 왜 개미산을 내뿜는 개미를 먹을 수 있을까?"라는 질문에서 출발합니다.
+        산과 염기가 반응하면 이온이 사라지고, 그만큼 용액에 흐르는 전류가 약해집니다.
+        이 변화를 <b>측정 → 데이터 → 그래프 → 함수</b>의 순서로 따라가며,
+        과학 개념·코딩·수학이 사실은 하나의 문제를 푸는 서로 다른 도구라는 것을 경험합니다.</p>
+      <div class="steam">
+        <div><div class="k">S</div><div class="t">Science</div><div class="d">중화 반응, 알짜 이온 반응식, 이온 수 변화</div></div>
+        <div><div class="k">T</div><div class="t">Technology</div><div class="d">마이크로비트·MakeCode로 전기 전도도 측정</div></div>
+        <div><div class="k">E</div><div class="t">Engineering</div><div class="d">측정 알고리즘 설계와 장치 제작·디버깅</div></div>
+        <div><div class="k">A</div><div class="t">Arts</div><div class="d">데이터를 읽히는 그래프로 시각화</div></div>
+        <div><div class="k">M</div><div class="t">Mathematics</div><div class="d">절댓값을 포함한 함수로 모델링·예측</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="curriculum">
+    <div class="wrap">
+      <h2>4차시 커리큘럼</h2>
+      <p class="intro">한 시간(50분)씩 4차시. 모둠(3~4인)으로 함께 실험하고 각자 활동지를 완성합니다.</p>
+      <div class="curr">
+        <div class="lesson">
+          <div class="h"><span class="n">1차시</span><h3>산과 염기의 중화 반응</h3></div>
+          <div class="sub">통합과학</div>
+          <p>중화 반응을 식으로 쓰고, 시뮬레이션으로 이온이 어떻게 사라지고 남는지 관찰합니다.</p>
+          <ul><li>전체·알짜 이온 반응식</li><li>자바실험실로 이온 수 변화표 완성</li><li>중화점을 확인하는 3가지 방법</li></ul>
+        </div>
+        <div class="lesson">
+          <div class="h"><span class="n">2차시</span><h3>전기 전도도 측정기 만들기</h3></div>
+          <div class="sub">정보 · 공학</div>
+          <p>마이크로비트를 연결하고, 측정 순서를 알고리즘으로 설계해 직접 코딩합니다.</p>
+          <ul><li>하드웨어 배선(P0-SIG / GND)</li><li>5회 평균 측정 알고리즘 설계</li><li>MakeCode 코딩·업로드·디버깅</li></ul>
+        </div>
+        <div class="lesson">
+          <div class="h"><span class="n">3차시</span><h3>실험 &amp; 데이터 수집</h3></div>
+          <div class="sub">통합과학 · 데이터</div>
+          <p>산·염기를 조금씩 섞으며 전기 전도도를 측정하고, 스프레드시트로 그래프를 그립니다.</p>
+          <ul><li>회차별 전도도 측정·기록</li><li>꺾은선 / 분산형 그래프 생성</li><li>V자 그래프와 중화점 해석</li></ul>
+        </div>
+        <div class="lesson">
+          <div class="h"><span class="n">4차시</span><h3>지오지브라로 함수 모델링</h3></div>
+          <div class="sub">통합과학 · 공통수학</div>
+          <p>데이터에 맞는 절댓값 함수를 찾아 그래프로 검증하고, 넣지 않은 값을 예측합니다.</p>
+          <ul><li>y = a|x − p| + q 로 표현</li><li>함수로 전도도 예측·검증</li><li>중화열 그래프로 확장 토의</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>이런 학생에게 추천합니다</h2>
+      <div class="two-col">
+        <div class="panel">
+          <h3><span class="dot" style="background:var(--neutral)"></span>이런 관심이 있다면</h3>
+          <ul>
+            <li>실험 결과가 왜 그렇게 나오는지 끝까지 따지고 싶은 사람</li>
+            <li>코딩·피지컬 컴퓨팅(마이크로비트, 아두이노)에 관심 있는 사람</li>
+            <li>데이터·그래프·수학이 실제로 어디에 쓰이는지 보고 싶은 사람</li>
+            <li>모둠 활동으로 하나의 결과물을 만들어 보고 싶은 사람</li>
+          </ul>
+        </div>
+        <div class="panel note">
+          <h3><span class="dot" style="background:var(--base)"></span>미리 알아둘 점</h3>
+          <ul>
+            <li>사전 지식·선수 과목은 필요 없습니다. 개념은 수업에서 다룹니다.</li>
+            <li>코딩 경험이 없어도 됩니다. 블록 코딩부터 함께 시작합니다.</li>
+            <li>장비(마이크로비트·노트북)와 시약은 모두 제공됩니다.</li>
+            <li>정원이 있어 신청이 많으면 학년·지원 동기 등을 참고해 선발합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>수업이 끝나면 남는 것</h2>
+      <div class="two-col three-col">
+        <div class="panel"><h3>산출물</h3><ul><li>4차시 활동지(포트폴리오)</li><li>모둠 실험 보고서 1편</li><li>내가 만든 측정 코드</li></ul></div>
+        <div class="panel"><h3>생기부 연계</h3><ul><li>과목별 세부능력 및 특기사항</li><li>탐구·문제해결 과정 기록</li><li>협업·의사소통 활동</li></ul></div>
+        <div class="panel"><h3>기른 역량</h3><ul><li>과학적 탐구력</li><li>컴퓨팅 사고력</li><li>수학적 모델링·데이터 해석</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="info">
+    <div class="wrap">
+      <h2>주제 1 운영 정보</h2>
+      <div class="tbl-wrap">
+        <table>
+          <tbody>
+            <tr><th>교과</th><td>통합과학 · 정보 · 공통수학</td></tr>
+            <tr><th>차시</th><td>1회 50분 × 4차시 · 모둠 3~4인</td></tr>
+            <tr><th>주요 도구</th><td>마이크로비트, MakeCode, 자바실험실, 스프레드시트, 지오지브라</td></tr>
+            <tr><th>장소</th><td><span class="tbd">〔장소〕</span></td></tr>
+            <tr><th>담당 교사</th><td><span class="tbd">〔담당 교사〕</span></td></tr>
+            <tr><th>준비물</th><td>필기도구만 지참 (장비·시약·노트북 제공)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="intro" style="margin-top:16px">대상·일정·정원·신청 방법 등 공통 정보는
+        <a href="../#info">STEAM 융합수업 안내</a>를 확인하세요.</p>
+    </div>
+  </section>
+
+  <section class="blk" id="apply">
+    <div class="wrap" style="text-align:center">
+      <h2>신청</h2>
+      <p class="intro" style="margin:12px auto 0">이 주제를 포함한 <b>4개 주제</b>의 신청은
+        <b>리로스쿨</b>에서 한 번에 접수합니다. 지원할 때 희망 주제를 1·2순위로 선택하세요.</p>
+      <a class="cta-big" href="../#apply">전체 신청 안내로 이동 →</a>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2>이 주제에 관한 질문</h2>
+      <div class="faq">
+        <details><summary>코딩을 한 번도 안 해봤는데 괜찮을까요?</summary><p>괜찮습니다. 마이크로비트 블록 코딩은 처음 하는 학생 기준으로 진행하며, "심화 알고리즘"이 아니라 "측정 순서를 논리로 설계하는 것"에 초점을 둡니다.</p></details>
+        <details><summary>화학·수학 개념을 미리 알아야 하나요?</summary><p>아니요. 중화 반응, 절댓값을 포함한 함수, 그래프 해석은 모두 활동 안에서 처음부터 다룹니다.</p></details>
+        <details><summary>활동지를 미리 볼 수 있나요?</summary><p>네. <a href="activity.html">활동지 미리보기</a>에서 실제로 채우게 될 내용을 확인할 수 있습니다.</p></details>
+      </div>
+      <p class="intro" style="margin-top:14px">성적 기준·장비·결석 등 공통 질문은
+        <a href="../#faq">STEAM 융합수업 자주 묻는 질문</a>에 있습니다.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><a href="../">2026학년도 2학기 야간 과제탐구반 STEAM 융합수업</a> · 주제 1 — 전기 전도도로 읽는 중화 반응</p>
+  <p style="margin-top:6px">자료 출처: 한국과학창의재단(KOFAC) 2022 개정 교육과정 융합교육(STEAM) 교재 ·
+    <a href="activity.html">학생 활동지</a> · 라이선스 CC BY-NC-SA 4.0</p>
+</footer>
+
+</body>
+</html>

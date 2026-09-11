@@ -3,30 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>전기 전도도로 읽는 중화 반응 — 센서 제작과 함수 모델링</title>
-<meta name="description" content="통합과학·정보·수학을 잇는 4차시 STEAM 융합수업. 전기 전도도 측정기를 직접 만들어 중화점을 찾고, 데이터를 절댓값 함수로 표현합니다. 1학년 대상.">
+<title>2026 STEAM 융합수업 — 학생 모집</title>
+<meta name="description" content="2026학년도 2학기 야간 과제탐구반 STEAM 융합수업. 4개 주제 중 하나를 골라 팀 프로젝트로 참여합니다. 통합과학·정보·수학·예술을 잇는 4차시 활동. 1학년 대상, 리로스쿨 접수.">
 <link rel="icon" href="favicon.svg">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="전기 전도도로 읽는 중화 반응 — 센서 제작과 함수 모델링">
-<meta property="og:description" content="직접 만든 마이크로비트 센서로 중화점을 찾고, 데이터를 절댓값 함수로 표현하는 4차시 STEAM 융합수업.">
+<meta property="og:title" content="2026 STEAM 융합수업 — 학생 모집">
+<meta property="og:description" content="4개 주제 중 하나를 골라 팀 프로젝트로. 센서·데이터·수학으로 실제 문제를 풀어 보는 4차시 활동. 1학년 대상.">
 <meta property="og:type" content="website">
 
 <!-- =========================================================================
-  공개 전에 아래 〔  〕 표시된 부분을 실제 정보로 바꿔 주세요 (find & replace):
+  공개 전에 아래 〔  〕 부분을 실제 정보로 바꾸세요 (본문에 주황색 점선으로 표시됨):
    〔학교명〕            예) 한일여자고등학교
+   〔운영 기간〕          예) 2026. 9. ~ 12.
    〔운영 요일·시간〕     예) 매주 화요일 18:00–21:30
-   〔운영 기간〕          예) 2026. 3.~6. (총 4주)
-   〔정원〕              예) 4명 (1개 반)
-   〔신청 기간〕          예) 2026. 3. 2.(월) ~ 3. 6.(금) 17:00
-   〔O월 중〕             예) 2월
-   〔담당 교사〕          예) 통합과학 ○○○ · 정보 ○○○
-   〔장소〕              예) 창의융합실 1
+   〔장소〕              예) 창의융합실 1·2, 과학실
+   〔정원〕              예) 주제별 4명 (총 16명)
+   〔신청 기간〕          예) 2026. 8. 25.(월) ~ 8. 29.(금) 17:00
+   〔O월 중〕             예) 8월
+   〔담당 교사〕          예) ○○○ · ○○○ · ○○○ · ○○○
    〔문의〕              예) 과학실 / 내선 000
 
-  신청 접수:
-   - 접수는 리로스쿨에서 4개 과정을 함께 안내하며 일괄 진행합니다.
+  신청 접수 (리로스쿨):
+   - 접수는 리로스쿨에서 4개 주제를 함께 안내하며 일괄 진행합니다.
    - 접수를 시작하면 id="apply" 섹션의 '신청 준비 중' <span> 과 <p class="soon"> 을 지우고,
      그 아래 주석 처리된 <a class="cta-big"> 의 href 에 리로스쿨 신청 페이지 주소를 넣으세요.
+
+  주제 추가:
+   - 주제 3·4가 정해지면 topics 그리드의 해당 <article class="topic-card soon"> 를 채우고,
+     하위 폴더(예: topic-3/)에 소개·활동지 페이지를 추가한 뒤 href 를 연결하세요.
 ========================================================================== -->
 
 <style>
@@ -38,8 +42,8 @@ img{max-width:100%}
 
 :root{
   --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#57636f; --line:#d7dde3;
-  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --neutral-deep:#237a66;
-  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb;
+  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --neutral-deep:#237a66; --plum:#7a5aa8;
+  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb; --plum-bg:#ece6f4;
   --tbd:#b06a2e; --tbd-bg:#f6ecdf;
   --shadow:0 1px 2px rgba(27,37,48,.05),0 10px 30px rgba(27,37,48,.07);
   --f-disp:"Gothic A1","IBM Plex Sans KR",system-ui,sans-serif;
@@ -48,15 +52,15 @@ img{max-width:100%}
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
-  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1;
-  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1; --plum:#b79ad9;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027; --plum-bg:#2a2140;
   --tbd:#dba06a; --tbd-bg:#332a1e;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
 }}
 :root[data-theme="dark"]{
   --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
-  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1;
-  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1; --plum:#b79ad9;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027; --plum-bg:#2a2140;
   --tbd:#dba06a; --tbd-bg:#332a1e;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
 }
@@ -66,21 +70,20 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 h1,h2,h3{font-family:var(--f-disp);line-height:1.22;margin:0;text-wrap:balance}
 p{margin:0}
 a{color:var(--base)}
-.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
 .tbd{color:var(--tbd);background:var(--tbd-bg);border-radius:4px;padding:0 4px;
   text-decoration:underline dotted;text-underline-offset:3px;white-space:nowrap;font-size:.94em}
 
-/* header */
 .top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
 @supports (backdrop-filter:blur(1px)){.top{background:color-mix(in srgb,var(--paper) 84%,transparent);backdrop-filter:blur(9px)}}
-.top-in{max-width:960px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:14px}
+.top-in{max-width:980px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:14px}
 .top strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
 .top nav{margin-left:auto;display:flex;gap:16px;align-items:center}
 .top nav a{font-size:13.5px;color:var(--ink-soft);text-decoration:none}
 .top nav a:hover{color:var(--ink)}
-.btn{font-family:var(--f-body);font-weight:600;font-size:14px;text-decoration:none;
-  border-radius:9px;padding:9px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid transparent}
+.btn{font-family:var(--f-body);font-weight:600;font-size:14px;text-decoration:none;border-radius:9px;
+  padding:9px 16px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid transparent}
 .btn-primary{background:var(--neutral);color:#fff}
 .btn-primary:hover{background:var(--neutral-deep)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
@@ -88,14 +91,10 @@ a{color:var(--base)}
 .btn:focus-visible,.top nav a:focus-visible{outline:2px solid var(--neutral);outline-offset:2px}
 @media (max-width:640px){.top nav a.hide-sm{display:none}}
 
-/* hero */
-.hero{padding:56px 0 40px}
-.hero h1{font-size:clamp(29px,5.2vw,46px);font-weight:800;letter-spacing:-.022em;margin:14px 0 10px}
+.hero{padding:58px 0 40px}
+.hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.022em;margin:14px 0 14px}
 .hero .tag{color:var(--acid)}
-.hero .title-line{font-family:var(--f-disp);font-weight:700;font-size:clamp(15px,2.1vw,18px);
-  color:var(--neutral-deep);margin:0 0 16px}
-.hero .title-line span{color:var(--ink-soft);font-weight:500}
-.hero p.sub{max-width:60ch;font-size:clamp(15px,2vw,17px);color:var(--ink-soft)}
+.hero p.sub{max-width:62ch;font-size:clamp(15px,2vw,17px);color:var(--ink-soft)}
 .hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
 .hero .btn{padding:12px 20px;font-size:15px}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
@@ -104,60 +103,52 @@ a{color:var(--base)}
 .chip b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
 .chip span{font-weight:600}
 
-section.blk{padding:40px 0;border-top:1px solid var(--line)}
+section.blk{padding:42px 0;border-top:1px solid var(--line)}
 section.blk > .wrap > h2{font-size:clamp(20px,3vw,27px);font-weight:800;letter-spacing:-.015em}
-section.blk > .wrap > p.intro{margin-top:12px;max-width:64ch;color:var(--ink-soft)}
+section.blk > .wrap > p.intro{margin-top:12px;max-width:66ch;color:var(--ink-soft)}
 
-/* STEAM 매핑 */
-.steam{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}
-@media (max-width:860px){.steam{grid-template-columns:1fr 1fr 1fr}}
-@media (max-width:520px){.steam{grid-template-columns:1fr 1fr}}
-.steam div{border:1px solid var(--line);border-radius:10px;padding:13px;background:var(--card)}
-.steam .k{font-family:var(--f-disp);font-weight:800;font-size:20px;line-height:1}
-.steam .t{font-size:11px;font-family:var(--f-mono);color:var(--ink-soft);margin:3px 0 7px}
-.steam .d{font-size:12.5px;line-height:1.5}
-.steam div:nth-child(1) .k{color:var(--neutral)}
-.steam div:nth-child(2) .k{color:var(--base)}
-.steam div:nth-child(3) .k{color:var(--base)}
-.steam div:nth-child(4) .k{color:var(--ink)}
-.steam div:nth-child(5) .k{color:var(--acid)}
+/* STEAM 한 줄 */
+.steam5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}
+@media (max-width:860px){.steam5{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:520px){.steam5{grid-template-columns:1fr 1fr}}
+.steam5 div{border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:var(--card)}
+.steam5 .k{font-family:var(--f-disp);font-weight:800;font-size:19px;line-height:1}
+.steam5 .t{font-size:11px;font-family:var(--f-mono);color:var(--ink-soft);margin:3px 0 6px}
+.steam5 .d{font-size:12.5px;line-height:1.5}
+.steam5 div:nth-child(1) .k{color:var(--neutral)}
+.steam5 div:nth-child(2) .k{color:var(--base)}
+.steam5 div:nth-child(3) .k{color:var(--base)}
+.steam5 div:nth-child(4) .k{color:var(--plum)}
+.steam5 div:nth-child(5) .k{color:var(--acid)}
 
-/* 커리큘럼 */
-.curr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-@media (max-width:720px){.curr{grid-template-columns:1fr}}
-.lesson{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 19px;box-shadow:var(--shadow)}
-.lesson .h{display:flex;align-items:baseline;gap:9px}
-.lesson .n{font-family:var(--f-mono);font-weight:600;font-size:12px;padding:3px 8px;border-radius:6px;background:var(--neutral-bg);color:var(--neutral-deep)}
-.lesson:nth-child(2) .n{background:var(--base-bg);color:var(--base)}
-.lesson:nth-child(3) .n{background:var(--tbd-bg);color:var(--tbd)}
-.lesson:nth-child(4) .n{background:var(--acid-bg);color:var(--acid)}
-.lesson h3{font-size:15.5px;font-weight:700}
-.lesson .sub{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft);margin-top:3px}
-.lesson p{font-size:13.5px;color:var(--ink-soft);margin-top:9px}
-.lesson ul{margin:9px 0 0;padding-left:18px;font-size:13px}
-.lesson li{margin-top:3px}
+/* 주제 카드 */
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media (max-width:720px){.topics{grid-template-columns:1fr}}
+.topic-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 21px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.topic-card .badge{align-self:flex-start;font-family:var(--f-mono);font-size:11px;font-weight:600;
+  padding:3px 9px;border-radius:20px;background:var(--neutral-bg);color:var(--neutral-deep)}
+.topic-card:nth-child(2) .badge{background:var(--base-bg);color:var(--base)}
+.topic-card h3{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+.topic-card .subject{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft)}
+.topic-card p{font-size:13.5px;color:var(--ink-soft)}
+.topic-card ul{margin:0;padding-left:17px;font-size:12.5px;color:var(--ink-soft)}
+.topic-card ul li{margin-top:2px}
+.topic-card .go{margin-top:auto;padding-top:6px}
+.topic-card .go a{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--neutral-deep)}
+.topic-card .go a:hover{text-decoration:underline}
+.topic-card.soon{border-style:dashed;opacity:.85}
+.topic-card.soon .badge{background:var(--tbd-bg);color:var(--tbd)}
+.topic-card.soon h3{color:var(--ink-soft)}
+.topics.trio{grid-template-columns:1fr 1fr 1fr}
+@media (max-width:720px){.topics.trio{grid-template-columns:1fr}}
 
-/* 리스트 카드 */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
-.three-col{grid-template-columns:1fr 1fr 1fr}
-@media (max-width:720px){.two-col,.three-col{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
-.panel h3{font-size:14.5px;font-weight:700;display:flex;gap:8px;align-items:center}
-.panel h3 .dot{width:9px;height:9px;border-radius:50%;flex:none}
-.panel ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-.panel li{font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
-.panel li::before{content:"";width:16px;height:16px;flex:none;margin-top:3px;border-radius:5px;
-  background:var(--neutral-bg);border:1px solid var(--neutral)}
-.panel.note li::before{background:var(--base-bg);border-color:var(--base)}
-
-/* 운영 안내 표 */
 .tbl-wrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:12px}
-table{border-collapse:collapse;width:100%;font-size:14px;min-width:420px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:440px}
 th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
 tr:last-child th,tr:last-child td{border-bottom:none}
-th{width:34%;background:var(--card);font-family:var(--f-disp);font-weight:700;white-space:nowrap}
+th{width:32%;background:var(--card);font-family:var(--f-disp);font-weight:700;white-space:nowrap}
 
-/* 신청 */
 #apply .wrap{text-align:center}
 .deadline{font-family:var(--f-mono);font-size:13px;color:var(--acid);margin-top:10px}
 .cta-big{margin-top:18px;font-size:16px;font-weight:700;padding:15px 30px;background:var(--neutral);color:#fff;
@@ -165,11 +156,10 @@ th{width:34%;background:var(--card);font-family:var(--f-disp);font-weight:700;wh
 .cta-big:hover{background:var(--neutral-deep)}
 .cta-big:focus-visible{outline:2px solid var(--neutral);outline-offset:3px}
 .cta-big.disabled{background:var(--line);color:var(--ink-soft);cursor:default;pointer-events:none}
-.soon{max-width:46ch;margin:14px auto 0;font-size:13.5px;color:var(--ink-soft);
+.soon-note{max-width:48ch;margin:14px auto 0;font-size:13.5px;color:var(--ink-soft);
   background:var(--neutral-bg);border:1px solid var(--neutral);border-radius:10px;padding:11px 15px}
 #apply .contact{font-size:13px;color:var(--ink-soft);margin-top:16px}
 
-/* FAQ */
 .faq{margin-top:20px;display:flex;flex-direction:column;gap:10px}
 details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:2px 18px}
 summary{font-weight:600;font-size:14.5px;padding:14px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
@@ -186,11 +176,11 @@ footer a{color:var(--ink-soft)}
 
 <header class="top">
   <div class="top-in">
-    <strong>전기 전도도로 읽는 중화 반응</strong>
+    <strong>2026 STEAM 융합수업</strong>
     <nav>
-      <a href="#about" class="hide-sm">과정 소개</a>
-      <a href="#curriculum" class="hide-sm">4차시</a>
-      <a href="activity.html" class="hide-sm">활동지 미리보기</a>
+      <a href="#topics" class="hide-sm">주제</a>
+      <a href="#info" class="hide-sm">운영 안내</a>
+      <a href="#faq" class="hide-sm">FAQ</a>
       <a href="#apply" class="btn btn-primary">신청 안내</a>
     </nav>
   </div>
@@ -199,109 +189,88 @@ footer a{color:var(--ink-soft)}
 <main>
   <section class="hero">
     <div class="wrap">
-      <div class="eyebrow">STEAM 융합수업 · 1학년 신입 모집</div>
-      <h1>산과 염기가 만나면,<br><span class="tag">전류</span>는 어떻게 변할까?</h1>
-      <p class="title-line">전기 전도도로 읽는 중화 반응 <span>— 센서 제작과 함수 모델링</span></p>
-      <p class="sub">눈에 보이지 않는 <b>중화 반응</b>을 직접 만든 <b>마이크로비트 측정기</b>로 읽어 내고,
-        그 데이터를 <b>그래프와 함수</b>로 표현합니다. 통합과학·정보·수학이 한 실험 안에서 만나는 4차시 프로그램입니다.</p>
+      <div class="eyebrow">2026학년도 2학기 야간 과제탐구반 · 1학년 학생 모집</div>
+      <h1>교과서 밖에서 <span class="tag">직접</span> 재고, 그리고, 풀어 봅니다.</h1>
+      <p class="sub">과학·기술·공학·예술·수학이 따로가 아니라 <b>하나의 문제</b>를 푸는 도구라는 걸
+        4차시 팀 프로젝트로 경험합니다. 아래 <b>4개 주제</b> 중 하나를 골라 신청하세요.</p>
       <div class="actions">
-        <a href="#apply" class="btn btn-primary">신청 안내 보기</a>
-        <a href="activity.html" class="btn btn-ghost">활동지 미리보기 →</a>
+        <a href="#topics" class="btn btn-primary">주제 살펴보기</a>
+        <a href="#apply" class="btn btn-ghost">신청 안내 →</a>
       </div>
       <div class="chips">
         <div class="chip"><b>대상</b><span>1학년 (희망자)</span></div>
-        <div class="chip"><b>기간</b><span class="tbd">〔운영 기간〕</span></div>
-        <div class="chip"><b>시간</b><span class="tbd">〔운영 요일·시간〕</span></div>
-        <div class="chip"><b>장소</b><span class="tbd">〔장소〕</span></div>
+        <div class="chip"><b>운영</b><span class="tbd">〔운영 요일·시간〕</span></div>
+        <div class="chip"><b>구성</b><span>주제별 팀 · 50분 × 4차시</span></div>
         <div class="chip"><b>정원</b><span class="tbd">〔정원〕</span></div>
-        <div class="chip"><b>준비</b><span>사전지식 불필요</span></div>
+        <div class="chip"><b>준비</b><span>사전지식·비용 없음</span></div>
       </div>
     </div>
   </section>
 
   <section class="blk" id="about">
     <div class="wrap">
-      <h2>이 과정은</h2>
-      <p class="intro">"딱따구리는 왜 개미산을 내뿜는 개미를 먹을 수 있을까?"라는 질문에서 출발합니다.
-        산과 염기가 반응하면 이온이 사라지고, 그만큼 용액에 흐르는 전류가 약해집니다.
-        이 변화를 <b>측정 → 데이터 → 그래프 → 함수</b>의 순서로 따라가며,
-        과학 개념·코딩·수학이 사실은 하나의 문제를 푸는 서로 다른 도구라는 것을 경험합니다.</p>
-      <div class="steam">
-        <div><div class="k">S</div><div class="t">Science</div><div class="d">중화 반응, 알짜 이온 반응식, 이온 수 변화</div></div>
-        <div><div class="k">T</div><div class="t">Technology</div><div class="d">마이크로비트·MakeCode로 전기 전도도 측정</div></div>
-        <div><div class="k">E</div><div class="t">Engineering</div><div class="d">측정 알고리즘 설계와 장치 제작·디버깅</div></div>
+      <h2>STEAM 융합수업이란</h2>
+      <p class="intro">하나의 실제 상황을 놓고, 과학으로 원리를 세우고 · 기술과 공학으로 측정 장치를 만들고 ·
+        데이터를 그림으로 표현하고 · 수학으로 그 안의 규칙을 찾아냅니다.
+        이 프로그램은 서로 다른 4개 주제로 나뉘며, 학생은 관심 있는 한 주제에 팀으로 참여합니다.</p>
+      <div class="steam5">
+        <div><div class="k">S</div><div class="t">Science</div><div class="d">현상의 원리를 세우고 가설을 검증</div></div>
+        <div><div class="k">T</div><div class="t">Technology</div><div class="d">센서·프로그램으로 데이터를 수집</div></div>
+        <div><div class="k">E</div><div class="t">Engineering</div><div class="d">측정 장치·실험을 직접 설계·제작</div></div>
         <div><div class="k">A</div><div class="t">Arts</div><div class="d">데이터를 읽히는 그래프로 시각화</div></div>
-        <div><div class="k">M</div><div class="t">Mathematics</div><div class="d">절댓값을 포함한 함수로 모델링·예측</div></div>
+        <div><div class="k">M</div><div class="t">Mathematics</div><div class="d">함수·미적분으로 규칙을 표현</div></div>
       </div>
     </div>
   </section>
 
-  <section class="blk" id="curriculum">
+  <section class="blk" id="topics">
     <div class="wrap">
-      <h2>4차시 커리큘럼</h2>
-      <p class="intro">한 시간(50분)씩 4차시. 모둠(3~4인)으로 함께 실험하고 각자 활동지를 완성합니다.</p>
-      <div class="curr">
-        <div class="lesson">
-          <div class="h"><span class="n">1차시</span><h3>산과 염기의 중화 반응</h3></div>
-          <div class="sub">통합과학</div>
-          <p>중화 반응을 식으로 쓰고, 시뮬레이션으로 이온이 어떻게 사라지고 남는지 관찰합니다.</p>
-          <ul><li>전체·알짜 이온 반응식</li><li>자바실험실로 이온 수 변화표 완성</li><li>중화점을 확인하는 3가지 방법</li></ul>
-        </div>
-        <div class="lesson">
-          <div class="h"><span class="n">2차시</span><h3>전기 전도도 측정기 만들기</h3></div>
-          <div class="sub">정보 · 공학</div>
-          <p>마이크로비트를 연결하고, 측정 순서를 알고리즘으로 설계해 직접 코딩합니다.</p>
-          <ul><li>하드웨어 배선(P0-SIG / GND)</li><li>5회 평균 측정 알고리즘 설계</li><li>MakeCode 코딩·업로드·디버깅</li></ul>
-        </div>
-        <div class="lesson">
-          <div class="h"><span class="n">3차시</span><h3>실험 &amp; 데이터 수집</h3></div>
-          <div class="sub">통합과학 · 데이터</div>
-          <p>산·염기를 조금씩 섞으며 전기 전도도를 측정하고, 스프레드시트로 그래프를 그립니다.</p>
-          <ul><li>회차별 전도도 측정·기록</li><li>꺾은선 / 분산형 그래프 생성</li><li>V자 그래프와 중화점 해석</li></ul>
-        </div>
-        <div class="lesson">
-          <div class="h"><span class="n">4차시</span><h3>지오지브라로 함수 모델링</h3></div>
-          <div class="sub">통합과학 · 공통수학</div>
-          <p>데이터에 맞는 절댓값 함수를 찾아 그래프로 검증하고, 넣지 않은 값을 예측합니다.</p>
-          <ul><li>y = a|x − p| + q 로 표현</li><li>함수로 전도도 예측·검증</li><li>중화열 그래프로 확장 토의</li></ul>
-        </div>
-      </div>
-    </div>
-  </section>
+      <h2>4개 주제</h2>
+      <p class="intro">각 주제는 통합과학·정보·수학을 함께 다루는 4차시 프로젝트입니다. 제목을 눌러 자세한 내용을 확인하세요.</p>
+      <div class="topics">
 
-  <section class="blk">
-    <div class="wrap">
-      <h2>이런 학생에게 추천합니다</h2>
-      <div class="two-col">
-        <div class="panel">
-          <h3><span class="dot" style="background:var(--neutral)"></span>이런 관심이 있다면</h3>
+        <article class="topic-card">
+          <span class="badge">주제 1</span>
+          <h3>전기 전도도로 읽는 중화 반응</h3>
+          <div class="subject">통합과학 · 정보 · 공통수학 &nbsp;|&nbsp; 마이크로비트 · 지오지브라</div>
+          <p>눈에 보이지 않는 중화 반응을, 직접 만든 전기 전도도 센서로 읽어 내고 함수로 표현합니다.</p>
           <ul>
-            <li>실험 결과가 왜 그렇게 나오는지 끝까지 따지고 싶은 사람</li>
-            <li>코딩·피지컬 컴퓨팅(마이크로비트, 아두이노)에 관심 있는 사람</li>
-            <li>데이터·그래프·수학이 실제로 어디에 쓰이는지 보고 싶은 사람</li>
-            <li>모둠 활동으로 하나의 결과물을 만들어 보고 싶은 사람</li>
+            <li>중화 반응·알짜 이온 반응식</li>
+            <li>마이크로비트 전도도 측정기 설계·코딩</li>
+            <li>절댓값을 포함한 함수로 데이터 모델링</li>
           </ul>
-        </div>
-        <div class="panel note">
-          <h3><span class="dot" style="background:var(--base)"></span>미리 알아둘 점</h3>
-          <ul>
-            <li>사전 지식·선수 과목은 필요 없습니다. 개념은 수업에서 다룹니다.</li>
-            <li>코딩 경험이 없어도 됩니다. 블록 코딩부터 함께 시작합니다.</li>
-            <li>장비(마이크로비트·노트북)와 시약은 모두 제공됩니다.</li>
-            <li>정원이 있어 신청이 많으면 학년·지원 동기 등을 참고해 선발합니다.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+          <div class="go"><a href="conductivity-neutralization/">주제 1 자세히 보기 →</a>
+            &nbsp; <a href="conductivity-neutralization/activity.html">활동지</a></div>
+        </article>
 
-  <section class="blk">
-    <div class="wrap">
-      <h2>수업이 끝나면 남는 것</h2>
-      <div class="two-col three-col">
-        <div class="panel"><h3>산출물</h3><ul><li>4차시 활동지(포트폴리오)</li><li>모둠 실험 보고서 1편</li><li>내가 만든 측정 코드</li></ul></div>
-        <div class="panel"><h3>생기부 연계</h3><ul><li>과목별 세부능력 및 특기사항</li><li>탐구·문제해결 과정 기록</li><li>협업·의사소통 활동</li></ul></div>
-        <div class="panel"><h3>기른 역량</h3><ul><li>과학적 탐구력</li><li>컴퓨팅 사고력</li><li>수학적 모델링·데이터 해석</li></ul></div>
+        <article class="topic-card">
+          <span class="badge">주제 2</span>
+          <h3>PASCO·Tracker로 읽는 빗면 운동, 미적분의 첫걸음</h3>
+          <div class="subject">통합과학 · 정보 · 공통수학 &nbsp;|&nbsp; PASCO 센서 · Tracker · 지오지브라</div>
+          <p>빗면을 내려오는 수레의 운동을 센서와 영상으로 <b>동시에</b> 측정하고, 그래프의 기울기와 넓이로 속도·가속도를 구합니다.</p>
+          <ul>
+            <li>PASCO 센서 측정 + 영상 촬영·Tracker 분석</li>
+            <li>기울기 = 미분 → 속도·가속도</li>
+            <li>넓이 = 적분 → 변위·속도 변화</li>
+          </ul>
+          <div class="go"><a href="incline-motion/">주제 2 자세히 보기 →</a>
+            &nbsp; <a href="incline-motion/activity.html">활동지</a></div>
+        </article>
+
+        <article class="topic-card soon">
+          <span class="badge">주제 3</span>
+          <h3>준비 중</h3>
+          <div class="subject">주제 확정 후 공개</div>
+          <p>세 번째 주제를 준비하고 있습니다. 신청 안내와 함께 공개됩니다.</p>
+        </article>
+
+        <article class="topic-card soon">
+          <span class="badge">주제 4</span>
+          <h3>준비 중</h3>
+          <div class="subject">주제 확정 후 공개</div>
+          <p>네 번째 주제를 준비하고 있습니다. 신청 안내와 함께 공개됩니다.</p>
+        </article>
+
       </div>
     </div>
   </section>
@@ -315,10 +284,10 @@ footer a{color:var(--ink-soft)}
             <tr><th>운영 학교</th><td><span class="tbd">〔학교명〕</span></td></tr>
             <tr><th>대상</th><td>1학년 희망 학생 (신청 후 선발)</td></tr>
             <tr><th>운영 기간</th><td><span class="tbd">〔운영 기간〕</span></td></tr>
-            <tr><th>요일 · 시간</th><td><span class="tbd">〔운영 요일·시간〕</span> · 1회 50분 × 4차시</td></tr>
+            <tr><th>요일 · 시간</th><td><span class="tbd">〔운영 요일·시간〕</span> · 주제별 1회 50분 × 4차시</td></tr>
             <tr><th>장소</th><td><span class="tbd">〔장소〕</span></td></tr>
-            <tr><th>정원</th><td><span class="tbd">〔정원〕</span> · 모둠 3~4인</td></tr>
-            <tr><th>준비물</th><td>필기도구만 지참 (장비·시약·노트북 제공)</td></tr>
+            <tr><th>정원</th><td><span class="tbd">〔정원〕</span> · 주제별 팀 3~4인</td></tr>
+            <tr><th>준비물</th><td>필기도구만 지참 (센서·노트북·시약 등 장비 제공)</td></tr>
             <tr><th>담당 교사</th><td><span class="tbd">〔담당 교사〕</span></td></tr>
             <tr><th>비용</th><td>없음</td></tr>
           </tbody>
@@ -327,19 +296,33 @@ footer a{color:var(--ink-soft)}
     </div>
   </section>
 
+  <section class="blk">
+    <div class="wrap">
+      <h2>참여하면 남는 것</h2>
+      <div class="topics trio">
+        <article class="topic-card"><span class="badge">산출물</span><ul style="margin-top:4px">
+          <li>4차시 활동지(포트폴리오)</li><li>팀 탐구 보고서 1편</li><li>내가 만든 코드·측정 자료</li></ul></article>
+        <article class="topic-card"><span class="badge">생기부 연계</span><ul style="margin-top:4px">
+          <li>과목별 세부능력 및 특기사항</li><li>탐구·문제해결 과정</li><li>협업·의사소통 활동</li></ul></article>
+        <article class="topic-card"><span class="badge">역량</span><ul style="margin-top:4px">
+          <li>과학적 탐구력</li><li>컴퓨팅 사고력</li><li>수학적 모델링·데이터 해석</li></ul></article>
+      </div>
+    </div>
+  </section>
+
   <section class="blk" id="apply">
     <div class="wrap">
       <h2>신청 안내</h2>
-      <p class="intro" style="margin-left:auto;margin-right:auto">이 과정은 <b>2026 STEAM 융합수업</b>의 4개 과정 중 하나입니다.
-        신청은 4개 과정을 함께 안내하며 <b>리로스쿨</b>에서 일괄 접수하고, 지원할 때 희망 과정을 1·2순위로 선택합니다.</p>
+      <p class="intro" style="margin-left:auto;margin-right:auto">신청은 <b>리로스쿨</b>에서 4개 주제를 함께 안내하며
+        일괄 접수합니다. 지원할 때 희망 주제를 <b>1·2순위</b>로 선택하고, 지원 동기를 2~3줄 적습니다.</p>
       <p class="deadline">접수처 · 리로스쿨 &nbsp;|&nbsp; 신청 기간 · <span class="tbd">〔신청 기간〕</span></p>
 
       <!-- 접수 시작 전: '준비 중' 상태 -->
       <span class="cta-big disabled" aria-disabled="true">신청 준비 중</span>
-      <p class="soon">4개 과정 안내가 모두 준비되면 <b>리로스쿨</b>에서 일괄 접수합니다 ·
+      <p class="soon-note">4개 주제가 모두 준비되면 <b>리로스쿨</b>에서 일괄 접수합니다 ·
         <span class="tbd">〔O월 중〕</span> 공지 예정</p>
 
-      <!-- ▼ 접수 시작 시: 위 <span> 과 <p class="soon"> 을 지우고 아래 줄의 주석을 풀어
+      <!-- ▼ 접수 시작 시: 위 <span> 과 <p class="soon-note"> 를 지우고 아래 줄의 주석을 풀어
              href 에 리로스쿨 신청 페이지 주소를 넣으세요.
       <a class="cta-big" href="리로스쿨_신청_페이지_URL" target="_blank" rel="noopener">리로스쿨에서 신청하기 →</a>
       -->
@@ -348,24 +331,25 @@ footer a{color:var(--ink-soft)}
     </div>
   </section>
 
-  <section class="blk">
+  <section class="blk" id="faq">
     <div class="wrap">
       <h2>자주 묻는 질문</h2>
       <div class="faq">
-        <details><summary>과학·정보 성적이 좋아야 신청할 수 있나요?</summary><p>아니요. 성적 기준은 없습니다. 관심과 참여 의지가 더 중요합니다. 개념과 코딩은 모두 수업 시간에 처음부터 다룹니다.</p></details>
-        <details><summary>코딩을 한 번도 안 해봤는데 괜찮을까요?</summary><p>괜찮습니다. 마이크로비트 블록 코딩은 처음 하는 학생 기준으로 진행하며, "심화 알고리즘"이 아니라 "측정 순서를 논리로 설계하는 것"에 초점을 둡니다.</p></details>
-        <details><summary>장비나 재료를 사야 하나요?</summary><p>필요 없습니다. 마이크로비트, 노트북, 시약, 비커 등은 학교에서 제공합니다. 학생은 필기도구만 가져오면 됩니다.</p></details>
-        <details><summary>한 차시라도 빠지면 안 되나요?</summary><p>4차시가 "측정 → 데이터 → 함수"로 이어지므로 가능하면 모두 참석을 권합니다. 부득이한 결석은 담당 교사와 상의해 보강할 수 있습니다.</p></details>
-        <details><summary>활동지를 미리 볼 수 있나요?</summary><p>네. <a href="activity.html">활동지 미리보기</a>에서 실제로 채우게 될 내용을 확인할 수 있습니다.</p></details>
+        <details><summary>과학·수학 성적이 좋아야 신청할 수 있나요?</summary><p>아니요. 성적 기준은 없습니다. 관심과 참여 의지가 더 중요하며, 필요한 개념은 활동 안에서 처음부터 다룹니다.</p></details>
+        <details><summary>코딩이나 센서를 다뤄 본 적이 없어도 되나요?</summary><p>됩니다. 모든 주제가 "처음 하는 학생" 기준으로 진행되며, 블록 코딩·센서 사용법부터 함께 익힙니다.</p></details>
+        <details><summary>주제를 직접 고르나요?</summary><p>네. 신청서에 희망 주제를 1·2순위로 적습니다. 팀 정원이 있어, 지원이 몰리면 학년·지원 동기 등을 참고해 배정합니다.</p></details>
+        <details><summary>장비나 재료를 사야 하나요?</summary><p>필요 없습니다. 센서, 노트북, 시약 등은 모두 학교에서 제공합니다. 학생은 필기도구만 가져오면 됩니다.</p></details>
+        <details><summary>한 차시라도 빠지면 안 되나요?</summary><p>4차시가 "측정 → 데이터 → 분석"으로 이어져 가능하면 모두 참석을 권합니다. 부득이한 결석은 담당 교사와 상의해 보강할 수 있습니다.</p></details>
+        <details><summary>활동 내용을 미리 볼 수 있나요?</summary><p>네. 각 주제 페이지의 "활동지 미리보기"에서 실제로 채우게 될 내용을 확인할 수 있습니다.</p></details>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <p>전기 전도도로 읽는 중화 반응 · 센서 제작과 함수 모델링 · 통합과학 + 정보 + 수학 STEAM</p>
+  <p>2026학년도 2학기 야간 과제탐구반 STEAM 융합수업 · <span class="tbd">〔학교명〕</span></p>
   <p style="margin-top:6px">자료 출처: 한국과학창의재단(KOFAC) 2022 개정 교육과정 융합교육(STEAM) 교재 ·
-    <a href="activity.html">학생 활동지</a> · 라이선스 CC BY-NC-SA 4.0</p>
+    라이선스 CC BY-NC-SA 4.0</p>
 </footer>
 
 </body>

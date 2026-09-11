@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빗면 운동 분석과 미적분의 첫걸음 · 학생 활동지</title>
+<meta name="description" content="통합과학·정보·수학 융합 STEAM 4차시 학생 활동지 — PASCO 센서·Tracker로 빗면 운동을 이중 측정하고 기울기·넓이로 분석">
+<link rel="icon" href="../favicon.svg">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="빗면 운동 분석과 미적분의 첫걸음 — 학생 활동지">
+<meta property="og:description" content="빗면 운동을 PASCO 센서와 Tracker로 동시에 측정하고, 그래프의 기울기(미분)·넓이(적분)로 변위·속도·가속도를 구하는 4차시">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#5a6673; --line:#d7dde3;
+  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --data:#3a4657;
+  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb; --data-bg:#e6e9ee;
+  --field:#eef2f6; --field-line:#a7b6c4; --focus:#2f6fb3;
+  --shadow:0 1px 2px rgba(27,37,48,.06),0 6px 20px rgba(27,37,48,.06);
+  --f-disp:"Gothic A1","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a;
+  --field:#1e2a35; --field-line:#476074; --focus:#7db2e2;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a;
+  --field:#1e2a35; --field-line:#476074; --focus:#7db2e2;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
+  font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--f-disp);line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--base)}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+@supports (backdrop-filter:blur(1px)){.bar{background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(8px)}}
+.bar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
+.steps{display:flex;gap:6px;margin-left:auto}
+.steps a{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;
+  font-family:var(--f-mono);font-size:13px;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);background:var(--card)}
+.steps a[data-d="sci"]:hover,.steps a[data-d="sci"].on{border-color:var(--neutral);color:var(--neutral)}
+.steps a[data-d="info"]:hover,.steps a[data-d="info"].on{border-color:var(--base);color:var(--base)}
+.steps a[data-d="data"]:hover,.steps a[data-d="data"].on{border-color:var(--data);color:var(--ink)}
+.steps a[data-d="math"]:hover,.steps a[data-d="math"].on{border-color:var(--acid);color:var(--acid)}
+.prog{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.tools{display:flex;gap:8px}
+.tools button{font-family:var(--f-body);font-size:13px;padding:6px 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tools button:hover{border-color:var(--focus)}
+.tools button:focus-visible,.steps a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+main{max-width:900px;margin:0 auto;padding:0 20px 90px}
+.hero{padding:44px 0 30px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;margin:12px 0 14px;letter-spacing:-.02em}
+.hero p{max-width:62ch;color:var(--ink-soft)}
+.who{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.who label{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+.who input{font-family:var(--f-body);font-size:15px;color:var(--ink);background:var(--field);
+  border:1px solid var(--field-line);border-radius:7px;padding:8px 10px;min-width:150px}
+.who input:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+
+.cha{margin-top:34px;border-top:2px solid var(--line);padding-top:8px}
+.cha-head{display:flex;gap:16px;align-items:flex-start;padding:16px 0 6px}
+.cha-num{font-family:var(--f-mono);font-weight:600;font-size:13px;padding:5px 9px;border-radius:6px;white-space:nowrap;margin-top:3px}
+.cha-head h2{font-size:clamp(20px,3vw,26px);font-weight:800;letter-spacing:-.015em}
+.cha-head .sub{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-top:5px;letter-spacing:.02em}
+[data-d="sci"] .cha-num{background:var(--neutral-bg);color:var(--neutral)}
+[data-d="info"] .cha-num{background:var(--base-bg);color:var(--base)}
+[data-d="data"] .cha-num{background:var(--data-bg);color:var(--ink)}
+[data-d="math"] .cha-num{background:var(--acid-bg);color:var(--acid)}
+[data-d="sci"]{border-top-color:var(--neutral)}
+[data-d="info"]{border-top-color:var(--base)}
+[data-d="data"]{border-top-color:var(--data)}
+[data-d="math"]{border-top-color:var(--acid)}
+
+.act{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);padding:20px 22px;margin-top:16px}
+.act > h3{font-size:16px;font-weight:700;display:flex;gap:9px;align-items:baseline}
+.act > h3 .tag{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;flex:none}
+.act p.lead{color:var(--ink-soft);font-size:14.5px;margin-top:6px}
+
+ol.todo,ul.todo{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+ol.todo li,ul.todo li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.todo input[type=checkbox]{flex:none;width:17px;height:17px;margin-top:3px;accent-color:var(--focus);cursor:pointer}
+.todo .n{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);flex:none;margin-top:2px;min-width:16px}
+.todo code,.act code{font-family:var(--f-mono);font-size:12.5px;background:var(--field);
+  border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.hint{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+
+.write{display:block;font-family:var(--f-body);font-size:14.5px;line-height:1.6;color:var(--ink);
+  background:var(--field);border:1px solid var(--field-line);border-radius:8px;
+  padding:10px 12px;margin-top:10px;min-height:2.6em;white-space:pre-wrap;word-break:break-word}
+.write:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.write:empty:before{content:attr(data-ph);color:var(--ink-soft);opacity:.75}
+.qlabel{font-size:13.5px;font-weight:600;margin-top:16px;display:flex;gap:7px}
+.qlabel .b{color:var(--focus);font-family:var(--f-mono);flex:none}
+.qlabel:first-of-type{margin-top:12px}
+
+.tbl-wrap{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:440px}
+caption{text-align:left;font-size:12.5px;color:var(--ink-soft);margin-bottom:7px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;font-variant-numeric:tabular-nums}
+thead th{background:var(--field);font-family:var(--f-disp);font-weight:700}
+tbody th{background:var(--field);font-weight:600;white-space:nowrap}
+td input{width:100%;min-width:44px;border:none;background:transparent;font-family:var(--f-mono);
+  font-size:13.5px;text-align:center;color:var(--ink);padding:3px 2px}
+td input:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:3px}
+td.fixed{background:var(--field);font-family:var(--f-mono);color:var(--ink-soft)}
+
+.fml{font-family:var(--f-mono);font-size:14px;background:var(--field);border:1px solid var(--line);
+  border-radius:8px;padding:12px 14px;margin-top:12px;overflow-x:auto}
+.callout{font-size:13.5px;border-left:3px solid var(--focus);padding:4px 0 4px 13px;margin-top:14px;color:var(--ink-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.two .box{border:1px solid var(--line);border-radius:9px;padding:12px 13px;background:var(--paper)}
+.two .box h4{font-size:13px;font-weight:700;font-family:var(--f-disp)}
+.two .box p{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+figure{margin:16px 0 0}
+figure svg{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--line);border-radius:9px}
+figure svg .ax{stroke:var(--line)}
+figure svg .c-data{stroke:var(--data);fill:none}
+figure svg .c-acc{stroke:var(--acid);fill:none}
+figure svg .fillv{fill:var(--base);opacity:.14}
+figure svg .pt{fill:var(--neutral)}
+figure svg .lbl{fill:var(--ink-soft);font-family:var(--f-mono)}
+figure svg .lbl-b{fill:var(--base);font-family:var(--f-mono)}
+figure svg .lbl-a{fill:var(--acid);font-family:var(--f-mono)}
+figcaption{font-size:12px;color:var(--ink-soft);margin-top:6px}
+
+.selfcheck{margin-top:16px;border:1px dashed var(--field-line);border-radius:10px;padding:14px 16px;background:var(--field)}
+.selfcheck h4{font-family:var(--f-disp);font-size:13px;font-weight:700;letter-spacing:.02em}
+.selfcheck .row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin-top:9px}
+.selfcheck .opts{margin-left:auto;display:flex;gap:5px;flex:none}
+.selfcheck .opts label{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line);border-radius:6px;
+  padding:3px 7px;cursor:pointer;background:var(--card);color:var(--ink-soft)}
+.selfcheck .opts input{position:absolute;opacity:0;width:0;height:0}
+.selfcheck .opts input:checked + span{color:var(--focus);font-weight:600}
+.selfcheck .opts label:has(input:checked){border-color:var(--focus)}
+
+footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(--ink-soft);text-align:center}
+
+.saved{position:fixed;right:16px;bottom:16px;font-family:var(--f-mono);font-size:11px;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 13px;
+  color:var(--ink-soft);box-shadow:var(--shadow);opacity:0;transition:opacity .3s;z-index:30}
+.saved.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.saved{transition:none}}
+
+@media print{
+  .bar,.tools,.saved,.steps{display:none!important}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  main{max-width:none;padding:0}
+  .act{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .cha{break-before:page}
+  .hero{padding:0 0 16px}
+  .write,.who input,td input{background:#fff;border-color:#999}
+  .write:empty:before{content:""}
+  figure svg{border-color:#999}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <a href="./" style="text-decoration:none;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px;flex:none">← 과정 소개</a>
+    <strong>빗면 운동 분석과 미적분의 첫걸음</strong>
+    <span class="prog" id="prog">진행 0%</span>
+    <nav class="steps" aria-label="차시 이동">
+      <a href="#cha1" data-d="sci">1</a>
+      <a href="#cha2" data-d="info">2</a>
+      <a href="#cha3" data-d="data">3</a>
+      <a href="#cha4" data-d="math">4</a>
+    </nav>
+    <div class="tools">
+      <button id="btn-copy" type="button">답안 복사</button>
+      <button id="btn-print" type="button">인쇄 · PDF</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">통합과학 · 정보 · 수학 융합 STEAM · 4차시</div>
+    <h1>빗면을 내려오는 수레, 1초 뒤엔 얼마나 빨라질까?</h1>
+    <p>같은 운동을 <b>PASCO 센서</b>와 <b>Tracker 영상 분석</b> 두 가지 방법으로 동시에 측정합니다.
+      그리고 그래프의 <b>기울기(미분)</b>로 속도·가속도를, <b>넓이(적분)</b>로 변위·속도 변화를 구해
+      세 값(센서·영상·이론)을 비교합니다. 각 활동에서 "내가 직접 해야 할 일"을 순서대로 따라가며 빈칸을 채우세요.
+      입력한 내용은 이 기기에 자동 저장됩니다.</p>
+    <div class="who">
+      <label>학년 / 반 / 번호 <input id="w-id" data-field="w-id" autocomplete="off"></label>
+      <label>이름 <input id="w-name" data-field="w-name" autocomplete="off"></label>
+      <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
+    </div>
+  </header>
+
+  <!-- ================= 1차시 ================= -->
+  <section class="cha" id="cha1" data-d="sci">
+    <div class="cha-head">
+      <span class="cha-num">1차시</span>
+      <div>
+        <h2>빗면 운동 이해 &amp; 이중 측정 설계</h2>
+        <div class="sub">통합과학 · 공학 · 등가속도 운동</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 빗면 운동이 등가속도 운동임을 알고 <b>a = g·sinθ</b>를 예측한다.
+      ② 같은 운동을 센서와 영상으로 <b>동시에</b> 잴 실험을 설계한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">열기</span> 두 번 재면 결과가 같을까?</h3>
+      <p class="lead">이번 실험에서는 빗면을 내려오는 수레의 운동을 <b>센서로도 재고, 영상으로도</b> 잽니다.</p>
+      <div class="qlabel"><span class="b">Q</span> 두 방법의 결과가 정확히 같을까요? 다르다면 그 까닭은 무엇일지 예상해 보세요.</div>
+      <div class="write" contenteditable="true" data-field="m1-hook" data-q="1차시 열기: 두 측정 방법의 결과 차이 예상" data-ph="예: 대체로 비슷하지만 조금 다를 것이다. 마찰이나 측정 방법의 한계 때문에 …"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 빗면 운동 예측하기</h3>
+      <div class="qlabel"><span class="b">1</span> 빗면 각도 θ를 재고, 수레에 작용하는 힘을 자유물체도로 그린다. 빗면 방향으로 작용하는 힘은?</div>
+      <div class="write" contenteditable="true" data-field="m1-force" data-q="빗면 방향 힘" data-ph="중력의 빗면 방향 성분 = m·g·sinθ (마찰 무시)"></div>
+      <div class="qlabel"><span class="b">2</span> 가속도 예측: <code>a = g·sinθ</code>. 우리 빗면의 θ = <input style="width:64px;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:3px 6px;color:var(--ink)" data-field="m1-theta" data-q="빗면 각도 θ">° 일 때 a = <input style="width:90px;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:3px 6px;color:var(--ink)" data-field="m1-a-pred" data-q="예측 가속도 a"> m/s²</div>
+      <div class="hint">g = 9.8 m/s². 예: θ = 10° → a = 9.8 × sin 10° ≈ 1.70 m/s²</div>
+      <div class="qlabel"><span class="b">3</span> 정지 상태(v₀ = 0)에서 출발한다고 할 때, 등가속도 운동 공식 3개를 적는다.</div>
+      <div class="write" contenteditable="true" data-field="m1-eqs" data-q="등가속도 운동 공식 3개" data-ph="v = v₀ + a·t / x = v₀·t + ½·a·t² / v² = v₀² + 2·a·x"></div>
+      <div class="qlabel"><span class="b">4</span> 예상 그래프의 모양을 아래 세 축에 각각 그려 본다(자유롭게 스케치 후, 특징을 글로).</div>
+      <figure>
+        <svg viewBox="0 0 460 150" role="img" aria-label="x-t, v-t, a-t 예상 그래프 모양">
+          <g transform="translate(0,0)">
+            <line class="ax" x1="28" y1="12" x2="28" y2="120"/><line class="ax" x1="28" y1="120" x2="140" y2="120"/>
+            <path class="c-data" d="M28,120 Q90,118 128,30" stroke-width="2.5"/>
+            <text class="lbl" x="30" y="10" font-size="10">x</text><text class="lbl" x="132" y="133" font-size="10">t</text>
+            <text class="lbl" x="30" y="140" font-size="9">위로 볼록한 곡선</text>
+          </g>
+          <g transform="translate(160,0)">
+            <line class="ax" x1="28" y1="12" x2="28" y2="120"/><line class="ax" x1="28" y1="120" x2="140" y2="120"/>
+            <line class="c-data" x1="28" y1="120" x2="130" y2="26" stroke-width="2.5"/>
+            <text class="lbl" x="30" y="10" font-size="10">v</text><text class="lbl" x="132" y="133" font-size="10">t</text>
+            <text class="lbl" x="30" y="140" font-size="9">원점 지나는 직선</text>
+          </g>
+          <g transform="translate(320,0)">
+            <line class="ax" x1="28" y1="12" x2="28" y2="120"/><line class="ax" x1="28" y1="120" x2="140" y2="120"/>
+            <line class="c-acc" x1="28" y1="60" x2="132" y2="60" stroke-width="2.5"/>
+            <text class="lbl" x="30" y="10" font-size="10">a</text><text class="lbl" x="132" y="133" font-size="10">t</text>
+            <text class="lbl" x="30" y="140" font-size="9">수평선 (일정)</text>
+          </g>
+        </svg>
+        <figcaption>등가속도 운동이면 x–t는 곡선, v–t는 직선, a–t는 수평선이 됩니다.</figcaption>
+      </figure>
+      <div class="write" contenteditable="true" data-field="m1-graph-note" data-q="예상 그래프 특징 서술" data-ph="x–t: 시간이 갈수록 기울기가 커진다 / v–t: 기울기가 일정한 직선 / a–t: 값이 변하지 않는다"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> PASCO 센서 측정 설계</h3>
+      <ul class="todo">
+        <li><label><input type="checkbox" data-field="m1p-1"></label><div>측정 도구 선택: <b>스마트카트</b>(내장 센서) 또는 <b>모션 센서</b>(초음파) — 우리 모둠이 쓸 것에 표시하고 이유 적기</div></li>
+        <li><label><input type="checkbox" data-field="m1p-2"></label><div>트랙을 수평 받침에 놓고 각도기로 θ 고정, 트랙이 좌우로 기울지 않았는지 확인</div></li>
+        <li><label><input type="checkbox" data-field="m1p-3"></label><div>SPARKvue(또는 Capstone) 연결 → 표본율 설정 <span class="hint">권장 20~50 Hz</span></div></li>
+        <li><label><input type="checkbox" data-field="m1p-4"></label><div>측정할 물리량 선택: 위치 · 속도 · 가속도 / 측정 구간(출발선 ~ 도착선) 정하기</div></li>
+      </ul>
+      <div class="qlabel"><span class="b">기록</span> 도구 선택과 이유, 표본율, 측정 구간</div>
+      <div class="write" contenteditable="true" data-field="m1-pasco" data-q="PASCO 측정 설계" data-ph="도구: 스마트카트 (바퀴 회전으로 위치를 바로 얻을 수 있어서) / 표본율: 40 Hz / 구간: 0 ~ 0.8 m"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 영상 촬영 설계 (Tracker용)</h3>
+      <ul class="todo">
+        <li><label><input type="checkbox" data-field="m1v-1"></label><div>카메라(스마트폰)를 삼각대로 고정 — 빗면을 <b>정면·수직</b>으로 바라보게</div></li>
+        <li><label><input type="checkbox" data-field="m1v-2"></label><div>프레임률 설정 <span class="hint">권장 30 또는 60 fps — 빠를수록 좋음</span>, 흔들림·자동초점 끄기</div></li>
+        <li><label><input type="checkbox" data-field="m1v-3"></label><div>화면 안에 <b>길이를 아는 기준자</b>(예: 30 cm 자, 또는 트랙의 표시 눈금)를 함께 촬영 → Tracker 척도 보정용</div></li>
+        <li><label><input type="checkbox" data-field="m1v-4"></label><div>수레에 <b>대비되는 색 스티커</b> 1개를 추적점으로 부착, 조명 충분히</div></li>
+      </ul>
+      <div class="qlabel"><span class="b">기록</span> fps, 기준자 실제 길이, 스티커 위치</div>
+      <div class="write" contenteditable="true" data-field="m1-video" data-q="영상 촬영 설계" data-ph="60 fps / 기준자 0.30 m / 스티커는 수레 중앙 윗면"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 동시 측정 계획 &amp; 역할 분담</h3>
+      <div class="qlabel"><span class="b">신호</span> 센서 측정 시작 · 영상 녹화 · 수레 놓기를 어떻게 맞출까?</div>
+      <div class="write" contenteditable="true" data-field="m1-sync" data-q="동시 측정 신호 맞추기" data-ph="예: '3, 2, 1' 구호에 ① 녹화 시작 ② SPARKvue 기록 시작 ③ 손을 떼 수레를 놓는다"></div>
+      <div class="qlabel"><span class="b">역할</span> 모둠원별 역할(수레·센서·촬영·기록)</div>
+      <div class="write" contenteditable="true" data-field="m1-roles" data-q="역할 분담" data-ph=""></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 빗면 운동이 등가속도 운동임을 알고 a = g·sinθ로 가속도를 예측할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm1a" data-field="scm1a" value="우수"><span>우수</span></label><label><input type="radio" name="scm1a" data-field="scm1a" value="보통"><span>보통</span></label><label><input type="radio" name="scm1a" data-field="scm1a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 센서 측정과 영상 촬영을 동시에 할 실험을 설계할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm1b" data-field="scm1b" value="우수"><span>우수</span></label><label><input type="radio" name="scm1b" data-field="scm1b" value="보통"><span>보통</span></label><label><input type="radio" name="scm1b" data-field="scm1b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 2차시 ================= -->
+  <section class="cha" id="cha2" data-d="info">
+    <div class="cha-head">
+      <span class="cha-num">2차시</span>
+      <div>
+        <h2>측정 실행 &amp; Tracker 영상 분석</h2>
+        <div class="sub">정보 · 데이터 수집 · 영상 분석</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① PASCO로 운동 데이터를 수집한다.
+      ② Tracker로 영상을 분석해 위치 데이터를 얻는다. ③ 두 방법의 데이터를 한 표로 정리한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> PASCO로 측정하기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m2p-1"></label><div>SPARKvue에서 센서 연결 확인 → <b>영점(0점) 설정</b></div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m2p-2"></label><div>1차시 신호에 맞춰 <b>3회 반복</b> 측정, 각 회차를 저장한다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="m2p-3"></label><div>각 회차 데이터를 <b>CSV로 내보내기</b> (파일 이름에 모둠·회차 표시)</div></li>
+        <li><span class="n">4</span><label><input type="checkbox" data-field="m2p-4"></label><div>가장 깨끗한 1회를 대표로 골라 아래 표(활동 4)의 <code>x(PASCO)</code> 칸에 옮겨 적는다.</div></li>
+      </ol>
+      <div class="qlabel"><span class="b">기록</span> 대표 회차 번호와 고른 이유</div>
+      <div class="write" contenteditable="true" data-field="m2-pasco-pick" data-q="대표 회차 선택" data-ph="예: 2회차 — 출발 순간이 깔끔하고 튀는 값이 없어서"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> Tracker 준비 — 영상 · 좌표축 · 척도</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m2t-1"></label><div>Tracker 실행 → <b>동영상 열기</b> → 분석할 <b>시작 프레임 / 끝 프레임</b> 지정</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m2t-2"></label><div><b>좌표축</b> 만들기 → 원점을 <b>수레의 출발 위치</b>에, x축을 <b>빗면 아래 방향</b>으로 회전</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="m2t-3"></label><div><b>보정 막대(calibration stick)</b>를 화면 속 기준자 양 끝에 맞추고 <b>실제 길이</b> 입력 <span class="hint">1차시에 정한 값, 예 0.30 m</span></div></li>
+      </ol>
+      <div class="qlabel"><span class="b">기록</span> 프레임률(fps), 척도 실제 길이, 분석 구간(초)</div>
+      <div class="write" contenteditable="true" data-field="m2-tracker-setup" data-q="Tracker 설정값" data-ph="60 fps / 척도 0.30 m / 0.00 s ~ 0.60 s"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 점 추적하기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m2r-1"></label><div><b>질량점(point mass)</b> 하나 만들기</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m2r-2"></label><div>자동 추적을 쓰거나, <code>Shift + 클릭</code>으로 <b>프레임마다 스티커 위치</b>를 찍는다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="m2r-3"></label><div>데이터 테이블에서 <b>t, x</b> 열을 확인하고 <b>클립보드/CSV로 내보내기</b></div></li>
+      </ol>
+      <div class="hint">튀는 점(잘못 찍힌 프레임)이 있으면 그 프레임만 다시 클릭해 고칩니다.</div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 두 데이터 한 표로 정리</h3>
+      <p class="lead">같은 시각에서 두 방법의 위치를 나란히 적습니다. 참고값은 θ=10°(a≈1.70 m/s²)로 계산한 이론값입니다.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>시간 t(s)에 따른 수레의 이동 거리 x(m)</caption>
+          <thead><tr><th>t (s)</th><th>0.0</th><th>0.1</th><th>0.2</th><th>0.3</th><th>0.4</th><th>0.5</th><th>0.6</th></tr></thead>
+          <tbody>
+            <tr><th>x — PASCO</th>
+              <td><input data-field="m2x-p0"></td><td><input data-field="m2x-p1"></td><td><input data-field="m2x-p2"></td><td><input data-field="m2x-p3"></td><td><input data-field="m2x-p4"></td><td><input data-field="m2x-p5"></td><td><input data-field="m2x-p6"></td></tr>
+            <tr><th>x — Tracker</th>
+              <td><input data-field="m2x-t0"></td><td><input data-field="m2x-t1"></td><td><input data-field="m2x-t2"></td><td><input data-field="m2x-t3"></td><td><input data-field="m2x-t4"></td><td><input data-field="m2x-t5"></td><td><input data-field="m2x-t6"></td></tr>
+            <tr><th>x — 이론(참고)</th>
+              <td class="fixed">0</td><td class="fixed">0.009</td><td class="fixed">0.034</td><td class="fixed">0.077</td><td class="fixed">0.136</td><td class="fixed">0.213</td><td class="fixed">0.306</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">측정값이 이론값과 조금 달라도 괜찮습니다. <b>왜 다른지</b>를 3·4차시에서 따져 봅니다.</div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① PASCO 센서로 운동 데이터를 수집하고 저장·내보내기 할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm2a" data-field="scm2a" value="우수"><span>우수</span></label><label><input type="radio" name="scm2a" data-field="scm2a" value="보통"><span>보통</span></label><label><input type="radio" name="scm2a" data-field="scm2a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② Tracker에서 좌표축·척도를 보정하고 점을 추적해 위치 데이터를 얻을 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm2b" data-field="scm2b" value="우수"><span>우수</span></label><label><input type="radio" name="scm2b" data-field="scm2b" value="보통"><span>보통</span></label><label><input type="radio" name="scm2b" data-field="scm2b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 3차시 ================= -->
+  <section class="cha" id="cha3" data-d="data">
+    <div class="cha-head">
+      <span class="cha-num">3차시</span>
+      <div>
+        <h2>기울기로 속도·가속도 구하기</h2>
+        <div class="sub">공통수학 · 통합과학 — 미분의 첫걸음</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 그래프의 <b>기울기</b>로 순간 속도·가속도를 구한다.
+      ② 센서·영상·이론 세 가지 가속도 값을 비교한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">알아보기</span> 기울기 = 변화율</h3>
+      <div class="callout">두 점 사이 <b>평균 속도</b> = <code>(x₂ − x₁) / (t₂ − t₁)</code> = 그 두 점을 잇는 <b>직선(할선)의 기울기</b>.
+        두 점의 시간 간격 Δt를 <b>점점 좁히면</b> → 그 순간의 속도(<b>접선의 기울기</b>)에 가까워집니다. 이것이 <b>미분</b>의 아이디어입니다.
+        같은 방법을 v–t 그래프에 쓰면, 기울기 = <b>가속도</b>.</div>
+      <figure>
+        <svg viewBox="0 0 420 190" role="img" aria-label="할선이 접선으로 가까워지는 그림">
+          <line class="ax" x1="40" y1="15" x2="40" y2="160"/><line class="ax" x1="40" y1="160" x2="400" y2="160"/>
+          <path class="c-data" d="M40,160 Q200,150 360,30" stroke-width="2.5"/>
+          <line class="c-acc" x1="70" y1="156" x2="330" y2="52" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <line class="c-acc" x1="150" y1="140" x2="300" y2="66" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <circle class="pt" cx="210" cy="112" r="4"/>
+          <text class="lbl" x="42" y="12" font-size="10">x</text><text class="lbl" x="392" y="174" font-size="10">t</text>
+          <text class="lbl-a" x="250" y="44" font-size="10">할선 → 접선</text>
+          <text class="lbl-n" x="196" y="104" font-size="10">이 순간의 속도</text>
+        </svg>
+        <figcaption>Δt를 줄일수록 할선의 기울기가 그 점의 접선 기울기(순간 속도)에 가까워집니다.</figcaption>
+      </figure>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> x–t 그래프 그리고 평균 속도 구하기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m3g-1"></label><div>2차시 표의 값을 스프레드시트(또는 지오지브라)에 넣고 <b>x–t 산점도</b>를 그린다. (PASCO·Tracker 각각)</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m3g-2"></label><div>아래 표에서 각 구간의 평균 속도 = (끝 x − 처음 x) ÷ (끝 t − 처음 t) 를 계산한다.</div></li>
+      </ol>
+      <div class="tbl-wrap">
+        <table>
+          <caption>구간별 평균 속도 (원하는 데이터 하나를 골라서)</caption>
+          <thead><tr><th>구간 (s)</th><th>0.0→0.2</th><th>0.1→0.3</th><th>0.2→0.4</th><th>0.3→0.5</th><th>0.4→0.6</th></tr></thead>
+          <tbody>
+            <tr><th>평균 속도 (m/s)</th>
+              <td><input data-field="m3v-1"></td><td><input data-field="m3v-2"></td><td><input data-field="m3v-3"></td><td><input data-field="m3v-4"></td><td><input data-field="m3v-5"></td></tr>
+            <tr><th>이론값(참고)</th>
+              <td class="fixed">0.17</td><td class="fixed">0.34</td><td class="fixed">0.51</td><td class="fixed">0.68</td><td class="fixed">0.85</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hint">이론값은 각 구간의 <b>가운데 시각</b>에서의 속도 v = a·t (a=1.70)로 계산한 값입니다.</div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 순간 속도 — 구간을 좁혀 보기</h3>
+      <p class="lead"><b>t = 0.30 s</b>에서의 순간 속도를 구합니다. 0.30을 가운데 두고 구간을 점점 좁히며 평균 속도를 계산해 보세요.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>구간</th><th>0.20 → 0.40</th><th>0.25 → 0.35</th><th>0.28 → 0.32</th></tr></thead>
+          <tbody><tr><th>평균 속도 (m/s)</th>
+            <td><input data-field="m3s-1"></td><td><input data-field="m3s-2"></td><td><input data-field="m3s-3"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">관찰</span> 구간을 좁힐수록 값이 어디로 수렴하나요? 이론값 v = 1.70 × 0.30 = 0.51 m/s와 비교</div>
+      <div class="write" contenteditable="true" data-field="m3-limit" data-q="구간 좁히기 관찰 (순간 속도)" data-ph="구간을 좁힐수록 약 0.5x m/s로 모인다. 이것이 t=0.3 s에서의 순간 속도(접선의 기울기)이다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> v–t 그래프의 기울기 = 가속도</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="m3a-1"></label><div>활동 1·2에서 구한 속도들로 <b>v–t 그래프</b>를 그린다. 거의 직선인지 확인.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="m3a-2"></label><div>직선 위 두 점을 골라 기울기 = (v₂ − v₁) ÷ (t₂ − t₁) = <b>가속도</b>를 구한다.</div></li>
+      </ol>
+      <div class="qlabel"><span class="b">계산</span> 고른 두 점과 가속도 계산 과정</div>
+      <div class="write" contenteditable="true" data-field="m3-acc-calc" data-q="v-t 기울기로 가속도 계산" data-ph="(0.1 s, 0.17 m/s), (0.5 s, 0.85 m/s) → a = (0.85−0.17)/(0.5−0.1) = 1.7 m/s²"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 가속도 세 값 비교</h3>
+      <div class="tbl-wrap">
+        <table>
+          <caption>가속도 a (m/s²) 비교 · 오차율 = |측정 − 이론| ÷ 이론 × 100</caption>
+          <thead><tr><th></th><th>PASCO 센서</th><th>Tracker 영상</th><th>이론 (g·sinθ)</th></tr></thead>
+          <tbody>
+            <tr><th>가속도 a</th><td><input data-field="m3c-p"></td><td><input data-field="m3c-t"></td><td><input data-field="m3c-th" placeholder="예 1.70"></td></tr>
+            <tr><th>이론 대비 오차율 (%)</th><td><input data-field="m3c-pe"></td><td><input data-field="m3c-te"></td><td class="fixed">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">해석</span> 어느 방법이 이론값에 더 가까웠나요? 그렇게 생각한 까닭은?</div>
+      <div class="write" contenteditable="true" data-field="m3-compare" data-q="가속도 비교 해석" data-ph=""></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① x–t 그래프의 기울기로 속도를, v–t 그래프의 기울기로 가속도를 구할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm3a" data-field="scm3a" value="우수"><span>우수</span></label><label><input type="radio" name="scm3a" data-field="scm3a" value="보통"><span>보통</span></label><label><input type="radio" name="scm3a" data-field="scm3a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 구간을 좁히면 평균 변화율이 순간 변화율에 가까워짐(미분의 아이디어)을 설명할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm3b" data-field="scm3b" value="우수"><span>우수</span></label><label><input type="radio" name="scm3b" data-field="scm3b" value="보통"><span>보통</span></label><label><input type="radio" name="scm3b" data-field="scm3b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 4차시 ================= -->
+  <section class="cha" id="cha4" data-d="math">
+    <div class="cha-head">
+      <span class="cha-num">4차시</span>
+      <div>
+        <h2>넓이로 변위·속도 변화 구하기 &amp; 결론</h2>
+        <div class="sub">공통수학 · 통합과학 — 적분의 첫걸음</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 그래프 <b>아래 넓이</b>로 변위·속도 변화를 구한다.
+      ② 두 측정 방법을 비교해 오차를 분석하고 결론을 낸다.</p>
+
+    <div class="act">
+      <h3><span class="tag">알아보기</span> 넓이 = 쌓인 양</h3>
+      <div class="callout"><b>v–t 그래프 아래 넓이 = 이동 거리(변위)</b>입니다.
+        곡선 아래를 <b>직사각형·사다리꼴로 잘게 쪼개</b> 넓이를 더하면 근삿값, 더 잘게 쪼갤수록 정확해집니다 — 이것이 <b>적분</b>의 아이디어입니다.
+        <b>a–t 그래프 아래 넓이 = 속도 변화</b>(a가 일정하면 a × t).</div>
+      <figure>
+        <svg viewBox="0 0 420 180" role="img" aria-label="v-t 그래프 아래를 사다리꼴로 나눈 그림">
+          <line class="ax" x1="40" y1="15" x2="40" y2="150"/><line class="ax" x1="40" y1="150" x2="400" y2="150"/>
+          <polygon class="fillv" points="40,150 100,126 160,102 220,78 280,54 340,30 340,150"/>
+          <line class="c-data" x1="40" y1="150" x2="340" y2="30" stroke-width="2.5"/>
+          <line class="ax" x1="100" y1="150" x2="100" y2="126"/><line class="ax" x1="160" y1="150" x2="160" y2="102"/>
+          <line class="ax" x1="220" y1="150" x2="220" y2="78"/><line class="ax" x1="280" y1="150" x2="280" y2="54"/>
+          <line class="ax" x1="340" y1="150" x2="340" y2="30"/>
+          <text class="lbl" x="42" y="12" font-size="10">v</text><text class="lbl" x="392" y="164" font-size="10">t</text>
+          <text class="lbl-b" x="150" y="140" font-size="10">넓이 = 이동 거리</text>
+        </svg>
+        <figcaption>구간 하나의 사다리꼴 넓이 = ½ × (왼쪽 높이 + 오른쪽 높이) × 밑변(Δt). 모두 더하면 변위.</figcaption>
+      </figure>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> v–t 넓이로 변위 구하기</h3>
+      <p class="lead">3차시에서 구한 속도로, 0 ~ 0.5 s를 0.1 s 간격 5칸으로 나눠 사다리꼴 넓이를 더합니다.</p>
+      <div class="fml">각 칸 넓이 = ½ × (v<sub>처음</sub> + v<sub>끝</sub>) × 0.1 &nbsp;→&nbsp; 5칸 합 = 변위</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>구간 (s)</th><th>0.0–0.1</th><th>0.1–0.2</th><th>0.2–0.3</th><th>0.3–0.4</th><th>0.4–0.5</th><th>합계</th></tr></thead>
+          <tbody><tr><th>사다리꼴 넓이 (m)</th>
+            <td><input data-field="m4a-1"></td><td><input data-field="m4a-2"></td><td><input data-field="m4a-3"></td><td><input data-field="m4a-4"></td><td><input data-field="m4a-5"></td><td><input data-field="m4a-sum"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">비교</span> 넓이로 구한 변위와 이론값 x = ½ × 1.70 × 0.5² = <b>0.213 m</b>, 그리고 2차시 표의 t=0.5 s 측정값을 비교</div>
+      <div class="write" contenteditable="true" data-field="m4-disp" data-q="넓이로 구한 변위와 비교" data-ph="넓이 합 ≈ 0.2x m ≈ 이론값 0.213 m ≈ 측정값 …"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> a–t 넓이로 속도 변화 구하기</h3>
+      <p class="lead">가속도가 일정(수평선)하므로 a–t 그래프 아래는 직사각형입니다.</p>
+      <div class="fml">0 ~ 0.5 s 넓이 = a × 0.5 = (3차시에서 구한 a) × 0.5 = ?  →  이 값 = v(0.5) − v(0)</div>
+      <div class="qlabel"><span class="b">계산·확인</span> 위 값과, v–t 그래프에서 읽은 v(0.5) − v(0)이 같은가?</div>
+      <div class="write" contenteditable="true" data-field="m4-dv" data-q="a-t 넓이 = 속도 변화 확인" data-ph="a × 0.5 ≈ 1.70 × 0.5 = 0.85 m/s. v-t 그래프의 v(0.5) − v(0)도 약 0.85 m/s로 일치."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 종합 비교표 (t = 0.5 s)</h3>
+      <div class="tbl-wrap">
+        <table>
+          <caption>t = 0.5 s에서의 변위 x · 속도 v · 가속도 a</caption>
+          <thead><tr><th></th><th>PASCO</th><th>Tracker</th><th>이론(참고)</th></tr></thead>
+          <tbody>
+            <tr><th>변위 x (m)</th><td><input data-field="m4t-xp"></td><td><input data-field="m4t-xt"></td><td class="fixed">0.213</td></tr>
+            <tr><th>속도 v (m/s)</th><td><input data-field="m4t-vp"></td><td><input data-field="m4t-vt"></td><td class="fixed">0.85</td></tr>
+            <tr><th>가속도 a (m/s²)</th><td><input data-field="m4t-ap"></td><td><input data-field="m4t-at"></td><td class="fixed">1.70</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
+      <div class="qlabel"><span class="b">1</span> 센서와 영상 측정값 중 이론값에 더 가까운 것은? 그 까닭은?</div>
+      <div class="write" contenteditable="true" data-field="m4-q1" data-q="토의1: 어느 방법이 더 정확했나" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 오차의 원인을 3가지 이상 (마찰·공기저항·트랙 수평·척도 보정·프레임률·클릭 오차·수레 정렬 등)</div>
+      <div class="write" contenteditable="true" data-field="m4-q2" data-q="토의2: 오차 원인 3가지 이상" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> "기울기 = 미분", "넓이 = 적분"이 이 실험에서 각각 무엇을 구하게 해 주었나?</div>
+      <div class="write" contenteditable="true" data-field="m4-q3" data-q="토의3: 미분·적분이 한 일" data-ph="기울기(미분): x–t → 속도, v–t → 가속도 / 넓이(적분): v–t → 변위, a–t → 속도 변화"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">마무리</span> 4차시 전체 되돌아보기</h3>
+      <div class="qlabel"><span class="b">연결</span> 빗면 운동 예측 → 이중 측정 → 기울기(미분) → 넓이(적분). 이 흐름을 내 말로 3~4문장으로 요약하기</div>
+      <div class="write" contenteditable="true" data-field="m4-summary" data-q="4차시 전체 흐름 요약" data-ph="" style="min-height:5em"></div>
+      <div class="qlabel"><span class="b">동료평가</span> 우리 모둠에서 가장 도움을 준 친구와 그 이유</div>
+      <div class="write" contenteditable="true" data-field="m4-peer" data-q="동료평가" data-ph=""></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① v–t 그래프 아래 넓이로 변위를, a–t 넓이로 속도 변화를 구할 수 있다(적분의 아이디어).</span>
+        <span class="opts"><label><input type="radio" name="scm4a" data-field="scm4a" value="우수"><span>우수</span></label><label><input type="radio" name="scm4a" data-field="scm4a" value="보통"><span>보통</span></label><label><input type="radio" name="scm4a" data-field="scm4a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 센서·영상 측정 결과를 비교하고 오차의 원인을 분석해 결론을 낼 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="scm4b" data-field="scm4b" value="우수"><span>우수</span></label><label><input type="radio" name="scm4b" data-field="scm4b" value="보통"><span>보통</span></label><label><input type="radio" name="scm4b" data-field="scm4b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <footer>
+    이 활동지의 입력 내용은 사용 중인 기기의 브라우저에만 저장됩니다(다른 기기·친구에게 전송되지 않음).
+    제출은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
+  </footer>
+</main>
+
+<div class="saved" id="saved">저장됨</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="steam-incline-v1";
+  var store={};
+  try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
+  var savedEl=document.getElementById("saved"), savedT;
+  function flash(){ if(!savedEl)return; savedEl.classList.add("show"); clearTimeout(savedT);
+    savedT=setTimeout(function(){ savedEl.classList.remove("show"); },1100); }
+  function persist(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); flash(); }catch(e){} }
+
+  var fields=Array.prototype.slice.call(document.querySelectorAll("[data-field]"));
+  fields.forEach(function(el){
+    var k=el.getAttribute("data-field");
+    if(el.type==="checkbox"){
+      if(store[k]===true) el.checked=true;
+      el.addEventListener("change",function(){ store[k]=el.checked; persist(); updateProgress(); });
+    } else if(el.type==="radio"){
+      if(store[k]===el.value) el.checked=true;
+      el.addEventListener("change",function(){ if(el.checked){ store[k]=el.value; persist(); updateProgress(); } });
+    } else if(el.isContentEditable){
+      if(typeof store[k]==="string") el.textContent=store[k];
+      el.addEventListener("input",function(){ store[k]=el.textContent; persist(); updateProgress(); });
+    } else {
+      if(typeof store[k]==="string") el.value=store[k];
+      el.addEventListener("input",function(){ store[k]=el.value; persist(); updateProgress(); });
+    }
+  });
+
+  var keys={};
+  fields.forEach(function(el){ keys[el.getAttribute("data-field")]=true; });
+  var totalKeys=Object.keys(keys).length;
+  var progEl=document.getElementById("prog");
+  function filledCount(){
+    var n=0;
+    for(var k in keys){
+      var v=store[k];
+      if(v===true) n++;
+      else if(typeof v==="string" && v.trim()!=="") n++;
+    }
+    return n;
+  }
+  function updateProgress(){
+    if(!progEl)return;
+    var pct=totalKeys? Math.round(filledCount()/totalKeys*100):0;
+    progEl.textContent="진행 "+pct+"%";
+  }
+  updateProgress();
+
+  var links=Array.prototype.slice.call(document.querySelectorAll(".steps a"));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){
+        var i=secs.indexOf(en.target);
+        if(i>-1 && en.isIntersecting){ links.forEach(function(l){ l.classList.remove("on"); }); links[i].classList.add("on"); }
+      });
+    },{rootMargin:"-40% 0px -55% 0px"});
+    secs.forEach(function(s){ if(s) io.observe(s); });
+  }
+
+  var bp=document.getElementById("btn-print");
+  if(bp) bp.addEventListener("click",function(){ window.print(); });
+
+  var bc=document.getElementById("btn-copy");
+  if(bc) bc.addEventListener("click",function(){
+    var lines=[];
+    var head=[];
+    ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
+    lines.push("빗면 운동 분석과 미적분의 첫걸음 — 활동지 답안");
+    if(head.length) lines.push(head.join(" / "));
+    lines.push("");
+    document.querySelectorAll("section.cha").forEach(function(sec){
+      var h2=sec.querySelector(".cha-head h2");
+      lines.push("=== "+(sec.querySelector(".cha-num").textContent)+" "+(h2?h2.textContent:"")+" ===");
+      sec.querySelectorAll("[data-field]").forEach(function(el){
+        var k=el.getAttribute("data-field"), q=el.getAttribute("data-q")||k, v=store[k];
+        if(el.type==="checkbox"){ if(v===true) lines.push("[v] "+ (el.closest("li")? el.closest("li").innerText.replace(/\s+/g," ").trim() : q)); return; }
+        if(el.type==="radio"){ if(el.checked) lines.push("· "+q+": "+v); return; }
+        if(v && String(v).trim()!==""){ lines.push("· "+q+":\n  "+String(v).trim().replace(/\n/g,"\n  ")); }
+      });
+      lines.push("");
+    });
+    var text=lines.join("\n");
+    function done(ok){ bc.textContent= ok? "복사됨!" : "복사 실패"; setTimeout(function(){ bc.textContent="답안 복사"; },1400); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ done(true); },function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      try{
+        var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(true);
+      }catch(e){ done(false); }
+    }
+  });
+
+  window.addEventListener("beforeprint",function(){
+    document.querySelectorAll(".write").forEach(function(el){ el.setAttribute("data-min",el.style.minHeight||""); el.style.minHeight="0"; });
+  });
+})();
+</script>
+
+</body>
+</html>
