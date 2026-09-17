@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sage Modeler와 빅데이터로 읽는 기후변화 · 학생 활동지</title>
+<meta name="description" content="통합과학·정보·공통수학 융합 STEAM 4차시 학생 활동지 — 온실효과 이해, Sage Modeler 시스템 모델링, 기상청 빅데이터 추세선 분석">
+<link rel="icon" href="../favicon.svg">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Sage Modeler와 빅데이터로 읽는 기후변화 — 학생 활동지">
+<meta property="og:description" content="온실효과·복사강제력 · Sage Modeler 시스템 모델링 · 기상청 빅데이터 추세선 분석 4차시">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#5a6673; --line:#d7dde3;
+  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --data:#3a4657; --warm:#b9711f;
+  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb; --data-bg:#e6e9ee; --warm-bg:#f3e6d3;
+  --field:#f4eee2; --field-line:#c7ac83; --focus:#b9711f;
+  --shadow:0 1px 2px rgba(27,37,48,.06),0 6px 20px rgba(27,37,48,.06);
+  --f-disp:"Gothic A1","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6; --warm:#e2a355;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a; --warm-bg:#332711;
+  --field:#2a2416; --field-line:#7a6338; --focus:#e2a355;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6; --warm:#e2a355;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a; --warm-bg:#332711;
+  --field:#2a2416; --field-line:#7a6338; --focus:#e2a355;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
+  font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--f-disp);line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--base)}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+@supports (backdrop-filter:blur(1px)){.bar{background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(8px)}}
+.bar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
+.steps{display:flex;gap:6px;margin-left:auto}
+.steps a{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;
+  font-family:var(--f-mono);font-size:13px;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);background:var(--card)}
+.steps a[data-d="sci"]:hover,.steps a[data-d="sci"].on{border-color:var(--neutral);color:var(--neutral)}
+.steps a[data-d="info"]:hover,.steps a[data-d="info"].on{border-color:var(--base);color:var(--base)}
+.steps a[data-d="data"]:hover,.steps a[data-d="data"].on{border-color:var(--data);color:var(--ink)}
+.steps a[data-d="math"]:hover,.steps a[data-d="math"].on{border-color:var(--warm);color:var(--warm)}
+.prog{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.tools{display:flex;gap:8px}
+.tools button{font-family:var(--f-body);font-size:13px;padding:6px 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tools button:hover{border-color:var(--focus)}
+.tools button:focus-visible,.steps a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+main{max-width:900px;margin:0 auto;padding:0 20px 90px}
+.hero{padding:44px 0 30px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;margin:12px 0 14px;letter-spacing:-.02em}
+.hero p{max-width:62ch;color:var(--ink-soft)}
+.who{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.who label{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+.who input{font-family:var(--f-body);font-size:15px;color:var(--ink);background:var(--field);
+  border:1px solid var(--field-line);border-radius:7px;padding:8px 10px;min-width:150px}
+.who input:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+
+.cha{margin-top:34px;border-top:2px solid var(--line);padding-top:8px}
+.cha-head{display:flex;gap:16px;align-items:flex-start;padding:16px 0 6px}
+.cha-num{font-family:var(--f-mono);font-weight:600;font-size:13px;padding:5px 9px;border-radius:6px;white-space:nowrap;margin-top:3px}
+.cha-head h2{font-size:clamp(20px,3vw,26px);font-weight:800;letter-spacing:-.015em}
+.cha-head .sub{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-top:5px;letter-spacing:.02em}
+[data-d="sci"] .cha-num{background:var(--neutral-bg);color:var(--neutral)}
+[data-d="info"] .cha-num{background:var(--base-bg);color:var(--base)}
+[data-d="data"] .cha-num{background:var(--data-bg);color:var(--ink)}
+[data-d="math"] .cha-num{background:var(--warm-bg);color:var(--warm)}
+[data-d="sci"]{border-top-color:var(--neutral)}
+[data-d="info"]{border-top-color:var(--base)}
+[data-d="data"]{border-top-color:var(--data)}
+[data-d="math"]{border-top-color:var(--warm)}
+
+.act{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);padding:20px 22px;margin-top:16px}
+.act > h3{font-size:16px;font-weight:700;display:flex;gap:9px;align-items:baseline}
+.act > h3 .tag{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;flex:none}
+.act p.lead{color:var(--ink-soft);font-size:14.5px;margin-top:6px}
+
+ol.todo,ul.todo{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+ol.todo li,ul.todo li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.todo input[type=checkbox]{flex:none;width:17px;height:17px;margin-top:3px;accent-color:var(--focus);cursor:pointer}
+.todo .n{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);flex:none;margin-top:2px;min-width:16px}
+.todo code,.act code{font-family:var(--f-mono);font-size:12.5px;background:var(--field);
+  border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.hint{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+
+.write{display:block;font-family:var(--f-body);font-size:14.5px;line-height:1.6;color:var(--ink);
+  background:var(--field);border:1px solid var(--field-line);border-radius:8px;
+  padding:10px 12px;margin-top:10px;min-height:2.6em;white-space:pre-wrap;word-break:break-word}
+.write:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.write:empty:before{content:attr(data-ph);color:var(--ink-soft);opacity:.75}
+.qlabel{font-size:13.5px;font-weight:600;margin-top:16px;display:flex;gap:7px}
+.qlabel .b{color:var(--focus);font-family:var(--f-mono);flex:none}
+.qlabel:first-of-type{margin-top:12px}
+
+.tbl-wrap{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:440px}
+caption{text-align:left;font-size:12.5px;color:var(--ink-soft);margin-bottom:7px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;font-variant-numeric:tabular-nums}
+thead th{background:var(--field);font-family:var(--f-disp);font-weight:700}
+tbody th{background:var(--field);font-weight:600;white-space:nowrap}
+td input{width:100%;min-width:44px;border:none;background:transparent;font-family:var(--f-mono);
+  font-size:13.5px;text-align:center;color:var(--ink);padding:3px 2px}
+td input:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:3px}
+td.fixed{background:var(--field);font-family:var(--f-mono);color:var(--ink-soft)}
+
+.fml{font-family:var(--f-mono);font-size:14px;background:var(--field);border:1px solid var(--line);
+  border-radius:8px;padding:12px 14px;margin-top:12px;overflow-x:auto}
+.callout{font-size:13.5px;border-left:3px solid var(--focus);padding:4px 0 4px 13px;margin-top:14px;color:var(--ink-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.two .box{border:1px solid var(--line);border-radius:9px;padding:12px 13px;background:var(--paper)}
+.two .box h4{font-size:13px;font-weight:700;font-family:var(--f-disp)}
+.two .box p{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+.selfcheck{margin-top:16px;border:1px dashed var(--field-line);border-radius:10px;padding:14px 16px;background:var(--field)}
+.selfcheck h4{font-family:var(--f-disp);font-size:13px;font-weight:700;letter-spacing:.02em}
+.selfcheck .row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin-top:9px}
+.selfcheck .opts{margin-left:auto;display:flex;gap:5px;flex:none}
+.selfcheck .opts label{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line);border-radius:6px;
+  padding:3px 7px;cursor:pointer;background:var(--card);color:var(--ink-soft)}
+.selfcheck .opts input{position:absolute;opacity:0;width:0;height:0}
+.selfcheck .opts input:checked + span{color:var(--focus);font-weight:600}
+.selfcheck .opts label:has(input:checked){border-color:var(--focus)}
+
+footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(--ink-soft);text-align:center}
+
+.saved{position:fixed;right:16px;bottom:16px;font-family:var(--f-mono);font-size:11px;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 13px;
+  color:var(--ink-soft);box-shadow:var(--shadow);opacity:0;transition:opacity .3s;z-index:30}
+.saved.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.saved{transition:none}}
+
+/* ---- 직접 그리는 그래프 (연도별 관측값 + 추세선) ---- */
+.plot{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:14px}
+.plot-cfg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;font-size:12.5px;color:var(--ink-soft)}
+.plot-cfg label{display:flex;flex-direction:column;gap:3px;font-family:var(--f-mono);font-size:10.5px}
+.plot-cfg input{font-family:var(--f-body);font-size:13px;color:var(--ink);background:var(--field);
+  border:1px solid var(--field-line);border-radius:6px;padding:5px 7px;width:112px}
+.plot-cfg button{align-self:flex-end;font-family:var(--f-body);font-size:12.5px;padding:6px 12px;border-radius:7px;
+  border:1px solid var(--field-line);background:var(--field);color:var(--ink);cursor:pointer}
+.plot-cfg button:hover{border-color:var(--focus)}
+.plot-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.plot-bar button{font-family:var(--f-body);font-size:12.5px;padding:6px 11px;border-radius:7px;
+  border:1px solid var(--field-line);background:var(--field);color:var(--ink);cursor:pointer}
+.plot-bar button:hover{border-color:var(--focus)}
+.plot-bar button.on{background:var(--warm);color:#fff;border-color:var(--warm)}
+.plot-bar button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.plot-svg{width:100%;height:auto;aspect-ratio:8/5;min-height:200px;display:block;background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;touch-action:manipulation;cursor:crosshair}
+.plot-svg .pg{stroke:var(--line);stroke-width:1}
+.plot-svg .pax{stroke:var(--ink-soft);stroke-width:1.5}
+.plot-svg .plb{fill:var(--ink-soft);font-family:var(--f-mono);font-size:10px}
+.plot-svg .pt-title{font-weight:600}
+.plot-svg .ptrend{stroke:var(--acid);stroke-width:2;stroke-dasharray:5 4;fill:none}
+.plot-svg .ptrend-lbl{fill:var(--acid);font-family:var(--f-mono);font-weight:600;font-size:11px}
+.plot-svg .psl{stroke:var(--warm);stroke-width:2.5;fill:none}
+.plot-svg .psp{fill:var(--warm);stroke:var(--card);stroke-width:1}
+.plot-hint{font-size:12px;color:var(--ink-soft);margin-top:8px}
+
+@media print{
+  .bar,.tools,.saved,.steps{display:none!important}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  main{max-width:none;padding:0}
+  .act{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .cha{break-before:page}
+  .hero{padding:0 0 16px}
+  .write,.who input,td input{background:#fff;border-color:#999}
+  .write:empty:before{content:""}
+  .plot-svg{border-color:#999;cursor:auto}
+  .plot-bar,.plot-cfg,.plot-hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <a href="./" style="text-decoration:none;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px;flex:none">← 과정 소개</a>
+    <strong>Sage Modeler로 읽는 기후변화</strong>
+    <span class="prog" id="prog">진행 0%</span>
+    <nav class="steps" aria-label="차시 이동">
+      <a href="#cha1" data-d="sci">1</a>
+      <a href="#cha2" data-d="info">2</a>
+      <a href="#cha3" data-d="data">3</a>
+      <a href="#cha4" data-d="math">4</a>
+    </nav>
+    <div class="tools">
+      <button id="btn-copy" type="button">답안 복사</button>
+      <button id="btn-print" type="button">인쇄 · PDF</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">통합과학 · 정보 · 공통수학 융합 STEAM · 4차시</div>
+    <h1>사막에 내린 폭우, 기후는 정말 변하고 있을까?</h1>
+    <p>온실효과가 강화되어 지구온난화가 되는 원리를 알아보고, <b>Sage Modeler</b>로 온실가스와 기후 변수 사이의
+      관계를 <b>시스템 모델</b>로 만듭니다. 그리고 기상청 <b>빅데이터</b>를 직접 내려받아 우리 지역의 실제 변화를
+      그래프에 <b>점으로 찍고</b>, <b>추세선</b>으로 변화율을 확인합니다. 입력한 내용은 이 기기에 자동 저장됩니다.</p>
+    <div class="who">
+      <label>학년 / 반 / 번호 <input id="w-id" data-field="w-id" autocomplete="off"></label>
+      <label>이름 <input id="w-name" data-field="w-name" autocomplete="off"></label>
+      <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
+    </div>
+  </header>
+
+  <!-- ================= 1차시 ================= -->
+  <section class="cha" id="cha1" data-d="sci">
+    <div class="cha-head">
+      <span class="cha-num">1차시</span>
+      <div>
+        <h2>기후변화, 무엇이 문제인가</h2>
+        <div class="sub">통합과학 · [10통과2-02-03]</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 온실효과가 강화되어 지구온난화가 되는 원리를 설명한다.
+      ② 온실가스의 종류·발생원인·영향력을 안다.</p>
+
+    <div class="act">
+      <h3><span class="tag">열기</span> 사막에서 깨어난 고대 새우</h3>
+      <p class="lead">미국 네바다주의 건조한 블랙록 사막(버닝맨 축제가 열리는 곳)에 갑작스러운 폭우가 내려
+        오랫동안 알로 잠들어 있던 긴꼬리투구새우가 부화했습니다.</p>
+      <div class="qlabel"><span class="b">Q</span> 사막에 갑자기 폭우가 내린 것이 기후변화와 어떤 관계가 있을지 지금 생각을 적어 보세요.</div>
+      <div class="write" contenteditable="true" data-field="k1-hook" data-q="1차시 열기: 사막 폭우와 기후변화 예상" data-ph="예: 지구 전체 기온이 오르면서 대기 중 수증기량이 늘어 극단적인 강수 현상이 잦아진 것 같다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 온실효과의 원리</h3>
+      <p class="lead">태양 복사는 짧은 파장, 지구가 방출하는 복사는 긴 파장입니다.</p>
+      <div class="qlabel"><span class="b">1</span> 빈칸 채우기 — 온실가스는 (&nbsp;&nbsp;&nbsp;) 파장의 태양 복사는 통과시키고, (&nbsp;&nbsp;&nbsp;) 파장의 지구 복사는 흡수해 지표를 보온한다.</div>
+      <div class="write" contenteditable="true" data-field="k1-mech" data-q="온실효과 원리 빈칸" data-ph="짧은 파장의 태양 복사는 통과 / 긴 파장의 지구 복사는 흡수"></div>
+      <div class="qlabel"><span class="b">2</span> 온실효과 자체는 지구 생명체에게 필요한 현상입니다. 그런데 무엇이 문제일까요?</div>
+      <div class="write" contenteditable="true" data-field="k1-problem" data-q="온실효과 강화의 문제점" data-ph="산업혁명 이후 온실가스 농도가 급격히 늘어 온실효과가 과도하게 강화되면서 지구 평균 기온이 필요 이상으로 오르고 있다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 6대 온실가스 조사하기</h3>
+      <p class="lead">교토의정서가 규제하는 6대 온실가스입니다. 화학식은 채워져 있습니다. 발생 원인·체류기간·지구온난화지수(GWP)를 조사해 채우세요.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>6대 온실가스 (GWP = CO₂ 1kg 대비 같은 양의 온난화 효과)</caption>
+          <thead><tr><th>종류</th><th>화학식</th><th>발생 원인</th><th>체류기간(년)</th><th>GWP</th></tr></thead>
+          <tbody>
+            <tr><th>이산화탄소</th><td class="fixed">CO₂</td><td><input data-field="k1g-co2-o" data-q="CO2 발생원인"></td><td><input data-field="k1g-co2-t" data-q="CO2 체류기간"></td><td><input data-field="k1g-co2-g" data-q="CO2 GWP"></td></tr>
+            <tr><th>메탄</th><td class="fixed">CH₄</td><td><input data-field="k1g-ch4-o"></td><td><input data-field="k1g-ch4-t"></td><td><input data-field="k1g-ch4-g"></td></tr>
+            <tr><th>아산화질소</th><td class="fixed">N₂O</td><td><input data-field="k1g-n2o-o"></td><td><input data-field="k1g-n2o-t"></td><td><input data-field="k1g-n2o-g"></td></tr>
+            <tr><th>육불화황</th><td class="fixed">SF₆</td><td><input data-field="k1g-sf6-o"></td><td><input data-field="k1g-sf6-t"></td><td><input data-field="k1g-sf6-g"></td></tr>
+            <tr><th>염화불화탄소류</th><td class="fixed">CFCs</td><td><input data-field="k1g-cfc-o"></td><td><input data-field="k1g-cfc-t"></td><td><input data-field="k1g-cfc-g"></td></tr>
+            <tr><th>삼불화질소</th><td class="fixed">NF₃</td><td><input data-field="k1g-nf3-o"></td><td><input data-field="k1g-nf3-t"></td><td><input data-field="k1g-nf3-g"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 복사강제력(Radiative Forcing) 이해하기</h3>
+      <div class="callout"><b>복사강제력(RF)</b>은 온실가스 같은 인자가 지구–대기 시스템의 에너지 균형에 미치는 영향을
+        나타내는 척도(단위 W/m²)입니다. RF가 <b>양수(+)</b>이면 에너지가 쌓여 <b>온난화</b>, <b>음수(−)</b>이면 <b>냉각</b>됩니다.</div>
+      <div class="qlabel"><span class="b">Q</span> RF 증가에 가장 큰 영향을 끼친 온실가스는 무엇일까요? 그렇게 생각한 까닭은?</div>
+      <div class="write" contenteditable="true" data-field="k1-rf" data-q="RF 증가에 가장 큰 영향을 준 온실가스와 이유" data-ph="이산화탄소 — 배출량 자체가 가장 많고, 대기 중에 오래 머무르는 장수명 온실가스이기 때문."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 온실가스 배출량 변화 해석하기</h3>
+      <p class="lead">이산화탄소·메탄·아산화질소의 배출량 추이를 조사해 보면, 세 기체 모두 농도는 늘어나지만
+        <b>증가율</b>은 다르게 나타납니다.</p>
+      <div class="qlabel"><span class="b">1</span> 어떤 온실가스가 지구온난화에 가장 큰 영향을 미친다고 생각하나요? 조사한 자료를 근거로 서술하기</div>
+      <div class="write" contenteditable="true" data-field="k1-trend" data-q="배출량 추이 해석" data-ph="이산화탄소 — 배출량과 증가율 모두 다른 온실가스보다 뚜렷하게 크다."></div>
+      <div class="qlabel"><span class="b">2</span> 온실가스 배출을 줄이기 위한 일상 속 실천 방안 3가지 이상</div>
+      <div class="write" contenteditable="true" data-field="k1-action" data-q="온실가스 감축 실천 방안 3가지 이상" data-ph="적정 냉난방 온도 유지, 대중교통·도보 이용, 에코백·다회용 컵 사용, 나무 심기 …"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">닫기</span> 처음 질문으로 돌아가기</h3>
+      <div class="qlabel"><span class="b">Q</span> 온실효과·온실가스에 대해 배운 내용으로, 사막 폭우 현상을 다시 설명해 보세요.</div>
+      <div class="write" contenteditable="true" data-field="k1-answer" data-q="1차시 닫기: 사막 폭우 최종 설명" data-ph="지구온난화로 대기가 더 많은 수증기를 머금을 수 있게 되면서, 평소 건조했던 지역에서도 폭우 같은 극단적 기상 현상이 나타날 수 있다."></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 온실효과가 강화되어 지구온난화가 되는 원리를 설명할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck1a" data-field="sck1a" value="우수"><span>우수</span></label><label><input type="radio" name="sck1a" data-field="sck1a" value="보통"><span>보통</span></label><label><input type="radio" name="sck1a" data-field="sck1a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 온실가스의 종류·발생원인·영향력을 설명할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck1b" data-field="sck1b" value="우수"><span>우수</span></label><label><input type="radio" name="sck1b" data-field="sck1b" value="보통"><span>보통</span></label><label><input type="radio" name="sck1b" data-field="sck1b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 2차시 ================= -->
+  <section class="cha" id="cha2" data-d="info">
+    <div class="cha-head">
+      <span class="cha-num">2차시</span>
+      <div>
+        <h2>Sage Modeler로 기후 시스템 모델링</h2>
+        <div class="sub">정보 · 통합과학 · 시스템 다이내믹스</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① Sage Modeler 사용법을 익힌다.
+      ② 온실가스·기후 변수 사이의 인과관계를 시스템 모델로 표현한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">열기</span> 변수들은 서로 어떻게 연결되어 있을까?</h3>
+      <p class="lead">온실가스 배출량, 대기 중 CO₂ 농도, 지구 평균 기온, 빙하 면적, 해수면 높이 — 이 변수들은 사슬처럼 서로 영향을 주고받습니다.</p>
+      <div class="write" contenteditable="true" data-field="k2-hook" data-q="변수 사이 관계 예상" data-ph="온실가스가 늘면 기온이 오르고, 기온이 오르면 빙하가 녹아 해수면이 높아질 것 같다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> Sage Modeler 사용법 익히기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="k2s-1"></label><div><code>sagemodeler.concord.org</code> 접속 → <b>예제 파일 불러오기</b>로 먼저 실습한다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="k2s-2"></label><div>새 이미지에서 박스를 드래그해 <b>변수</b>를 만들고, 관련 이미지로 바꾼다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="k2s-3"></label><div>오른쪽 화살표를 드래그해 <b>변수끼리 연결</b>한다.</div></li>
+        <li><span class="n">4</span><label><input type="checkbox" data-field="k2s-4"></label><div>화살표를 클릭해 <b>관계</b>(증가시킴/감소시킴)를 정하고 이유를 적는다.</div></li>
+        <li><span class="n">5</span><label><input type="checkbox" data-field="k2s-5"></label><div><b>시뮬레이션 실행</b> → 변수 옆 막대를 움직여 데이터를 만들어 본다.</div></li>
+        <li><span class="n">6</span><label><input type="checkbox" data-field="k2s-6"></label><div>결과를 <b>그래프</b>로 표현해 확인한다.</div></li>
+      </ol>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 우리 모둠의 기후 시스템 변수 정하기</h3>
+      <p class="lead">모델에 넣을 변수 5개를 정합니다. (예시: 온실가스 배출량)</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>변수 1</th><th>변수 2</th><th>변수 3</th><th>변수 4</th><th>변수 5</th></tr></thead>
+          <tbody><tr>
+            <td class="fixed">온실가스 배출량</td>
+            <td><input data-field="k2v-2" data-q="변수2"></td>
+            <td><input data-field="k2v-3" data-q="변수3"></td>
+            <td><input data-field="k2v-4" data-q="변수4"></td>
+            <td><input data-field="k2v-5" data-q="변수5"></td>
+          </tr></tbody>
+        </table>
+      </div>
+      <div class="hint">예: 대기 중 CO₂ 농도, 지구 평균 기온, 빙하 면적, 해수면 높이 — 우리 모둠이 다루고 싶은 변수로 바꿔도 됩니다.</div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 인과관계 설계하기</h3>
+      <p class="lead">위 변수들을 화살표로 연결한다면, 어떤 변수가 어떤 변수를 증가/감소시킬까요? 이유도 함께 적습니다.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>인과관계 표 (Sage Modeler의 화살표·관계와 같은 내용)</caption>
+          <thead><tr><th>원인 변수</th><th>관계</th><th>결과 변수</th><th>이유</th></tr></thead>
+          <tbody>
+            <tr><td><input data-field="k2r1-a"></td><td><input data-field="k2r1-r" placeholder="증가/감소시킴"></td><td><input data-field="k2r1-b"></td><td><input data-field="k2r1-w"></td></tr>
+            <tr><td><input data-field="k2r2-a"></td><td><input data-field="k2r2-r" placeholder="증가/감소시킴"></td><td><input data-field="k2r2-b"></td><td><input data-field="k2r2-w"></td></tr>
+            <tr><td><input data-field="k2r3-a"></td><td><input data-field="k2r3-r" placeholder="증가/감소시킴"></td><td><input data-field="k2r3-b"></td><td><input data-field="k2r3-w"></td></tr>
+            <tr><td><input data-field="k2r4-a"></td><td><input data-field="k2r4-r" placeholder="증가/감소시킴"></td><td><input data-field="k2r4-b"></td><td><input data-field="k2r4-w"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 시뮬레이션 실행하고 관찰하기</h3>
+      <div class="qlabel"><span class="b">관찰</span> 온실가스 배출량을 늘렸을 때, 그래프에서 관찰한 변화를 서술하세요.</div>
+      <div class="write" contenteditable="true" data-field="k2-sim" data-q="시뮬레이션 관찰" data-ph="배출량 막대를 올리자 CO2 농도, 기온 그래프가 함께 올라가는 것을 확인했다."></div>
+      <div class="qlabel"><span class="b">모둠 발표</span> 다른 모둠의 모델을 보고 배운 점</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>모둠</th><th>배운 내용</th></tr></thead>
+          <tbody>
+            <tr><td><input data-field="k2p1-g"></td><td><input data-field="k2p1-c"></td></tr>
+            <tr><td><input data-field="k2p2-g"></td><td><input data-field="k2p2-c"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① Sage Modeler로 변수와 관계를 만들어 시스템 모델링을 할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck2a" data-field="sck2a" value="우수"><span>우수</span></label><label><input type="radio" name="sck2a" data-field="sck2a" value="보통"><span>보통</span></label><label><input type="radio" name="sck2a" data-field="sck2a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 시뮬레이션 결과를 관찰하고 해석할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck2b" data-field="sck2b" value="우수"><span>우수</span></label><label><input type="radio" name="sck2b" data-field="sck2b" value="보통"><span>보통</span></label><label><input type="radio" name="sck2b" data-field="sck2b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 3차시 ================= -->
+  <section class="cha" id="cha3" data-d="data">
+    <div class="cha-head">
+      <span class="cha-num">3차시</span>
+      <div>
+        <h2>기상청 빅데이터로 우리 지역 살펴보기</h2>
+        <div class="sub">정보 · 공통수학 · [12정02-04]</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 기상청 개방포털에서 관측 빅데이터를 수집한다.
+      ② 데이터를 정리해 그래프로 표현한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">열기</span> 느낌 말고 데이터로</h3>
+      <div class="qlabel"><span class="b">Q</span> "우리 지역은 정말 더워지고 있을까?"를 데이터로 확인하려면 무엇이 필요할까요?</div>
+      <div class="write" contenteditable="true" data-field="k3-hook" data-q="데이터로 확인하는 방법 예상" data-ph="여러 해에 걸친 기온·폭염일수 같은 실제 관측 기록을 모아 비교해 보면 될 것 같다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 기상청 빅데이터 수집하기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="k3d-1"></label><div>기상청 기후자료개방포털(<code>data.kma.go.kr</code>) 접속 → <b>기후통계분석</b> 메뉴로 이동</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="k3d-2"></label><div>지구온난화 관련 항목 하나를 정한다 <span class="hint">예: 폭염일수, 열대야일수, 연평균기온</span></div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="k3d-3"></label><div>우리 지역(관측지점)과 기간(예: 최근 15~20년)을 정하고 조회한다.</div></li>
+        <li><span class="n">4</span><label><input type="checkbox" data-field="k3d-4"></label><div>데이터를 <b>CSV</b>로 내려받는다.</div></li>
+      </ol>
+      <div class="qlabel"><span class="b">기록</span> 우리 모둠이 고른 항목·지역·기간</div>
+      <div class="write" contenteditable="true" data-field="k3-pick" data-q="관측 항목·지역·기간 선택" data-ph="폭염일수 / 서울 / 2005~2024년"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 데이터 전처리</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="k3p-1"></label><div>CSV 파일을 열어 불필요한 머리말·설명 행을 정리한다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="k3p-2"></label><div><b>연도, 값</b> 두 열만 남긴다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="k3p-3"></label><div>값이 비어 있는 연도(결측치)가 있으면 처리 방법을 정한다. <span class="hint">예: 제외, 앞뒤 값 평균</span></div></li>
+      </ol>
+      <div class="qlabel"><span class="b">기록</span> 전처리 과정에서 만난 문제와 해결 방법</div>
+      <div class="write" contenteditable="true" data-field="k3-clean" data-q="전처리 문제와 해결" data-ph=""></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 데이터를 직접 그래프로 그리기</h3>
+      <p class="lead">먼저 아래에서 <b>연도 범위</b>와 <b>세로축 항목·범위</b>를 우리 데이터에 맞게 설정한 뒤 [적용]을 누르세요.
+        그다음 모눈을 클릭해 (연도, 관측값) 점을 찍고 <b>완료</b>를 누르면 점이 이어집니다.</p>
+      <div class="plot" data-plot="climate">
+        <div class="plot-cfg">
+          <label>시작 연도 <input type="number" data-cfg="xmin" value="2005" step="1"></label>
+          <label>끝 연도 <input type="number" data-cfg="xmax" value="2024" step="1"></label>
+          <label>세로축 항목 <input type="text" data-cfg="yunit" value="폭염일수 (일)"></label>
+          <label>세로축 최댓값 <input type="number" data-cfg="ymax" value="40" step="1"></label>
+          <label>세로축 눈금 간격 <input type="number" data-cfg="ystep" value="5" step="1"></label>
+          <button type="button" data-act="apply">축 적용</button>
+        </div>
+        <div class="plot-bar">
+          <button type="button" data-act="done">완료 · 선 잇기</button>
+          <button type="button" data-act="undo">되돌리기</button>
+          <button type="button" data-act="reset">초기화</button>
+          <button type="button" data-act="trend">추세선 보기</button>
+        </div>
+        <svg class="plot-svg" viewBox="0 0 480 300" role="img" aria-label="연도별 관측값을 직접 그리는 모눈"></svg>
+        <p class="plot-hint">가로 = 연도, 세로 = 내가 고른 관측 항목. 점을 다시 찍으면 그 연도의 값이 바뀝니다.
+          <b>추세선</b>은 4차시에서 사용합니다 — 지금은 점만 찍고 완료해 보세요.</p>
+      </div>
+      <div class="qlabel"><span class="b">관찰</span> 그래프의 모양은 어떤가요? (오르는지, 내리는지, 들쭉날쭉한지)</div>
+      <div class="write" contenteditable="true" data-field="k3-shape" data-q="그래프 모양 관찰" data-ph="해마다 들쭉날쭉하지만 전체적으로는 늘어나는 것처럼 보인다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 최댓값·최솟값 정리</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th></th><th>연도</th><th>값</th></tr></thead>
+          <tbody>
+            <tr><th>최댓값</th><td><input data-field="k3m-maxy"></td><td><input data-field="k3m-maxv"></td></tr>
+            <tr><th>최솟값</th><td><input data-field="k3m-miny"></td><td><input data-field="k3m-minv"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">비교</span> 관측 시작 5년 평균과 최근 5년 평균을 비교하면?</div>
+      <div class="write" contenteditable="true" data-field="k3-avgcmp" data-q="시작 5년 vs 최근 5년 평균 비교" data-ph="시작 5년 평균 약 …일 → 최근 5년 평균 약 …일로 늘었다."></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 기상청 빅데이터를 수집하고 정리(전처리)할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck3a" data-field="sck3a" value="우수"><span>우수</span></label><label><input type="radio" name="sck3a" data-field="sck3a" value="보통"><span>보통</span></label><label><input type="radio" name="sck3a" data-field="sck3a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 수집한 데이터를 그래프로 표현할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck3b" data-field="sck3b" value="우수"><span>우수</span></label><label><input type="radio" name="sck3b" data-field="sck3b" value="보통"><span>보통</span></label><label><input type="radio" name="sck3b" data-field="sck3b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 4차시 ================= -->
+  <section class="cha" id="cha4" data-d="math">
+    <div class="cha-head">
+      <span class="cha-num">4차시</span>
+      <div>
+        <h2>경향성 분석과 기후 행동 제안</h2>
+        <div class="sub">공통수학 · 통합과학 — 추세선과 변화율</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 추세선(회귀직선)의 기울기로 변화율을 수치화한다.
+      ② 모델링 결과와 실제 데이터를 비교해 기후 행동을 제안한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">알아보기</span> 추세선 = 데이터가 말하는 기울기</h3>
+      <div class="callout">해마다 값이 들쭉날쭉해도, 점들을 가장 잘 대표하는 <b>하나의 직선(추세선)</b>을 그을 수 있습니다.
+        추세선의 <b>기울기</b> = 1년마다 평균적으로 값이 얼마나 변하는지(연간 변화율).
+        중화 반응의 함수, 빗면 운동의 v–t 그래프에서 본 것과 같이, <b>기울기는 곧 변화율</b>이라는 아이디어가 여기서도 그대로 쓰입니다.</div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 내 그래프에 추세선 표시하기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="k4t-1"></label><div>3차시에서 찍은 점이 아래에 그대로 남아 있는지 확인한다. (없다면 다시 찍는다)</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="k4t-2"></label><div><b>추세선 보기</b>를 눌러 내 데이터에 맞는 추세선과 기울기 값을 확인한다.</div></li>
+      </ol>
+      <div class="plot" data-plot="climate">
+        <div class="plot-cfg">
+          <label>시작 연도 <input type="number" data-cfg="xmin" value="2005" step="1"></label>
+          <label>끝 연도 <input type="number" data-cfg="xmax" value="2024" step="1"></label>
+          <label>세로축 항목 <input type="text" data-cfg="yunit" value="폭염일수 (일)"></label>
+          <label>세로축 최댓값 <input type="number" data-cfg="ymax" value="40" step="1"></label>
+          <label>세로축 눈금 간격 <input type="number" data-cfg="ystep" value="5" step="1"></label>
+          <button type="button" data-act="apply">축 적용</button>
+        </div>
+        <div class="plot-bar">
+          <button type="button" data-act="done">완료 · 선 잇기</button>
+          <button type="button" data-act="undo">되돌리기</button>
+          <button type="button" data-act="reset">초기화</button>
+          <button type="button" data-act="trend">추세선 보기</button>
+        </div>
+        <svg class="plot-svg" viewBox="0 0 480 300" role="img" aria-label="연도별 관측값과 추세선"></svg>
+        <p class="plot-hint">점이 2개 이상이어야 추세선이 계산됩니다. (3차시와 같은 데이터를 이어서 사용합니다)</p>
+      </div>
+      <div class="qlabel"><span class="b">기록</span> 화면에 표시된 추세선 기울기 값과, 그것이 뜻하는 것을 내 말로 적기</div>
+      <div class="write" contenteditable="true" data-field="k4-slope" data-q="추세선 기울기와 의미" data-ph="기울기 ≈ 0.4 → 1년마다 평균적으로 폭염일수가 약 0.4일씩 늘어나고 있다는 뜻이다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 기간을 나눠 비교하기</h3>
+      <p class="lead">관측 기간을 앞·뒤 절반으로 나눠, 각 구간의 평균 변화율 = (끝 값 − 처음 값) ÷ (기간)을 비교합니다.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th></th><th>앞쪽 절반</th><th>뒤쪽(최근) 절반</th></tr></thead>
+          <tbody><tr><th>평균 변화율 (단위/년)</th>
+            <td><input data-field="k4c-1"></td><td><input data-field="k4c-2"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">해석</span> 최근으로 올수록 변화가 더 빨라졌나요, 느려졌나요?</div>
+      <div class="write" contenteditable="true" data-field="k4-accel" data-q="기간별 변화율 비교 해석" data-ph=""></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 모델링(2차시) vs 실제 데이터(3·4차시) 비교</h3>
+      <div class="qlabel"><span class="b">Q</span> Sage Modeler 시뮬레이션에서 예상한 경향과, 실제 관측 데이터의 추세가 비슷했나요? 다르다면 왜 다를까요?</div>
+      <div class="write" contenteditable="true" data-field="k4-compare" data-q="모델 vs 실측 데이터 비교" data-ph="모델은 온실가스가 늘면 기온도 꾸준히 오르는 단순한 관계로 보여줬지만, 실제 데이터는 해마다 들쭉날쭉하다. 실제 기후는 모델이 다루지 않은 다른 요인(엘니뇨 등)의 영향도 받기 때문일 것이다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 데이터에 근거한 기후 행동 제안</h3>
+      <div class="qlabel"><span class="b">제안</span> 우리 지역 데이터를 근거로, 실천할 수 있는 기후 행동 3가지 이상 (근거와 함께)</div>
+      <div class="write" contenteditable="true" data-field="k4-action" data-q="데이터 근거 기후 행동 제안 3가지 이상" data-ph="" style="min-height:5em"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">마무리</span> 4차시 전체 되돌아보기</h3>
+      <div class="qlabel"><span class="b">연결</span> 온실효과 원리 → 시스템 모델링 → 빅데이터 수집 → 추세선 분석. 이 흐름을 내 말로 3~4문장으로 요약하기</div>
+      <div class="write" contenteditable="true" data-field="k4-summary" data-q="4차시 전체 흐름 요약" data-ph="" style="min-height:5em"></div>
+      <div class="qlabel"><span class="b">동료평가</span> 우리 모둠에서 가장 도움을 준 친구와 그 이유</div>
+      <div class="write" contenteditable="true" data-field="k4-peer" data-q="동료평가" data-ph=""></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 추세선의 기울기로 데이터의 변화율을 수치화할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck4a" data-field="sck4a" value="우수"><span>우수</span></label><label><input type="radio" name="sck4a" data-field="sck4a" value="보통"><span>보통</span></label><label><input type="radio" name="sck4a" data-field="sck4a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 모델과 실제 데이터를 비교해 기후 행동을 제안할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sck4b" data-field="sck4b" value="우수"><span>우수</span></label><label><input type="radio" name="sck4b" data-field="sck4b" value="보통"><span>보통</span></label><label><input type="radio" name="sck4b" data-field="sck4b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <footer>
+    이 활동지의 입력 내용은 사용 중인 기기의 브라우저에만 저장됩니다(다른 기기·친구에게 전송되지 않음).
+    제출은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
+  </footer>
+</main>
+
+<div class="saved" id="saved">저장됨</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="steam-climate-v1";
+  var store={};
+  try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
+  var savedEl=document.getElementById("saved"), savedT;
+  function flash(){ if(!savedEl)return; savedEl.classList.add("show"); clearTimeout(savedT);
+    savedT=setTimeout(function(){ savedEl.classList.remove("show"); },1100); }
+  function persist(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); flash(); }catch(e){} }
+
+  var fields=Array.prototype.slice.call(document.querySelectorAll("[data-field]"));
+  fields.forEach(function(el){
+    var k=el.getAttribute("data-field");
+    if(el.type==="checkbox"){
+      if(store[k]===true) el.checked=true;
+      el.addEventListener("change",function(){ store[k]=el.checked; persist(); updateProgress(); });
+    } else if(el.type==="radio"){
+      if(store[k]===el.value) el.checked=true;
+      el.addEventListener("change",function(){ if(el.checked){ store[k]=el.value; persist(); updateProgress(); } });
+    } else if(el.isContentEditable){
+      if(typeof store[k]==="string") el.textContent=store[k];
+      el.addEventListener("input",function(){ store[k]=el.textContent; persist(); updateProgress(); });
+    } else {
+      if(typeof store[k]==="string") el.value=store[k];
+      el.addEventListener("input",function(){ store[k]=el.value; persist(); updateProgress(); });
+    }
+  });
+
+  var keys={};
+  fields.forEach(function(el){ keys[el.getAttribute("data-field")]=true; });
+  var totalKeys=Object.keys(keys).length;
+  var progEl=document.getElementById("prog");
+  function filledCount(){
+    var n=0;
+    for(var k in keys){
+      var v=store[k];
+      if(v===true) n++;
+      else if(typeof v==="string" && v.trim()!=="") n++;
+    }
+    return n;
+  }
+  function updateProgress(){
+    if(!progEl)return;
+    var pct=totalKeys? Math.round(filledCount()/totalKeys*100):0;
+    progEl.textContent="진행 "+pct+"%";
+  }
+  updateProgress();
+
+  var links=Array.prototype.slice.call(document.querySelectorAll(".steps a"));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){
+        var i=secs.indexOf(en.target);
+        if(i>-1 && en.isIntersecting){ links.forEach(function(l){ l.classList.remove("on"); }); links[i].classList.add("on"); }
+      });
+    },{rootMargin:"-40% 0px -55% 0px"});
+    secs.forEach(function(s){ if(s) io.observe(s); });
+  }
+
+  var bp=document.getElementById("btn-print");
+  if(bp) bp.addEventListener("click",function(){ window.print(); });
+
+  var bc=document.getElementById("btn-copy");
+  if(bc) bc.addEventListener("click",function(){
+    var lines=[];
+    var head=[];
+    ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
+    lines.push("Sage Modeler와 빅데이터로 읽는 기후변화 — 활동지 답안");
+    if(head.length) lines.push(head.join(" / "));
+    lines.push("");
+    document.querySelectorAll("section.cha").forEach(function(sec){
+      var h2=sec.querySelector(".cha-head h2");
+      lines.push("=== "+(sec.querySelector(".cha-num").textContent)+" "+(h2?h2.textContent:"")+" ===");
+      sec.querySelectorAll("[data-field]").forEach(function(el){
+        var k=el.getAttribute("data-field"), q=el.getAttribute("data-q")||k, v=store[k];
+        if(el.type==="checkbox"){ if(v===true) lines.push("[v] "+ (el.closest("li")? el.closest("li").innerText.replace(/\s+/g," ").trim() : q)); return; }
+        if(el.type==="radio"){ if(el.checked) lines.push("· "+q+": "+v); return; }
+        if(v && String(v).trim()!==""){ lines.push("· "+q+":\n  "+String(v).trim().replace(/\n/g,"\n  ")); }
+      });
+      lines.push("");
+    });
+    var text=lines.join("\n");
+    function done(ok){ bc.textContent= ok? "복사됨!" : "복사 실패"; setTimeout(function(){ bc.textContent="답안 복사"; },1400); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ done(true); },function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      try{
+        var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(true);
+      }catch(e){ done(false); }
+    }
+  });
+
+  window.addEventListener("beforeprint",function(){
+    document.querySelectorAll(".write").forEach(function(el){ el.setAttribute("data-min",el.style.minHeight||""); el.style.minHeight="0"; });
+  });
+})();
+</script>
+
+<script>
+/* ---- 직접 그리는 그래프: 연도별 관측값 + 추세선(최소제곱 회귀) ---- */
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var W=480, H=300, mL=54, mR=16, mT=16, mB=38;
+  var pw=W-mL-mR, ph=H-mT-mB;
+  var STORE_KEY="steam-climate-plot-main";
+
+  function el(tag,attrs,text){
+    var e=document.createElementNS(NS,tag);
+    for(var k in attrs) e.setAttribute(k,attrs[k]);
+    if(text!=null) e.textContent=text;
+    return e;
+  }
+  function fmt(n){ var s=n.toFixed(2); return s.indexOf(".")>-1 ? s.replace(/0+$/,"").replace(/\.$/,"") : s; }
+
+  function xTicks(xmin,xmax){
+    var range=Math.max(1,xmax-xmin);
+    var minor, label;
+    if(range<=10){ minor=1; label=1; }
+    else if(range<=20){ minor=1; label=5; }
+    else if(range<=40){ minor=2; label=10; }
+    else { minor=5; label=20; }
+    return {minor:minor,label:label};
+  }
+
+  function loadState(){
+    var s={cfg:null,pts:[],done:false,trend:false};
+    try{ var raw=JSON.parse(localStorage.getItem(STORE_KEY));
+      if(raw&&typeof raw==="object"){
+        s.cfg=raw.cfg||null; s.pts=Array.isArray(raw.pts)?raw.pts:[]; s.done=!!raw.done; s.trend=!!raw.trend;
+      }
+    }catch(e){}
+    return s;
+  }
+  function saveState(s){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(s)); }catch(e){} }
+
+  var state=loadState();
+  var roots=Array.prototype.slice.call(document.querySelectorAll('.plot[data-plot="climate"]'));
+  if(!roots.length) return;
+
+  // 기본 cfg: 첫 인스턴스의 입력값을 초깃값으로 사용 (저장된 값이 없을 때만)
+  if(!state.cfg){
+    var f=roots[0];
+    state.cfg={
+      xmin: parseFloat(f.querySelector('[data-cfg="xmin"]').value)||2005,
+      xmax: parseFloat(f.querySelector('[data-cfg="xmax"]').value)||2024,
+      ymax: parseFloat(f.querySelector('[data-cfg="ymax"]').value)||40,
+      ystep: parseFloat(f.querySelector('[data-cfg="ystep"]').value)||5,
+      yunit: f.querySelector('[data-cfg="yunit"]').value||"관측값"
+    };
+    saveState(state);
+  }
+
+  var undo=[];
+  function pushUndo(){ undo.push(JSON.stringify(state.pts)); if(undo.length>40) undo.shift(); }
+
+  function X(t){ var c=state.cfg; return mL + ((t-c.xmin)/(c.xmax-c.xmin))*pw; }
+  function Y(v){ var c=state.cfg; v=Math.max(0,Math.min(v,c.ymax)); return mT + ph - (v/c.ymax)*ph; }
+
+  function regression(pts){
+    var n=pts.length; if(n<2) return null;
+    var sx=0,sy=0; pts.forEach(function(p){ sx+=p[0]; sy+=p[1]; });
+    var mx=sx/n, my=sy/n;
+    var num=0,den=0;
+    pts.forEach(function(p){ num+=(p[0]-mx)*(p[1]-my); den+=(p[0]-mx)*(p[0]-mx); });
+    if(den===0) return null;
+    var b=num/den, a=my-b*mx;
+    return {a:a,b:b};
+  }
+
+  function addPoint(t,v){
+    var c=state.cfg;
+    t=Math.round(t); t=Math.max(c.xmin,Math.min(t,c.xmax));
+    var q=c.ystep/2;
+    v=Math.round(v/q)*q; v=Math.max(0,Math.min(v,c.ymax)); v=Math.round(v*1000)/1000;
+    pushUndo();
+    var hit=-1;
+    for(var i=0;i<state.pts.length;i++){ if(state.pts[i][0]===t){ hit=i; break; } }
+    if(hit>=0) state.pts[hit][1]=v; else state.pts.push([t,v]);
+    state.pts.sort(function(p,r){ return p[0]-r[0]; });
+    saveState(state); renderAll();
+  }
+
+  function applyCfg(root){
+    var xmin=parseFloat(root.querySelector('[data-cfg="xmin"]').value);
+    var xmax=parseFloat(root.querySelector('[data-cfg="xmax"]').value);
+    var ymax=parseFloat(root.querySelector('[data-cfg="ymax"]').value);
+    var ystep=parseFloat(root.querySelector('[data-cfg="ystep"]').value);
+    var yunit=root.querySelector('[data-cfg="yunit"]').value||"관측값";
+    if(!(xmax>xmin)||!(ymax>0)||!(ystep>0)) return;
+    state.cfg={xmin:xmin,xmax:xmax,ymax:ymax,ystep:ystep,yunit:yunit};
+    saveState(state); renderAll();
+  }
+
+  function bindRoot(root){
+    var svg=root.querySelector(".plot-svg");
+    svg.addEventListener("click",function(ev){
+      var r=svg.getBoundingClientRect();
+      if(!r.width) return;
+      var px=(ev.clientX-r.left)/r.width*W;
+      var py=(ev.clientY-r.top)/r.height*H;
+      if(px<mL-8||px>W-mR+8||py<mT-8||py>mT+ph+8) return;
+      var c=state.cfg;
+      addPoint(c.xmin+(px-mL)/pw*(c.xmax-c.xmin), (mT+ph-py)/ph*c.ymax);
+    });
+    root.querySelectorAll(".plot-bar button").forEach(function(b){
+      b.addEventListener("click",function(){
+        var act=b.getAttribute("data-act");
+        if(act==="done"){ state.done=!state.done; saveState(state); renderAll(); }
+        else if(act==="undo"){ if(undo.length){ try{ state.pts=JSON.parse(undo.pop()); }catch(e){} saveState(state); renderAll(); } }
+        else if(act==="reset"){ pushUndo(); state.pts=[]; state.done=false; saveState(state); renderAll(); }
+        else if(act==="trend"){ state.trend=!state.trend; saveState(state); renderAll(); }
+      });
+    });
+    var applyBtn=root.querySelector('[data-act="apply"]');
+    if(applyBtn) applyBtn.addEventListener("click",function(){ applyCfg(root); });
+  }
+
+  function renderRoot(root){
+    var c=state.cfg;
+    root.querySelectorAll('[data-cfg]').forEach(function(inp){
+      var k=inp.getAttribute("data-cfg");
+      if(document.activeElement!==inp) inp.value = c[k];
+    });
+    var svg=root.querySelector(".plot-svg");
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var tk=xTicks(c.xmin,c.xmax);
+
+    for(var gy=0; gy<=c.ymax+1e-9; gy+=c.ystep)
+      svg.appendChild(el("line",{"class":"pg",x1:mL,y1:Y(gy),x2:W-mR,y2:Y(gy)}));
+    for(var gx=c.xmin; gx<=c.xmax+1e-9; gx+=tk.minor)
+      svg.appendChild(el("line",{"class":"pg",x1:X(gx),y1:mT,x2:X(gx),y2:mT+ph}));
+
+    svg.appendChild(el("line",{"class":"pax",x1:mL,y1:mT,x2:mL,y2:mT+ph}));
+    svg.appendChild(el("line",{"class":"pax",x1:mL,y1:mT+ph,x2:W-mR,y2:mT+ph}));
+
+    for(var lx=c.xmin; lx<=c.xmax+1e-9; lx+=tk.label)
+      svg.appendChild(el("text",{"class":"plb",x:X(Math.round(lx)),y:mT+ph+16,"text-anchor":"middle"}, String(Math.round(lx))));
+    for(var ly=0; ly<=c.ymax+1e-9; ly+=c.ystep)
+      svg.appendChild(el("text",{"class":"plb",x:mL-8,y:Y(ly)+3,"text-anchor":"end"}, fmt(ly)));
+
+    svg.appendChild(el("text",{"class":"plb pt-title",x:W-mR,y:mT+ph+31,"text-anchor":"end"},"연도"));
+    svg.appendChild(el("text",{"class":"plb pt-title",x:mL-8,y:mT-4,"text-anchor":"end"}, c.yunit));
+
+    if(state.trend){
+      var reg=regression(state.pts);
+      if(reg){
+        var y1=reg.a+reg.b*c.xmin, y2=reg.a+reg.b*c.xmax;
+        svg.appendChild(el("line",{"class":"ptrend",x1:X(c.xmin),y1:Y(y1),x2:X(c.xmax),y2:Y(y2)}));
+        svg.appendChild(el("text",{"class":"ptrend-lbl",x:mL+6,y:mT+14},"기울기 ≈ "+fmt(reg.b)+" / 년"));
+      } else {
+        svg.appendChild(el("text",{"class":"plb",x:mL+6,y:mT+14},"점을 2개 이상 찍으면 추세선이 계산됩니다"));
+      }
+    }
+    if(state.done && state.pts.length>1){
+      svg.appendChild(el("polyline",{"class":"psl",points:state.pts.map(function(p){ return X(p[0]).toFixed(1)+","+Y(p[1]).toFixed(1); }).join(" ")}));
+    }
+    state.pts.forEach(function(p){ svg.appendChild(el("circle",{"class":"psp",cx:X(p[0]),cy:Y(p[1]),r:4})); });
+
+    root.querySelectorAll(".plot-bar button").forEach(function(b){
+      var act=b.getAttribute("data-act");
+      if(act==="trend"){ b.classList.toggle("on",state.trend); b.textContent=state.trend?"추세선 숨기기":"추세선 보기"; }
+      if(act==="done") b.textContent=state.done?"선 지우기":"완료 · 선 잇기";
+    });
+  }
+
+  function renderAll(){ roots.forEach(renderRoot); }
+
+  roots.forEach(bindRoot);
+  renderAll();
+})();
+</script>
+
+</body>
+</html>

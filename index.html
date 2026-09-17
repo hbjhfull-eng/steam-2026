@@ -43,6 +43,7 @@ img{max-width:100%}
 :root{
   --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#57636f; --line:#d7dde3;
   --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --neutral-deep:#237a66; --plum:#7a5aa8;
+  --warm:#b9711f; --warm-bg:#f3e6d3;
   --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb; --plum-bg:#ece6f4;
   --tbd:#b06a2e; --tbd-bg:#f6ecdf;
   --shadow:0 1px 2px rgba(27,37,48,.05),0 10px 30px rgba(27,37,48,.07);
@@ -53,6 +54,7 @@ img{max-width:100%}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
   --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1; --plum:#b79ad9;
+  --warm:#e2a355; --warm-bg:#3a2c18;
   --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027; --plum-bg:#2a2140;
   --tbd:#dba06a; --tbd-bg:#332a1e;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
@@ -60,6 +62,7 @@ img{max-width:100%}
 :root[data-theme="dark"]{
   --paper:#11171e; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2b3745;
   --acid:#e97a7a; --base:#7db2e2; --neutral:#54c6a8; --neutral-deep:#7fd8c1; --plum:#b79ad9;
+  --warm:#e2a355; --warm-bg:#3a2c18;
   --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#163027; --plum-bg:#2a2140;
   --tbd:#dba06a; --tbd-bg:#332a1e;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.4);
@@ -129,6 +132,7 @@ section.blk > .wrap > p.intro{margin-top:12px;max-width:66ch;color:var(--ink-sof
 .topic-card .badge{align-self:flex-start;font-family:var(--f-mono);font-size:11px;font-weight:600;
   padding:3px 9px;border-radius:20px;background:var(--neutral-bg);color:var(--neutral-deep)}
 .topic-card:nth-child(2) .badge{background:var(--base-bg);color:var(--base)}
+.topic-card:nth-child(3) .badge{background:var(--warm-bg);color:var(--warm)}
 .topic-card h3{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
 .topic-card .subject{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft)}
 .topic-card p{font-size:13.5px;color:var(--ink-soft)}
@@ -257,11 +261,18 @@ footer a{color:var(--ink-soft)}
             &nbsp; <a href="incline-motion/activity.html">활동지</a></div>
         </article>
 
-        <article class="topic-card soon">
+        <article class="topic-card">
           <span class="badge">주제 3</span>
-          <h3>준비 중</h3>
-          <div class="subject">주제 확정 후 공개</div>
-          <p>세 번째 주제를 준비하고 있습니다. 신청 안내와 함께 공개됩니다.</p>
+          <h3>Sage Modeler와 빅데이터로 읽는 기후변화</h3>
+          <div class="subject">통합과학 · 정보 · 공통수학 &nbsp;|&nbsp; Sage Modeler · 기상청 빅데이터</div>
+          <p>온실효과·지구온난화의 원리를 시스템 모델로 표현하고, 기상청 실측 데이터로 우리 지역의 변화를 추세선으로 확인합니다.</p>
+          <ul>
+            <li>온실효과·복사강제력·온실가스 조사</li>
+            <li>Sage Modeler로 기후 시스템 모델링</li>
+            <li>빅데이터 추세선으로 변화율 분석</li>
+          </ul>
+          <div class="go"><a href="climate-modeling/">주제 3 자세히 보기 →</a>
+            &nbsp; <a href="climate-modeling/activity.html">활동지</a></div>
         </article>
 
         <article class="topic-card soon">

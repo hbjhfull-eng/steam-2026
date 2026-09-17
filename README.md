@@ -21,11 +21,15 @@ steam-2026/                         (GitHub 저장소 이름 예시)
 │   ├─ index.html                    주제 소개
 │   └─ activity.html                 4차시 학생 활동지
 │
-└─ incline-motion/                   주제 2 — PASCO·Tracker로 읽는 빗면 운동, 미적분의 첫걸음
+├─ incline-motion/                   주제 2 — PASCO·Tracker로 읽는 빗면 운동, 미적분의 첫걸음
+│   ├─ index.html
+│   └─ activity.html
+│
+└─ climate-modeling/                 주제 3 — Sage Modeler와 빅데이터로 읽는 기후변화
     ├─ index.html
     └─ activity.html
 
-  (주제 3·4 는 확정 시 topic-3/ topic-4/ 형태로 추가)
+  (주제 4 는 확정 시 topic-4/ 형태로 추가)
 ```
 
 배포 후 주소 (`<사용자명>` = GitHub 사용자명):
@@ -36,6 +40,8 @@ https://<사용자명>.github.io/steam-2026/conductivity-neutralization/   주�
 https://<사용자명>.github.io/steam-2026/conductivity-neutralization/activity.html
 https://<사용자명>.github.io/steam-2026/incline-motion/                주제 2 소개
 https://<사용자명>.github.io/steam-2026/incline-motion/activity.html
+https://<사용자명>.github.io/steam-2026/climate-modeling/              주제 3 소개
+https://<사용자명>.github.io/steam-2026/climate-modeling/activity.html
 ```
 
 ---
@@ -58,7 +64,7 @@ https://<사용자명>.github.io/steam-2026/incline-motion/activity.html
 | `〔담당 교사〕` | ○○○ · ○○○ · ○○○ · ○○○ |
 | `〔문의〕` | 과학실 / 내선 000 |
 
-**`conductivity-neutralization/index.html`, `incline-motion/index.html` (주제 소개)** — `〔담당 교사〕` `〔장소〕` 만.
+**`conductivity-neutralization/index.html`, `incline-motion/index.html`, `climate-modeling/index.html` (주제 소개)** — `〔담당 교사〕` `〔장소〕` 만.
 
 ### 신청 접수 (리로스쿨)
 
@@ -68,10 +74,10 @@ https://<사용자명>.github.io/steam-2026/incline-motion/activity.html
   1. `<span class="cta-big disabled">신청 준비 중</span>` 과 바로 아래 `<p class="soon-note">…</p>` 삭제
   2. 그 아래 주석 처리된 `<a class="cta-big" href="리로스쿨_신청_페이지_URL">` 의 주석을 풀고 `href` 에 리로스쿨 신청 페이지 주소 입력
 
-### 주제 3·4 추가
+### 주제 4 추가
 
-1. `index.html` 의 `topics` 안 `<article class="topic-card soon">` 두 개를 실제 내용으로 채우고 `.soon` 클래스 제거
-2. 하위 폴더(`topic-3/` 등)에 `index.html`(소개)·`activity.html`(활동지) 추가 — 주제 1·2 파일을 복제해 내용만 교체
+1. `index.html` 의 `topics` 안 남은 `<article class="topic-card soon">` 를 실제 내용으로 채우고 `.soon` 클래스 제거
+2. 하위 폴더(`topic-4/` 등)에 `index.html`(소개)·`activity.html`(활동지) 추가 — 주제 1·2·3 파일을 복제해 내용만 교체
 3. 카드의 `href` 를 새 폴더로 연결
 
 ---
@@ -134,24 +140,39 @@ git push -u origin main  # 원격은 이미 https://github.com/JIN/steam-2026.gi
 
 참고 데이터는 θ=10°(`a≈1.70 m/s²`) 이론값. `activity.html` 표의 `class="fixed"` 셀에서 바꿀 수 있습니다.
 
+**주제 3 · Sage Modeler와 빅데이터로 읽는 기후변화** (통합과학·정보·공통수학)
+
+| 차시 | 내용 |
+|---|---|
+| 1 | 온실효과 원리, 6대 온실가스·복사강제력 조사, 배출량 그래프 해석 |
+| 2 | Sage Modeler로 온실가스–기후 변수의 인과관계 시스템 모델링·시뮬레이션 |
+| 3 | 기상청 빅데이터(CSV) 수집·전처리, 연도별 관측값을 모눈에 직접 플로팅 |
+| 4 | 추세선(최소제곱 회귀)으로 변화율 산출, 모델 vs 실측 비교, 기후 행동 제안 |
+
+성취기준: `[10통과2-02-03]` `[12정02-09]` `[12정02-04]`
+
 ---
 
 ## 커스터마이즈
 
-* **색상·글꼴**: 각 파일 `<style>` 안 `:root` 의 CSS 변수 (허브·주제1은 teal, 주제2는 blue 계열)
+* **색상·글꼴**: 각 파일 `<style>` 안 `:root` 의 CSS 변수 (허브·주제1은 teal, 주제2는 blue, 주제3은 amber 계열)
 * **활동지 참고값**: `activity.html` 표의 `class="fixed"` 셀
 * **활동지 저장 키 초기화**: 브라우저 콘솔 —
   주제1 `localStorage.removeItem('ddr-jungwha-v1')`,
-  주제2 `localStorage.removeItem('steam-incline-v1')` (그래프는 `steam-incline-plot-xt` / `-vt` / `-at` 별도)
+  주제2 `localStorage.removeItem('steam-incline-v1')` (그래프는 `steam-incline-plot-xt` / `-vt` / `-at` 별도),
+  주제3 `localStorage.removeItem('steam-climate-v1')` (그래프는 `steam-climate-plot-main` 별도)
 * **주제2 그래프 위젯**: `incline-motion/activity.html` 3·4차시. 시간축은 0.05 s 눈금 고정,
   그래프별 y축은 `<div class="plot" data-ymax data-ystep data-ylabelstep …>` 속성에서 조정.
   학생은 모눈 클릭 → **완료**(선 잇기) / **되돌리기** / **초기화** / **이론값 곡선 보기·숨기기**
+* **주제3 그래프 위젯**: `climate-modeling/activity.html` 3차시(플로팅)·4차시(추세선)가 같은 데이터를 공유합니다.
+  학생이 페이지 안의 **연도 범위·세로축 항목·범위** 입력칸에 실제 데이터에 맞는 값을 넣고 **[축 적용]**을 누른 뒤 점을 찍습니다.
+  **[추세선 보기]** 는 고정 공식이 아니라 학생이 찍은 점으로 **최소제곱 회귀**를 계산해 기울기(연간 변화율)를 보여줍니다.
 
 ---
 
 ## 출처 및 라이선스
 
 * 원 자료: 한국과학창의재단(KOFAC) 2022 개정 교육과정 융합교육(STEAM) 교재·지도서
-  (주제 1 — 「융합9. 디지털로 읽는 산과 염기의 중화 반응」 등)
+  (주제 1 — 「융합9. 디지털로 읽는 산과 염기의 중화 반응」, 주제 3 — 「융합11. 온실효과 강화로 인한 지구온난화(기후변화) 이해하기」 등)
 * 이 사이트: 위 자료를 4차시 수업용으로 재구성한 2차 저작물
 * 라이선스: [CC BY-NC-SA 4.0](LICENSE) — 출처 표시 · 비영리 · 동일조건 변경 허락
