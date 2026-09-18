@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>전기 전도도로 읽는 중화 반응 · 학생 활동지</title>
-<meta name="description" content="통합과학·정보·수학 융합 STEAM 4차시 학생 활동지 — 센서 제작과 함수 모델링">
+<title>PASCO 센서로 읽는 중화 반응 · 학생 활동지</title>
+<meta name="description" content="통합과학·정보·수학 융합 STEAM 4차시 학생 활동지 — PASCO 무선 pH·온도·전압전류 센서 다중 측정과 함수 모델링">
 <link rel="icon" href="../favicon.svg">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="전기 전도도로 읽는 중화 반응 — 학생 활동지">
-<meta property="og:description" content="중화 반응 · 전기 전도도 측정(마이크로비트/자바실험실) · 절댓값 함수 모델링 4차시">
+<meta property="og:title" content="PASCO 센서로 읽는 중화 반응 — 학생 활동지">
+<meta property="og:description" content="중화 반응 · pH·온도·전도도 3중 측정(PASCO 무선 센서) · 함수 모델링과 탐구 보고서 4차시">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -195,7 +195,7 @@ img{max-width:100%}
 <div class="bar">
   <div class="bar-in">
     <a href="./" style="text-decoration:none;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px;flex:none">← 과정 소개</a>
-    <strong>전기 전도도로 읽는 중화 반응</strong>
+    <strong>PASCO 센서로 읽는 중화 반응</strong>
     <span class="prog" id="prog">진행 0%</span>
     <nav class="steps" aria-label="차시 이동">
       <a href="#cha1" data-d="sci">1</a>
@@ -213,9 +213,10 @@ img{max-width:100%}
 <main>
   <header class="hero">
     <div class="eyebrow">통합과학 · 정보 · 수학 융합 STEAM · 4차시</div>
-    <h1>산과 염기가 만나면 전류는 어떻게 변할까?</h1>
-    <p>중화 반응을 <b>화학 반응식</b>으로 쓰고, 마이크로비트로 만든 측정기와 자바실험실 시뮬레이션으로
-      <b>전기 전도도 데이터</b>를 모으고, 지오지브라로 그 데이터를 <b>절댓값 함수</b>로 표현합니다.
+    <h1>산과 염기가 만나는 순간, 세 센서는 무엇을 볼까?</h1>
+    <p>중화 반응을 <b>화학 반응식</b>으로 쓰고, <b>PASCO 무선 pH·온도·전압전류 센서</b> 세 가지로
+      같은 적정 실험을 동시에 측정합니다. 지오지브라로 세 데이터를 각각 <b>절댓값 함수·변화율</b>로 모델링해
+      중화점을 교차 검증하고, 그 결과를 <b>모둠 탐구 보고서</b>와 <b>한 장짜리 인포그래픽</b>으로 완성합니다.
       각 활동에서 "내가 직접 해야 할 일"을 순서대로 따라가며 빈칸을 채우세요. 입력한 내용은 이 기기에 자동 저장됩니다.</p>
     <div class="who">
       <label>학년 / 반 / 번호 <input id="w-id" data-field="w-id" autocomplete="off"></label>
@@ -308,6 +309,8 @@ img{max-width:100%}
     <div class="act">
       <h3><span class="tag">닫기</span> 중화점을 확인하는 3가지 방법</h3>
       <div class="write" contenteditable="true" data-field="c1-methods" data-q="중화점 확인 방법 3가지" data-ph="① 지시약의 색 변화  ② 혼합 용액의 온도 변화(중화열)  ③ 전기 전도도(전류 세기) 변화"></div>
+      <div class="callout">실제 화학 분석에서는 이 세 가지를 각각 <b>전위차 적정</b>(pH 센서), <b>열량 적정</b>(온도 센서),
+        <b>전기 전도도 적정</b>(전압·전류 센서)이라고 부릅니다. 2~4차시에서 이 세 가지를 <b>PASCO 무선 센서</b>로 동시에 측정해 봅니다.</div>
       <div class="qlabel"><span class="b">Q</span> 이제 처음 질문에 답해 보세요. 딱따구리가 개미를 먹을 수 있는 까닭은?</div>
       <div class="write" contenteditable="true" data-field="c1-answer" data-q="1차시 닫기: 개미 질문 최종 답" data-ph="딱따구리의 침(또는 소화액)에 들어 있는 염기성 물질이 개미산을 중화하기 때문이다."></div>
     </div>
@@ -326,87 +329,78 @@ img{max-width:100%}
     <div class="cha-head">
       <span class="cha-num">2차시</span>
       <div>
-        <h2>전기 전도도 측정기 만들기</h2>
-        <div class="sub">정보 · [12정03-07] · 마이크로비트 + MakeCode</div>
+        <h2>PASCO 무선 센서로 측정 설계하기</h2>
+        <div class="sub">정보 · 공학 · [12정03-07] · pH · 온도 · 전압전류 무선 센서 + SPARKvue</div>
       </div>
     </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 문제 해결에 알맞은 피지컬 컴퓨팅 장치를 고른다.
-      ② 측정 알고리즘을 설계한다. ③ 장치를 제어하는 프로그램을 작성한다. ④ 완성하고 버그를 찾아 해결한다.</p>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 문제 해결에 알맞은 다중 센서 구성을 선택한다.
+      ② PASCO 무선 센서를 SPARKvue에 연결한다. ③ 측정 계획을 설계한다.</p>
 
     <div class="act">
-      <h3><span class="tag">열기</span> 왜 전기 전도도로 중화점을 알 수 있을까?</h3>
-      <div class="callout">용액 속 <b>이온이 전류를 나른다</b>. 이온이 많을수록 전기 전도도가 크다.
-        1차시 표에서 총 이온 수가 가장 적은 지점 = 전기 전도도가 가장 (&nbsp;&nbsp;)은 지점 = 중화점.</div>
-      <div class="write" contenteditable="true" data-field="c2-hook" data-q="전기 전도도로 중화점을 아는 원리" data-ph="이온 수가 가장 적을 때 전기 전도도가 가장 작아지므로, 그 지점이 중화점이다."></div>
+      <h3><span class="tag">열기</span> 왜 한 가지가 아니라 세 가지로 동시에 잴까?</h3>
+      <div class="callout">1차시에서 배운 중화점 확인 3가지 방법 — <b>지시약(색)·온도·전기 전도도</b> — 을 이번엔 눈대중이 아니라
+        <b>PASCO 무선 pH 센서, 무선 온도 센서, 무선 전압·전류 센서</b>로 동시에 정밀 측정합니다.</div>
+      <div class="qlabel"><span class="b">Q</span> 한 가지 방법만 쓰지 않고 세 가지를 동시에 재면 무엇이 좋을까요?</div>
+      <div class="write" contenteditable="true" data-field="c2-hook" data-q="세 가지를 동시에 측정하는 이유" data-ph="한 방법의 오차나 애매함을 다른 두 방법으로 교차 확인할 수 있어서, 중화점을 더 신뢰할 수 있게 찾을 수 있다."></div>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 1</span> 피지컬 컴퓨팅 개념 정리</h3>
-      <p class="lead">[융합1 데이터의 일상화]에서 배운 내용을 떠올려 채웁니다.</p>
-      <div class="qlabel"><span class="b">개념</span> 피지컬 컴퓨팅이란?</div>
-      <div class="write" contenteditable="true" data-field="c2-concept" data-q="피지컬 컴퓨팅 개념" data-ph="디지털 세계의 프로그래밍 결과를 센서·모터·LED 등 다양한 입출력 장치를 통해 현실 세계로 직접 주고받는 컴퓨팅 기술"></div>
-      <div class="qlabel"><span class="b">도구</span> 대표적인 도구 3가지</div>
-      <div class="write" contenteditable="true" data-field="c2-tools" data-q="피지컬 컴퓨팅 도구 3가지" data-ph="아두이노, 마이크로비트, 라즈베리파이"></div>
-      <div class="qlabel"><span class="b">활용</span> 과학에서 쓰이는 예 (2가지 이상 조사)</div>
-      <div class="write" contenteditable="true" data-field="c2-use" data-q="과학에서의 피지컬 컴퓨팅 활용 예" data-ph="예: 미세먼지/이산화탄소 측정 장치, 중력 가속도 측정 장치, 스마트팜 …"></div>
+      <h3><span class="tag">활동 1</span> 세 가지 적정법 알아보기</h3>
+      <p class="lead">각 센서가 무엇을, 어떤 원리로 측정하는지 정리합니다.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>PASCO 무선 센서와 적정법</caption>
+          <thead><tr><th>센서</th><th>측정량</th><th>적정법 이름</th><th>중화점이 보이는 모양</th></tr></thead>
+          <tbody>
+            <tr><th>무선 pH 센서</th><td>pH</td><td><input data-field="c2t-r1" placeholder="전위차 적정"></td><td><input data-field="c2t-s1" placeholder="예: S자로 급격히 꺾임"></td></tr>
+            <tr><th>무선 온도 센서</th><td>온도(중화열)</td><td><input data-field="c2t-r2" placeholder="열량 적정"></td><td><input data-field="c2t-s2" placeholder="예: 산 모양(최고점)"></td></tr>
+            <tr><th>무선 전압·전류 센서</th><td>전압·전류 → 전도도</td><td><input data-field="c2t-r3" placeholder="전기 전도도 적정"></td><td><input data-field="c2t-s3" placeholder="예: V자(최저점)"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">원리</span> 전압·전류 센서로 전도도를 어떻게 계산할까요? <span class="hint">저항 R = 전압 ÷ 전류, 전도도는 저항의 역수에 비례</span></div>
+      <div class="write" contenteditable="true" data-field="c2-formula" data-q="전압전류 센서로 전도도 계산하는 원리" data-ph="두 전극 사이에 일정한 전압을 걸고 흐르는 전류를 측정한다. 저항 R = V/I 이고, 전도도는 1/R에 비례하므로 전류가 클수록(=저항이 작을수록) 전도도가 크다."></div>
     </div>
 
     <div class="act">
       <h3><span class="tag">활동 2</span> 재료 확인 (모둠별)</h3>
       <ul class="todo">
-        <li><label><input type="checkbox" data-field="c2m-1"></label><div>마이크로비트 1개 · 커넥터(확장) 보드 1개</div></li>
-        <li><label><input type="checkbox" data-field="c2m-2"></label><div>마이크로 5핀 USB 케이블 1개 · 암/수 점퍼선 2개 (전극용)</div></li>
-        <li><label><input type="checkbox" data-field="c2m-3"></label><div>노트북(컴퓨터) 1대 — MakeCode 접속용</div></li>
-        <li><label><input type="checkbox" data-field="c2m-4"></label><div>비커 3개 · 스포이트 · 증류수 · 산성 용액 · 염기성 용액</div></li>
+        <li><label><input type="checkbox" data-field="c2m-1"></label><div>PASCO 무선 pH 센서 · 무선 온도 센서 · 무선 전압·전류 센서 각 1개</div></li>
+        <li><label><input type="checkbox" data-field="c2m-2"></label><div>SPARKvue가 설치된 노트북(또는 태블릿) 1대</div></li>
+        <li><label><input type="checkbox" data-field="c2m-3"></label><div>비커 · 스탠드/클램프(센서 고정용) · 자석 교반기(있으면) · 스포이트 또는 뷰렛</div></li>
+        <li><label><input type="checkbox" data-field="c2m-4"></label><div>묽은 염산(HCl) · 수산화 나트륨(NaOH) 수용액 · 증류수 · 보안경·장갑</div></li>
       </ul>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 3</span> 하드웨어 연결</h3>
+      <h3><span class="tag">활동 3</span> SPARKvue에 센서 연결하기</h3>
       <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c2h-1"></label><div>마이크로비트를 커넥터 보드에 끼운다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c2h-2"></label><div>점퍼선 하나를 <code>P0-SIG</code>(노란색) 핀, 다른 하나를 <code>P0-GND</code>(검정색) 핀에 연결한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c2h-3"></label><div>두 선의 반대쪽 끝(전극)이 <b>서로 닿지 않게</b> 비커 안에 담근다.</div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c2h-4"></label><div>USB로 마이크로비트를 컴퓨터에 연결한다.</div></li>
+        <li><span class="n">1</span><label><input type="checkbox" data-field="c2h-1"></label><div>SPARKvue 실행 → <b>블루투스로 센서 검색</b> → pH·온도·전압전류 센서 3개를 모두 페어링한다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="c2h-2"></label><div>화면에 <b>그래프 3개</b>(pH–시간, 온도–시간, 전압·전류–시간)를 동시에 띄우도록 설정한다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="c2h-3"></label><div>샘플링(측정) 속도를 정한다. <span class="hint">너무 빠르면 데이터가 많아 다루기 어렵고, 너무 느리면 변화를 놓친다</span></div></li>
+        <li><span class="n">4</span><label><input type="checkbox" data-field="c2h-4"></label><div>세 센서를 모두 같은 비커에 담가 <b>증류수로 값이 안정적으로 잡히는지</b> 시험 측정한다.</div></li>
       </ol>
-      <div class="hint">전극이 서로 닿으면 물 없이도 값이 크게 나옵니다. 매 측정 전 전극을 증류수로 헹굽니다.</div>
+      <div class="hint">전극(pH, 전압전류)이 서로 닿지 않게 간격을 두고, 매 실험 전 증류수로 헹굽니다.</div>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 4</span> 측정 알고리즘 설계 (순서도)</h3>
-      <p class="lead">코드를 쓰기 전에 "무엇을 어떤 순서로" 할지 글/그림으로 먼저 정리합니다.</p>
-      <div class="fml">시작 &rarr; P0 아날로그값 읽기 &rarr; 5회 반복해서 더하기 &rarr; 5로 나눠 <b>평균</b> &rarr; LED/시리얼로 값 표시 &rarr; (버튼 누르면 다시)</div>
-      <div class="qlabel"><span class="b">설계</span> 내 알고리즘을 순서대로 쓰기 (조건·반복 구조가 드러나게)</div>
-      <div class="write" contenteditable="true" data-field="c2-algo" data-q="측정 알고리즘 설계" data-ph="1) A 버튼을 누르면  2) 변수 합 = 0  3) 5번 반복: 합 = 합 + P0 아날로그값, 0.1초 대기  4) 평균 = 합 / 5  5) 평균을 화면에 출력 …" style="min-height:5em"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 5</span> MakeCode로 코딩 · 업로드</h3>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c2c-1"></label><div><code>makecode.microbit.org</code> 접속 &rarr; <b>새 프로젝트</b>.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c2c-2"></label><div>화면 하단 점 3개 &rarr; <b>장치 연결</b> &rarr; 안내에 따라 브라우저와 마이크로비트를 페어링한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c2c-3"></label><div>활동 4의 알고리즘대로 블록을 조립한다. <span class="hint">P0 아날로그 읽기 · 변수 · 반복(5) · 나눗셈 · 표시 블록</span></div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c2c-4"></label><div><b>다운로드</b>로 업로드한 뒤, 전극을 <b>증류수</b>에 담가 값이 뜨는지 확인한다.</div></li>
-      </ol>
-      <div class="qlabel"><span class="b">기록</span> 증류수에서 나온 값 = <input style="font-family:var(--f-mono);width:90px;background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:4px 8px;color:var(--ink)" data-field="c2-distilled" data-q="증류수 측정값"></div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 6</span> 디버깅 &amp; 나만의 창의 코드</h3>
-      <div class="qlabel"><span class="b">버그</span> 겪은 문제와 해결 과정</div>
-      <div class="write" contenteditable="true" data-field="c2-bug" data-q="버그와 디버깅 과정" data-ph="예: 값이 항상 1023으로 나옴 → 전극이 서로 닿아 있었음 → 간격을 벌려 해결"></div>
-      <div class="qlabel"><span class="b">창의</span> 내 코드에 추가한 나만의 요소 (아이콘 표시, 소리, 임계값 경고 등)</div>
-      <div class="write" contenteditable="true" data-field="c2-creative" data-q="나만의 창의적 코드 요소" data-ph="예: 전도도가 기준값보다 낮아지면 하트 아이콘을 띄워 '중화점 근처'임을 알림"></div>
+      <h3><span class="tag">활동 4</span> 측정 계획 설계</h3>
+      <div class="two">
+        <div class="box"><h4>한 번에 넣는 NaOH 양</h4><p><input style="width:100%;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:5px 8px;color:var(--ink)" data-field="c2-step" data-q="1회 NaOH 첨가량" placeholder="예: 1 mL"></p></div>
+        <div class="box"><h4>기록 방법</h4><p>SPARKvue가 자동으로 그래프를 그리지만, 각 회차의 pH·온도·전압·전류 값은 3차시 표에도 옮겨 적습니다.</p></div>
+      </div>
+      <div class="qlabel"><span class="b">역할 분담</span> 적정(용액 넣기) · 관찰(그래프 확인) · 기록(표 작성) 역할을 정하기</div>
+      <div class="write" contenteditable="true" data-field="c2-roles" data-q="역할 분담" data-ph=""></div>
+      <div class="qlabel"><span class="b">안전</span> 산·염기를 다룰 때 지켜야 할 안전 수칙</div>
+      <div class="write" contenteditable="true" data-field="c2-safety" data-q="안전 수칙" data-ph="보안경·장갑 착용, 피부에 튀면 즉시 물로 씻기, 용액 냄새를 직접 맡지 않기"></div>
     </div>
 
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 문제 해결에 알맞은 피지컬 컴퓨팅 장치를 골라 설계할 수 있다.</span>
+      <div class="row"><span>① 문제 해결에 알맞은 다중 센서 구성을 선택할 수 있다.</span>
         <span class="opts"><label><input type="radio" name="sc2a" data-field="sc2a" value="우수"><span>우수</span></label><label><input type="radio" name="sc2a" data-field="sc2a" value="보통"><span>보통</span></label><label><input type="radio" name="sc2a" data-field="sc2a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 장치를 제어하는 프로그램을 작성할 수 있다.</span>
+      <div class="row"><span>② PASCO 무선 센서를 연결하고 측정 계획을 세울 수 있다.</span>
         <span class="opts"><label><input type="radio" name="sc2b" data-field="sc2b" value="우수"><span>우수</span></label><label><input type="radio" name="sc2b" data-field="sc2b" value="보통"><span>보통</span></label><label><input type="radio" name="sc2b" data-field="sc2b" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>③ 완성한 뒤 문제점을 찾아 해결할 수 있다.</span>
-        <span class="opts"><label><input type="radio" name="sc2c" data-field="sc2c" value="우수"><span>우수</span></label><label><input type="radio" name="sc2c" data-field="sc2c" value="보통"><span>보통</span></label><label><input type="radio" name="sc2c" data-field="sc2c" value="미흡"><span>미흡</span></label></span></div>
     </div>
   </section>
 
@@ -415,80 +409,92 @@ img{max-width:100%}
     <div class="cha-head">
       <span class="cha-num">3차시</span>
       <div>
-        <h2>중화 반응 실험 &amp; 데이터 수집</h2>
-        <div class="sub">통합과학 + 데이터 · 측정 → 표 → 그래프</div>
+        <h2>다중 센서 적정 실험</h2>
+        <div class="sub">통합과학 + 정보 · pH·온도·전도도 동시 측정</div>
       </div>
     </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — 산·염기를 섞으며 전기 전도도를 측정해 표로 정리하고, 스프레드시트로 그래프를 그려 중화점을 찾는다.</p>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 세 센서로 중화 적정 실험을 안전하게 수행한다.
+      ② 세 그래프의 개형(모양)을 비교·관찰한다.</p>
 
     <div class="act">
-      <h3><span class="tag">활동 1</span> 실험 설계</h3>
-      <p class="lead">지도서 예시: 묽은 염산(HCl)을 비커에 담아 두고, 수산화 나트륨(NaOH) 용액을 일정량씩 넣으며 측정합니다.</p>
-      <div class="two">
-        <div class="box"><h4>한 번에 넣는 NaOH 양</h4><p><input style="width:100%;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:5px 8px;color:var(--ink)" data-field="c3-step" data-q="1회 NaOH 첨가량" placeholder="예: 1 mL (스포이트 1방울)"></p></div>
-        <div class="box"><h4>측정 방법</h4><p>마이크로비트 측정기(활동 5, 5회 평균)로 매 회차 기록. 전극은 매번 증류수로 헹굼.</p></div>
-      </div>
-      <div class="qlabel"><span class="b">가설</span> NaOH를 계속 넣으면 전기 전도도는 어떻게 변할까?</div>
-      <div class="write" contenteditable="true" data-field="c3-hypo" data-q="3차시 가설" data-ph="처음에는 줄어들다가 어떤 지점에서 가장 작아지고, 그 뒤로는 다시 커질 것이다."></div>
+      <h3><span class="tag">활동 1</span> 실험 준비</h3>
+      <p class="lead">묽은 염산(HCl)을 비커에 담고 pH·온도·전압전류 센서 세 개를 함께 담근 뒤, 수산화 나트륨(NaOH) 용액을 2차시에서 정한 양만큼씩 넣으며 측정합니다.</p>
+      <ul class="todo">
+        <li><label><input type="checkbox" data-field="c3-1"></label><div>보안경·장갑 착용, 실험대 정리</div></li>
+        <li><label><input type="checkbox" data-field="c3-2"></label><div>세 센서를 비커에 고정(스탠드/클램프), SPARKvue에서 그래프 3개가 실시간으로 그려지는지 확인</div></li>
+        <li><label><input type="checkbox" data-field="c3-3"></label><div>측정 시작(기록 버튼) → 처음 값(0회차) 기록</div></li>
+      </ul>
+      <div class="qlabel"><span class="b">가설</span> NaOH를 계속 넣으면 pH·온도·전도도는 각각 어떻게 변할까?</div>
+      <div class="write" contenteditable="true" data-field="c3-hypo" data-q="3차시 가설(세 그래프 예상)" data-ph="pH는 점점 올라가다가 중화점 부근에서 급격히 뛸 것이다. 온도는 오르다가 중화점에서 가장 높고 그 뒤로는 거의 그대로거나 살짝 내려갈 것이다. 전도도는 줄어들다가 중화점에서 가장 낮고 다시 늘어날 것이다."></div>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 2·3</span> 측정 &amp; 데이터 표</h3>
-      <p class="lead">0회차 = 넣기 전(증류수 또는 묽은 염산만). NaOH를 1회씩 더하며 채웁니다.
-        시간이 부족하면 <b>자바실험실 중화 반응 시뮬레이션</b>으로 이어서 값을 얻어도 됩니다(측정값과 비교).</p>
+      <h3><span class="tag">활동 2</span> 측정 &amp; 데이터 표</h3>
+      <p class="lead">0회차 = 넣기 전(묽은 염산만). NaOH를 1회씩 더할 때마다 SPARKvue 값을 표에 옮겨 적습니다. 전도도 = 전류 ÷ 전압(2차시 활동1 참고).</p>
       <div class="tbl-wrap">
         <table>
-          <caption>NaOH 넣은 회차 → 전기 전도도 (내 측정값 / 시뮬레이션·참고값)</caption>
-          <thead><tr><th>회차</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+          <caption>회차별 pH · 온도 · 전압·전류(→전도도)</caption>
+          <thead><tr><th>회차</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr></thead>
           <tbody>
-            <tr><th>내 측정값</th>
-              <td><input data-field="c3d-1"></td><td><input data-field="c3d-2"></td><td><input data-field="c3d-3"></td><td><input data-field="c3d-4"></td><td><input data-field="c3d-5"></td><td><input data-field="c3d-6"></td><td><input data-field="c3d-7"></td><td><input data-field="c3d-8"></td><td><input data-field="c3d-9"></td><td><input data-field="c3d-10"></td><td><input data-field="c3d-11"></td><td><input data-field="c3d-12"></td></tr>
-            <tr><th>참고값</th>
-              <td class="fixed">15</td><td class="fixed">13</td><td class="fixed">11</td><td class="fixed">9</td><td class="fixed">7</td><td class="fixed">5</td><td class="fixed">3</td><td class="fixed">1</td><td class="fixed">3</td><td class="fixed">5</td><td class="fixed">7</td><td class="fixed">9</td></tr>
+            <tr><th>pH</th>
+              <td><input data-field="c3p-0"></td><td><input data-field="c3p-1"></td><td><input data-field="c3p-2"></td><td><input data-field="c3p-3"></td><td><input data-field="c3p-4"></td><td><input data-field="c3p-5"></td><td><input data-field="c3p-6"></td><td><input data-field="c3p-7"></td><td><input data-field="c3p-8"></td></tr>
+            <tr><th>온도(℃)</th>
+              <td><input data-field="c3t-0"></td><td><input data-field="c3t-1"></td><td><input data-field="c3t-2"></td><td><input data-field="c3t-3"></td><td><input data-field="c3t-4"></td><td><input data-field="c3t-5"></td><td><input data-field="c3t-6"></td><td><input data-field="c3t-7"></td><td><input data-field="c3t-8"></td></tr>
+            <tr><th>전압(V)</th>
+              <td><input data-field="c3v-0"></td><td><input data-field="c3v-1"></td><td><input data-field="c3v-2"></td><td><input data-field="c3v-3"></td><td><input data-field="c3v-4"></td><td><input data-field="c3v-5"></td><td><input data-field="c3v-6"></td><td><input data-field="c3v-7"></td><td><input data-field="c3v-8"></td></tr>
+            <tr><th>전류(mA)</th>
+              <td><input data-field="c3i-0"></td><td><input data-field="c3i-1"></td><td><input data-field="c3i-2"></td><td><input data-field="c3i-3"></td><td><input data-field="c3i-4"></td><td><input data-field="c3i-5"></td><td><input data-field="c3i-6"></td><td><input data-field="c3i-7"></td><td><input data-field="c3i-8"></td></tr>
+            <tr><th>전도도(=I/V)</th>
+              <td><input data-field="c3c-0"></td><td><input data-field="c3c-1"></td><td><input data-field="c3c-2"></td><td><input data-field="c3c-3"></td><td><input data-field="c3c-4"></td><td><input data-field="c3c-5"></td><td><input data-field="c3c-6"></td><td><input data-field="c3c-7"></td><td><input data-field="c3c-8"></td></tr>
           </tbody>
         </table>
       </div>
-      <div class="callout">참고값은 지도서 예시 데이터입니다. 내 측정값이 참고값과 달라도 괜찮습니다 —
-        <b>모양(줄었다가 최저점을 지나 다시 증가)</b>이 나타나는지가 중요합니다.</div>
+      <div class="callout">회차 수는 예시입니다. 완전 중화 지점을 지나 몇 회 더 넣을 때까지, 필요한 만큼 열을 늘려도 됩니다.</div>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 4</span> 스프레드시트로 그래프 만들기</h3>
+      <h3><span class="tag">활동 3</span> 세 그래프 관찰·비교</h3>
       <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c3g-1"></label><div>스프레드시트에 "회차"와 "전기 전도도" 두 줄(또는 두 열)로 값을 입력한다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c3g-2"></label><div>입력한 영역을 <b>드래그</b>해서 선택한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c3g-3"></label><div><b>삽입 &rarr; 차트</b>를 누른다. 차트 종류를 <b>꺾은선</b> 또는 <b>분산형(산점도)</b>으로 바꾼다.</div></li>
-        <li><span class="n">4</span><label><input type="checkbox" data-field="c3g-4"></label><div>축 제목(가로: 회차, 세로: 전기 전도도)과 범례를 정리하고, 그래프를 캡처해 보고서에 넣는다.</div></li>
+        <li><span class="n">1</span><label><input type="checkbox" data-field="c3g-1"></label><div>SPARKvue(또는 위 표를 스프레드시트에 옮겨) pH–회차, 온도–회차, 전도도–회차 그래프 3개를 각각 확인한다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="c3g-2"></label><div>각 그래프에서 눈대중으로 중화점처럼 보이는 회차에 표시한다.</div></li>
       </ol>
       <figure>
-        <svg viewBox="0 0 420 200" role="img" aria-label="V자 모양 전기 전도도 그래프 예시">
-          <line class="ax" x1="45" y1="20" x2="45" y2="165"/>
-          <line class="ax" x1="45" y1="165" x2="400" y2="165"/>
-          <polyline class="curve-data" points="55,35 100,60 145,85 190,110 235,135 258,150 281,135 326,110 371,85 393,72" fill="none" stroke-width="2.5"/>
-          <circle class="pt" cx="258" cy="150" r="4"/>
-          <text class="lbl-n" x="258" y="140" text-anchor="middle" font-size="11">중화점</text>
-          <text class="lbl" x="16" y="95" font-size="10" transform="rotate(-90 16 95)">전기 전도도</text>
-          <text class="lbl" x="210" y="187" font-size="10">NaOH 넣은 회차 →</text>
+        <svg viewBox="0 0 420 200" role="img" aria-label="pH·온도·전도도 세 그래프 개형 비교">
+          <g transform="translate(0,0)">
+            <line class="ax" x1="20" y1="15" x2="20" y2="160"/><line class="ax" x1="20" y1="160" x2="130" y2="160"/>
+            <path class="curve-fn" d="M20,140 Q60,135 70,90 Q78,35 130,25" fill="none" stroke-width="2.5"/>
+            <text class="lbl" x="10" y="185" font-size="10">pH (S자)</text>
+          </g>
+          <g transform="translate(150,0)">
+            <line class="ax" x1="20" y1="15" x2="20" y2="160"/><line class="ax" x1="20" y1="160" x2="130" y2="160"/>
+            <path class="curve-fn" d="M20,140 Q70,20 130,140" fill="none" stroke-width="2.5"/>
+            <text class="lbl" x="6" y="185" font-size="10">온도 (산 모양)</text>
+          </g>
+          <g transform="translate(300,0)">
+            <line class="ax" x1="20" y1="15" x2="20" y2="160"/><line class="ax" x1="20" y1="160" x2="130" y2="160"/>
+            <path class="curve-data" d="M20,40 Q70,150 130,40" fill="none" stroke-width="2.5"/>
+            <text class="lbl" x="0" y="185" font-size="10">전도도 (V자)</text>
+          </g>
         </svg>
-        <figcaption>내 그래프도 이런 V자(또는 그에 가까운) 모양이 나와야 합니다.</figcaption>
+        <figcaption>세 그래프의 모양은 서로 다르지만, 특징점(급변점·최댓값·최솟값)은 같은 회차를 가리켜야 합니다.</figcaption>
       </figure>
     </div>
 
     <div class="act">
       <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
-      <div class="qlabel"><span class="b">1</span> 전기 전도도가 가장 작은 회차는? 그때가 왜 중화점인가?</div>
-      <div class="write" contenteditable="true" data-field="c3-q1" data-q="토의1: 최저점과 중화점" data-ph="…회차. 이때 총 이온 수가 가장 적어서 전류를 나르는 이온이 가장 적기 때문."></div>
-      <div class="qlabel"><span class="b">2</span> 중화점 전과 후에 전기 전도도가 변하는 까닭을 이온 수로 설명하기 (1차시 표와 연결)</div>
-      <div class="write" contenteditable="true" data-field="c3-q2" data-q="토의2: 중화점 전후 이온 수 설명" data-ph="중화점 전: H⁺이 OH⁻로 바뀌며(물 생성) 이온이 줄어 전도도 감소 / 중화점 후: Na⁺·OH⁻이 늘어 전도도 증가"></div>
-      <div class="qlabel"><span class="b">3</span> 지시약(또는 온도)으로 찾은 중화점과 전기 전도도로 찾은 중화점이 같았는가? 차이가 있었다면 원인은?</div>
-      <div class="write" contenteditable="true" data-field="c3-q3" data-q="토의3: 방법 간 비교와 오차 원인" data-ph="예: 방울 크기가 일정하지 않음, 전극에 기포, 온도 변화 …"></div>
+      <div class="qlabel"><span class="b">1</span> 세 그래프에서 각각 중화점으로 보이는 회차는? (pH 급변 / 온도 최고 / 전도도 최저)</div>
+      <div class="write" contenteditable="true" data-field="c3-q1" data-q="토의1: 세 그래프의 중화점 회차" data-ph="pH: …회차 급변 / 온도: …회차 최고 / 전도도: …회차 최저"></div>
+      <div class="qlabel"><span class="b">2</span> 세 방법이 가리키는 회차가 서로 비슷했나요? 다르다면 어느 방법이 가장 뚜렷했나요?</div>
+      <div class="write" contenteditable="true" data-field="c3-q2" data-q="토의2: 세 방법 비교" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 중화점 전후로 전도도가 변하는 까닭을 1차시 이온 수 변화표와 연결해 설명하기</div>
+      <div class="write" contenteditable="true" data-field="c3-q3" data-q="토의3: 전도도 변화의 이온론적 설명" data-ph="중화점 전: H⁺이 OH⁻와 만나 물이 되며 이온이 줄어 전도도 감소 / 중화점 후: Na⁺·OH⁻이 늘며 전도도 증가"></div>
     </div>
 
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 전기 전도도를 정확히 측정해 표로 정리할 수 있다.</span>
+      <div class="row"><span>① 세 센서로 중화 적정 실험을 안전하게 수행할 수 있다.</span>
         <span class="opts"><label><input type="radio" name="sc3a" data-field="sc3a" value="우수"><span>우수</span></label><label><input type="radio" name="sc3a" data-field="sc3a" value="보통"><span>보통</span></label><label><input type="radio" name="sc3a" data-field="sc3a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 그래프의 모양을 이온 수 변화와 연결해 중화점을 설명할 수 있다.</span>
+      <div class="row"><span>② 세 그래프의 개형을 비교해 중화점을 설명할 수 있다.</span>
         <span class="opts"><label><input type="radio" name="sc3b" data-field="sc3b" value="우수"><span>우수</span></label><label><input type="radio" name="sc3b" data-field="sc3b" value="보통"><span>보통</span></label><label><input type="radio" name="sc3b" data-field="sc3b" value="미흡"><span>미흡</span></label></span></div>
     </div>
   </section>
@@ -498,45 +504,21 @@ img{max-width:100%}
     <div class="cha-head">
       <span class="cha-num">4차시</span>
       <div>
-        <h2>지오지브라로 함수 모델링</h2>
-        <div class="sub">통합과학 + 공통수학 · 절댓값을 포함한 함수</div>
+        <h2>세 함수로 교차 검증하고 결과물 만들기</h2>
+        <div class="sub">통합과학 + 공통수학 · 절댓값 함수 · 변화율 · 탐구 보고서</div>
       </div>
     </div>
-    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 컴퓨터 프로그램으로 절댓값을 포함한 함수를 표현한다.
-      ② 정량적 데이터를 분석하고 그 의미를 토의한다.</p>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 전도도·온도·pH 세 그래프를 각각 알맞은 함수/변화율로 모델링해 중화점을 구한다.
+      ② 결과를 모둠 탐구 보고서와 인포그래픽으로 정리한다.</p>
 
     <div class="act">
-      <h3><span class="tag">활동 1</span> 모형으로 전기 전도도 변화 예측</h3>
-      <p class="lead">일정량의 묽은 염산에 NaOH 수용액을 조금씩 넣을 때, 이온 모형을 떠올려 변화를 예측합니다.</p>
-      <div class="qlabel"><span class="b">이온</span> 완전 중화보다 NaOH를 더 넣었을 때 마지막 수용액의 이온 구성은? <span class="hint">(예: 2H₂O, 2Cl⁻, 4Na⁺, 2OH⁻)</span></div>
-      <div class="write" contenteditable="true" data-field="c4-ions" data-q="마지막 수용액 이온 구성" data-ph="2H₂O, 2Cl⁻, 4Na⁺, 2OH⁻"></div>
-      <div class="tbl-wrap">
-        <table>
-          <caption>구간별 전기 전도도 변화 (증가 / 감소 / 감소하여 0에 가까움)</caption>
-          <thead><tr><th>구간</th><th>기준점 → A</th><th>A → B</th><th>B(중화점) → C</th><th>C → D</th></tr></thead>
-          <tbody><tr><th>전기 전도도</th>
-            <td><input data-field="c4p-1" data-q="예측 구간 기준점→A"></td>
-            <td><input data-field="c4p-2" data-q="예측 구간 A→B"></td>
-            <td><input data-field="c4p-3" data-q="예측 구간 B→C"></td>
-            <td><input data-field="c4p-4" data-q="예측 구간 C→D"></td></tr></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 지오지브라에 데이터 넣기</h3>
-      <ol class="todo">
-        <li><span class="n">1</span><label><input type="checkbox" data-field="c4g-1"></label><div>검색창에 <code>geogebra.org</code>를 입력해 접속하고 <b>그래픽 계산기</b>를 연다.</div></li>
-        <li><span class="n">2</span><label><input type="checkbox" data-field="c4g-2"></label><div>보기 메뉴에서 <b>스프레드시트(표)</b> 창을 켜고, A열에 회차·B열에 전기 전도도를 입력한다.</div></li>
-        <li><span class="n">3</span><label><input type="checkbox" data-field="c4g-3"></label><div>입력 범위를 선택하고 마우스 오른쪽 &rarr; <b>목록 만들기 → 점 목록</b>으로 점을 찍는다.</div></li>
-      </ol>
-    </div>
-
-    <div class="act">
-      <h3><span class="tag">활동 3</span> 데이터에 맞는 함수 찾기</h3>
+      <h3><span class="tag">활동 1</span> 전도도 → 절댓값 함수</h3>
       <p class="lead">일차함수 <code>y = ax + b</code>의 <b>a = 기울기</b>, <b>b = y절편</b>. 절댓값 <code>|x|</code>은 "0에서 꺾이는 V자".
         둘을 합치면 <b>y = a|x − p| + q</b> — <b>(p, q)</b>가 꺾이는 점(중화점), a가 기울기입니다.</p>
-      <div class="fml">입력창에 예시로 &nbsp;<b>f(x) = 2 abs(x − 8) + 1</b>&nbsp; 을 입력해 점들과 겹치는지 확인</div>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="c4g-1"></label><div><code>geogebra.org</code> 접속 → <b>그래픽 계산기</b> → 표(스프레드시트) 창에 회차·전도도 데이터를 넣고 점을 찍는다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="c4g-2"></label><div>입력창에 <code>f(x) = a abs(x − p) + q</code> 꼴로 넣고 슬라이더나 값을 바꿔가며 점들과 겹치게 맞춘다.</div></li>
+      </ol>
       <figure>
         <svg viewBox="0 0 420 210" role="img" aria-label="절댓값 함수 y=a|x-p|+q 그래프">
           <line class="ax" x1="45" y1="15" x2="45" y2="175"/>
@@ -546,42 +528,95 @@ img{max-width:100%}
           <text class="lbl-n" x="235" y="150" text-anchor="middle" font-size="11">(p, q) = 중화점</text>
           <text class="lbl-a" x="300" y="95" font-size="11">기울기 a</text>
         </svg>
-        <figcaption>꺾이는 점의 x좌표 = 중화가 완성된 회차, y좌표 = 그때의 (가장 작은) 전기 전도도.</figcaption>
+        <figcaption>꺾이는 점의 x좌표 = 중화가 완성된 회차, y좌표 = 그때의 (가장 작은) 전도도.</figcaption>
       </figure>
-      <div class="qlabel"><span class="b">내 함수</span> 내 데이터(또는 참고값)에 가장 잘 맞는 함수는?</div>
-      <div class="write" contenteditable="true" data-field="c4-fn" data-q="내 데이터에 맞는 절댓값 함수" data-ph="y = 2|x − 8| + 1"></div>
-      <div class="qlabel"><span class="b">해석</span> p, q, a가 각각 실험에서 무엇을 뜻하는지 쓰기</div>
-      <div class="write" contenteditable="true" data-field="c4-mean" data-q="p, q, a의 실험적 의미" data-ph="p = 완전 중화가 일어난 회차 / q = 중화점에서의 전기 전도도 / a = 회차당 전도도가 변하는 정도"></div>
+      <div class="qlabel"><span class="b">내 함수</span> 전도도 데이터에 맞춘 절댓값 함수와, 그 최솟값(중화점 A)</div>
+      <div class="write" contenteditable="true" data-field="c4-fn" data-q="전도도 절댓값 함수와 중화점 A" data-ph="y = 2|x − 8| + 1 → 중화점 A: 8회차, 전도도 1"></div>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 4</span> 함수로 예측하기</h3>
-      <p class="lead">NaOH 용액을 <b>5회 더</b> 추가하면(총 17회) 전기 전도도는 얼마일까? 활동 3의 함수에 대입합니다.</p>
-      <div class="fml">y = 2 |17 − 8| + 1 = 2 × 9 + 1 = <b>19</b> &nbsp;<span style="color:var(--ink-soft)">← 예시 함수일 때</span></div>
-      <div class="qlabel"><span class="b">내 계산</span> 내 함수로 계산한 값과 과정</div>
-      <div class="write" contenteditable="true" data-field="c4-predict" data-q="함수로 예측한 값과 과정" data-ph="y = 2|17 − 8| + 1 = 19"></div>
+      <h3><span class="tag">활동 2</span> 온도(중화열) → 뒤집힌 절댓값 함수</h3>
+      <p class="lead">중화 반응이 진행될수록 중화열이 쌓여 온도가 오르다가, 완전 중화 지점에서 가장 높고 그 뒤로는 거의 유지되거나 살짝 내려갑니다 —
+        산 모양(∧)이므로 <b>y = −a|x − p| + q</b> (또는 이차함수 <code>y=-a(x-p)²+q</code>)로 나타낼 수 있습니다.</p>
+      <div class="fml">전도도 함수 <code>y=a|x-p|+q</code>의 부호만 바꾸면 산 모양이 됩니다: <code>y=-a|x-p|+q</code></div>
+      <div class="qlabel"><span class="b">내 함수</span> 온도 데이터에 맞춘 함수와, 그 최댓값(중화점 B)</div>
+      <div class="write" contenteditable="true" data-field="c4-fn2" data-q="온도 함수와 중화점 B" data-ph="y = −0.4|x − 8| + 24.5 → 중화점 B: 8회차, 온도 24.5℃"></div>
     </div>
 
     <div class="act">
-      <h3><span class="tag">활동 5</span> 확장 — 중화열을 함수로 표현한다면?</h3>
-      <p class="lead">중화 반응이 일어날수록 중화열이 쌓이고, 완전 중화 지점에서 온도가 가장 높습니다.</p>
-      <div class="qlabel"><span class="b">Q</span> 전기 전도도 그래프와 비교해 중화열 그래프의 모양은? 함수 꼴로 예상해 보기</div>
-      <div class="write" contenteditable="true" data-field="c4-heat" data-q="중화열 그래프 모양과 함수 꼴" data-ph="중화점에서 최대인 ∧(뒤집힌 V) 모양. y = −a|x − p| + q 꼴로 표현할 수 있다."></div>
+      <h3><span class="tag">활동 3</span> pH → 변화율이 가장 큰 지점</h3>
+      <p class="lead">pH 그래프는 V자도 산 모양도 아닌 S자(시그모이드) 곡선입니다. 대신 2차시에서 배운 "구간의 변화율 = 기울기"
+        아이디어를 그대로 씁니다 — <b>변화율이 가장 큰 구간</b>이 중화점입니다.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>구간별 pH 변화율 = (뒤 pH − 앞 pH) ÷ (뒤 회차 − 앞 회차)</caption>
+          <thead><tr><th>구간</th><th>0→2</th><th>2→4</th><th>4→6</th><th>6→8</th></tr></thead>
+          <tbody><tr><th>pH 변화율</th>
+            <td><input data-field="c4ph-1"></td><td><input data-field="c4ph-2"></td><td><input data-field="c4ph-3"></td><td><input data-field="c4ph-4"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">중화점 C</span> 변화율이 가장 큰 구간과, 그 구간의 중간 회차</div>
+      <div class="write" contenteditable="true" data-field="c4-fn3" data-q="pH 최대 변화율 구간과 중화점 C" data-ph="6→8 구간의 변화율이 가장 크다 → 중화점 C: 약 7회차"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 세 중화점 비교 &amp; 예측</h3>
+      <div class="tbl-wrap">
+        <table>
+          <caption>세 가지 방법으로 구한 중화점(회차) 비교</caption>
+          <thead><tr><th></th><th>A · 전도도(절댓값함수)</th><th>B · 온도(뒤집힌함수)</th><th>C · pH(최대 변화율)</th></tr></thead>
+          <tbody><tr><th>중화점(회차)</th>
+            <td><input data-field="c4cmp-a"></td><td><input data-field="c4cmp-b"></td><td><input data-field="c4cmp-c"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">비교</span> 세 값이 서로 얼마나 가까운가요? 다르다면 왜 다른지, 어느 값을 최종 중화점으로 채택할지</div>
+      <div class="write" contenteditable="true" data-field="c4-conclude" data-q="세 방법 비교 및 최종 중화점 결론" data-ph=""></div>
+      <div class="qlabel"><span class="b">예측</span> NaOH를 5회 더 넣으면 전도도는? (활동1의 함수에 대입)</div>
+      <div class="write" contenteditable="true" data-field="c4-predict" data-q="함수로 예측한 값과 과정" data-ph="y = 2|13 − 8| + 1 = 11"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 5</span> 결과물 ① — 모둠 탐구 보고서 작성</h3>
+      <p class="lead">아래 항목을 순서대로 채우면, [답안 복사] 또는 [인쇄·PDF]로 그대로 하나의 보고서가 됩니다.</p>
+      <div class="qlabel"><span class="b">제목</span> 우리 모둠의 탐구 제목</div>
+      <div class="write" contenteditable="true" data-field="c4r-title" data-q="[보고서] 제목" data-ph="예: PASCO 다중 센서로 찾는 중화점 — pH·온도·전도도 교차 검증"></div>
+      <div class="qlabel"><span class="b">연구 목적·가설</span></div>
+      <div class="write" contenteditable="true" data-field="c4r-purpose" data-q="[보고서] 연구 목적과 가설" data-ph=""></div>
+      <div class="qlabel"><span class="b">실험 방법 요약</span> (센서 구성, 첨가량, 측정 방법)</div>
+      <div class="write" contenteditable="true" data-field="c4r-method" data-q="[보고서] 실험 방법 요약" data-ph=""></div>
+      <div class="qlabel"><span class="b">결과</span> (세 그래프의 모양, 세 함수/변화율, 세 중화점)</div>
+      <div class="write" contenteditable="true" data-field="c4r-result" data-q="[보고서] 결과" data-ph="" style="min-height:5em"></div>
+      <div class="qlabel"><span class="b">결론 및 제언</span></div>
+      <div class="write" contenteditable="true" data-field="c4r-conclusion" data-q="[보고서] 결론 및 제언" data-ph=""></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 6</span> 결과물 ② — 한 장 인포그래픽 기획</h3>
+      <p class="lead"><b>미리캔버스</b> 또는 <b>구글 프레젠테이션</b>으로 한 장짜리 인포그래픽을 만듭니다. 먼저 아래 기획표를 채우세요.</p>
+      <ul class="todo">
+        <li><label><input type="checkbox" data-field="c4i-1"></label><div>제목 문구 (한눈에 들어오는 짧은 문장)</div></li>
+        <li><label><input type="checkbox" data-field="c4i-2"></label><div>대표 그래프 1개 선택 (전도도·온도·pH 중 가장 뚜렷했던 것)</div></li>
+        <li><label><input type="checkbox" data-field="c4i-3"></label><div>핵심 수치 3가지 (예: 최종 중화점, 사용한 함수식, 오차 범위)</div></li>
+        <li><label><input type="checkbox" data-field="c4i-4"></label><div>한 줄 결론</div></li>
+      </ul>
+      <div class="qlabel"><span class="b">기획</span> 위 네 가지를 실제 문구로 적어보기</div>
+      <div class="write" contenteditable="true" data-field="c4i-plan" data-q="[인포그래픽] 기획 내용" data-ph="제목: … / 대표 그래프: … / 핵심 수치: … / 한 줄 결론: …" style="min-height:4.5em"></div>
+      <div class="hint">시간이 부족하면 기획표까지만 완성하고, 실제 인포그래픽 파일은 다음 시간 전까지 모둠별로 제출합니다.</div>
     </div>
 
     <div class="act">
       <h3><span class="tag">마무리</span> 4차시 전체 되돌아보기</h3>
-      <div class="qlabel"><span class="b">연결</span> 화학 반응식 → 이온 수 → 전기 전도도 → 함수. 이 흐름을 내 말로 3~4문장으로 요약하기</div>
-      <div class="write" contenteditable="true" data-field="c4-summary" data-q="4차시 전체 흐름 요약" data-ph="산과 염기가 만나면 H⁺과 OH⁻이 물이 되어 이온이 줄고 …" style="min-height:5em"></div>
+      <div class="qlabel"><span class="b">연결</span> 화학 반응식 → 이온 수 → 세 센서(pH·온도·전도도) → 세 함수 → 보고서·인포그래픽. 이 흐름을 내 말로 3~4문장으로 요약하기</div>
+      <div class="write" contenteditable="true" data-field="c4-summary" data-q="4차시 전체 흐름 요약" data-ph="" style="min-height:5em"></div>
       <div class="qlabel"><span class="b">동료평가</span> 우리 모둠에서 가장 도움을 준 친구와 그 이유</div>
       <div class="write" contenteditable="true" data-field="c4-peer" data-q="동료평가" data-ph=""></div>
     </div>
 
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
-      <div class="row"><span>① 전기 전도도의 변화를 절댓값을 포함한 함수로 표현할 수 있다.</span>
+      <div class="row"><span>① 전도도·온도·pH 데이터를 각각 알맞은 함수/변화율로 모델링해 중화점을 구할 수 있다.</span>
         <span class="opts"><label><input type="radio" name="sc4a" data-field="sc4a" value="우수"><span>우수</span></label><label><input type="radio" name="sc4a" data-field="sc4a" value="보통"><span>보통</span></label><label><input type="radio" name="sc4a" data-field="sc4a" value="미흡"><span>미흡</span></label></span></div>
-      <div class="row"><span>② 지오지브라로 정량적 데이터를 분석하고 그 의미를 토의할 수 있다.</span>
+      <div class="row"><span>② 세 가지 방법을 비교·교차검증하고, 결과를 보고서·인포그래픽으로 정리할 수 있다.</span>
         <span class="opts"><label><input type="radio" name="sc4b" data-field="sc4b" value="우수"><span>우수</span></label><label><input type="radio" name="sc4b" data-field="sc4b" value="보통"><span>보통</span></label><label><input type="radio" name="sc4b" data-field="sc4b" value="미흡"><span>미흡</span></label></span></div>
     </div>
   </section>
@@ -667,7 +702,7 @@ img{max-width:100%}
     var lines=[];
     var head=[];
     ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
-    lines.push("전기 전도도로 읽는 중화 반응 — 활동지 답안");
+    lines.push("PASCO 센서로 읽는 중화 반응 — 활동지 답안");
     if(head.length) lines.push(head.join(" / "));
     lines.push("");
     document.querySelectorAll("section.cha").forEach(function(sec){
