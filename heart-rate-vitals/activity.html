@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>심박 센서로 읽는 활력징후 · 학생 활동지</title>
+<meta name="description" content="통합과학·정보·공통수학 융합 STEAM 4차시 학생 활동지 — 아두이노 심박 센서 제작과 회복곡선 지수함수 모델링">
+<link rel="icon" href="../favicon.svg">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="심박 센서로 읽는 활력징후 — 학생 활동지">
+<meta property="og:description" content="물질대사·활력징후 · 아두이노 심박 센서 제작 · 회복곡선 지수함수 모델링 4차시">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#f3f6f8; --card:#ffffff; --ink:#1b2530; --ink-soft:#5a6673; --line:#d7dde3;
+  --acid:#cf4444; --base:#2f6fb3; --neutral:#2f9c82; --data:#3a4657; --vital:#c23b62;
+  --acid-bg:#f8e7e6; --base-bg:#e5eef7; --neutral-bg:#e0f0eb; --data-bg:#e6e9ee; --vital-bg:#f7e3ea;
+  --field:#f6eef1; --field-line:#cf9fb1; --focus:#c23b62;
+  --shadow:0 1px 2px rgba(27,37,48,.06),0 6px 20px rgba(27,37,48,.06);
+  --f-disp:"Gothic A1","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6; --vital:#e8829f;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a; --vital-bg:#33222a;
+  --field:#2a2025; --field-line:#7a4c5c; --focus:#e8829f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --paper:#12181f; --card:#1a2330; --ink:#e7edf3; --ink-soft:#9aa7b4; --line:#2c3846;
+  --acid:#e97a7a; --base:#7db2e2; --neutral:#5cc6a9; --data:#aab7c6; --vital:#e8829f;
+  --acid-bg:#3a2422; --base-bg:#1e2f42; --neutral-bg:#173029; --data-bg:#232d3a; --vital-bg:#33222a;
+  --field:#2a2025; --field-line:#7a4c5c; --focus:#e8829f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
+  font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--f-disp);line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--base)}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+@supports (backdrop-filter:blur(1px)){.bar{background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(8px)}}
+.bar-in{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar strong{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:-.01em}
+.steps{display:flex;gap:6px;margin-left:auto}
+.steps a{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;
+  font-family:var(--f-mono);font-size:13px;text-decoration:none;color:var(--ink-soft);
+  border:1px solid var(--line);background:var(--card)}
+.steps a[data-d="sci"]:hover,.steps a[data-d="sci"].on{border-color:var(--neutral);color:var(--neutral)}
+.steps a[data-d="info"]:hover,.steps a[data-d="info"].on{border-color:var(--base);color:var(--base)}
+.steps a[data-d="data"]:hover,.steps a[data-d="data"].on{border-color:var(--data);color:var(--ink)}
+.steps a[data-d="math"]:hover,.steps a[data-d="math"].on{border-color:var(--vital);color:var(--vital)}
+.prog{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.tools{display:flex;gap:8px}
+.tools button{font-family:var(--f-body);font-size:13px;padding:6px 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tools button:hover{border-color:var(--focus)}
+.tools button:focus-visible,.steps a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+main{max-width:900px;margin:0 auto;padding:0 20px 90px}
+.hero{padding:44px 0 30px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;margin:12px 0 14px;letter-spacing:-.02em}
+.hero p{max-width:62ch;color:var(--ink-soft)}
+.who{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.who label{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+.who input{font-family:var(--f-body);font-size:15px;color:var(--ink);background:var(--field);
+  border:1px solid var(--field-line);border-radius:7px;padding:8px 10px;min-width:150px}
+.who input:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+
+.cha{margin-top:34px;border-top:2px solid var(--line);padding-top:8px}
+.cha-head{display:flex;gap:16px;align-items:flex-start;padding:16px 0 6px}
+.cha-num{font-family:var(--f-mono);font-weight:600;font-size:13px;padding:5px 9px;border-radius:6px;white-space:nowrap;margin-top:3px}
+.cha-head h2{font-size:clamp(20px,3vw,26px);font-weight:800;letter-spacing:-.015em}
+.cha-head .sub{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-top:5px;letter-spacing:.02em}
+[data-d="sci"] .cha-num{background:var(--neutral-bg);color:var(--neutral)}
+[data-d="info"] .cha-num{background:var(--base-bg);color:var(--base)}
+[data-d="data"] .cha-num{background:var(--data-bg);color:var(--ink)}
+[data-d="math"] .cha-num{background:var(--vital-bg);color:var(--vital)}
+[data-d="sci"]{border-top-color:var(--neutral)}
+[data-d="info"]{border-top-color:var(--base)}
+[data-d="data"]{border-top-color:var(--data)}
+[data-d="math"]{border-top-color:var(--vital)}
+
+.act{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);padding:20px 22px;margin-top:16px}
+.act > h3{font-size:16px;font-weight:700;display:flex;gap:9px;align-items:baseline}
+.act > h3 .tag{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;flex:none}
+.act p.lead{color:var(--ink-soft);font-size:14.5px;margin-top:6px}
+
+ol.todo,ul.todo{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+ol.todo li,ul.todo li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.todo input[type=checkbox]{flex:none;width:17px;height:17px;margin-top:3px;accent-color:var(--focus);cursor:pointer}
+.todo .n{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);flex:none;margin-top:2px;min-width:16px}
+.todo code,.act code{font-family:var(--f-mono);font-size:12.5px;background:var(--field);
+  border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.hint{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+
+.write{display:block;font-family:var(--f-body);font-size:14.5px;line-height:1.6;color:var(--ink);
+  background:var(--field);border:1px solid var(--field-line);border-radius:8px;
+  padding:10px 12px;margin-top:10px;min-height:2.6em;white-space:pre-wrap;word-break:break-word}
+.write:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.write:empty:before{content:attr(data-ph);color:var(--ink-soft);opacity:.75}
+.qlabel{font-size:13.5px;font-weight:600;margin-top:16px;display:flex;gap:7px}
+.qlabel .b{color:var(--focus);font-family:var(--f-mono);flex:none}
+.qlabel:first-of-type{margin-top:12px}
+
+.tbl-wrap{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:440px}
+caption{text-align:left;font-size:12.5px;color:var(--ink-soft);margin-bottom:7px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:center;font-variant-numeric:tabular-nums}
+thead th{background:var(--field);font-family:var(--f-disp);font-weight:700}
+tbody th{background:var(--field);font-weight:600;white-space:nowrap}
+td input{width:100%;min-width:44px;border:none;background:transparent;font-family:var(--f-mono);
+  font-size:13.5px;text-align:center;color:var(--ink);padding:3px 2px}
+td input:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:3px}
+td.fixed{background:var(--field);font-family:var(--f-mono);color:var(--ink-soft)}
+
+.fml{font-family:var(--f-mono);font-size:14px;background:var(--field);border:1px solid var(--line);
+  border-radius:8px;padding:12px 14px;margin-top:12px;overflow-x:auto}
+.callout{font-size:13.5px;border-left:3px solid var(--focus);padding:4px 0 4px 13px;margin-top:14px;color:var(--ink-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.two .box{border:1px solid var(--line);border-radius:9px;padding:12px 13px;background:var(--paper)}
+.two .box h4{font-size:13px;font-weight:700;font-family:var(--f-disp)}
+.two .box p{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+figure{margin:16px 0 0}
+figure svg{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--line);border-radius:9px}
+figure svg .ax{stroke:var(--line)}
+figure svg .curve-data{stroke:var(--data)}
+figure svg .curve-fn{stroke:var(--vital)}
+figure svg .pt{fill:var(--neutral)}
+figure svg .lbl{fill:var(--ink-soft);font-family:var(--f-mono)}
+figure svg .lbl-n{fill:var(--neutral);font-family:var(--f-mono)}
+figure svg .lbl-a{fill:var(--vital);font-family:var(--f-mono)}
+figcaption{font-size:12px;color:var(--ink-soft);margin-top:6px}
+
+.selfcheck{margin-top:16px;border:1px dashed var(--field-line);border-radius:10px;padding:14px 16px;background:var(--field)}
+.selfcheck h4{font-family:var(--f-disp);font-size:13px;font-weight:700;letter-spacing:.02em}
+.selfcheck .row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin-top:9px}
+.selfcheck .opts{margin-left:auto;display:flex;gap:5px;flex:none}
+.selfcheck .opts label{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line);border-radius:6px;
+  padding:3px 7px;cursor:pointer;background:var(--card);color:var(--ink-soft)}
+.selfcheck .opts input{position:absolute;opacity:0;width:0;height:0}
+.selfcheck .opts input:checked + span{color:var(--focus);font-weight:600}
+.selfcheck .opts label:has(input:checked){border-color:var(--focus)}
+
+footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(--ink-soft);text-align:center}
+
+.saved{position:fixed;right:16px;bottom:16px;font-family:var(--f-mono);font-size:11px;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 13px;
+  color:var(--ink-soft);box-shadow:var(--shadow);opacity:0;transition:opacity .3s;z-index:30}
+.saved.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.saved{transition:none}}
+
+@media print{
+  .bar,.tools,.saved,.steps{display:none!important}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  main{max-width:none;padding:0}
+  .act{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .cha{break-before:page}
+  .hero{padding:0 0 16px}
+  .write,.who input,td input{background:#fff;border-color:#999}
+  .write:empty:before{content:""}
+  figure svg{border-color:#999}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <a href="./" style="text-decoration:none;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px;flex:none">← 과정 소개</a>
+    <strong>심박 센서로 읽는 활력징후</strong>
+    <span class="prog" id="prog">진행 0%</span>
+    <nav class="steps" aria-label="차시 이동">
+      <a href="#cha1" data-d="sci">1</a>
+      <a href="#cha2" data-d="info">2</a>
+      <a href="#cha3" data-d="data">3</a>
+      <a href="#cha4" data-d="math">4</a>
+    </nav>
+    <div class="tools">
+      <button id="btn-copy" type="button">답안 복사</button>
+      <button id="btn-print" type="button">인쇄 · PDF</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">통합과학 · 정보 · 공통수학 융합 STEAM · 4차시</div>
+    <h1>병원에서 가장 먼저 재는 것, 내가 만든 센서로 재본다면?</h1>
+    <p>물질대사와 순환·호흡계를 이해하고, <b>아두이노 심박 센서</b>를 검색으로 직접 찾아 만듭니다.
+      안정 시·운동 직후·회복 중 심박수를 측정해 <b>지수함수로 회복곡선</b>을 모델링하고,
+      실제 임상에서 쓰는 심박수 회복 지표를 계산합니다. 각 활동에서 "내가 직접 해야 할 일"을 순서대로 따라가며
+      빈칸을 채우세요. 입력한 내용은 이 기기에 자동 저장됩니다.</p>
+    <div class="who">
+      <label>학년 / 반 / 번호 <input id="w-id" data-field="w-id" autocomplete="off"></label>
+      <label>이름 <input id="w-name" data-field="w-name" autocomplete="off"></label>
+      <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
+    </div>
+  </header>
+
+  <!-- ================= 1차시 ================= -->
+  <section class="cha" id="cha1" data-d="sci">
+    <div class="cha-head">
+      <span class="cha-num">1차시</span>
+      <div>
+        <h2>우리 몸은 어떻게 움직일까</h2>
+        <div class="sub">통합과학 · [10통과1-03-06] · 물질대사와 기관계</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 물질대사에 필요한 물질·에너지의 흐름을 소화·순환·호흡·배설의 통합적 관점에서 설명한다.
+      ② 활력징후가 무엇이고 왜 중요한지 안다.</p>
+
+    <div class="act">
+      <h3><span class="tag">열기</span> 의료진이 가장 먼저 하는 일</h3>
+      <p class="lead">응급실이나 병동에서 환자를 처음 만나면, 의료진은 검사 전에 반드시 <b>활력징후</b>부터 확인합니다.</p>
+      <div class="qlabel"><span class="b">Q</span> 활력징후에는 무엇이 있을지, 왜 가장 먼저 재는지 지금 생각을 적어 보세요.</div>
+      <div class="write" contenteditable="true" data-field="h1-hook" data-q="1차시 열기: 활력징후 예상과 이유" data-ph="체온, 맥박, 호흡, 혈압일 것 같다. 몸 상태를 가장 빠르고 간단하게 확인할 수 있는 지표이기 때문일 것이다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 물질대사의 흐름 — 소화·순환·호흡·배설</h3>
+      <p class="lead">우리 몸은 음식을 에너지로 바꾸고 쓰기 위해 여러 기관계가 이어져 일합니다.</p>
+      <div class="fml">소화(영양소 흡수) &rarr; 순환(온몸으로 운반) &rarr; 호흡(산소 공급·이산화탄소 배출) &rarr; 배설(노폐물 제거)</div>
+      <div class="qlabel"><span class="b">1</span> 이 네 기관계 중, 활력징후로 직접 확인할 수 있는 것은 무엇이고 어떻게 확인하나요?</div>
+      <div class="write" contenteditable="true" data-field="h1-flow" data-q="기관계와 활력징후의 연결" data-ph="순환계는 맥박(심박수)으로, 호흡계는 호흡수로 직접 확인할 수 있다."></div>
+      <div class="qlabel"><span class="b">2</span> 심장과 폐는 각각 이 흐름에서 어떤 역할을 하나요?</div>
+      <div class="write" contenteditable="true" data-field="h1-organs" data-q="심장·폐의 역할" data-ph="심장: 혈액을 온몸으로 순환시켜 영양소·산소를 운반 / 폐: 산소를 받아들이고 이산화탄소를 내보냄"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 활력징후 4가지 조사하기</h3>
+      <div class="tbl-wrap">
+        <table>
+          <caption>활력징후(Vital Signs) 4가지</caption>
+          <thead><tr><th>활력징후</th><th>측정 도구</th><th>정상 범위(성인)</th></tr></thead>
+          <tbody>
+            <tr><th>체온</th><td><input data-field="h1v-temp-tool" placeholder="예: 체온계"></td><td><input data-field="h1v-temp-range" placeholder="예: 36.1~37.2℃"></td></tr>
+            <tr><th>맥박(심박수)</th><td><input data-field="h1v-pulse-tool" placeholder="예: 손목 촉진, 맥박 센서"></td><td><input data-field="h1v-pulse-range" placeholder="예: 60~100회/분"></td></tr>
+            <tr><th>호흡수</th><td><input data-field="h1v-resp-tool"></td><td><input data-field="h1v-resp-range"></td></tr>
+            <tr><th>혈압</th><td><input data-field="h1v-bp-tool"></td><td><input data-field="h1v-bp-range"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 운동하면 왜 심박수가 오를까 — 항상성 되먹임</h3>
+      <div class="callout">운동하는 근육은 평소보다 <b>더 많은 산소와 영양소</b>를 필요로 합니다.
+        몸은 이 요구에 맞춰 심장을 더 빨리 뛰게 하고 호흡을 가쁘게 만들어 공급을 늘립니다 — 이것이 <b>항상성 되먹임</b>입니다.</div>
+      <div class="qlabel"><span class="b">Q</span> 운동을 멈추면 심박수는 어떻게 변할까요? 왜 그럴까요?</div>
+      <div class="write" contenteditable="true" data-field="h1-homeo" data-q="운동 후 심박수 변화와 이유" data-ph="근육의 산소·영양소 요구가 줄어들므로 심박수도 점점 낮아져 다시 안정 시 수준으로 돌아간다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">닫기</span> 처음 질문으로 돌아가기</h3>
+      <div class="qlabel"><span class="b">Q</span> 배운 내용으로, 활력징후를 가장 먼저 재는 이유를 다시 설명해 보세요.</div>
+      <div class="write" contenteditable="true" data-field="h1-answer" data-q="1차시 닫기: 활력징후를 먼저 재는 이유" data-ph="활력징후는 순환·호흡 같은 생명 유지에 필수적인 기능이 정상인지를 장비 없이도 빠르게 확인할 수 있는 지표이기 때문이다."></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 물질대사의 흐름을 소화·순환·호흡·배설의 통합적 관점에서 설명할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch1a" data-field="sch1a" value="우수"><span>우수</span></label><label><input type="radio" name="sch1a" data-field="sch1a" value="보통"><span>보통</span></label><label><input type="radio" name="sch1a" data-field="sch1a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 활력징후가 무엇이고 왜 중요한지 설명할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch1b" data-field="sch1b" value="우수"><span>우수</span></label><label><input type="radio" name="sch1b" data-field="sch1b" value="보통"><span>보통</span></label><label><input type="radio" name="sch1b" data-field="sch1b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 2차시 ================= -->
+  <section class="cha" id="cha2" data-d="info">
+    <div class="cha-head">
+      <span class="cha-num">2차시</span>
+      <div>
+        <h2>심박 센서 스스로 만들기</h2>
+        <div class="sub">정보 · 공학 · 아두이노 + 심박(펄스) 센서</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 자기주도적으로 검색해 심박 센서의 회로와 코드를 구현한다.
+      ② 완성한 뒤 문제점을 찾아 해결한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">열기</span> 손으로 세는 것과 센서로 재는 것, 무엇이 다를까?</h3>
+      <div class="write" contenteditable="true" data-field="h2-hook" data-q="촉진과 센서의 차이 예상" data-ph="센서는 연속적으로 계속 측정할 수 있어서 변화하는 순간을 놓치지 않고, 사람마다 세는 오차도 줄일 수 있을 것 같다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 재료 확인 (모둠별)</h3>
+      <ul class="todo">
+        <li><label><input type="checkbox" data-field="h2m-1"></label><div>아두이노 Uno 1개 · USB 케이블</div></li>
+        <li><label><input type="checkbox" data-field="h2m-2"></label><div>브레드보드 1개 · 점퍼선 여러 개</div></li>
+        <li><label><input type="checkbox" data-field="h2m-3"></label><div>심박(펄스) 센서 모듈 1개 <span class="hint">손가락을 집게로 무는 클립형 또는 접촉형</span></div></li>
+        <li><label><input type="checkbox" data-field="h2m-4"></label><div>아두이노 IDE가 설치된 노트북 1대</div></li>
+      </ul>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 스스로 찾기 — 회로와 코드</h3>
+      <p class="lead">아래 검색어(또는 자유 검색)로 <b>회로 연결법</b>과 <b>코드</b>를 직접 찾습니다. 참고한 자료와 핵심 아이디어를 기록하세요.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>검색어 힌트</caption>
+          <thead><tr><th>목표</th><th>검색어</th></tr></thead>
+          <tbody>
+            <tr><th>회로 이해</th><td>아두이노 심박센서 회로도 · 아두이노 펄스센서 연결 방법</td></tr>
+            <tr><th>코드 작성</th><td>아두이노 심박센서 소스코드 · 아두이노 analogRead 심박수 계산</td></tr>
+            <tr><th>그래프로 확인</th><td>아두이노 시리얼 플로터 사용법</td></tr>
+            <tr><th>막혔을 때</th><td>아두이노 심박센서 안 잡힐 때 · pulse sensor 잡음 노이즈 해결</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">기록</span> 참고한 자료(링크·출처)와 이해한 핵심 아이디어</div>
+      <div class="write" contenteditable="true" data-field="h2-research" data-q="참고 자료와 핵심 아이디어" data-ph="" style="min-height:4.5em"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 구현 &amp; 검증</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="h2v-1"></label><div>찾은 회로도대로 센서 → 브레드보드 → 아두이노를 연결한다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="h2v-2"></label><div>찾은 코드를 참고해 작성·업로드한다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="h2v-3"></label><div>손가락을 센서에 대고 <b>시리얼 플로터</b>에서 심박 파형이 나오는지 확인한다.</div></li>
+      </ol>
+      <div class="qlabel"><span class="b">회로도</span> 내가 이해한 회로 연결을 글 또는 그림 설명으로 정리</div>
+      <div class="write" contenteditable="true" data-field="h2-circuit" data-q="내가 이해한 회로 연결" data-ph="센서의 신호선을 아날로그 핀(A0)에, 전원선을 5V·GND에 연결했다."></div>
+      <div class="qlabel"><span class="b">코드 설명</span> 코드에서 "파형의 봉우리를 세어 분당 박동수(BPM)로 바꾸는 부분"을 내 말로 설명</div>
+      <div class="write" contenteditable="true" data-field="h2-code" data-q="봉우리 계산 → BPM 변환 로직 설명" data-ph=""></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 디버깅 &amp; 나만의 창의 요소</h3>
+      <div class="qlabel"><span class="b">문제</span> 겪은 문제와 해결 과정 (막혔을 때 검색어 활용)</div>
+      <div class="write" contenteditable="true" data-field="h2-bug" data-q="문제와 해결 과정" data-ph="예: 파형에 잡음이 심함 → 손가락을 너무 세게 누르고 있었음 → 힘을 빼고 다시 측정해 해결"></div>
+      <div class="qlabel"><span class="b">창의</span> 내 코드에 추가한 나만의 요소</div>
+      <div class="write" contenteditable="true" data-field="h2-creative" data-q="나만의 창의적 요소" data-ph="예: 심박수가 100을 넘으면 LED가 빠르게 깜빡이도록 추가"></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 스스로 검색해 심박 센서의 회로와 코드를 구현할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch2a" data-field="sch2a" value="우수"><span>우수</span></label><label><input type="radio" name="sch2a" data-field="sch2a" value="보통"><span>보통</span></label><label><input type="radio" name="sch2a" data-field="sch2a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 완성한 뒤 문제점을 찾아 해결할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch2b" data-field="sch2b" value="우수"><span>우수</span></label><label><input type="radio" name="sch2b" data-field="sch2b" value="보통"><span>보통</span></label><label><input type="radio" name="sch2b" data-field="sch2b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 3차시 ================= -->
+  <section class="cha" id="cha3" data-d="data">
+    <div class="cha-head">
+      <span class="cha-num">3차시</span>
+      <div>
+        <h2>활력징후 측정 실험</h2>
+        <div class="sub">통합과학 · 정보 · 안정 – 운동 – 회복</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 안정 시·운동 직후·회복 중 심박수를 측정한다.
+      ② 손목 촉진과 센서 측정을 비교한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 안정 시 심박수 — 촉진 vs 센서</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="h3-1"></label><div>가만히 앉아 1분 이상 안정을 취한다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="h3-2"></label><div><b>손목 촉진</b>으로 15초간 맥박을 세고 ×4 해서 분당 심박수를 구한다.</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="h3-3"></label><div>같은 시점에 <b>내가 만든 센서</b>로 심박수를 측정한다.</div></li>
+      </ol>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th></th><th>손목 촉진(15초×4)</th><th>센서 측정</th></tr></thead>
+          <tbody><tr><th>안정 시 심박수(회/분)</th><td><input data-field="h3r-palp"></td><td><input data-field="h3r-sensor"></td></tr></tbody>
+        </table>
+      </div>
+      <div class="qlabel"><span class="b">비교</span> 두 값이 얼마나 비슷했나요? 다르다면 어느 쪽이 더 정확할지, 왜 그렇게 생각하나요?</div>
+      <div class="write" contenteditable="true" data-field="h3-compare" data-q="촉진 vs 센서 비교" data-ph=""></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 운동 직후 심박수 측정</h3>
+      <p class="lead">제자리 뛰기 등을 30초~1분간 한 뒤, <b>즉시</b> 센서로 심박수를 측정합니다.</p>
+      <div class="qlabel"><span class="b">기록</span> 운동 종류·시간과 운동 직후 심박수(회/분)</div>
+      <div class="write" contenteditable="true" data-field="h3-exercise" data-q="운동 내용과 직후 심박수" data-ph="제자리 뛰기 1분 → 직후 심박수 150회/분"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 회복 구간 반복 측정</h3>
+      <p class="lead">운동을 멈춘 시점을 0분으로 하고, 30초 간격으로 센서로 심박수를 측정합니다.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>회복 구간 심박수(회/분) — 참고값(예시)은 자유롭게 지우고 내 값으로 채우세요</caption>
+          <thead><tr><th>시간(분)</th><th>0(직후)</th><th>0.5</th><th>1.0</th><th>1.5</th><th>2.0</th><th>2.5</th><th>3.0</th></tr></thead>
+          <tbody>
+            <tr><th>내 측정값</th>
+              <td><input data-field="h3c-0"></td><td><input data-field="h3c-1"></td><td><input data-field="h3c-2"></td><td><input data-field="h3c-3"></td><td><input data-field="h3c-4"></td><td><input data-field="h3c-5"></td><td><input data-field="h3c-6"></td></tr>
+            <tr><th>참고값(예시)</th>
+              <td class="fixed">150</td><td class="fixed">125</td><td class="fixed">108</td><td class="fixed">96</td><td class="fixed">88</td><td class="fixed">82</td><td class="fixed">78</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">회복이 다 되지 않았다면 안정 시 수준(활동1의 값)에 가까워질 때까지 더 측정해도 좋습니다.</div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
+      <div class="qlabel"><span class="b">1</span> 시간이 지날수록 심박수는 어떤 모양으로 줄어드나요? (일정하게? 처음엔 빠르게, 나중엔 천천히?)</div>
+      <div class="write" contenteditable="true" data-field="h3-q1" data-q="회복 그래프 모양 관찰" data-ph="처음에는 빠르게 떨어지다가, 안정 시 수준에 가까워질수록 점점 천천히 떨어진다."></div>
+      <div class="qlabel"><span class="b">2</span> 모둠원끼리 회복 속도를 비교하면 차이가 있나요? 어떤 요인 때문일까요?</div>
+      <div class="write" contenteditable="true" data-field="h3-q2" data-q="개인차 비교" data-ph="평소 운동량이 많은 사람이 더 빨리 회복하는 것 같다."></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 안정 시·운동 직후·회복 중 심박수를 정확히 측정할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch3a" data-field="sch3a" value="우수"><span>우수</span></label><label><input type="radio" name="sch3a" data-field="sch3a" value="보통"><span>보통</span></label><label><input type="radio" name="sch3a" data-field="sch3a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 손목 촉진과 센서 측정을 비교해 설명할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch3b" data-field="sch3b" value="우수"><span>우수</span></label><label><input type="radio" name="sch3b" data-field="sch3b" value="보통"><span>보통</span></label><label><input type="radio" name="sch3b" data-field="sch3b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <!-- ================= 4차시 ================= -->
+  <section class="cha" id="cha4" data-d="math">
+    <div class="cha-head">
+      <span class="cha-num">4차시</span>
+      <div>
+        <h2>회복곡선 함수 모델링</h2>
+        <div class="sub">공통수학 · 통합과학 — 지수함수</div>
+      </div>
+    </div>
+    <p class="lead" style="padding:0 2px">오늘의 목표 — ① 심박수 회복 데이터를 지수함수로 모델링한다.
+      ② 심박수 회복(HRR) 지표를 계산하고 해석한다.</p>
+
+    <div class="act">
+      <h3><span class="tag">알아보기</span> 회복곡선 = 지수함수</h3>
+      <div class="callout">운동 직후 최고였던 심박수는 시간이 지나며 <b>안정 시 수준</b>으로 점점 다가갑니다 —
+        처음엔 빠르게, 나중엔 천천히 줄어드는 이 모양이 <b>지수함수</b> <code>y = a·e<sup>−bt</sup> + c</code> 입니다.
+        <b>c</b>는 최종적으로 다가가는 값(안정 시 심박수), <b>a+c</b>는 시작값(운동 직후 심박수), <b>b</b>는 얼마나 빨리 회복하는지를 나타냅니다.</div>
+      <figure>
+        <svg viewBox="0 0 420 200" role="img" aria-label="지수적으로 감소하는 회복곡선">
+          <line class="ax" x1="45" y1="20" x2="45" y2="165"/>
+          <line class="ax" x1="45" y1="165" x2="400" y2="165"/>
+          <path class="curve-fn" d="M55,35 C120,60 160,120 220,140 C280,155 340,160 390,162" fill="none" stroke-width="2.5"/>
+          <line class="ax" x1="45" y1="162" x2="400" y2="162" stroke-dasharray="3 3"/>
+          <text class="lbl-a" x="300" y="80" font-size="11">y = a·e⁻ᵇᵗ + c</text>
+          <text class="lbl" x="360" y="155" font-size="10">c (안정 시)</text>
+          <text class="lbl" x="16" y="95" font-size="10" transform="rotate(-90 16 95)">심박수</text>
+          <text class="lbl" x="200" y="187" font-size="10">시간(분) →</text>
+        </svg>
+        <figcaption>처음엔 빠르게, 안정 시 수준에 가까워질수록 천천히 줄어드는 것이 지수적 감소의 특징입니다.</figcaption>
+      </figure>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 1</span> 회복 데이터 그래프로 그리기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="h4g-1"></label><div><code>geogebra.org</code> 접속 → 표(스프레드시트) 창에 3차시의 (시간, 심박수) 데이터를 입력하고 점을 찍는다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="h4g-2"></label><div>점들이 지수적으로 감소하는 모양인지 확인한다.</div></li>
+      </ol>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 2</span> 지수함수로 모델링하기</h3>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="h4f-1"></label><div>안정 시 심박수(활동1의 값)를 <b>c</b>로 놓는다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="h4f-2"></label><div>입력창에 <code>f(x) = a exp(-b x) + c</code> 꼴로 넣고 <b>a, b</b> 값을 바꿔가며(또는 지오지브라의 회귀 도구 <code>FitExp</code>) 점들과 겹치게 맞춘다.</div></li>
+      </ol>
+      <div class="qlabel"><span class="b">내 함수</span> 내 회복 데이터에 맞춘 함수</div>
+      <div class="write" contenteditable="true" data-field="h4-fn" data-q="내 회복곡선 함수" data-ph="y = 78·e^(−0.9t) + 72"></div>
+      <div class="qlabel"><span class="b">해석</span> a, b, c가 각각 무엇을 뜻하는지 쓰기</div>
+      <div class="write" contenteditable="true" data-field="h4-mean" data-q="a, b, c의 의미" data-ph="a+c = 운동 직후 심박수 / c = 안정 시(최종 도달) 심박수 / b가 클수록 더 빨리 회복한다."></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 3</span> 심박수 회복(HRR) 계산하기</h3>
+      <div class="callout">스포츠의학·임상에서는 <b>운동 직후 심박수 − 1분 후 심박수</b>를 <b>HRR1(1분 심박수 회복)</b>이라 부르며,
+        값이 클수록(빨리 떨어질수록) 심혈관 건강 상태가 좋다고 봅니다.</div>
+      <div class="fml">예시: 150 (직후) − 108 (1분 후) = HRR1 <b>42</b></div>
+      <div class="qlabel"><span class="b">내 계산</span> 내 데이터로 계산한 HRR1과, 이 값이 뜻하는 것</div>
+      <div class="write" contenteditable="true" data-field="h4-hrr" data-q="내 HRR1 계산과 해석" data-ph=""></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">활동 4</span> 모둠 비교 &amp; 결론</h3>
+      <div class="qlabel"><span class="b">비교</span> 모둠원들의 함수(a, b, c)와 HRR1을 비교하면 어떤 차이가 있나요?</div>
+      <div class="write" contenteditable="true" data-field="h4-compare" data-q="모둠원 간 비교" data-ph=""></div>
+      <div class="qlabel"><span class="b">결론</span> 이 활동을 통해 알게 된 것과, 활력징후·물질대사와 어떻게 연결되는지 정리</div>
+      <div class="write" contenteditable="true" data-field="h4-conclude" data-q="결론 및 연결" data-ph="" style="min-height:4.5em"></div>
+    </div>
+
+    <div class="act">
+      <h3><span class="tag">마무리</span> 4차시 전체 되돌아보기</h3>
+      <div class="qlabel"><span class="b">연결</span> 물질대사·기관계 → 심박 센서 제작 → 활력징후 측정 → 지수함수 모델링. 이 흐름을 내 말로 3~4문장으로 요약하기</div>
+      <div class="write" contenteditable="true" data-field="h4-summary" data-q="4차시 전체 흐름 요약" data-ph="" style="min-height:5em"></div>
+      <div class="qlabel"><span class="b">동료평가</span> 우리 모둠에서 가장 도움을 준 친구와 그 이유</div>
+      <div class="write" contenteditable="true" data-field="h4-peer" data-q="동료평가" data-ph=""></div>
+    </div>
+
+    <div class="selfcheck">
+      <h4>스스로 평가하기</h4>
+      <div class="row"><span>① 심박수 회복 데이터를 지수함수로 모델링할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch4a" data-field="sch4a" value="우수"><span>우수</span></label><label><input type="radio" name="sch4a" data-field="sch4a" value="보통"><span>보통</span></label><label><input type="radio" name="sch4a" data-field="sch4a" value="미흡"><span>미흡</span></label></span></div>
+      <div class="row"><span>② 심박수 회복(HRR) 지표를 계산하고 그 의미를 해석할 수 있다.</span>
+        <span class="opts"><label><input type="radio" name="sch4b" data-field="sch4b" value="우수"><span>우수</span></label><label><input type="radio" name="sch4b" data-field="sch4b" value="보통"><span>보통</span></label><label><input type="radio" name="sch4b" data-field="sch4b" value="미흡"><span>미흡</span></label></span></div>
+    </div>
+  </section>
+
+  <footer>
+    이 활동지의 입력 내용은 사용 중인 기기의 브라우저에만 저장됩니다(다른 기기·친구에게 전송되지 않음).
+    제출은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
+  </footer>
+</main>
+
+<div class="saved" id="saved">저장됨</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="steam-heartrate-v1";
+  var store={};
+  try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
+  var savedEl=document.getElementById("saved"), savedT;
+  function flash(){ if(!savedEl)return; savedEl.classList.add("show"); clearTimeout(savedT);
+    savedT=setTimeout(function(){ savedEl.classList.remove("show"); },1100); }
+  function persist(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); flash(); }catch(e){} }
+
+  var fields=Array.prototype.slice.call(document.querySelectorAll("[data-field]"));
+  fields.forEach(function(el){
+    var k=el.getAttribute("data-field");
+    if(el.type==="checkbox"){
+      if(store[k]===true) el.checked=true;
+      el.addEventListener("change",function(){ store[k]=el.checked; persist(); updateProgress(); });
+    } else if(el.type==="radio"){
+      if(store[k]===el.value) el.checked=true;
+      el.addEventListener("change",function(){ if(el.checked){ store[k]=el.value; persist(); updateProgress(); } });
+    } else if(el.isContentEditable){
+      if(typeof store[k]==="string") el.textContent=store[k];
+      el.addEventListener("input",function(){ store[k]=el.textContent; persist(); updateProgress(); });
+    } else {
+      if(typeof store[k]==="string") el.value=store[k];
+      el.addEventListener("input",function(){ store[k]=el.value; persist(); updateProgress(); });
+    }
+  });
+
+  var keys={};
+  fields.forEach(function(el){ keys[el.getAttribute("data-field")]=true; });
+  var totalKeys=Object.keys(keys).length;
+  var progEl=document.getElementById("prog");
+  function filledCount(){
+    var n=0;
+    for(var k in keys){
+      var v=store[k];
+      if(v===true) n++;
+      else if(typeof v==="string" && v.trim()!=="") n++;
+    }
+    return n;
+  }
+  function updateProgress(){
+    if(!progEl)return;
+    var pct=totalKeys? Math.round(filledCount()/totalKeys*100):0;
+    progEl.textContent="진행 "+pct+"%";
+  }
+  updateProgress();
+
+  var links=Array.prototype.slice.call(document.querySelectorAll(".steps a"));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){
+        var i=secs.indexOf(en.target);
+        if(i>-1 && en.isIntersecting){ links.forEach(function(l){ l.classList.remove("on"); }); links[i].classList.add("on"); }
+      });
+    },{rootMargin:"-40% 0px -55% 0px"});
+    secs.forEach(function(s){ if(s) io.observe(s); });
+  }
+
+  var bp=document.getElementById("btn-print");
+  if(bp) bp.addEventListener("click",function(){ window.print(); });
+
+  var bc=document.getElementById("btn-copy");
+  if(bc) bc.addEventListener("click",function(){
+    var lines=[];
+    var head=[];
+    ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
+    lines.push("심박 센서로 읽는 활력징후 — 활동지 답안");
+    if(head.length) lines.push(head.join(" / "));
+    lines.push("");
+    document.querySelectorAll("section.cha").forEach(function(sec){
+      var h2=sec.querySelector(".cha-head h2");
+      lines.push("=== "+(sec.querySelector(".cha-num").textContent)+" "+(h2?h2.textContent:"")+" ===");
+      sec.querySelectorAll("[data-field]").forEach(function(el){
+        var k=el.getAttribute("data-field"), q=el.getAttribute("data-q")||k, v=store[k];
+        if(el.type==="checkbox"){ if(v===true) lines.push("[v] "+ (el.closest("li")? el.closest("li").innerText.replace(/\s+/g," ").trim() : q)); return; }
+        if(el.type==="radio"){ if(el.checked) lines.push("· "+q+": "+v); return; }
+        if(v && String(v).trim()!==""){ lines.push("· "+q+":\n  "+String(v).trim().replace(/\n/g,"\n  ")); }
+      });
+      lines.push("");
+    });
+    var text=lines.join("\n");
+    function done(ok){ bc.textContent= ok? "복사됨!" : "복사 실패"; setTimeout(function(){ bc.textContent="답안 복사"; },1400); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ done(true); },function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      try{
+        var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(true);
+      }catch(e){ done(false); }
+    }
+  });
+
+  window.addEventListener("beforeprint",function(){
+    document.querySelectorAll(".write").forEach(function(el){ el.setAttribute("data-min",el.style.minHeight||""); el.style.minHeight="0"; });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -25,11 +25,13 @@ steam-2026/                         (GitHub 저장소 이름 예시)
 │   ├─ index.html
 │   └─ activity.html
 │
-└─ climate-modeling/                 주제 3 — Sage Modeler와 빅데이터로 읽는 기후변화
+├─ climate-modeling/                 주제 3 — Sage Modeler와 빅데이터로 읽는 기후변화
+│   ├─ index.html
+│   └─ activity.html
+│
+└─ heart-rate-vitals/                주제 4 — 심박 센서로 읽는 활력징후
     ├─ index.html
     └─ activity.html
-
-  (주제 4 는 확정 시 topic-4/ 형태로 추가)
 ```
 
 배포 후 주소 (`<사용자명>` = GitHub 사용자명):
@@ -42,6 +44,8 @@ https://<사용자명>.github.io/steam-2026/incline-motion/                주�
 https://<사용자명>.github.io/steam-2026/incline-motion/activity.html
 https://<사용자명>.github.io/steam-2026/climate-modeling/              주제 3 소개
 https://<사용자명>.github.io/steam-2026/climate-modeling/activity.html
+https://<사용자명>.github.io/steam-2026/heart-rate-vitals/              주제 4 소개
+https://<사용자명>.github.io/steam-2026/heart-rate-vitals/activity.html
 ```
 
 ---
@@ -64,7 +68,7 @@ https://<사용자명>.github.io/steam-2026/climate-modeling/activity.html
 | `〔담당 교사〕` | ○○○ · ○○○ · ○○○ · ○○○ |
 | `〔문의〕` | 과학실 / 내선 000 |
 
-**`conductivity-neutralization/index.html`, `incline-motion/index.html`, `climate-modeling/index.html` (주제 소개)** — `〔담당 교사〕` `〔장소〕` 만.
+**주제 소개 페이지(4개 모두)** — `〔담당 교사〕` `〔장소〕` 만.
 
 ### 신청 접수 (리로스쿨)
 
@@ -74,11 +78,8 @@ https://<사용자명>.github.io/steam-2026/climate-modeling/activity.html
   1. `<span class="cta-big disabled">신청 준비 중</span>` 과 바로 아래 `<p class="soon-note">…</p>` 삭제
   2. 그 아래 주석 처리된 `<a class="cta-big" href="리로스쿨_신청_페이지_URL">` 의 주석을 풀고 `href` 에 리로스쿨 신청 페이지 주소 입력
 
-### 주제 4 추가
-
-1. `index.html` 의 `topics` 안 남은 `<article class="topic-card soon">` 를 실제 내용으로 채우고 `.soon` 클래스 제거
-2. 하위 폴더(`topic-4/` 등)에 `index.html`(소개)·`activity.html`(활동지) 추가 — 주제 1·2·3 파일을 복제해 내용만 교체
-3. 카드의 `href` 를 새 폴더로 연결
+4개 주제 모두 확정되어 이 저장소에 있습니다. 다섯 번째 이후 주제를 더 추가하려면 하위 폴더를 새로 만들고
+기존 주제의 `index.html`·`activity.html`을 복제해 내용만 교체한 뒤, 허브 `topics` 안에 카드를 추가하면 됩니다.
 
 ---
 
@@ -151,16 +152,30 @@ git push -u origin main  # 원격은 이미 https://github.com/JIN/steam-2026.gi
 
 성취기준: `[10통과2-02-03]` `[12정02-09]` `[12정02-04]`
 
+**주제 4 · 심박 센서로 읽는 활력징후** (통합과학·정보·공통수학 · 의학·간호 계열 추천)
+
+| 차시 | 내용 |
+|---|---|
+| 1 | 물질대사와 기관계(소화·순환·호흡·배설), 활력징후 4가지, 운동 시 심박수 상승의 항상성 원리 |
+| 2 | 검색어를 단서로 아두이노 심박(펄스) 센서의 회로·코드를 스스로 찾아 구현·디버깅 |
+| 3 | 안정 시(손목 촉진 vs 센서) · 운동 직후 · 회복 구간 심박수 측정, 촉진과 센서 비교 |
+| 4 | 회복곡선을 지수함수 `y=a·e^(-bt)+c` 로 모델링, 심박수 회복(HRR1) 지표 계산·해석 |
+
+성취기준: `[10통과1-03-06]` (물질대사와 기관계) — 생명과학1 순환계·호흡계·항상성과 연계
+> 이 주제는 KOFAC 융합교육 교재에 없는 **신규 설계**입니다. 2차시는 정답 링크를 주지 않고
+> `activity.html` 안의 검색어 힌트만으로 학생이 스스로 회로·코드를 찾도록 구성했습니다.
+
 ---
 
 ## 커스터마이즈
 
-* **색상·글꼴**: 각 파일 `<style>` 안 `:root` 의 CSS 변수 (허브·주제1은 teal, 주제2는 blue, 주제3은 amber 계열)
+* **색상·글꼴**: 각 파일 `<style>` 안 `:root` 의 CSS 변수 (허브·주제1은 teal, 주제2는 blue, 주제3은 amber, 주제4는 rose 계열)
 * **활동지 참고값**: `activity.html` 표의 `class="fixed"` 셀
 * **활동지 저장 키 초기화**: 브라우저 콘솔 —
   주제1 `localStorage.removeItem('ddr-jungwha-v1')`,
   주제2 `localStorage.removeItem('steam-incline-v1')` (그래프는 `steam-incline-plot-xt` / `-vt` / `-at` 별도),
-  주제3 `localStorage.removeItem('steam-climate-v1')` (그래프는 `steam-climate-plot-main` 별도)
+  주제3 `localStorage.removeItem('steam-climate-v1')` (그래프는 `steam-climate-plot-main` 별도),
+  주제4 `localStorage.removeItem('steam-heartrate-v1')`
 * **주제2 그래프 위젯**: `incline-motion/activity.html` 3·4차시. 시간축은 0.05 s 눈금 고정,
   그래프별 y축은 `<div class="plot" data-ymax data-ystep data-ylabelstep …>` 속성에서 조정.
   학생은 모눈 클릭 → **완료**(선 잇기) / **되돌리기** / **초기화** / **이론값 곡선 보기·숨기기**
@@ -174,5 +189,6 @@ git push -u origin main  # 원격은 이미 https://github.com/JIN/steam-2026.gi
 
 * 원 자료: 한국과학창의재단(KOFAC) 2022 개정 교육과정 융합교육(STEAM) 교재·지도서
   (주제 1 — 「융합9. 디지털로 읽는 산과 염기의 중화 반응」, 주제 3 — 「융합11. 온실효과 강화로 인한 지구온난화(기후변화) 이해하기」 등)
-* 이 사이트: 위 자료를 4차시 수업용으로 재구성한 2차 저작물
+* 주제 4는 KOFAC 자료가 아닌, 성취기준 `[10통과1-03-06]`을 바탕으로 한 신규 설계입니다.
+* 이 사이트: 위 자료를 4차시 수업용으로 재구성·설계한 2차/신규 저작물
 * 라이선스: [CC BY-NC-SA 4.0](LICENSE) — 출처 표시 · 비영리 · 동일조건 변경 허락
