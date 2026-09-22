@@ -92,7 +92,7 @@ GitHub에서 새 저장소 생성 (이름 예: `steam-2026`). README·라이선�
 
 ```bash
 cd "steam-2026"          # 이 폴더 (웹(steam-2026))
-git push -u origin main  # 원격은 이미 https://github.com/JIN/steam-2026.git 로 설정됨
+git push -u origin main  # 원격은 이미 https://github.com/hbjhfull-eng/steam-2026.git 로 설정됨
 ```
 > 웹 업로드 시 `.nojekyll` 이 누락되면 **Create new file** 로 파일명에 `.nojekyll` 만 입력해 빈 파일로 커밋.
 > 이 폴더는 Google Drive 안에 있으므로, **Drive 동기화가 멈춘 것을 확인한 뒤** 커밋·푸시하세요.
