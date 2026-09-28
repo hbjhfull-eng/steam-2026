@@ -88,7 +88,7 @@ https://<사용자명>.github.io/steam-2026/heart-rate-vitals/activity.html
   활동지 전체 내용이 교사의 구글 시트(주제별 탭, 모둠당 1행)에 저장됩니다. 같은 모둠명으로 재제출하면 덮어씁니다.
 - 구조: `activity.html` → `submit.js` → Apps Script 웹앱(`apps-script/Code.gs`) → 구글 시트.
 - **켜는 방법**: `apps-script/설정방법.md` 순서대로 웹앱을 배포한 뒤 `submit-config.js` 의 `endpoint` 에 주소를 넣고 푸시.
-  `endpoint` 가 비어 있으면 버튼이 나타나지 않습니다(현재 기본 상태).
+  `endpoint` 가 비어 있으면 버튼이 나타나지 않습니다. (현재는 웹앱 주소가 연결되어 있음)
 - 주제 폴더를 새로 만들 때는 `activity.html` 맨 아래에 `submit-config.js`·`submit.js` 스크립트 태그(`data-topic`, `data-store`, `data-plot-prefix`)를 복사하세요.
 
 ---

@@ -5,6 +5,6 @@
  * 코드 값 자체는 이 파일이 아니라 Apps Script(Code.gs)의 SUBMIT_CODE 에 넣으세요.
  */
 window.STEAM_SUBMIT = {
-  endpoint: "",
+  endpoint: "https://script.google.com/macros/s/AKfycbxEa6wycVF_oalwz4U31r6Mi1RZLpbLxBIx7aiq63yvbUAbQfVt9vBx7xDU4ySUwOQXrw/exec",
   needCode: false
 };
