@@ -16,6 +16,8 @@
 steam-2026/                         (GitHub 저장소 이름 예시)
 ├─ index.html                       프로그램 허브 — 소개 + 4개 주제 + 신청 안내(리로스쿨) + FAQ
 ├─ favicon.svg  .nojekyll  .gitignore  LICENSE  README.md
+├─ submit.js  submit-config.js       활동지 [제출하기] 기능 (공용) — endpoint 를 채우면 활성화
+├─ apps-script/                      제출 수신용 Google Apps Script (Code.gs + 설정방법.md)
 │
 ├─ conductivity-neutralization/      주제 1 — PASCO 센서로 읽는 중화 반응
 │   ├─ index.html                    주제 소개
@@ -79,6 +81,15 @@ https://<사용자명>.github.io/steam-2026/heart-rate-vitals/activity.html
 
 4개 주제 모두 확정되어 이 저장소에 있습니다. 다섯 번째 이후 주제를 더 추가하려면 하위 폴더를 새로 만들고
 기존 주제의 `index.html`·`activity.html`을 복제해 내용만 교체한 뒤, 허브 `topics` 안에 카드를 추가하면 됩니다.
+
+### 활동지 제출 (모둠 대표가 주제 마지막에 1회)
+
+- 4개 `activity.html` 상단에 **[제출하기]** 버튼이 생기고, 모둠 대표가 모둠명·모둠원을 적어 제출하면
+  활동지 전체 내용이 교사의 구글 시트(주제별 탭, 모둠당 1행)에 저장됩니다. 같은 모둠명으로 재제출하면 덮어씁니다.
+- 구조: `activity.html` → `submit.js` → Apps Script 웹앱(`apps-script/Code.gs`) → 구글 시트.
+- **켜는 방법**: `apps-script/설정방법.md` 순서대로 웹앱을 배포한 뒤 `submit-config.js` 의 `endpoint` 에 주소를 넣고 푸시.
+  `endpoint` 가 비어 있으면 버튼이 나타나지 않습니다(현재 기본 상태).
+- 주제 폴더를 새로 만들 때는 `activity.html` 맨 아래에 `submit-config.js`·`submit.js` 스크립트 태그(`data-topic`, `data-store`, `data-plot-prefix`)를 복사하세요.
 
 ---
 
