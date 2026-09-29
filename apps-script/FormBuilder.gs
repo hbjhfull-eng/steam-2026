@@ -18,6 +18,9 @@ var YESNO = ["그렇다", "아니다"];
 function buildAllForms() {
   var ss = SpreadsheetApp.create("STEAM 세특 근거 응답 모음");
   var ssId = ss.getId();
+  // 폼을 연결하면 구글이 새 시트를 어디에 끼워 넣을지 보장되지 않으므로,
+  // 요약표 전용 시트를 이름으로 직접 만들어 인덱스로 찾지 않음 (이전 버전의 버그 원인)
+  var sh = ss.insertSheet("링크 모음", 0);
 
   var links = [];
   links.push(buildPreIndividual(ssId));
@@ -27,9 +30,6 @@ function buildAllForms() {
   links.push(buildPostIndividual(ssId));
   links.push(buildPostTeam(ssId));
 
-  // 기본 시트 이름이 계정 언어에 따라 "시트1"/"Sheet1"로 달라질 수 있어 이름 대신 순서로 찾음
-  var sh = ss.getSheets()[0];
-  sh.setName("링크 모음");
   sh.getRange(1, 1, 1, 2).setValues([["폼 이름", "학생에게 나눠줄 링크"]]).setFontWeight("bold");
   sh.getRange(2, 1, links.length, 2).setValues(links);
   sh.autoResizeColumns(1, 2);
