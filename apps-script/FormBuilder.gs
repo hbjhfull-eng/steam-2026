@@ -27,12 +27,12 @@ function buildAllForms() {
   links.push(buildPostIndividual(ssId));
   links.push(buildPostTeam(ssId));
 
-  var sh = ss.getSheetByName("시트1");
-  if (sh) {
-    sh.getRange(1, 1, 1, 2).setValues([["폼 이름", "학생에게 나눠줄 링크"]]).setFontWeight("bold");
-    sh.getRange(2, 1, links.length, 2).setValues(links);
-    sh.autoResizeColumns(1, 2);
-  }
+  // 기본 시트 이름이 계정 언어에 따라 "시트1"/"Sheet1"로 달라질 수 있어 이름 대신 순서로 찾음
+  var sh = ss.getSheets()[0];
+  sh.setName("링크 모음");
+  sh.getRange(1, 1, 1, 2).setValues([["폼 이름", "학생에게 나눠줄 링크"]]).setFontWeight("bold");
+  sh.getRange(2, 1, links.length, 2).setValues(links);
+  sh.autoResizeColumns(1, 2);
   Logger.log("완료! 스프레드시트: " + ss.getUrl());
 }
 
