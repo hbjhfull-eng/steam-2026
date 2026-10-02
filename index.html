@@ -24,9 +24,9 @@
    〔문의〕              예) 과학실 / 내선 000
 
   신청 접수 (리로스쿨):
-   - 접수는 리로스쿨에서 4개 주제를 함께 안내하며 일괄 진행합니다.
-   - 접수를 시작하면 id="apply" 섹션의 '신청 준비 중' <span> 과 <p class="soon"> 을 지우고,
-     그 아래 주석 처리된 <a class="cta-big"> 의 href 에 리로스쿨 신청 페이지 주소를 넣으세요.
+   - 신청은 이 웹사이트가 아니라 리로스쿨에서 직접 받습니다. 리로스쿨 공지에 이 웹사이트 주소를
+     안내용으로 걸어 두고, 학생은 리로스쿨에서 바로 신청서를 작성합니다.
+   - 이 사이트의 id="apply" 섹션은 안내 문구만 있고 버튼/링크는 없습니다.
 
   주제 추가:
    - 주제 3·4가 정해지면 topics 그리드의 해당 <article class="topic-card soon"> 를 채우고,
@@ -156,13 +156,6 @@ th{width:32%;background:var(--card);font-family:var(--f-disp);font-weight:700;wh
 
 #apply .wrap{text-align:center}
 .deadline{font-family:var(--f-mono);font-size:13px;color:var(--acid);margin-top:10px}
-.cta-big{margin-top:18px;font-size:16px;font-weight:700;padding:15px 30px;background:var(--neutral);color:#fff;
-  text-decoration:none;border-radius:11px;display:inline-flex;gap:9px;align-items:center}
-.cta-big:hover{background:var(--neutral-deep)}
-.cta-big:focus-visible{outline:2px solid var(--neutral);outline-offset:3px}
-.cta-big.disabled{background:var(--line);color:var(--ink-soft);cursor:default;pointer-events:none}
-.soon-note{max-width:48ch;margin:14px auto 0;font-size:13.5px;color:var(--ink-soft);
-  background:var(--neutral-bg);border:1px solid var(--neutral);border-radius:10px;padding:11px 15px}
 #apply .contact{font-size:13px;color:var(--ink-soft);margin-top:16px}
 
 .faq{margin-top:20px;display:flex;flex-direction:column;gap:10px}
@@ -333,18 +326,9 @@ footer a{color:var(--ink-soft)}
     <div class="wrap">
       <h2>신청 안내</h2>
       <p class="intro" style="margin-left:auto;margin-right:auto">신청은 <b>리로스쿨</b>에서 4개 주제를 함께 안내하며
-        일괄 접수합니다. 지원할 때 희망 주제를 <b>1·2순위</b>로 선택하고, 지원 동기를 2~3줄 적습니다.</p>
+        일괄 접수합니다. 지원할 때 희망 주제를 <b>1·2순위</b>로 선택하고, 지원 동기를 2~3줄 적습니다.
+        <b>이 웹사이트에서는 신청을 받지 않으니</b>, 리로스쿨 공지사항에서 신청서를 작성해 주세요.</p>
       <p class="deadline">접수처 · 리로스쿨 &nbsp;|&nbsp; 신청 기간 · <span class="tbd">〔신청 기간〕</span></p>
-
-      <!-- 접수 시작 전: '준비 중' 상태 -->
-      <span class="cta-big disabled" aria-disabled="true">신청 준비 중</span>
-      <p class="soon-note">4개 주제가 모두 준비되면 <b>리로스쿨</b>에서 일괄 접수합니다 ·
-        <span class="tbd">〔O월 중〕</span> 공지 예정</p>
-
-      <!-- ▼ 접수 시작 시: 위 <span> 과 <p class="soon-note"> 를 지우고 아래 줄의 주석을 풀어
-             href 에 리로스쿨 신청 페이지 주소를 넣으세요.
-      <a class="cta-big" href="리로스쿨_신청_페이지_URL" target="_blank" rel="noopener">리로스쿨에서 신청하기 →</a>
-      -->
 
       <p class="contact">문의 · <span class="tbd">〔문의〕</span></p>
     </div>
