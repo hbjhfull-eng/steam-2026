@@ -12,25 +12,18 @@
 <meta property="og:type" content="website">
 
 <!-- =========================================================================
-  공개 전에 아래 〔  〕 부분을 실제 정보로 바꾸세요 (본문에 주황색 점선으로 표시됨):
+  운영 정보 확정 현황 (남은 〔 〕 플레이스홀더 없음 — 운영 요일만 아직 협의 중):
    (학교명은 김천한일고등학교로 확정되어 반영 완료)
    (운영 기간은 2026년 10월 중으로 확정)
    (운영 시간은 야자 1·2부로 확정, 요일은 협의 후 결정 예정 — 확정되면 index.html의 "요일은 협의 후 확정" 문구를 실제 요일로 교체)
    (장소는 창의융합실 1로 확정)
    (정원은 주제별 8명 내외로 확정, 상황에 따라 변동 가능)
-   〔신청 기간〕          예) 2026. 8. 25.(월) ~ 8. 29.(금) 17:00
-   〔O월 중〕             예) 8월
    (담당 교사는 황보진현·이재춘·조윤주·조혜지로 확정 — 주제별 담당은 추후 배정)
-   〔문의〕              예) 과학실 / 내선 000
 
-  신청 접수 (리로스쿨):
+  신청 접수:
    - 신청은 이 웹사이트가 아니라 리로스쿨에서 직접 받습니다. 리로스쿨 공지에 이 웹사이트 주소를
      안내용으로 걸어 두고, 학생은 리로스쿨에서 바로 신청서를 작성합니다.
-   - 이 사이트의 id="apply" 섹션은 안내 문구만 있고 버튼/링크는 없습니다.
-
-  주제 추가:
-   - 주제 3·4가 정해지면 topics 그리드의 해당 <article class="topic-card soon"> 를 채우고,
-     하위 폴더(예: topic-3/)에 소개·활동지 페이지를 추가한 뒤 href 를 연결하세요.
+   - 이 사이트에는 신청 안내 섹션/버튼이 없습니다 (의도적으로 제거함).
 ========================================================================== -->
 
 <style>
@@ -154,9 +147,6 @@ th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
 tr:last-child th,tr:last-child td{border-bottom:none}
 th{width:32%;background:var(--card);font-family:var(--f-disp);font-weight:700;white-space:nowrap}
 
-#apply .wrap{text-align:center}
-.deadline{font-family:var(--f-mono);font-size:13px;color:var(--acid);margin-top:10px}
-#apply .contact{font-size:13px;color:var(--ink-soft);margin-top:16px}
 
 .faq{margin-top:20px;display:flex;flex-direction:column;gap:10px}
 details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:2px 18px}
@@ -179,7 +169,6 @@ footer a{color:var(--ink-soft)}
       <a href="#topics" class="hide-sm">주제</a>
       <a href="#info" class="hide-sm">운영 안내</a>
       <a href="#faq" class="hide-sm">FAQ</a>
-      <a href="#apply" class="btn btn-primary">신청 안내</a>
     </nav>
   </div>
 </header>
@@ -190,10 +179,9 @@ footer a{color:var(--ink-soft)}
       <div class="eyebrow">2026학년도 2학기 야간 과제탐구반 · 1학년 학생 모집</div>
       <h1>교과서 밖에서 <span class="tag">직접</span> 재고, 그리고, 풀어 봅니다.</h1>
       <p class="sub">과학·기술·공학·예술·수학이 따로가 아니라 <b>하나의 문제</b>를 푸는 도구라는 걸
-        4차시 팀 프로젝트로 경험합니다. 아래 <b>4개 주제</b> 중 하나를 골라 신청하세요.</p>
+        4차시 팀 프로젝트로 경험합니다. 아래 <b>4개 주제</b> 중 하나를 골라 리로스쿨에서 신청하세요.</p>
       <div class="actions">
         <a href="#topics" class="btn btn-primary">주제 살펴보기</a>
-        <a href="#apply" class="btn btn-ghost">신청 안내 →</a>
       </div>
       <div class="chips">
         <div class="chip"><b>대상</b><span>1학년 (희망자)</span></div>
@@ -319,18 +307,6 @@ footer a{color:var(--ink-soft)}
         <article class="topic-card"><span class="badge">역량</span><ul style="margin-top:4px">
           <li>과학적 탐구력</li><li>컴퓨팅 사고력</li><li>수학적 모델링·데이터 해석</li></ul></article>
       </div>
-    </div>
-  </section>
-
-  <section class="blk" id="apply">
-    <div class="wrap">
-      <h2>신청 안내</h2>
-      <p class="intro" style="margin-left:auto;margin-right:auto">신청은 <b>리로스쿨</b>에서 4개 주제를 함께 안내하며
-        일괄 접수합니다. 지원할 때 희망 주제를 <b>1·2순위</b>로 선택하고, 지원 동기를 2~3줄 적습니다.
-        <b>이 웹사이트에서는 신청을 받지 않으니</b>, 리로스쿨 공지사항에서 신청서를 작성해 주세요.</p>
-      <p class="deadline">접수처 · 리로스쿨 &nbsp;|&nbsp; 신청 기간 · <span class="tbd">〔신청 기간〕</span></p>
-
-      <p class="contact">문의 · <span class="tbd">〔문의〕</span></p>
     </div>
   </section>
 
