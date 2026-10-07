@@ -189,6 +189,7 @@ body{margin:0}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
+<link rel="stylesheet" href="../paths.css">
 </head>
 <body>
 
@@ -197,6 +198,7 @@ img{max-width:100%}
     <a href="./" style="text-decoration:none;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px;flex:none">← 과정 소개</a>
     <strong>PASCO 센서로 읽는 중화 반응</strong>
     <span class="prog" id="prog">진행 0%</span>
+    <span class="mypath" id="mypath" role="button" tabindex="0" title="나의 경로 선택으로 이동">경로를 선택하세요</span>
     <nav class="steps" aria-label="차시 이동">
       <a href="#cha1" data-d="sci">1</a>
       <a href="#cha2" data-d="info">2</a>
@@ -223,6 +225,23 @@ img{max-width:100%}
       <label>이름 <input id="w-name" data-field="w-name" autocomplete="off"></label>
       <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
     </div>
+    <div class="cycle" aria-label="4단계 탐구 사이클">
+      <div class="cy"><b>① 문제 발견</b><span>산·염기가 만나면 무엇이 변할까? 측정으로 답할 수 있는 질문 만들기</span><em>1차시</em></div>
+      <div class="cy"><b>② 직접 측정</b><span>PASCO 센서로 같은 적정 실험을 세 가지 눈으로 동시에 측정하기</span><em>2차시 · 3차시</em></div>
+      <div class="cy"><b>③ 데이터 해석</b><span>그래프·함수로 중화점을 찾고 세 방법을 서로 견주기</span><em>3차시 · 4차시</em></div>
+      <div class="cy"><b>④ 재설계</b><span>결과를 바탕으로 실험을 고쳐 다시 설계하고 결과물로 정리하기</span><em>4차시</em></div>
+    </div>
+    <div class="pathsel" id="pathsel">
+      <h2>나의 경로 선택</h2>
+      <p>모둠원 4명이 서로 다른 경로(A~D)를 하나씩 맡습니다 — 모둠 안에서 겹치지 않게 정하세요. 모두 같은 4단계를 따라가지만, 차시마다 <b>내 경로의 미션 카드</b>가 달라집니다. 각자 결과를 모아 모둠이 하나의 결론을 만들고, 제출도 내 경로 결과(각자)와 모둠 통합본(대표)으로 나뉩니다. 활동 번호가 건너뛰는 것은 다른 경로의 활동이 숨겨져 있기 때문입니다. 경로를 바꾸면 이전 경로 카드에 쓴 내용은 저장되지만 제출에는 포함되지 않습니다. 모둠이 3명이면 한 사람이 두 경로를 맡고, 아래 <b>모든 경로 보기</b>를 켜서 두 경로의 카드를 모두 채웁니다.</p>
+      <div class="pcards" role="radiogroup" aria-label="나의 경로">
+        <label class="pcard" data-l="A"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="A"><b data-k="A">pH 탐정</b><span>pH 센서로 산·염기의 세기 변화를 읽는 경로 (전위차 적정)</span></label>
+        <label class="pcard" data-l="B"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="B"><b data-k="B">온도 탐정</b><span>온도 센서로 중화열을 읽는 경로 (열량 적정)</span></label>
+        <label class="pcard" data-l="C"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="C"><b data-k="C">전도도 탐정</b><span>전도도 센서로 이온 수 변화를 읽는 경로 (전기 전도도 적정)</span></label>
+        <label class="pcard" data-l="D"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="D"><b data-k="D">이온 해설가</b><span>지시약 색과 이온 모형으로 세 센서의 결과를 설명하는 경로</span></label>
+      </div>
+      <div class="pathtools"><label><input type="checkbox" id="pathall"> 모든 경로 보기 (경로를 둘 맡은 경우 · 선생님 미리보기)</label></div>
+    </div>
   </header>
 
   <!-- ================= 1차시 ================= -->
@@ -234,6 +253,8 @@ img{max-width:100%}
         <div class="sub">통합과학 · [10통과2-01-04] · 학습 모형: 순환</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st on">① 문제 발견</span><span class="st">② 직접 측정</span><span class="st">③ 데이터 해석</span><span class="st">④ 재설계</span><span class="stnote">이번 차시는 ① 문제 발견 — 내 경로가 확인할 질문을 만듭니다. <a class="gomission" data-n="1" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 산성·염기성이 나타나는 까닭을 이온으로 설명한다.
       ② 중화 반응을 화학 반응식과 알짜 이온 반응식, 이온 모형으로 나타낸다.</p>
 
@@ -306,6 +327,50 @@ img{max-width:100%}
         완전 중화 이후에 H⁺과 Cl⁻이 함께 늘면서 총 이온 수가 증가한다. 이 변화가 다음 차시 "전기 전도도"와 연결됩니다.</div>
     </div>
 
+    <div class="act pm" id="pm1-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> pH가 알려 줄 질문 만들기</h3>
+      <p class="lead">중화가 진행되면 pH는 어떻게 변할까요? 내가 pH 센서로 확인할 수 있는 질문을 정합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내가 던질 탐구 질문 한 문장</div>
+      <div class="write" contenteditable="true" data-field="p1A-1" data-q="[1차시 경로A] 내가 던질 탐구 질문 한 문장" data-ph="예: 염산에 NaOH를 조금씩 넣을 때 pH는 어떤 모양으로 변할까?"></div>
+      <div class="qlabel"><span class="b">2</span> 예상 그래프 — 가로: 넣은 NaOH 양, 세로: pH. 모양을 말로 설명해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p1A-2" data-q="[1차시 경로A] 예상 그래프 — 가로: 넣은 NaOH 양, 세로: pH. 모양을 말로 설명해 보세요" data-ph="예: 처음엔 천천히 오르다가 어느 지점에서 갑자기 크게 오른다"></div>
+      <div class="qlabel"><span class="b">3</span> pH 센서만으로는 알 수 없는 것은? (다른 경로에 부탁할 것)</div>
+      <div class="write" contenteditable="true" data-field="p1A-3" data-q="[1차시 경로A] pH 센서만으로는 알 수 없는 것은? (다른 경로에 부탁할 것)" data-ph="예: 온도 변화, 이온 수"></div>
+    </div>
+
+    <div class="act pm" id="pm1-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 중화열이 알려 줄 질문 만들기</h3>
+      <p class="lead">중화 반응이 일어나면 온도가 변합니다. 내가 온도 센서로 확인할 수 있는 질문을 정합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내가 던질 탐구 질문 한 문장</div>
+      <div class="write" contenteditable="true" data-field="p1B-1" data-q="[1차시 경로B] 내가 던질 탐구 질문 한 문장" data-ph="예: NaOH를 넣을수록 용액 온도는 계속 오를까?"></div>
+      <div class="qlabel"><span class="b">2</span> 온도가 변하는 까닭을 '에너지' 관점에서 설명해 보세요 (산 + 염기 → 물 + 염 + 중화열)</div>
+      <div class="write" contenteditable="true" data-field="p1B-2" data-q="[1차시 경로B] 온도가 변하는 까닭을 &#x27;에너지&#x27; 관점에서 설명해 보세요 (산 + 염기 → 물 + 염 +" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 온도 센서가 놓칠 수 있는 것은? (예: 주변으로 빠져나가는 열)</div>
+      <div class="write" contenteditable="true" data-field="p1B-3" data-q="[1차시 경로B] 온도 센서가 놓칠 수 있는 것은? (예: 주변으로 빠져나가는 열)" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm1-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 이온 수가 알려 줄 질문 만들기</h3>
+      <p class="lead">활동 3의 이온 수 변화표를 떠올려 보세요. 이온이 많을수록 전기가 잘 통합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내가 던질 탐구 질문 한 문장</div>
+      <div class="write" contenteditable="true" data-field="p1C-1" data-q="[1차시 경로C] 내가 던질 탐구 질문 한 문장" data-ph="예: 중화가 진행될수록 전도도는 어떻게 달라질까?"></div>
+      <div class="qlabel"><span class="b">2</span> 이온 수 표를 보고 전도도를 예상해 보세요 — ① 처음 → ③ 완전 중화 → ④ HCl(또는 NaOH) 더 넣음</div>
+      <div class="write" contenteditable="true" data-field="p1C-2" data-q="[1차시 경로C] 이온 수 표를 보고 전도도를 예상해 보세요 — ① 처음 → ③ 완전 중화 → ④ HCl" data-ph="예: 처음 크다 → 줄어 최저 → 다시 커진다"></div>
+      <div class="qlabel"><span class="b">3</span> 전도도 센서만으로는 구별할 수 없는 것은?</div>
+      <div class="write" contenteditable="true" data-field="p1C-3" data-q="[1차시 경로C] 전도도 센서만으로는 구별할 수 없는 것은?" data-ph="예: 어떤 이온이 많은지(종류)"></div>
+    </div>
+
+    <div class="act pm" id="pm1-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 지시약과 이온 모형으로 질문 만들기</h3>
+      <p class="lead">지시약은 색으로, 이온 모형은 그림으로 중화를 보여 줍니다. 두 가지로 세 센서의 결과를 설명할 준비를 합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 지시약(예: 페놀프탈레인)의 색이 바뀌는 순간, 비커 속 H⁺와 OH⁻는 어떤 상태일까요?</div>
+      <div class="write" contenteditable="true" data-field="p1D-1" data-q="[1차시 경로D] 지시약(예: 페놀프탈레인)의 색이 바뀌는 순간, 비커 속 H⁺와 OH⁻는 어떤 상태일까" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 처음 / 완전 중화 / 더 넣은 뒤 — 세 시점의 이온 모형 그림을 어떻게 그릴지 글로 계획하세요</div>
+      <div class="write" contenteditable="true" data-field="p1D-2" data-q="[1차시 경로D] 처음 / 완전 중화 / 더 넣은 뒤 — 세 시점의 이온 모형 그림을 어떻게 그릴지 글로" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 세 센서의 결과가 서로 다르게 나올 수 있는 까닭을 미리 예상해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p1D-3" data-q="[1차시 경로D] 세 센서의 결과가 서로 다르게 나올 수 있는 까닭을 미리 예상해 보세요" data-ph=""></div>
+    </div>
+
     <div class="act">
       <h3><span class="tag">닫기</span> 중화점을 확인하는 3가지 방법</h3>
       <div class="write" contenteditable="true" data-field="c1-methods" data-q="중화점 확인 방법 3가지" data-ph="① 지시약의 색 변화  ② 혼합 용액의 온도 변화(중화열)  ③ 전기 전도도(전류 세기) 변화"></div>
@@ -313,6 +378,21 @@ img{max-width:100%}
         <b>전기 전도도 적정</b>(전도도 센서)이라고 부릅니다. 2~4차시에서 이 세 가지를 <b>PASCO 무선 센서</b>로 동시에 측정해 봅니다.</div>
       <div class="qlabel"><span class="b">Q</span> 이제 처음 질문에 답해 보세요. 딱따구리가 개미를 먹을 수 있는 까닭은?</div>
       <div class="write" contenteditable="true" data-field="c1-answer" data-q="1차시 닫기: 개미 질문 최종 답" data-ph="딱따구리의 침(또는 소화액)에 들어 있는 염기성 물질이 개미산을 중화하기 때문이다."></div>
+    </div>
+
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> pH 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-A" data-q="[모둠 1차시] A경로(pH 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 온도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-B" data-q="[모둠 1차시] B경로(온도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 전도도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-C" data-q="[모둠 1차시] C경로(전도도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 이온 해설가 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-D" data-q="[모둠 1차시] D경로(이온 해설가) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 네 질문을 합쳐 '우리 모둠의 탐구 질문'을 한 문장으로 만드세요</div>
+      <div class="write" contenteditable="true" data-field="tb1-sum" data-q="[모둠 1차시] 종합: 네 질문을 합쳐 &#x27;우리 모둠의 탐구 질문&#x27;을 한 문장으로 만드세요" data-ph="" style="min-height:4em"></div>
     </div>
 
     <div class="selfcheck">
@@ -333,6 +413,8 @@ img{max-width:100%}
         <div class="sub">정보 · 공학 · [12정03-07] · pH · 온도 · 전도도 무선 센서 + SPARKvue</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st">① 문제 발견</span><span class="st on">② 직접 측정</span><span class="st">③ 데이터 해석</span><span class="st">④ 재설계</span><span class="stnote">이번 차시는 ② 직접 측정 — 내 경로의 측정을 준비하고 계획을 세웁니다. <a class="gomission" data-n="2" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 문제 해결에 알맞은 다중 센서 구성을 선택한다.
       ② PASCO 무선 센서를 SPARKvue에 연결한다. ③ 측정 계획을 설계한다.</p>
 
@@ -395,6 +477,65 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c2-safety" data-q="안전 수칙" data-ph="보안경·장갑 착용, 피부에 튀면 즉시 물로 씻기, 용액 냄새를 직접 맡지 않기"></div>
     </div>
 
+    <div class="act pm" id="pm2-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> pH 센서 보정과 측정 계획</h3>
+      <p class="lead">정확한 값을 얻으려면 센서를 먼저 점검하고, 어떻게 넣고 얼마나 기다릴지 정해야 합니다.</p>
+      <div class="qlabel"><span class="b">1</span> pH 센서 점검·보정 방법과 확인 결과 (예: 표준 용액 pH 4·7로 확인)</div>
+      <div class="write" contenteditable="true" data-field="p2A-1" data-q="[2차시 경로A] pH 센서 점검·보정 방법과 확인 결과 (예: 표준 용액 pH 4·7로 확인)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> NaOH를 한 번에 몇 mL씩, 몇 초 기다렸다가 기록할까요? 그 이유는?</div>
+      <div class="write" contenteditable="true" data-field="p2A-2" data-q="[2차시 경로A] NaOH를 한 번에 몇 mL씩, 몇 초 기다렸다가 기록할까요? 그 이유는?" data-ph="예: 1 mL씩, 값이 안정될 때까지 약 10초"></div>
+      <div class="qlabel"><span class="b">3</span> 정확도를 해칠 수 있는 요인 2가지와 막는 방법</div>
+      <div class="write" contenteditable="true" data-field="p2A-3" data-q="[2차시 경로A] 정확도를 해칠 수 있는 요인 2가지와 막는 방법" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm2-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 온도 측정 계획 — 열 손실 줄이기</h3>
+      <p class="lead">중화열은 작아서 주변으로 빠져나가면 변화가 잘 보이지 않습니다.</p>
+      <div class="qlabel"><span class="b">1</span> 시작 온도가 안정될 때까지 기다린 시간과 처음 온도</div>
+      <div class="write" contenteditable="true" data-field="p2B-1" data-q="[2차시 경로B] 시작 온도가 안정될 때까지 기다린 시간과 처음 온도" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 열 손실을 줄이는 방법 (예: 용기, 뚜껑, 교반)</div>
+      <div class="write" contenteditable="true" data-field="p2B-2" data-q="[2차시 경로B] 열 손실을 줄이는 방법 (예: 용기, 뚜껑, 교반)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 온도 변화가 너무 작아 보일 때 어떻게 확인할 계획인가요?</div>
+      <div class="write" contenteditable="true" data-field="p2B-3" data-q="[2차시 경로B] 온도 변화가 너무 작아 보일 때 어떻게 확인할 계획인가요?" data-ph="예: 센서 눈금 간격을 좁히기, 용액 양 줄이기"></div>
+    </div>
+
+    <div class="act pm" id="pm2-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 전도도 측정 계획 — 전극 관리</h3>
+      <p class="lead">전도도는 전극 상태와 섞이는 정도에 크게 좌우됩니다.</p>
+      <div class="qlabel"><span class="b">1</span> 전극 세척·침지 깊이 등 준비 상태와, 증류수에서의 시험 측정값</div>
+      <div class="write" contenteditable="true" data-field="p2C-1" data-q="[2차시 경로C] 전극 세척·침지 깊이 등 준비 상태와, 증류수에서의 시험 측정값" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 측정 범위(μS/cm)와 표본율을 어떻게 정했나요?</div>
+      <div class="write" contenteditable="true" data-field="p2C-2" data-q="[2차시 경로C] 측정 범위(μS/cm)와 표본율을 어떻게 정했나요?" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 용액을 저어 주지 않으면 어떤 문제가 생길까요?</div>
+      <div class="write" contenteditable="true" data-field="p2C-3" data-q="[2차시 경로C] 용액을 저어 주지 않으면 어떤 문제가 생길까요?" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm2-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 안전·역할·지시약 계획</h3>
+      <p class="lead">네 경로가 한 비커에서 부딪히지 않도록 조정하고, 안전을 책임지는 경로입니다.</p>
+      <div class="qlabel"><span class="b">1</span> 시약 취급 안전 수칙과 위험 요소 3가지</div>
+      <div class="write" contenteditable="true" data-field="p2D-1" data-q="[2차시 경로D] 시약 취급 안전 수칙과 위험 요소 3가지" data-ph="예: 보안경·장갑 착용, 피부에 닿으면 즉시 물로 씻기"></div>
+      <div class="qlabel"><span class="b">2</span> 지시약은 어디에 어떻게 넣을까요? (센서에 영향을 주지 않는 방법)</div>
+      <div class="write" contenteditable="true" data-field="p2D-2" data-q="[2차시 경로D] 지시약은 어디에 어떻게 넣을까요? (센서에 영향을 주지 않는 방법)" data-ph="예: 별도 시험관에서 같은 비율로 소량 비교"></div>
+      <div class="qlabel"><span class="b">3</span> 측정을 시작하기 전에 모둠원 A·B·C에게 확인할 질문 3가지</div>
+      <div class="write" contenteditable="true" data-field="p2D-3" data-q="[2차시 경로D] 측정을 시작하기 전에 모둠원 A·B·C에게 확인할 질문 3가지" data-ph="예: 센서 연결됐나요? 영점 확인했나요? 기록 준비됐나요?"></div>
+    </div>
+
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> pH 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-A" data-q="[모둠 2차시] A경로(pH 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 온도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-B" data-q="[모둠 2차시] B경로(온도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 전도도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-C" data-q="[모둠 2차시] C경로(전도도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 이온 해설가 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-D" data-q="[모둠 2차시] D경로(이온 해설가) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 세 센서와 지시약이 한 비커에서 서로 방해하는 점과 해결 계획</div>
+      <div class="write" contenteditable="true" data-field="tb2-sum" data-q="[모둠 2차시] 종합: 세 센서와 지시약이 한 비커에서 서로 방해하는 점과 해결 계획" data-ph="" style="min-height:4em"></div>
+    </div>
+
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
       <div class="row"><span>① 문제 해결에 알맞은 다중 센서 구성을 선택할 수 있다.</span>
@@ -413,6 +554,8 @@ img{max-width:100%}
         <div class="sub">통합과학 + 정보 · pH·온도·전도도 동시 측정</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st">① 문제 발견</span><span class="st on">② 직접 측정</span><span class="st on">③ 데이터 해석</span><span class="st">④ 재설계</span><span class="stnote">이번 차시는 ② 직접 측정 → ③ 데이터 해석 — 실제로 재고, 내 경로의 결과를 읽습니다. <a class="gomission" data-n="3" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 세 센서로 중화 적정 실험을 안전하게 수행한다.
       ② 세 그래프의 개형(모양)을 비교·관찰한다.</p>
 
@@ -476,6 +619,50 @@ img{max-width:100%}
       </figure>
     </div>
 
+    <div class="act pm" id="pm3-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> pH 곡선 읽기</h3>
+      <p class="lead">측정한 pH 값을 표의 pH 줄에 채우고, 곡선이 어떻게 변했는지 읽습니다.</p>
+      <div class="qlabel"><span class="b">1</span> pH가 가장 급하게 변한 회차와 그때의 pH 범위</div>
+      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] pH가 가장 급하게 변한 회차와 그때의 pH 범위" data-ph="예: 7→8회차, pH 3 → 11"></div>
+      <div class="qlabel"><span class="b">2</span> 예상했던 그래프와 달랐던 점과 그 이유</div>
+      <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] 예상했던 그래프와 달랐던 점과 그 이유" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점</div>
+      <div class="write" contenteditable="true" data-field="p3A-3" data-q="[3차시 경로A] 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 온도 곡선 읽기</h3>
+      <p class="lead">측정한 온도를 표의 온도 줄에 채우고, 최고점을 찾습니다.</p>
+      <div class="qlabel"><span class="b">1</span> 온도가 가장 높았던 회차와 최고 온도</div>
+      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 온도가 가장 높았던 회차와 최고 온도" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 최고점 이후 온도는 어떻게 되었나요? 그 이유는?</div>
+      <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] 최고점 이후 온도는 어떻게 되었나요? 그 이유는?" data-ph="예: 거의 유지되거나 조금 내려감 — 더 넣어도 반응할 산이 없다"></div>
+      <div class="qlabel"><span class="b">3</span> 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점</div>
+      <div class="write" contenteditable="true" data-field="p3B-3" data-q="[3차시 경로B] 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 전도도 곡선 읽기</h3>
+      <p class="lead">측정한 전도도를 표의 전도도 줄에 채우고, 최저점을 찾습니다.</p>
+      <div class="qlabel"><span class="b">1</span> 전도도가 가장 낮았던 회차와 그 값</div>
+      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 전도도가 가장 낮았던 회차와 그 값" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 최저점 앞뒤의 기울기가 다른 까닭을 이온 수로 설명해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] 최저점 앞뒤의 기울기가 다른 까닭을 이온 수로 설명해 보세요" data-ph="예: 앞에서는 H⁺이 줄어 이온이 감소, 뒤에서는 Na⁺·OH⁻이 늘어 증가"></div>
+      <div class="qlabel"><span class="b">3</span> 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점</div>
+      <div class="write" contenteditable="true" data-field="p3C-3" data-q="[3차시 경로C] 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 이온 모형으로 세 결과 해설하기</h3>
+      <p class="lead">지시약의 색 변화와 이온 모형으로 세 센서의 결과가 왜 그렇게 나왔는지 설명하는 경로입니다.</p>
+      <div class="qlabel"><span class="b">1</span> 지시약 색이 바뀐 회차와 센서 결과가 가리킨 회차를 견주어 보세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 지시약 색이 바뀐 회차와 센서 결과가 가리킨 회차를 견주어 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 처음 / 중화점 / 이후 — 세 시점의 이온 모형을 글로 설명해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] 처음 / 중화점 / 이후 — 세 시점의 이온 모형을 글로 설명해 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 네 가지 방법(pH·온도·전도도·지시약) 중 가장 믿을 만한 것과 그 이유</div>
+      <div class="write" contenteditable="true" data-field="p3D-3" data-q="[3차시 경로D] 네 가지 방법(pH·온도·전도도·지시약) 중 가장 믿을 만한 것과 그 이유" data-ph=""></div>
+    </div>
+
     <div class="act">
       <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
       <div class="qlabel"><span class="b">1</span> 세 그래프에서 각각 중화점으로 보이는 회차는? (pH 급변 / 온도 최고 / 전도도 최저)</div>
@@ -484,6 +671,21 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c3-q2" data-q="토의2: 세 방법 비교" data-ph=""></div>
       <div class="qlabel"><span class="b">3</span> 중화점 전후로 전도도가 변하는 까닭을 1차시 이온 수 변화표와 연결해 설명하기</div>
       <div class="write" contenteditable="true" data-field="c3-q3" data-q="토의3: 전도도 변화의 이온론적 설명" data-ph="중화점 전: H⁺이 OH⁻와 만나 물이 되며 이온이 줄어 전도도 감소 / 중화점 후: Na⁺·OH⁻이 늘며 전도도 증가"></div>
+    </div>
+
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> pH 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-A" data-q="[모둠 3차시] A경로(pH 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 온도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-B" data-q="[모둠 3차시] B경로(온도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 전도도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-C" data-q="[모둠 3차시] C경로(전도도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 이온 해설가 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-D" data-q="[모둠 3차시] D경로(이온 해설가) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 네 경로가 가리킨 중화점 회차를 견주어 보세요 — 어디가 일치하고 어디가 다른가요?</div>
+      <div class="write" contenteditable="true" data-field="tb3-sum" data-q="[모둠 3차시] 종합: 네 경로가 가리킨 중화점 회차를 견주어 보세요 — 어디가 일치하고 어디가" data-ph="" style="min-height:4em"></div>
     </div>
 
     <div class="selfcheck">
@@ -504,11 +706,13 @@ img{max-width:100%}
         <div class="sub">통합과학 + 공통수학 · 절댓값 함수 · 변화율 · 탐구 보고서</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st">① 문제 발견</span><span class="st">② 직접 측정</span><span class="st on">③ 데이터 해석</span><span class="st on">④ 재설계</span><span class="stnote">이번 차시는 ③ 데이터 해석 → ④ 재설계 — 결과를 해석하고, 실험·모형을 고쳐 다시 설계합니다. <a class="gomission" data-n="4" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 전도도·온도·pH 세 그래프를 각각 알맞은 함수/변화율로 모델링해 중화점을 구한다.
       ② 결과를 모둠 탐구 보고서와 인포그래픽으로 정리한다.</p>
 
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 전도도 → 절댓값 함수</h3>
+    <div class="act" data-p="C">
+      <h3><span class="tag">활동 1 · C 경로</span> 전도도 → 절댓값 함수</h3>
       <p class="lead">일차함수 <code>y = ax + b</code>의 <b>a = 기울기</b>, <b>b = y절편</b>. 절댓값 <code>|x|</code>은 "0에서 꺾이는 V자".
         둘을 합치면 <b>y = a|x − p| + q</b> — <b>(p, q)</b>가 꺾이는 점(중화점), a가 기울기입니다.</p>
       <ol class="todo">
@@ -530,8 +734,8 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c4-fn" data-q="전도도 절댓값 함수와 중화점 A" data-ph="y = 2|x − 8| + 1 → 중화점 A: 8회차, 전도도 1"></div>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 온도(중화열) → 뒤집힌 절댓값 함수</h3>
+    <div class="act" data-p="B">
+      <h3><span class="tag">활동 2 · B 경로</span> 온도(중화열) → 뒤집힌 절댓값 함수</h3>
       <p class="lead">중화 반응이 진행될수록 중화열이 쌓여 온도가 오르다가, 완전 중화 지점에서 가장 높고 그 뒤로는 거의 유지되거나 살짝 내려갑니다 —
         산 모양(∧)이므로 <b>y = −a|x − p| + q</b> (또는 이차함수 <code>y=-a(x-p)²+q</code>)로 나타낼 수 있습니다.</p>
       <div class="fml">전도도 함수 <code>y=a|x-p|+q</code>의 부호만 바꾸면 산 모양이 됩니다: <code>y=-a|x-p|+q</code></div>
@@ -539,8 +743,8 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c4-fn2" data-q="온도 함수와 중화점 B" data-ph="y = −0.4|x − 8| + 24.5 → 중화점 B: 8회차, 온도 24.5℃"></div>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 3</span> pH → 변화율이 가장 큰 지점</h3>
+    <div class="act" data-p="A">
+      <h3><span class="tag">활동 3 · A 경로</span> pH → 변화율이 가장 큰 지점</h3>
       <p class="lead">pH 그래프는 V자도 산 모양도 아닌 S자(시그모이드) 곡선입니다. 대신 2차시에서 배운 "구간의 변화율 = 기울기"
         아이디어를 그대로 씁니다 — <b>변화율이 가장 큰 구간</b>이 중화점입니다.</p>
       <div class="tbl-wrap">
@@ -555,8 +759,8 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c4-fn3" data-q="pH 최대 변화율 구간과 중화점 C" data-ph="6→8 구간의 변화율이 가장 크다 → 중화점 C: 약 7회차"></div>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 4</span> 세 중화점 비교 &amp; 예측</h3>
+    <div class="act" data-p="D">
+      <h3><span class="tag">활동 4 · D 경로</span> 세 중화점 비교 &amp; 예측</h3>
       <div class="tbl-wrap">
         <table>
           <caption>세 가지 방법으로 구한 중화점(회차) 비교</caption>
@@ -571,7 +775,51 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c4-predict" data-q="함수로 예측한 값과 과정" data-ph="y = 2|13 − 8| + 1 = 11"></div>
     </div>
 
-    <div class="act">
+    <div class="act pm" id="pm4-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> 재설계 ④ — pH 급변 구간 더 정밀하게</h3>
+      <p class="lead">활동 3에서 구한 중화점 C(변화율이 가장 큰 구간)를 근거로 실험을 고쳐 설계합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내 해석 결과 한 줄: pH 변화율이 가장 큰 구간과 중화점 C</div>
+      <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] 내 해석 결과 한 줄: pH 변화율이 가장 큰 구간과 중화점 C" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 급변 구간을 더 촘촘히 재려면 첨가량·측정 방법을 어떻게 바꿀까요? (숫자로)</div>
+      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 급변 구간을 더 촘촘히 재려면 첨가량·측정 방법을 어떻게 바꿀까요? (숫자로)" data-ph="예: 6~8회차 구간은 0.2 mL씩 넣고 표본율을 높인다"></div>
+      <div class="qlabel"><span class="b">3</span> 바꾼 설계로 기대하는 달라진 점</div>
+      <div class="write" contenteditable="true" data-field="p4A-3" data-q="[4차시 경로A] 바꾼 설계로 기대하는 달라진 점" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 재설계 ④ — 열 손실 줄이기</h3>
+      <p class="lead">활동 2의 결과(중화점 B)를 근거로 최고점이 더 뚜렷해지도록 설계를 바꿉니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내 해석 결과 한 줄: 최고 온도 회차와 중화점 B</div>
+      <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 내 해석 결과 한 줄: 최고 온도 회차와 중화점 B" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 최고점을 더 뚜렷하게 만들 방법 (보온, 농도, 부피 중에서 구체적으로)</div>
+      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 최고점을 더 뚜렷하게 만들 방법 (보온, 농도, 부피 중에서 구체적으로)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 바꾼 설계로 기대하는 달라진 점</div>
+      <div class="write" contenteditable="true" data-field="p4B-3" data-q="[4차시 경로B] 바꾼 설계로 기대하는 달라진 점" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 재설계 ④ — 이온 신호 키우기</h3>
+      <p class="lead">활동 1의 결과(중화점 A)를 근거로 V자가 더 뚜렷해지도록 설계를 바꿉니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내 해석 결과 한 줄: 절댓값 함수와 중화점 A</div>
+      <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] 내 해석 결과 한 줄: 절댓값 함수와 중화점 A" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 농도·부피를 어떻게 바꾸면 V자가 더 뚜렷해질까요? 이유도 함께</div>
+      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 농도·부피를 어떻게 바꾸면 V자가 더 뚜렷해질까요? 이유도 함께" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 바꾼 설계로 기대하는 달라진 점</div>
+      <div class="write" contenteditable="true" data-field="p4C-3" data-q="[4차시 경로C] 바꾼 설계로 기대하는 달라진 점" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 재설계 ④ — 세 결과 종합과 재설계 심사</h3>
+      <p class="lead">A·B·C의 재설계안을 견주어 모둠이 다시 해 볼 실험 하나를 고릅니다.</p>
+      <div class="qlabel"><span class="b">1</span> 세 중화점(A·B·C)의 값과 차이를 정리해 보세요 (활동 4의 표 활용)</div>
+      <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] 세 중화점(A·B·C)의 값과 차이를 정리해 보세요 (활동 4의 표 활용)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 값이 다르게 나온 가장 큰 원인 한 가지와 그 근거</div>
+      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 값이 다르게 나온 가장 큰 원인 한 가지와 그 근거" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 세 재설계안 중 모둠이 먼저 다시 해 볼 것 하나와 고른 이유</div>
+      <div class="write" contenteditable="true" data-field="p4D-3" data-q="[4차시 경로D] 세 재설계안 중 모둠이 먼저 다시 해 볼 것 하나와 고른 이유" data-ph=""></div>
+    </div>
+
+    <div class="act team-only">
       <h3><span class="tag">활동 5</span> 결과물 ① — 모둠 탐구 보고서 작성</h3>
       <p class="lead">아래 항목을 순서대로 채우면, [답안 복사] 또는 [인쇄·PDF]로 그대로 하나의 보고서가 됩니다.</p>
       <div class="qlabel"><span class="b">제목</span> 우리 모둠의 탐구 제목</div>
@@ -586,7 +834,7 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c4r-conclusion" data-q="[보고서] 결론 및 제언" data-ph=""></div>
     </div>
 
-    <div class="act">
+    <div class="act team-only">
       <h3><span class="tag">활동 6</span> 결과물 ② — 한 장 인포그래픽 기획</h3>
       <p class="lead"><b>미리캔버스</b> 또는 <b>구글 프레젠테이션</b>으로 한 장짜리 인포그래픽을 만듭니다. 먼저 아래 기획표를 채우세요.</p>
       <ul class="todo">
@@ -608,6 +856,21 @@ img{max-width:100%}
       <div class="write" contenteditable="true" data-field="c4-peer" data-q="동료평가" data-ph=""></div>
     </div>
 
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> pH 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-A" data-q="[모둠 4차시] A경로(pH 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 온도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-B" data-q="[모둠 4차시] B경로(온도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 전도도 탐정 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-C" data-q="[모둠 4차시] C경로(전도도 탐정) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 이온 해설가 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-D" data-q="[모둠 4차시] D경로(이온 해설가) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 최종 중화점과, 다시 해 볼 실험 계획 (바꿀 것 · 고정할 것 · 기대 결과)</div>
+      <div class="write" contenteditable="true" data-field="tb4-sum" data-q="[모둠 4차시] 종합: 최종 중화점과, 다시 해 볼 실험 계획 (바꿀 것 · 고정할 것 · 기대" data-ph="" style="min-height:4em"></div>
+    </div>
+
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
       <div class="row"><span>① 전도도·온도·pH 데이터를 각각 알맞은 함수/변화율로 모델링해 중화점을 구할 수 있다.</span>
@@ -619,7 +882,7 @@ img{max-width:100%}
 
   <footer>
     이 활동지의 입력 내용은 사용 중인 기기의 브라우저에만 저장됩니다(다른 기기·친구에게 전송되지 않음).
-    제출은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
+    내 경로 결과·모둠 통합본은 위쪽 <b>제출하기</b>로, 개인 보관은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
   </footer>
 </main>
 
@@ -654,25 +917,26 @@ img{max-width:100%}
     }
   });
 
-  // progress: distinct field keys with a non-empty value
-  var keys={};
-  fields.forEach(function(el){ keys[el.getAttribute("data-field")]=true; });
-  var totalKeys=Object.keys(keys).length;
+  // progress: 보이는(내 경로) 입력칸만 계산 — 모둠 공유판은 제외
+  var keys={}, keyEls={};
+  fields.forEach(function(el){ var k=el.getAttribute("data-field"); keys[k]=true; (keyEls[k]=keyEls[k]||[]).push(el); });
   var progEl=document.getElementById("prog");
-  function filledCount(){
-    var n=0;
-    for(var k in keys){
-      var v=store[k];
-      if(v===true) n++;
-      else if(typeof v==="string" && v.trim()!=="") n++;
-    }
-    return n;
+  function isOn(k){
+    return keyEls[k].some(function(el){
+      if(el.closest(".team-only")||el.closest(".pathsel")) return false;
+      return !(window.steamPathHidden&&window.steamPathHidden(el));
+    });
   }
   function updateProgress(){
     if(!progEl)return;
-    var pct=totalKeys? Math.round(filledCount()/totalKeys*100):0;
-    progEl.textContent="진행 "+pct+"%";
+    var n=0,tot=0;
+    for(var k in keys){
+      if(!isOn(k)) continue; tot++;
+      var v=store[k]; if(v===true||(typeof v==="string"&&v.trim()!=="")) n++;
+    }
+    progEl.textContent="진행 "+(tot?Math.round(n/tot*100):0)+"%";
   }
+  document.addEventListener("steam-path",updateProgress);
   updateProgress();
 
   // section highlight in nav
@@ -700,11 +964,13 @@ img{max-width:100%}
     ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
     lines.push("PASCO 센서로 읽는 중화 반응 — 활동지 답안");
     if(head.length) lines.push(head.join(" / "));
+    if(store["w-path"]&&window.steamPathLabel) lines.push("내 경로: "+window.steamPathLabel(store["w-path"]));
     lines.push("");
     document.querySelectorAll("section.cha").forEach(function(sec){
       var h2=sec.querySelector(".cha-head h2");
       lines.push("=== "+(sec.querySelector(".cha-num").textContent)+" "+(h2?h2.textContent:"")+" ===");
       sec.querySelectorAll("[data-field]").forEach(function(el){
+        if(el.closest(".pathsel")||(window.steamPathHidden&&window.steamPathHidden(el))) return;
         var k=el.getAttribute("data-field"), q=el.getAttribute("data-q")||k, v=store[k];
         if(el.type==="checkbox"){ if(v===true) lines.push("[v] "+ (el.closest("li")? el.closest("li").innerText.replace(/\s+/g," ").trim() : q)); return; }
         if(el.type==="radio"){ if(el.checked) lines.push("· "+q+": "+v); return; }
@@ -732,6 +998,7 @@ img{max-width:100%}
 })();
 </script>
 
+<script src="../paths.js"></script>
 <script src="../submit-config.js"></script>
 <script src="../submit.js" data-topic="주제1 중화반응" data-store="ddr-jungwha-v1" data-plot-prefix=""></script>
 

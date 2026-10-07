@@ -176,6 +176,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
   figure svg{border-color:#999}
 }
 </style>
+<link rel="stylesheet" href="../paths.css">
 </head>
 <body>
 
@@ -184,6 +185,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <a href="./" style="text-decoration:none;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px;flex:none">← 과정 소개</a>
     <strong>심박 센서로 읽는 활력징후</strong>
     <span class="prog" id="prog">진행 0%</span>
+    <span class="mypath" id="mypath" role="button" tabindex="0" title="나의 경로 선택으로 이동">경로를 선택하세요</span>
     <nav class="steps" aria-label="차시 이동">
       <a href="#cha1" data-d="sci">1</a>
       <a href="#cha2" data-d="info">2</a>
@@ -210,6 +212,23 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <label>이름 <input id="w-name" data-field="w-name" autocomplete="off"></label>
       <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
     </div>
+    <div class="cycle" aria-label="4단계 탐구 사이클">
+      <div class="cy"><b>① 문제 발견</b><span>의료진이 가장 먼저 재는 것, 우리 몸은 어떻게 변할까? 확인할 질문 만들기</span><em>1차시</em></div>
+      <div class="cy"><b>② 직접 측정</b><span>내가 만든 센서로 안정·운동·회복의 심박수를 직접 재기</span><em>2차시 · 3차시</em></div>
+      <div class="cy"><b>③ 데이터 해석</b><span>회복 곡선을 지수함수로 모델링하고 HRR을 비교하기</span><em>3차시 · 4차시</em></div>
+      <div class="cy"><b>④ 재설계</b><span>결과로 측정 방법과 센서를 고쳐 다시 설계하기</span><em>4차시</em></div>
+    </div>
+    <div class="pathsel" id="pathsel">
+      <h2>나의 경로 선택</h2>
+      <p>모둠원 4명이 서로 다른 경로(A~D)를 하나씩 맡습니다 — 모둠 안에서 겹치지 않게 정하세요. 모두 같은 4단계를 따라가지만, 차시마다 <b>내 경로의 미션 카드</b>가 달라집니다. 각자 결과를 모아 모둠이 하나의 결론을 만들고, 제출도 내 경로 결과(각자)와 모둠 통합본(대표)으로 나뉩니다. 활동 번호가 건너뛰는 것은 다른 경로의 활동이 숨겨져 있기 때문입니다. 경로를 바꾸면 이전 경로 카드에 쓴 내용은 저장되지만 제출에는 포함되지 않습니다. 모둠이 3명이면 한 사람이 두 경로를 맡고, 아래 <b>모든 경로 보기</b>를 켜서 두 경로의 카드를 모두 채웁니다.</p>
+      <div class="pcards" role="radiogroup" aria-label="나의 경로">
+        <label class="pcard" data-l="A"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="A"><b data-k="A">기준선 경로</b><span>안정 시 심박수를 촉진과 센서로 재어 기준선을 만드는 경로</span></label>
+        <label class="pcard" data-l="B"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="B"><b data-k="B">가벼운 운동 경로</b><span>가벼운 운동(30초)과 회복 과정을 재는 경로</span></label>
+        <label class="pcard" data-l="C"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="C"><b data-k="C">활발한 운동 경로</b><span>활발한 운동(60초 이내)과 회복 과정을 재는 경로 — 안전 우선</span></label>
+        <label class="pcard" data-l="D"><input type="radio" name="w-path" data-field="w-path" data-q="내 경로" value="D"><b data-k="D">신호 품질 경로</b><span>센서 신호의 잡음을 살피고 센서를 개선하는 경로</span></label>
+      </div>
+      <div class="pathtools"><label><input type="checkbox" id="pathall"> 모든 경로 보기 (경로를 둘 맡은 경우 · 선생님 미리보기)</label></div>
+    </div>
   </header>
 
   <!-- ================= 1차시 ================= -->
@@ -221,6 +240,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <div class="sub">통합과학 · [10통과1-03-06] · 물질대사와 기관계</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st on">① 문제 발견</span><span class="st">② 직접 측정</span><span class="st">③ 데이터 해석</span><span class="st">④ 재설계</span><span class="stnote">이번 차시는 ① 문제 발견 — 내 경로가 확인할 질문을 만듭니다. <a class="gomission" data-n="1" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 물질대사에 필요한 물질·에너지의 흐름을 소화·순환·호흡·배설의 통합적 관점에서 설명한다.
       ② 활력징후가 무엇이고 왜 중요한지 안다.</p>
 
@@ -265,10 +286,69 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h1-homeo" data-q="운동 후 심박수 변화와 이유" data-ph="근육의 산소·영양소 요구가 줄어들므로 심박수도 점점 낮아져 다시 안정 시 수준으로 돌아간다."></div>
     </div>
 
+    <div class="act pm" id="pm1-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 기준선 경로</span> 기준선 질문 만들기</h3>
+      <p class="lead">안정 시 심박수는 모든 비교의 출발점입니다.</p>
+      <div class="qlabel"><span class="b">1</span> 안정 시 심박수가 사람마다 같은지 확인할 탐구 질문 한 문장</div>
+      <div class="write" contenteditable="true" data-field="p1A-1" data-q="[1차시 경로A] 안정 시 심박수가 사람마다 같은지 확인할 탐구 질문 한 문장" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 활력징후(체온·맥박·호흡·혈압) 중 심박수만으로는 알 수 없는 것은?</div>
+      <div class="write" contenteditable="true" data-field="p1A-2" data-q="[1차시 경로A] 활력징후(체온·맥박·호흡·혈압) 중 심박수만으로는 알 수 없는 것은?" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> '안정 상태'를 보장하려면 어떻게 해야 할까요? (자세·휴식 시간 등)</div>
+      <div class="write" contenteditable="true" data-field="p1A-3" data-q="[1차시 경로A] &#x27;안정 상태&#x27;를 보장하려면 어떻게 해야 할까요? (자세·휴식 시간 등)" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm1-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 가벼운 운동 경로</span> 가벼운 운동의 영향 질문 만들기</h3>
+      <p class="lead">가벼운 운동을 하면 심박수는 얼마나 오르고 얼마나 빨리 돌아올까요?</p>
+      <div class="qlabel"><span class="b">1</span> 가벼운 운동 후 회복을 확인할 탐구 질문 한 문장</div>
+      <div class="write" contenteditable="true" data-field="p1B-1" data-q="[1차시 경로B] 가벼운 운동 후 회복을 확인할 탐구 질문 한 문장" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 운동하면 심박수가 오르는 까닭을 항상성 되먹임으로 한 문장 설명</div>
+      <div class="write" contenteditable="true" data-field="p1B-2" data-q="[1차시 경로B] 운동하면 심박수가 오르는 까닭을 항상성 되먹임으로 한 문장 설명" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 30초 운동 뒤 안정 시 수준으로 돌아오기까지 걸릴 시간을 예상해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p1B-3" data-q="[1차시 경로B] 30초 운동 뒤 안정 시 수준으로 돌아오기까지 걸릴 시간을 예상해 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm1-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 활발한 운동 경로</span> 활발한 운동의 영향 질문 만들기</h3>
+      <p class="lead">운동 강도가 커지면 회복 과정은 어떻게 달라질까요? (안전 규칙부터 정합니다)</p>
+      <div class="qlabel"><span class="b">1</span> 강한 운동 후 회복을 확인할 탐구 질문 한 문장</div>
+      <div class="write" contenteditable="true" data-field="p1C-1" data-q="[1차시 경로C] 강한 운동 후 회복을 확인할 탐구 질문 한 문장" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 강도가 클 때의 예상 그래프(0→3분)를 말로 설명해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p1C-2" data-q="[1차시 경로C] 강도가 클 때의 예상 그래프(0→3분)를 말로 설명해 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 몸을 지키기 위한 안전 규칙 3가지</div>
+      <div class="write" contenteditable="true" data-field="p1C-3" data-q="[1차시 경로C] 몸을 지키기 위한 안전 규칙 3가지" data-ph="예: 컨디션이 나쁘면 하지 않기, 어지러우면 즉시 중단, 60초를 넘기지 않기"></div>
+    </div>
+
+    <div class="act pm" id="pm1-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 신호 품질 경로</span> 센서 신호에 대한 질문 만들기</h3>
+      <p class="lead">센서가 잘 재는지 모르면 어떤 결과도 믿을 수 없습니다.</p>
+      <div class="qlabel"><span class="b">1</span> 손으로 센 맥박과 센서 값이 같아지려면 어떤 조건이 필요할까요?</div>
+      <div class="write" contenteditable="true" data-field="p1D-1" data-q="[1차시 경로D] 손으로 센 맥박과 센서 값이 같아지려면 어떤 조건이 필요할까요?" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 센서 신호를 방해할 수 있는 요인 3가지</div>
+      <div class="write" contenteditable="true" data-field="p1D-2" data-q="[1차시 경로D] 센서 신호를 방해할 수 있는 요인 3가지" data-ph="예: 손가락 움직임, 누르는 세기, 주변 빛"></div>
+      <div class="qlabel"><span class="b">3</span> 신호가 좋은지 판단할 기준을 정해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p1D-3" data-q="[1차시 경로D] 신호가 좋은지 판단할 기준을 정해 보세요" data-ph="예: 파형이 규칙적으로 반복되는가"></div>
+    </div>
+
     <div class="act">
       <h3><span class="tag">닫기</span> 처음 질문으로 돌아가기</h3>
       <div class="qlabel"><span class="b">Q</span> 배운 내용으로, 활력징후를 가장 먼저 재는 이유를 다시 설명해 보세요.</div>
       <div class="write" contenteditable="true" data-field="h1-answer" data-q="1차시 닫기: 활력징후를 먼저 재는 이유" data-ph="활력징후는 순환·호흡 같은 생명 유지에 필수적인 기능이 정상인지를 장비 없이도 빠르게 확인할 수 있는 지표이기 때문이다."></div>
+    </div>
+
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> 기준선 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-A" data-q="[모둠 1차시] A경로(기준선 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 가벼운 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-B" data-q="[모둠 1차시] B경로(가벼운 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 활발한 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-C" data-q="[모둠 1차시] C경로(활발한 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 신호 품질 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb1-D" data-q="[모둠 1차시] D경로(신호 품질 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 네 질문 중 모둠이 함께 확인할 질문</div>
+      <div class="write" contenteditable="true" data-field="tb1-sum" data-q="[모둠 1차시] 종합: 네 질문 중 모둠이 함께 확인할 질문" data-ph="" style="min-height:4em"></div>
     </div>
 
     <div class="selfcheck">
@@ -289,6 +369,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <div class="sub">정보 · 공학 · 아두이노 + 심박(펄스) 센서</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st">① 문제 발견</span><span class="st on">② 직접 측정</span><span class="st">③ 데이터 해석</span><span class="st">④ 재설계</span><span class="stnote">이번 차시는 ② 직접 측정 — 내 경로의 측정을 준비하고 계획을 세웁니다. <a class="gomission" data-n="2" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 자기주도적으로 검색해 심박 센서의 회로와 코드를 구현한다.
       ② 완성한 뒤 문제점을 찾아 해결한다.</p>
 
@@ -347,6 +429,65 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h2-creative" data-q="나만의 창의적 요소" data-ph="예: 심박수가 100을 넘으면 LED가 빠르게 깜빡이도록 추가"></div>
     </div>
 
+    <div class="act pm" id="pm2-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 기준선 경로</span> 기준선 측정 계획</h3>
+      <p class="lead">안정 시 심박수를 촉진과 센서로 어떻게 잴지 정합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 휴식 시간, 자세, 측정 시간과 계산법(15초×4 / 센서 평균)</div>
+      <div class="write" contenteditable="true" data-field="p2A-1" data-q="[2차시 경로A] 휴식 시간, 자세, 측정 시간과 계산법(15초×4 / 센서 평균)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 측정 대상 자원자와 컨디션 확인 사항</div>
+      <div class="write" contenteditable="true" data-field="p2A-2" data-q="[2차시 경로A] 측정 대상 자원자와 컨디션 확인 사항" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 촉진과 센서 중 무엇을 기준으로 삼을까요? 이유는?</div>
+      <div class="write" contenteditable="true" data-field="p2A-3" data-q="[2차시 경로A] 촉진과 센서 중 무엇을 기준으로 삼을까요? 이유는?" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm2-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 가벼운 운동 경로</span> 가벼운 운동 프로토콜</h3>
+      <p class="lead">운동 종류·시간·측정 시각을 정해 누가 해도 같은 방법이 되게 합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 운동 종류, 시간(30초), 강도 기준 (예: 말을 할 수 있는 정도)</div>
+      <div class="write" contenteditable="true" data-field="p2B-1" data-q="[2차시 경로B] 운동 종류, 시간(30초), 강도 기준 (예: 말을 할 수 있는 정도)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 회복 측정 시각표 (운동 직후, 0.5분, 1.0분, …)</div>
+      <div class="write" contenteditable="true" data-field="p2B-2" data-q="[2차시 경로B] 회복 측정 시각표 (운동 직후, 0.5분, 1.0분, …)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 측정자·기록자·운동하는 사람 역할 분담</div>
+      <div class="write" contenteditable="true" data-field="p2B-3" data-q="[2차시 경로B] 측정자·기록자·운동하는 사람 역할 분담" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm2-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 활발한 운동 경로</span> 활발한 운동 프로토콜 — 안전 우선</h3>
+      <p class="lead">건강 상태가 좋지 않으면 하지 않습니다. 중단 기준을 먼저 정합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 운동 종류, 시간(60초 이내), 중단 기준 (어지러움·가슴 답답함 등)</div>
+      <div class="write" contenteditable="true" data-field="p2C-1" data-q="[2차시 경로C] 운동 종류, 시간(60초 이내), 중단 기준 (어지러움·가슴 답답함 등)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 회복 측정 시각표 (운동 직후, 0.5분, 1.0분, …)</div>
+      <div class="write" contenteditable="true" data-field="p2C-2" data-q="[2차시 경로C] 회복 측정 시각표 (운동 직후, 0.5분, 1.0분, …)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 안전 확인자 역할과, 시작 전 확인할 질문</div>
+      <div class="write" contenteditable="true" data-field="p2C-3" data-q="[2차시 경로C] 안전 확인자 역할과, 시작 전 확인할 질문" data-ph="예: 오늘 몸 상태는? 어디 아픈 곳은?"></div>
+    </div>
+
+    <div class="act pm" id="pm2-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 신호 품질 경로</span> 센서 제작 품질 관리</h3>
+      <p class="lead">센서 제작을 점검하고 신호가 안정되도록 합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 회로·코드를 확인한 결과와, 파형이 보였는지</div>
+      <div class="write" contenteditable="true" data-field="p2D-1" data-q="[2차시 경로D] 회로·코드를 확인한 결과와, 파형이 보였는지" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 신호가 불안정할 때 시도한 방법과 효과</div>
+      <div class="write" contenteditable="true" data-field="p2D-2" data-q="[2차시 경로D] 신호가 불안정할 때 시도한 방법과 효과" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 측정 중 센서를 고정하는 방법</div>
+      <div class="write" contenteditable="true" data-field="p2D-3" data-q="[2차시 경로D] 측정 중 센서를 고정하는 방법" data-ph=""></div>
+    </div>
+
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> 기준선 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-A" data-q="[모둠 2차시] A경로(기준선 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 가벼운 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-B" data-q="[모둠 2차시] B경로(가벼운 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 활발한 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-C" data-q="[모둠 2차시] C경로(활발한 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 신호 품질 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb2-D" data-q="[모둠 2차시] D경로(신호 품질 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 측정 프로토콜(휴식·운동·회복 시각)과 안전 규칙 최종안</div>
+      <div class="write" contenteditable="true" data-field="tb2-sum" data-q="[모둠 2차시] 종합: 측정 프로토콜(휴식·운동·회복 시각)과 안전 규칙 최종안" data-ph="" style="min-height:4em"></div>
+    </div>
+
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
       <div class="row"><span>① 스스로 검색해 심박 센서의 회로와 코드를 구현할 수 있다.</span>
@@ -365,11 +506,13 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <div class="sub">통합과학 · 정보 · 안정 – 운동 – 회복</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st">① 문제 발견</span><span class="st on">② 직접 측정</span><span class="st on">③ 데이터 해석</span><span class="st">④ 재설계</span><span class="stnote">이번 차시는 ② 직접 측정 → ③ 데이터 해석 — 실제로 재고, 내 경로의 결과를 읽습니다. <a class="gomission" data-n="3" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 안정 시·운동 직후·회복 중 심박수를 측정한다.
       ② 손목 촉진과 센서 측정을 비교한다.</p>
 
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 안정 시 심박수 — 촉진 vs 센서</h3>
+    <div class="act" data-p="A">
+      <h3><span class="tag">활동 1 · A 경로</span> 안정 시 심박수 — 촉진 vs 센서</h3>
       <ol class="todo">
         <li><span class="n">1</span><label><input type="checkbox" data-field="h3-1"></label><div>가만히 앉아 1분 이상 안정을 취한다.</div></li>
         <li><span class="n">2</span><label><input type="checkbox" data-field="h3-2"></label><div><b>손목 촉진</b>으로 15초간 맥박을 세고 ×4 해서 분당 심박수를 구한다.</div></li>
@@ -385,15 +528,15 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h3-compare" data-q="촉진 vs 센서 비교" data-ph=""></div>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 운동 직후 심박수 측정</h3>
+    <div class="act" data-p="BC">
+      <h3><span class="tag">활동 2 · B·C 경로</span> 운동 직후 심박수 측정</h3>
       <p class="lead">제자리 뛰기 등을 30초~1분간 한 뒤, <b>즉시</b> 센서로 심박수를 측정합니다.</p>
       <div class="qlabel"><span class="b">기록</span> 운동 종류·시간과 운동 직후 심박수(회/분)</div>
       <div class="write" contenteditable="true" data-field="h3-exercise" data-q="운동 내용과 직후 심박수" data-ph="제자리 뛰기 1분 → 직후 심박수 150회/분"></div>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 3</span> 회복 구간 반복 측정</h3>
+    <div class="act" data-p="BC">
+      <h3><span class="tag">활동 3 · B·C 경로</span> 회복 구간 반복 측정</h3>
       <p class="lead">운동을 멈춘 시점을 0분으로 하고, 30초 간격으로 센서로 심박수를 측정합니다.</p>
       <div class="tbl-wrap">
         <table>
@@ -410,12 +553,71 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="callout">회복이 다 되지 않았다면 안정 시 수준(활동1의 값)에 가까워질 때까지 더 측정해도 좋습니다.</div>
     </div>
 
-    <div class="act">
+    <div class="act pm" id="pm3-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 기준선 경로</span> 기준선 결과 읽기</h3>
+      <p class="lead">안정 시 심박수를 촉진과 센서로 잰 결과를 정리합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 촉진과 센서로 잰 안정 시 심박수, 그리고 두 값의 차이</div>
+      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] 촉진과 센서로 잰 안정 시 심박수, 그리고 두 값의 차이" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 차이가 컸다면 원인은?</div>
+      <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] 차이가 컸다면 원인은?" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 이 값을 다른 경로의 회복 그래프에서 기준선으로 어떻게 쓸 수 있을까요?</div>
+      <div class="write" contenteditable="true" data-field="p3A-3" data-q="[3차시 경로A] 이 값을 다른 경로의 회복 그래프에서 기준선으로 어떻게 쓸 수 있을까요?" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 가벼운 운동 경로</span> 가벼운 운동 결과 읽기</h3>
+      <p class="lead">운동 직후와 회복 구간을 측정해 표에 채우고 결과를 읽습니다.</p>
+      <div class="qlabel"><span class="b">1</span> 운동 직후 심박수와, 안정 시 대비 증가량</div>
+      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 운동 직후 심박수와, 안정 시 대비 증가량" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 회복 곡선의 첫인상 (빨리/천천히 내려옴)</div>
+      <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] 회복 곡선의 첫인상 (빨리/천천히 내려옴)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 활발한 운동 경로의 결과와 견주어 어떤 점이 다른가요?</div>
+      <div class="write" contenteditable="true" data-field="p3B-3" data-q="[3차시 경로B] 활발한 운동 경로의 결과와 견주어 어떤 점이 다른가요?" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 활발한 운동 경로</span> 활발한 운동 결과 읽기</h3>
+      <p class="lead">운동 직후와 회복 구간을 측정해 표에 채우고 결과를 읽습니다.</p>
+      <div class="qlabel"><span class="b">1</span> 운동 직후 심박수와, 안정 시 대비 증가량</div>
+      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 운동 직후 심박수와, 안정 시 대비 증가량" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 회복 곡선의 첫인상 (빨리/천천히 내려옴)</div>
+      <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] 회복 곡선의 첫인상 (빨리/천천히 내려옴)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 가벼운 운동 경로의 결과와 견주어 어떤 점이 다른가요?</div>
+      <div class="write" contenteditable="true" data-field="p3C-3" data-q="[3차시 경로C] 가벼운 운동 경로의 결과와 견주어 어떤 점이 다른가요?" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 신호 품질 경로</span> 신호 품질 분석</h3>
+      <p class="lead">여러 번 측정한 신호가 얼마나 믿을 만한지 따져 봅니다.</p>
+      <div class="qlabel"><span class="b">1</span> 좋은 신호와 나쁜 신호 구간을 견주어 보세요 (몇 번 중 몇 번 정상 파형)</div>
+      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 좋은 신호와 나쁜 신호 구간을 견주어 보세요 (몇 번 중 몇 번 정상 파형)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 촉진 값과 센서 값의 차이가 컸던 경우와 그 까닭</div>
+      <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] 촉진 값과 센서 값의 차이가 컸던 경우와 그 까닭" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 센서를 개선할 아이디어 1가지</div>
+      <div class="write" contenteditable="true" data-field="p3D-3" data-q="[3차시 경로D] 센서를 개선할 아이디어 1가지" data-ph=""></div>
+    </div>
+
+    <div class="act team-only">
       <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
       <div class="qlabel"><span class="b">1</span> 시간이 지날수록 심박수는 어떤 모양으로 줄어드나요? (일정하게? 처음엔 빠르게, 나중엔 천천히?)</div>
       <div class="write" contenteditable="true" data-field="h3-q1" data-q="회복 그래프 모양 관찰" data-ph="처음에는 빠르게 떨어지다가, 안정 시 수준에 가까워질수록 점점 천천히 떨어진다."></div>
       <div class="qlabel"><span class="b">2</span> 모둠원끼리 회복 속도를 비교하면 차이가 있나요? 어떤 요인 때문일까요?</div>
       <div class="write" contenteditable="true" data-field="h3-q2" data-q="개인차 비교" data-ph="평소 운동량이 많은 사람이 더 빨리 회복하는 것 같다."></div>
+    </div>
+
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> 기준선 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-A" data-q="[모둠 3차시] A경로(기준선 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 가벼운 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-B" data-q="[모둠 3차시] B경로(가벼운 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 활발한 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-C" data-q="[모둠 3차시] C경로(활발한 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 신호 품질 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb3-D" data-q="[모둠 3차시] D경로(신호 품질 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 안정·가벼운 운동·활발한 운동의 결과 비교와 센서 신뢰도</div>
+      <div class="write" contenteditable="true" data-field="tb3-sum" data-q="[모둠 3차시] 종합: 안정·가벼운 운동·활발한 운동의 결과 비교와 센서 신뢰도" data-ph="" style="min-height:4em"></div>
     </div>
 
     <div class="selfcheck">
@@ -436,6 +638,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <div class="sub">공통수학 · 통합과학 — 지수함수</div>
       </div>
     </div>
+    <div class="stagebar" aria-label="탐구 사이클 단계"><span class="st">① 문제 발견</span><span class="st">② 직접 측정</span><span class="st on">③ 데이터 해석</span><span class="st on">④ 재설계</span><span class="stnote">이번 차시는 ③ 데이터 해석 → ④ 재설계 — 결과를 해석하고, 실험·모형을 고쳐 다시 설계합니다. <a class="gomission" data-n="4" href="#pathsel">내 경로 미션으로 ↓</a></span></div>
+    <div class="nopath-note">위쪽 <b>나의 경로 선택</b>에서 경로(A~D)를 고르면, 내 경로의 미션 카드가 이 차시 아래쪽(공통 활동 뒤)에 나타납니다. <a href="#pathsel">경로 고르러 가기 ↑</a></div>
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 심박수 회복 데이터를 지수함수로 모델링한다.
       ② 심박수 회복(HRR) 지표를 계산하고 해석한다.</p>
 
@@ -459,16 +663,16 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       </figure>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 1</span> 회복 데이터 그래프로 그리기</h3>
+    <div class="act" data-p="BC">
+      <h3><span class="tag">활동 1 · B·C 경로</span> 회복 데이터 그래프로 그리기</h3>
       <ol class="todo">
         <li><span class="n">1</span><label><input type="checkbox" data-field="h4g-1"></label><div><code>geogebra.org</code> 접속 → 표(스프레드시트) 창에 3차시의 (시간, 심박수) 데이터를 입력하고 점을 찍는다.</div></li>
         <li><span class="n">2</span><label><input type="checkbox" data-field="h4g-2"></label><div>점들이 지수적으로 감소하는 모양인지 확인한다.</div></li>
       </ol>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 2</span> 지수함수로 모델링하기</h3>
+    <div class="act" data-p="BC">
+      <h3><span class="tag">활동 2 · B·C 경로</span> 지수함수로 모델링하기</h3>
       <ol class="todo">
         <li><span class="n">1</span><label><input type="checkbox" data-field="h4f-1"></label><div>안정 시 심박수(활동1의 값)를 <b>c</b>로 놓는다.</div></li>
         <li><span class="n">2</span><label><input type="checkbox" data-field="h4f-2"></label><div>입력창에 <code>f(x) = a exp(-b x) + c</code> 꼴로 넣고 <b>a, b</b> 값을 바꿔가며(또는 지오지브라의 회귀 도구 <code>FitExp</code>) 점들과 겹치게 맞춘다.</div></li>
@@ -479,8 +683,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h4-mean" data-q="a, b, c의 의미" data-ph="a+c = 운동 직후 심박수 / c = 안정 시(최종 도달) 심박수 / b가 클수록 더 빨리 회복한다."></div>
     </div>
 
-    <div class="act">
-      <h3><span class="tag">활동 3</span> 심박수 회복(HRR) 계산하기</h3>
+    <div class="act" data-p="BC">
+      <h3><span class="tag">활동 3 · B·C 경로</span> 심박수 회복(HRR) 계산하기</h3>
       <div class="callout">스포츠의학·임상에서는 <b>운동 직후 심박수 − 1분 후 심박수</b>를 <b>HRR1(1분 심박수 회복)</b>이라 부르며,
         값이 클수록(빨리 떨어질수록) 심혈관 건강 상태가 좋다고 봅니다.</div>
       <div class="fml">예시: 150 (직후) − 108 (1분 후) = HRR1 <b>42</b></div>
@@ -488,7 +692,51 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h4-hrr" data-q="내 HRR1 계산과 해석" data-ph=""></div>
     </div>
 
-    <div class="act">
+    <div class="act pm" id="pm4-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 기준선 경로</span> 재설계 ④ — 기준선 해석과 측정 고치기</h3>
+      <p class="lead">친구들의 회복 곡선 모델의 c(안정값)와 내 기준선을 견주어 봅니다.</p>
+      <div class="qlabel"><span class="b">1</span> 회복 곡선 모델의 c 값과 내가 잰 안정 시 심박수 비교</div>
+      <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] 회복 곡선 모델의 c 값과 내가 잰 안정 시 심박수 비교" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 기준선 측정을 더 정확히 하려면 무엇을 바꿀까요?</div>
+      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 기준선 측정을 더 정확히 하려면 무엇을 바꿀까요?" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 사람마다 안정 시 심박수가 다른 이유 후보</div>
+      <div class="write" contenteditable="true" data-field="p4A-3" data-q="[4차시 경로A] 사람마다 안정 시 심박수가 다른 이유 후보" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 가벼운 운동 경로</span> 재설계 ④ — 회복 모델 해석과 측정 고치기</h3>
+      <p class="lead">내 데이터를 지수함수로 모델링하고, 모델을 더 정확하게 만들 방법을 생각합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내 모델 y = a·e^(−bt) + c 의 a·b·c 값과 HRR1</div>
+      <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 내 모델 y = a·e^(−bt) + c 의 a·b·c 값과 HRR1" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> b(회복 속도) 값이 의미하는 것을 풀이해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] b(회복 속도) 값이 의미하는 것을 풀이해 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 더 정확한 모델을 위해 측정 방법을 어떻게 바꿀까요? (간격·횟수 등)</div>
+      <div class="write" contenteditable="true" data-field="p4B-3" data-q="[4차시 경로B] 더 정확한 모델을 위해 측정 방법을 어떻게 바꿀까요? (간격·횟수 등)" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 활발한 운동 경로</span> 재설계 ④ — 회복 모델 해석과 측정 고치기</h3>
+      <p class="lead">내 데이터를 지수함수로 모델링하고, 모델을 더 정확하게 만들 방법을 생각합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 내 모델 y = a·e^(−bt) + c 의 a·b·c 값과 HRR1</div>
+      <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] 내 모델 y = a·e^(−bt) + c 의 a·b·c 값과 HRR1" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> b(회복 속도) 값이 의미하는 것을 풀이해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] b(회복 속도) 값이 의미하는 것을 풀이해 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 더 정확한 모델을 위해 측정 방법을 어떻게 바꿀까요? (간격·횟수 등)</div>
+      <div class="write" contenteditable="true" data-field="p4C-3" data-q="[4차시 경로C] 더 정확한 모델을 위해 측정 방법을 어떻게 바꿀까요? (간격·횟수 등)" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 신호 품질 경로</span> 재설계 ④ — 센서 개선 설계</h3>
+      <p class="lead">신호 품질 결과를 바탕으로 센서를 어떻게 고칠지 구체적으로 설계합니다.</p>
+      <div class="qlabel"><span class="b">1</span> 신호 품질 결과 요약</div>
+      <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] 신호 품질 결과 요약" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 센서를 고치는 구체적 설계 (예: 고정 밴드, 평균 필터 코드)</div>
+      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 센서를 고치는 구체적 설계 (예: 고정 밴드, 평균 필터 코드)" data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 고친 센서가 더 좋아졌는지 확인하는 방법</div>
+      <div class="write" contenteditable="true" data-field="p4D-3" data-q="[4차시 경로D] 고친 센서가 더 좋아졌는지 확인하는 방법" data-ph=""></div>
+    </div>
+
+    <div class="act team-only">
       <h3><span class="tag">활동 4</span> 모둠 비교 &amp; 결론</h3>
       <div class="qlabel"><span class="b">비교</span> 모둠원들의 함수(a, b, c)와 HRR1을 비교하면 어떤 차이가 있나요?</div>
       <div class="write" contenteditable="true" data-field="h4-compare" data-q="모둠원 간 비교" data-ph=""></div>
@@ -504,6 +752,21 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h4-peer" data-q="동료평가" data-ph=""></div>
     </div>
 
+    <div class="act team-only teamboard">
+      <h3><span class="tag">모둠 공유판</span> 네 경로의 결과 모으기</h3>
+      <p class="lead">모둠원이 자기 경로의 <b>한 줄 결과</b>를 말하면, 모둠 대표가 아래에 모아 적습니다. (모둠원 각자는 비워 두어도 됩니다. 이 칸은 <b>모둠 통합본</b>에 들어갑니다.)</p>
+      <div class="qlabel"><span class="b">A</span> 기준선 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-A" data-q="[모둠 4차시] A경로(기준선 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">B</span> 가벼운 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-B" data-q="[모둠 4차시] B경로(가벼운 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">C</span> 활발한 운동 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-C" data-q="[모둠 4차시] C경로(활발한 운동 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">D</span> 신호 품질 경로 경로의 한 줄 결과</div>
+      <div class="write" contenteditable="true" data-field="tb4-D" data-q="[모둠 4차시] D경로(신호 품질 경로) 한 줄 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">종합</span> 강도에 따른 회복 속도 결론과, 센서·측정 재설계안</div>
+      <div class="write" contenteditable="true" data-field="tb4-sum" data-q="[모둠 4차시] 종합: 강도에 따른 회복 속도 결론과, 센서·측정 재설계안" data-ph="" style="min-height:4em"></div>
+    </div>
+
     <div class="selfcheck">
       <h4>스스로 평가하기</h4>
       <div class="row"><span>① 심박수 회복 데이터를 지수함수로 모델링할 수 있다.</span>
@@ -515,7 +778,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
   <footer>
     이 활동지의 입력 내용은 사용 중인 기기의 브라우저에만 저장됩니다(다른 기기·친구에게 전송되지 않음).
-    제출은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
+    내 경로 결과·모둠 통합본은 위쪽 <b>제출하기</b>로, 개인 보관은 <b>인쇄 · PDF</b> 또는 <b>답안 복사</b> 버튼을 이용하세요.
   </footer>
 </main>
 
@@ -550,24 +813,26 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     }
   });
 
-  var keys={};
-  fields.forEach(function(el){ keys[el.getAttribute("data-field")]=true; });
-  var totalKeys=Object.keys(keys).length;
+  // progress: 보이는(내 경로) 입력칸만 계산 — 모둠 공유판은 제외
+  var keys={}, keyEls={};
+  fields.forEach(function(el){ var k=el.getAttribute("data-field"); keys[k]=true; (keyEls[k]=keyEls[k]||[]).push(el); });
   var progEl=document.getElementById("prog");
-  function filledCount(){
-    var n=0;
-    for(var k in keys){
-      var v=store[k];
-      if(v===true) n++;
-      else if(typeof v==="string" && v.trim()!=="") n++;
-    }
-    return n;
+  function isOn(k){
+    return keyEls[k].some(function(el){
+      if(el.closest(".team-only")||el.closest(".pathsel")) return false;
+      return !(window.steamPathHidden&&window.steamPathHidden(el));
+    });
   }
   function updateProgress(){
     if(!progEl)return;
-    var pct=totalKeys? Math.round(filledCount()/totalKeys*100):0;
-    progEl.textContent="진행 "+pct+"%";
+    var n=0,tot=0;
+    for(var k in keys){
+      if(!isOn(k)) continue; tot++;
+      var v=store[k]; if(v===true||(typeof v==="string"&&v.trim()!=="")) n++;
+    }
+    progEl.textContent="진행 "+(tot?Math.round(n/tot*100):0)+"%";
   }
+  document.addEventListener("steam-path",updateProgress);
   updateProgress();
 
   var links=Array.prototype.slice.call(document.querySelectorAll(".steps a"));
@@ -592,11 +857,13 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     ["w-id","w-name","w-team"].forEach(function(k){ if(store[k]) head.push(store[k]); });
     lines.push("심박 센서로 읽는 활력징후 — 활동지 답안");
     if(head.length) lines.push(head.join(" / "));
+    if(store["w-path"]&&window.steamPathLabel) lines.push("내 경로: "+window.steamPathLabel(store["w-path"]));
     lines.push("");
     document.querySelectorAll("section.cha").forEach(function(sec){
       var h2=sec.querySelector(".cha-head h2");
       lines.push("=== "+(sec.querySelector(".cha-num").textContent)+" "+(h2?h2.textContent:"")+" ===");
       sec.querySelectorAll("[data-field]").forEach(function(el){
+        if(el.closest(".pathsel")||(window.steamPathHidden&&window.steamPathHidden(el))) return;
         var k=el.getAttribute("data-field"), q=el.getAttribute("data-q")||k, v=store[k];
         if(el.type==="checkbox"){ if(v===true) lines.push("[v] "+ (el.closest("li")? el.closest("li").innerText.replace(/\s+/g," ").trim() : q)); return; }
         if(el.type==="radio"){ if(el.checked) lines.push("· "+q+": "+v); return; }
@@ -623,6 +890,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 })();
 </script>
 
+<script src="../paths.js"></script>
 <script src="../submit-config.js"></script>
 <script src="../submit.js" data-topic="주제4 활력징후" data-store="steam-heartrate-v1" data-plot-prefix=""></script>
 

@@ -1,0 +1,77 @@
+/* 4단계 탐구 사이클 + 모둠원별 경로(A~D) — 4개 activity.html 공용 */
+:root{
+  --pA:var(--acid,#cf4444); --pB:var(--base,#2f6fb3); --pC:var(--neutral,#2f9c82); --pD:#b7791f;
+  --pA-bg:var(--acid-bg,#f8e7e6); --pB-bg:var(--base-bg,#e5eef7); --pC-bg:var(--neutral-bg,#e0f0eb); --pD-bg:#f6ecd9;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){ --pD:#e0b25c; --pD-bg:#3a3020; }}
+:root[data-theme="dark"]{ --pD:#e0b25c; --pD-bg:#3a3020; }
+
+/* ---- 탐구 사이클 ---- */
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
+.cycle .cy{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px 11px}
+.cycle .cy b{display:block;font-family:var(--f-disp);font-size:14px}
+.cycle .cy span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
+.cycle .cy em{display:inline-block;margin-top:6px;font-family:var(--f-mono);font-size:10.5px;font-style:normal;color:var(--ink-soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.cycle .cy:not(:last-child):after{content:"›";position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ink-soft);z-index:1}
+@media (max-width:720px){.cycle{grid-template-columns:1fr 1fr}.cycle .cy:after{display:none}}
+
+/* ---- 경로 선택 ---- */
+.pathsel{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.pathsel h2{font-size:16px;font-weight:800}
+.pathsel > p{font-size:13px;color:var(--ink-soft);margin-top:5px;line-height:1.6}
+.pcards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+@media (max-width:760px){.pcards{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.pcards{grid-template-columns:1fr}}
+.pcard{position:relative;display:block;cursor:pointer;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.pcard input{position:absolute;opacity:0;width:0;height:0}
+.pcard b{display:block;font-family:var(--f-disp);font-size:13.5px}
+.pcard span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
+.pcard[data-l="A"]{--pc:var(--pA);--pb:var(--pA-bg)} .pcard[data-l="B"]{--pc:var(--pB);--pb:var(--pB-bg)}
+.pcard[data-l="C"]{--pc:var(--pC);--pb:var(--pC-bg)} .pcard[data-l="D"]{--pc:var(--pD);--pb:var(--pD-bg)}
+.pcard b:before{content:attr(data-k);display:inline-block;min-width:20px;text-align:center;margin-right:6px;border-radius:5px;padding:0 4px;background:var(--pb);color:var(--pc);font-family:var(--f-mono);font-size:12px}
+.pcard:hover{border-color:var(--pc)}
+.pcard.on{border-color:var(--pc);background:var(--pb);box-shadow:0 0 0 1px var(--pc) inset}
+.pcard:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:2px}
+.pathtools{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:12px;color:var(--ink-soft)}
+.pathtools label{display:flex;gap:6px;align-items:center;cursor:pointer}
+
+/* ---- 상단 바의 내 경로 표시 ---- */
+.mypath{font-family:var(--f-mono);font-size:11.5px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;white-space:nowrap}
+body[data-path] .mypath{color:var(--ink);border-color:var(--ink-soft)}
+
+/* ---- 차시별 단계 표시 ---- */
+.stagebar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:2px 2px 4px}
+.stagebar .st{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:var(--card)}
+.stagebar .st.on{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:600}
+.stagebar .stnote{font-size:12.5px;color:var(--ink-soft);flex-basis:100%;margin-top:3px}
+.stagebar .gomission{display:inline-block;margin-left:8px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:1px 9px;background:var(--card);color:var(--ink)}
+.stagebar .gomission:hover{border-color:var(--focus)}
+.nopath-note{display:none;margin:10px 2px 0;padding:10px 13px;border:1px dashed var(--field-line);border-radius:9px;background:var(--field);font-size:13.5px}
+body:not([data-path]) .nopath-note{display:block}
+
+/* ---- 경로별 보이기/숨기기 ---- */
+body:not([data-path]) [data-p]{display:none}
+body[data-path="A"] [data-p]:not([data-p*="A"]),
+body[data-path="B"] [data-p]:not([data-p*="B"]),
+body[data-path="C"] [data-p]:not([data-p*="C"]),
+body[data-path="D"] [data-p]:not([data-p*="D"]){display:none}
+body.showall [data-p]{display:block!important}
+body.showall .nopath-note{display:none!important}
+
+/* ---- 경로 미션 카드 ---- */
+.act.pm{border-left:5px solid var(--pc)}
+.act.pm[data-l="A"]{--pc:var(--pA);--pb:var(--pA-bg)} .act.pm[data-l="B"]{--pc:var(--pB);--pb:var(--pB-bg)}
+.act.pm[data-l="C"]{--pc:var(--pC);--pb:var(--pC-bg)} .act.pm[data-l="D"]{--pc:var(--pD);--pb:var(--pD-bg)}
+.act.pm > h3 .tag{background:var(--pb);color:var(--pc);border-color:var(--pc)}
+
+/* ---- 모둠 공유판 ---- */
+.act.teamboard{border-style:dashed;border-width:1.5px;background:var(--field)}
+.act.teamboard > h3 .tag{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.act.teamboard .qlabel .b{font-weight:700}
+.act.team-only:not(.teamboard) > h3 .tag:after{content:" · 모둠 공동";}
+
+@media print{
+  .pathtools,.mypath{display:none!important}
+  .cycle .cy,.pathsel{box-shadow:none;break-inside:avoid}
+  .nopath-note{display:none!important}
+}
