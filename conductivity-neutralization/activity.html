@@ -226,10 +226,10 @@ img{max-width:100%}
       <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
     </div>
     <div class="cycle" aria-label="4단계 탐구 사이클">
-      <div class="cy"><b>① 문제 발견</b><span>산·염기가 만나면 무엇이 변할까? 측정으로 답할 수 있는 질문 만들기</span><em>1차시</em></div>
-      <div class="cy"><b>② 직접 측정</b><span>PASCO 센서로 같은 적정 실험을 세 가지 눈으로 동시에 측정하기</span><em>2차시 · 3차시</em></div>
-      <div class="cy"><b>③ 데이터 해석</b><span>그래프·함수로 중화점을 찾고 세 방법을 서로 견주기</span><em>3차시 · 4차시</em></div>
-      <div class="cy"><b>④ 재설계</b><span>결과를 바탕으로 실험을 고쳐 다시 설계하고 결과물로 정리하기</span><em>4차시</em></div>
+      <div class="cy"><b>① 문제 발견</b><span>산·염기가 만나면 무엇이 변할까? 측정으로 답할 수 있는 질문 만들기</span><span class="out">내 산출물 : 탐구 질문 · 예상</span><em>1차시</em></div>
+      <div class="cy"><b>② 직접 측정</b><span>PASCO 센서로 같은 적정 실험을 세 가지 눈으로 동시에 측정하기</span><span class="out">내 산출물 : 측정 계획 · 원자료</span><em>2차시 · 3차시</em></div>
+      <div class="cy"><b>③ 데이터 해석</b><span>그래프·함수로 중화점을 찾고 세 방법을 서로 견주기</span><span class="out">내 산출물 : 주장 · 근거 · 한계</span><em>3차시 · 4차시</em></div>
+      <div class="cy"><b>④ 재설계</b><span>결과를 바탕으로 실험을 고쳐 다시 설계하고 결과물로 정리하기</span><span class="out">내 산출물 : 재설계안 · 시도 기록</span><em>4차시</em></div>
     </div>
     <div class="pathsel" id="pathsel">
       <h2>나의 경로 선택</h2>
@@ -423,7 +423,7 @@ img{max-width:100%}
       <div class="callout">1차시에서 배운 중화점 확인 3가지 방법 — <b>지시약(색)·온도·전기 전도도</b> — 을 이번엔 눈대중이 아니라
         <b>PASCO 무선 pH 센서, 무선 온도 센서, 무선 전도도 센서</b>로 동시에 정밀 측정합니다.</div>
       <div class="qlabel"><span class="b">Q</span> 한 가지 방법만 쓰지 않고 세 가지를 동시에 재면 무엇이 좋을까요?</div>
-      <div class="write" contenteditable="true" data-field="c2-hook" data-q="세 가지를 동시에 측정하는 이유" data-ph="한 방법의 오차나 애매함을 다른 두 방법으로 교차 확인할 수 있어서, 중화점을 더 신뢰할 수 있게 찾을 수 있다."></div>
+      <div class="write" contenteditable="true" data-field="c2-hook" data-q="세 가지를 동시에 측정하는 이유" data-ph=""></div>
     </div>
 
     <div class="act">
@@ -434,14 +434,14 @@ img{max-width:100%}
           <caption>PASCO 무선 센서와 적정법</caption>
           <thead><tr><th>센서</th><th>측정량</th><th>적정법 이름</th><th>중화점이 보이는 모양</th></tr></thead>
           <tbody>
-            <tr><th>무선 pH 센서</th><td>pH</td><td><input data-field="c2t-r1" placeholder="전위차 적정"></td><td><input data-field="c2t-s1" placeholder="예: S자로 급격히 꺾임"></td></tr>
-            <tr><th>무선 온도 센서</th><td>온도(중화열)</td><td><input data-field="c2t-r2" placeholder="열량 적정"></td><td><input data-field="c2t-s2" placeholder="예: 산 모양(최고점)"></td></tr>
-            <tr><th>무선 전도도 센서</th><td>전도도(전기가 통하는 정도)</td><td><input data-field="c2t-r3" placeholder="전기 전도도 적정"></td><td><input data-field="c2t-s3" placeholder="예: V자(최저점)"></td></tr>
+            <tr><th>무선 pH 센서</th><td>pH</td><td><input data-field="c2t-r1"></td><td><input data-field="c2t-s1"></td></tr>
+            <tr><th>무선 온도 센서</th><td>온도(중화열)</td><td><input data-field="c2t-r2"></td><td><input data-field="c2t-s2"></td></tr>
+            <tr><th>무선 전도도 센서</th><td>전도도(전기가 통하는 정도)</td><td><input data-field="c2t-r3"></td><td><input data-field="c2t-s3"></td></tr>
           </tbody>
         </table>
       </div>
       <div class="qlabel"><span class="b">원리</span> 전도도 센서는 어떻게 전도도를 측정할까요? <span class="hint">두 전극에 교류(AC) 신호를 걸고 흐르는 전류를 재서 전도도를 계산해 화면에 바로 보여줍니다.</span></div>
-      <div class="write" contenteditable="true" data-field="c2-formula" data-q="전도도 센서의 측정 원리" data-ph="전극 사이에 교류 전압을 걸고 흐르는 전류를 측정한다. 용액에 이온이 많을수록 더 많은 전류가 흐르므로 전도도가 크게 표시된다."></div>
+      <div class="write" contenteditable="true" data-field="c2-formula" data-q="전도도 센서의 측정 원리" data-ph=""></div>
     </div>
 
     <div class="act">
@@ -468,18 +468,19 @@ img{max-width:100%}
     <div class="act">
       <h3><span class="tag">활동 4</span> 측정 계획 설계</h3>
       <div class="two">
-        <div class="box"><h4>한 번에 넣는 NaOH 양</h4><p><input style="width:100%;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:5px 8px;color:var(--ink)" data-field="c2-step" data-q="1회 NaOH 첨가량" placeholder="예: 1 mL"></p></div>
+        <div class="box"><h4>한 번에 넣는 NaOH 양</h4><p><input style="width:100%;font-family:var(--f-mono);background:var(--field);border:1px solid var(--field-line);border-radius:6px;padding:5px 8px;color:var(--ink)" data-field="c2-step" data-q="1회 NaOH 첨가량"></p></div>
         <div class="box"><h4>기록 방법</h4><p>SPARKvue가 자동으로 그래프를 그리지만, 각 회차의 pH·온도·전도도 값은 3차시 표에도 옮겨 적습니다.</p></div>
       </div>
       <div class="qlabel"><span class="b">역할 분담</span> 적정(용액 넣기) · 관찰(그래프 확인) · 기록(표 작성) 역할을 정하기</div>
       <div class="write" contenteditable="true" data-field="c2-roles" data-q="역할 분담" data-ph=""></div>
       <div class="qlabel"><span class="b">안전</span> 산·염기를 다룰 때 지켜야 할 안전 수칙</div>
-      <div class="write" contenteditable="true" data-field="c2-safety" data-q="안전 수칙" data-ph="보안경·장갑 착용, 피부에 튀면 즉시 물로 씻기, 용액 냄새를 직접 맡지 않기"></div>
+      <div class="write" contenteditable="true" data-field="c2-safety" data-q="안전 수칙" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm2-A" data-p="A" data-l="A">
       <h3><span class="tag">경로 A · pH 탐정</span> pH 센서 보정과 측정 계획</h3>
       <p class="lead">정확한 값을 얻으려면 센서를 먼저 점검하고, 어떻게 넣고 얼마나 기다릴지 정해야 합니다.</p>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> pH 센서 점검·보정 방법과 확인 결과 (예: 표준 용액 pH 4·7로 확인)</div>
       <div class="write" contenteditable="true" data-field="p2A-1" data-q="[2차시 경로A] pH 센서 점검·보정 방법과 확인 결과 (예: 표준 용액 pH 4·7로 확인)" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> NaOH를 한 번에 몇 mL씩, 몇 초 기다렸다가 기록할까요? 그 이유는?</div>
@@ -491,6 +492,7 @@ img{max-width:100%}
     <div class="act pm" id="pm2-B" data-p="B" data-l="B">
       <h3><span class="tag">경로 B · 온도 탐정</span> 온도 측정 계획 — 열 손실 줄이기</h3>
       <p class="lead">중화열은 작아서 주변으로 빠져나가면 변화가 잘 보이지 않습니다.</p>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 시작 온도가 안정될 때까지 기다린 시간과 처음 온도</div>
       <div class="write" contenteditable="true" data-field="p2B-1" data-q="[2차시 경로B] 시작 온도가 안정될 때까지 기다린 시간과 처음 온도" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> 열 손실을 줄이는 방법 (예: 용기, 뚜껑, 교반)</div>
@@ -502,6 +504,7 @@ img{max-width:100%}
     <div class="act pm" id="pm2-C" data-p="C" data-l="C">
       <h3><span class="tag">경로 C · 전도도 탐정</span> 전도도 측정 계획 — 전극 관리</h3>
       <p class="lead">전도도는 전극 상태와 섞이는 정도에 크게 좌우됩니다.</p>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 전극 세척·침지 깊이 등 준비 상태와, 증류수에서의 시험 측정값</div>
       <div class="write" contenteditable="true" data-field="p2C-1" data-q="[2차시 경로C] 전극 세척·침지 깊이 등 준비 상태와, 증류수에서의 시험 측정값" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> 측정 범위(μS/cm)와 표본율을 어떻게 정했나요?</div>
@@ -513,6 +516,7 @@ img{max-width:100%}
     <div class="act pm" id="pm2-D" data-p="D" data-l="D">
       <h3><span class="tag">경로 D · 이온 해설가</span> 안전·역할·지시약 계획</h3>
       <p class="lead">네 경로가 한 비커에서 부딪히지 않도록 조정하고, 안전을 책임지는 경로입니다.</p>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 시약 취급 안전 수칙과 위험 요소 3가지</div>
       <div class="write" contenteditable="true" data-field="p2D-1" data-q="[2차시 경로D] 시약 취급 안전 수칙과 위험 요소 3가지" data-ph="예: 보안경·장갑 착용, 피부에 닿으면 즉시 물로 씻기"></div>
       <div class="qlabel"><span class="b">2</span> 지시약은 어디에 어떻게 넣을까요? (센서에 영향을 주지 않는 방법)</div>
@@ -559,6 +563,50 @@ img{max-width:100%}
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 세 센서로 중화 적정 실험을 안전하게 수행한다.
       ② 세 그래프의 개형(모양)을 비교·관찰한다.</p>
 
+    <div class="act pm" id="pm3-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> pH 곡선으로 내 질문에 답하기</h3>
+      <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p2A-2&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> pH 센서로 얻은 핵심 결과 — 급변이 보이는 회차·pH 범위, 곡선 전체 모양</div>
+      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] pH 센서로 얻은 핵심 결과 — 급변이 보이는 회차·pH 범위, 곡선 전체 모양" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내 질문에 답하려면 pH 곡선을 어떻게 읽을까요? 기준으로 삼을 값(예: 급변 구간)과 쓸 도구, 그 이유를 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] 내 질문에 답하려면 pH 곡선을 어떻게 읽을까요? 기준으로 삼을 값(예: 급변 구간)과" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 온도 곡선으로 내 질문에 답하기</h3>
+      <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p2B-2&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 온도 센서로 얻은 핵심 결과 — 최고 온도 회차·값, 최고점 이후의 변화</div>
+      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 온도 센서로 얻은 핵심 결과 — 최고 온도 회차·값, 최고점 이후의 변화" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내 질문에 답하려면 최고점을 어떻게 판단할까요? 열 손실의 영향을 어떻게 고려할지, 쓸 도구와 이유를 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] 내 질문에 답하려면 최고점을 어떻게 판단할까요? 열 손실의 영향을 어떻게 고려할지, 쓸" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 전도도 곡선으로 내 질문에 답하기</h3>
+      <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p2C-2&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 전도도 센서로 얻은 핵심 결과 — 최저 전도도 회차·값, 최저점 앞뒤의 기울기 차이</div>
+      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 전도도 센서로 얻은 핵심 결과 — 최저 전도도 회차·값, 최저점 앞뒤의 기울기 차이" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내 질문에 답하려면 꺾이는 점을 어떻게 찾을까요? 눈대중·함수 등 방법을 고르고 이유를 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] 내 질문에 답하려면 꺾이는 점을 어떻게 찾을까요? 눈대중·함수 등 방법을 고르고 이유를" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 네 가지 방법으로 내 질문에 답하기</h3>
+      <p class="lead">지시약과 이온 모형으로 센서 결과를 설명할 수 있는지, 견주는 기준을 스스로 정합니다.</p>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p2D-2&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 지시약 색이 바뀐 회차와, A·B·C 경로 결과를 한 표로 정리한 결과</div>
+      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 지시약 색이 바뀐 회차와, A·B·C 경로 결과를 한 표로 정리한 결과" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 네 가지 방법(pH·온도·전도도·지시약)을 어떤 기준으로 견주고 얼마나 믿을지, 이온 모형으로 어떻게 설명할지 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] 네 가지 방법(pH·온도·전도도·지시약)을 어떤 기준으로 견주고 얼마나 믿을지, 이온 " data-ph=""></div>
+    </div>
+
+    <div class="toolbox-note"><b>도구함</b> — 아래 활동은 순서대로 모두 할 필요가 없어요. 위 미션 카드에서 정한 방법에 필요한 도구를 골라 쓰고, 쓴 도구와 결과는 아래 정리 카드에서 근거로 말하세요. ([A·D 경로]처럼 표시된 활동은 해당 경로의 도구입니다.)</div>
+
+
+
     <div class="act">
       <h3><span class="tag">활동 1</span> 실험 준비</h3>
       <p class="lead">묽은 염산(HCl)을 비커에 담고 pH·온도·전도도 센서 세 개를 함께 담근 뒤, 수산화 나트륨(NaOH) 용액을 2차시에서 정한 양만큼씩 넣으며 측정합니다.</p>
@@ -568,7 +616,7 @@ img{max-width:100%}
         <li><label><input type="checkbox" data-field="c3-3"></label><div>측정 시작(기록 버튼) → 처음 값(0회차) 기록</div></li>
       </ul>
       <div class="qlabel"><span class="b">가설</span> NaOH를 계속 넣으면 pH·온도·전도도는 각각 어떻게 변할까?</div>
-      <div class="write" contenteditable="true" data-field="c3-hypo" data-q="3차시 가설(세 그래프 예상)" data-ph="pH는 점점 올라가다가 중화점 부근에서 급격히 뛸 것이다. 온도는 오르다가 중화점에서 가장 높고 그 뒤로는 거의 그대로거나 살짝 내려갈 것이다. 전도도는 줄어들다가 중화점에서 가장 낮고 다시 늘어날 것이다."></div>
+      <div class="write" contenteditable="true" data-field="c3-hypo" data-q="3차시 가설(세 그래프 예상)" data-ph=""></div>
     </div>
 
     <div class="act">
@@ -619,58 +667,50 @@ img{max-width:100%}
       </figure>
     </div>
 
-    <div class="act pm" id="pm3-A" data-p="A" data-l="A">
-      <h3><span class="tag">경로 A · pH 탐정</span> pH 곡선 읽기</h3>
-      <p class="lead">측정한 pH 값을 표의 pH 줄에 채우고, 곡선이 어떻게 변했는지 읽습니다.</p>
-      <div class="qlabel"><span class="b">1</span> pH가 가장 급하게 변한 회차와 그때의 pH 범위</div>
-      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] pH가 가장 급하게 변한 회차와 그때의 pH 범위" data-ph="예: 7→8회차, pH 3 → 11"></div>
-      <div class="qlabel"><span class="b">2</span> 예상했던 그래프와 달랐던 점과 그 이유</div>
-      <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] 예상했던 그래프와 달랐던 점과 그 이유" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점</div>
-      <div class="write" contenteditable="true" data-field="p3A-3" data-q="[3차시 경로A] 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점" data-ph=""></div>
+    <div class="act pm" id="pm3-A-post" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3A-3" data-q="[3차시 경로A] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 측정 간격이 넓어 급변을 놓쳤나?)</div>
+      <div class="write" contenteditable="true" data-field="p3A-4" data-q="[3차시 경로A] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-B" data-p="B" data-l="B">
-      <h3><span class="tag">경로 B · 온도 탐정</span> 온도 곡선 읽기</h3>
-      <p class="lead">측정한 온도를 표의 온도 줄에 채우고, 최고점을 찾습니다.</p>
-      <div class="qlabel"><span class="b">1</span> 온도가 가장 높았던 회차와 최고 온도</div>
-      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 온도가 가장 높았던 회차와 최고 온도" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 최고점 이후 온도는 어떻게 되었나요? 그 이유는?</div>
-      <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] 최고점 이후 온도는 어떻게 되었나요? 그 이유는?" data-ph="예: 거의 유지되거나 조금 내려감 — 더 넣어도 반응할 산이 없다"></div>
-      <div class="qlabel"><span class="b">3</span> 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점</div>
-      <div class="write" contenteditable="true" data-field="p3B-3" data-q="[3차시 경로B] 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점" data-ph=""></div>
+    <div class="act pm" id="pm3-B-post" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3B-3" data-q="[3차시 경로B] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 열 손실, 교반 부족, 센서 반응 시간)</div>
+      <div class="write" contenteditable="true" data-field="p3B-4" data-q="[3차시 경로B] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-C" data-p="C" data-l="C">
-      <h3><span class="tag">경로 C · 전도도 탐정</span> 전도도 곡선 읽기</h3>
-      <p class="lead">측정한 전도도를 표의 전도도 줄에 채우고, 최저점을 찾습니다.</p>
-      <div class="qlabel"><span class="b">1</span> 전도도가 가장 낮았던 회차와 그 값</div>
-      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 전도도가 가장 낮았던 회차와 그 값" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 최저점 앞뒤의 기울기가 다른 까닭을 이온 수로 설명해 보세요</div>
-      <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] 최저점 앞뒤의 기울기가 다른 까닭을 이온 수로 설명해 보세요" data-ph="예: 앞에서는 H⁺이 줄어 이온이 감소, 뒤에서는 Na⁺·OH⁻이 늘어 증가"></div>
-      <div class="qlabel"><span class="b">3</span> 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점</div>
-      <div class="write" contenteditable="true" data-field="p3C-3" data-q="[3차시 경로C] 다른 경로의 결과와 맞춰 보니 일치한 점 / 어긋난 점" data-ph=""></div>
+    <div class="act pm" id="pm3-C-post" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3C-3" data-q="[3차시 경로C] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 교반 부족으로 값이 흔들림, 전극 오염)</div>
+      <div class="write" contenteditable="true" data-field="p3C-4" data-q="[3차시 경로C] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-D" data-p="D" data-l="D">
-      <h3><span class="tag">경로 D · 이온 해설가</span> 이온 모형으로 세 결과 해설하기</h3>
-      <p class="lead">지시약의 색 변화와 이온 모형으로 세 센서의 결과가 왜 그렇게 나왔는지 설명하는 경로입니다.</p>
-      <div class="qlabel"><span class="b">1</span> 지시약 색이 바뀐 회차와 센서 결과가 가리킨 회차를 견주어 보세요</div>
-      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 지시약 색이 바뀐 회차와 센서 결과가 가리킨 회차를 견주어 보세요" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 처음 / 중화점 / 이후 — 세 시점의 이온 모형을 글로 설명해 보세요</div>
-      <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] 처음 / 중화점 / 이후 — 세 시점의 이온 모형을 글로 설명해 보세요" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 네 가지 방법(pH·온도·전도도·지시약) 중 가장 믿을 만한 것과 그 이유</div>
-      <div class="write" contenteditable="true" data-field="p3D-3" data-q="[3차시 경로D] 네 가지 방법(pH·온도·전도도·지시약) 중 가장 믿을 만한 것과 그 이유" data-ph=""></div>
+    <div class="act pm" id="pm3-D-post" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-3" data-q="[3차시 경로D] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 방법마다 가리키는 회차가 다른 까닭)</div>
+      <div class="write" contenteditable="true" data-field="p3D-4" data-q="[3차시 경로D] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
     <div class="act">
       <h3><span class="tag">결과 토의</span> 모둠에서 이야기하고 각자 적기</h3>
       <div class="qlabel"><span class="b">1</span> 세 그래프에서 각각 중화점으로 보이는 회차는? (pH 급변 / 온도 최고 / 전도도 최저)</div>
-      <div class="write" contenteditable="true" data-field="c3-q1" data-q="토의1: 세 그래프의 중화점 회차" data-ph="pH: …회차 급변 / 온도: …회차 최고 / 전도도: …회차 최저"></div>
+      <div class="write" contenteditable="true" data-field="c3-q1" data-q="토의1: 세 그래프의 중화점 회차" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> 세 방법이 가리키는 회차가 서로 비슷했나요? 다르다면 어느 방법이 가장 뚜렷했나요?</div>
       <div class="write" contenteditable="true" data-field="c3-q2" data-q="토의2: 세 방법 비교" data-ph=""></div>
       <div class="qlabel"><span class="b">3</span> 중화점 전후로 전도도가 변하는 까닭을 1차시 이온 수 변화표와 연결해 설명하기</div>
-      <div class="write" contenteditable="true" data-field="c3-q3" data-q="토의3: 전도도 변화의 이온론적 설명" data-ph="중화점 전: H⁺이 OH⁻와 만나 물이 되며 이온이 줄어 전도도 감소 / 중화점 후: Na⁺·OH⁻이 늘며 전도도 증가"></div>
+      <div class="write" contenteditable="true" data-field="c3-q3" data-q="토의3: 전도도 변화의 이온론적 설명" data-ph=""></div>
     </div>
 
     <div class="act team-only teamboard">
@@ -711,6 +751,50 @@ img{max-width:100%}
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 전도도·온도·pH 세 그래프를 각각 알맞은 함수/변화율로 모델링해 중화점을 구한다.
       ② 결과를 모둠 탐구 보고서와 인포그래픽으로 정리한다.</p>
 
+    <div class="act pm" id="pm4-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> pH 곡선을 수학으로 말하기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p3A-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-A-post&quot;], [&quot;p3A-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-A-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> pH 곡선의 급변 지점을 수학적으로 어떻게 나타낼까요? 쓸 방법(변화율·기울기 등)을 고르고 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] pH 곡선의 급변 지점을 수학적으로 어떻게 나타낼까요? 쓸 방법(변화율·기울기 등)을 " data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 3차시 결과 중 아직 설명하지 못한 점 한 가지 — 오늘 이 점을 풀어 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 3차시 결과 중 아직 설명하지 못한 점 한 가지 — 오늘 이 점을 풀어 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 온도 곡선을 함수로 말하기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p3B-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-B-post&quot;], [&quot;p3B-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-B-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 산 모양 온도 곡선을 어떤 식·방법으로 나타낼까요? 방법을 고르고 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 산 모양 온도 곡선을 어떤 식·방법으로 나타낼까요? 방법을 고르고 이유를 쓰세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 3차시 결과 중 아직 설명하지 못한 점 한 가지 — 오늘 이 점을 풀어 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 3차시 결과 중 아직 설명하지 못한 점 한 가지 — 오늘 이 점을 풀어 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 전도도 곡선을 함수로 말하기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p3C-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-C-post&quot;], [&quot;p3C-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-C-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> V자 전도도 곡선을 어떤 함수로 나타낼까요? 방법을 고르고 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] V자 전도도 곡선을 어떤 함수로 나타낼까요? 방법을 고르고 이유를 쓰세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 3차시 결과 중 아직 설명하지 못한 점 한 가지 — 오늘 이 점을 풀어 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 3차시 결과 중 아직 설명하지 못한 점 한 가지 — 오늘 이 점을 풀어 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 세 중화점 종합하기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p3D-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-D-post&quot;], [&quot;p3D-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-D-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 세 중화점(A·B·C)이 서로 다를 때 어떤 기준으로 종합할까요? 평균·범위·가장 믿는 방법 중 골라 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] 세 중화점(A·B·C)이 서로 다를 때 어떤 기준으로 종합할까요? 평균·범위·가장 믿는" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 세 결과 사이에 아직 설명하지 못한 차이 한 가지 — 오늘 풀어 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 세 결과 사이에 아직 설명하지 못한 차이 한 가지 — 오늘 풀어 보세요" data-ph=""></div>
+    </div>
+
+    <div class="toolbox-note"><b>도구함</b> — 아래 활동은 순서대로 모두 할 필요가 없어요. 위 미션 카드에서 정한 방법에 필요한 도구를 골라 쓰고, 쓴 도구와 결과는 아래 정리 카드에서 근거로 말하세요. ([A·D 경로]처럼 표시된 활동은 해당 경로의 도구입니다.)</div>
+
+
+
     <div class="act" data-p="C">
       <h3><span class="tag">활동 1 · C 경로</span> 전도도 → 절댓값 함수</h3>
       <p class="lead">일차함수 <code>y = ax + b</code>의 <b>a = 기울기</b>, <b>b = y절편</b>. 절댓값 <code>|x|</code>은 "0에서 꺾이는 V자".
@@ -731,7 +815,7 @@ img{max-width:100%}
         <figcaption>꺾이는 점의 x좌표 = 중화가 완성된 회차, y좌표 = 그때의 (가장 작은) 전도도.</figcaption>
       </figure>
       <div class="qlabel"><span class="b">내 함수</span> 전도도 데이터에 맞춘 절댓값 함수와, 그 최솟값(중화점 A)</div>
-      <div class="write" contenteditable="true" data-field="c4-fn" data-q="전도도 절댓값 함수와 중화점 A" data-ph="y = 2|x − 8| + 1 → 중화점 A: 8회차, 전도도 1"></div>
+      <div class="write" contenteditable="true" data-field="c4-fn" data-q="전도도 절댓값 함수와 중화점 A" data-ph=""></div>
     </div>
 
     <div class="act" data-p="B">
@@ -740,7 +824,7 @@ img{max-width:100%}
         산 모양(∧)이므로 <b>y = −a|x − p| + q</b> (또는 이차함수 <code>y=-a(x-p)²+q</code>)로 나타낼 수 있습니다.</p>
       <div class="fml">전도도 함수 <code>y=a|x-p|+q</code>의 부호만 바꾸면 산 모양이 됩니다: <code>y=-a|x-p|+q</code></div>
       <div class="qlabel"><span class="b">내 함수</span> 온도 데이터에 맞춘 함수와, 그 최댓값(중화점 B)</div>
-      <div class="write" contenteditable="true" data-field="c4-fn2" data-q="온도 함수와 중화점 B" data-ph="y = −0.4|x − 8| + 24.5 → 중화점 B: 8회차, 온도 24.5℃"></div>
+      <div class="write" contenteditable="true" data-field="c4-fn2" data-q="온도 함수와 중화점 B" data-ph=""></div>
     </div>
 
     <div class="act" data-p="A">
@@ -756,7 +840,7 @@ img{max-width:100%}
         </table>
       </div>
       <div class="qlabel"><span class="b">중화점 C</span> 변화율이 가장 큰 구간과, 그 구간의 중간 회차</div>
-      <div class="write" contenteditable="true" data-field="c4-fn3" data-q="pH 최대 변화율 구간과 중화점 C" data-ph="6→8 구간의 변화율이 가장 크다 → 중화점 C: 약 7회차"></div>
+      <div class="write" contenteditable="true" data-field="c4-fn3" data-q="pH 최대 변화율 구간과 중화점 C" data-ph=""></div>
     </div>
 
     <div class="act" data-p="D">
@@ -772,58 +856,66 @@ img{max-width:100%}
       <div class="qlabel"><span class="b">비교</span> 세 값이 서로 얼마나 가까운가요? 다르다면 왜 다른지, 어느 값을 최종 중화점으로 채택할지</div>
       <div class="write" contenteditable="true" data-field="c4-conclude" data-q="세 방법 비교 및 최종 중화점 결론" data-ph=""></div>
       <div class="qlabel"><span class="b">예측</span> NaOH를 5회 더 넣으면 전도도는? (활동1의 함수에 대입)</div>
-      <div class="write" contenteditable="true" data-field="c4-predict" data-q="함수로 예측한 값과 과정" data-ph="y = 2|13 − 8| + 1 = 11"></div>
+      <div class="write" contenteditable="true" data-field="c4-predict" data-q="함수로 예측한 값과 과정" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-A" data-p="A" data-l="A">
-      <h3><span class="tag">경로 A · pH 탐정</span> 재설계 ④ — pH 급변 구간 더 정밀하게</h3>
-      <p class="lead">활동 3에서 구한 중화점 C(변화율이 가장 큰 구간)를 근거로 실험을 고쳐 설계합니다.</p>
-      <div class="qlabel"><span class="b">1</span> 내 해석 결과 한 줄: pH 변화율이 가장 큰 구간과 중화점 C</div>
-      <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] 내 해석 결과 한 줄: pH 변화율이 가장 큰 구간과 중화점 C" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 급변 구간을 더 촘촘히 재려면 첨가량·측정 방법을 어떻게 바꿀까요? (숫자로)</div>
-      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 급변 구간을 더 촘촘히 재려면 첨가량·측정 방법을 어떻게 바꿀까요? (숫자로)" data-ph="예: 6~8회차 구간은 0.2 mL씩 넣고 표본율을 높인다"></div>
-      <div class="qlabel"><span class="b">3</span> 바꾼 설계로 기대하는 달라진 점</div>
-      <div class="write" contenteditable="true" data-field="p4A-3" data-q="[4차시 경로A] 바꾼 설계로 기대하는 달라진 점" data-ph=""></div>
+    <div class="act pm" id="pm4-A-post" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · pH 탐정</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-3" data-q="[4차시 경로A] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 급변 구간을 더 촘촘히 재기)</div>
+      <div class="write" contenteditable="true" data-field="p4A-4" data-q="[4차시 경로A] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-5" data-q="[4차시 경로A] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4A-6" data-q="[4차시 경로A] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-B" data-p="B" data-l="B">
-      <h3><span class="tag">경로 B · 온도 탐정</span> 재설계 ④ — 열 손실 줄이기</h3>
-      <p class="lead">활동 2의 결과(중화점 B)를 근거로 최고점이 더 뚜렷해지도록 설계를 바꿉니다.</p>
-      <div class="qlabel"><span class="b">1</span> 내 해석 결과 한 줄: 최고 온도 회차와 중화점 B</div>
-      <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 내 해석 결과 한 줄: 최고 온도 회차와 중화점 B" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 최고점을 더 뚜렷하게 만들 방법 (보온, 농도, 부피 중에서 구체적으로)</div>
-      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 최고점을 더 뚜렷하게 만들 방법 (보온, 농도, 부피 중에서 구체적으로)" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 바꾼 설계로 기대하는 달라진 점</div>
-      <div class="write" contenteditable="true" data-field="p4B-3" data-q="[4차시 경로B] 바꾼 설계로 기대하는 달라진 점" data-ph=""></div>
+    <div class="act pm" id="pm4-B-post" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 온도 탐정</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-3" data-q="[4차시 경로B] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 보온·농도·부피로 열 손실 줄이기)</div>
+      <div class="write" contenteditable="true" data-field="p4B-4" data-q="[4차시 경로B] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-5" data-q="[4차시 경로B] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4B-6" data-q="[4차시 경로B] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-C" data-p="C" data-l="C">
-      <h3><span class="tag">경로 C · 전도도 탐정</span> 재설계 ④ — 이온 신호 키우기</h3>
-      <p class="lead">활동 1의 결과(중화점 A)를 근거로 V자가 더 뚜렷해지도록 설계를 바꿉니다.</p>
-      <div class="qlabel"><span class="b">1</span> 내 해석 결과 한 줄: 절댓값 함수와 중화점 A</div>
-      <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] 내 해석 결과 한 줄: 절댓값 함수와 중화점 A" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 농도·부피를 어떻게 바꾸면 V자가 더 뚜렷해질까요? 이유도 함께</div>
-      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 농도·부피를 어떻게 바꾸면 V자가 더 뚜렷해질까요? 이유도 함께" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 바꾼 설계로 기대하는 달라진 점</div>
-      <div class="write" contenteditable="true" data-field="p4C-3" data-q="[4차시 경로C] 바꾼 설계로 기대하는 달라진 점" data-ph=""></div>
+    <div class="act pm" id="pm4-C-post" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 전도도 탐정</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-3" data-q="[4차시 경로C] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 농도·부피를 바꿔 V자를 뚜렷하게)</div>
+      <div class="write" contenteditable="true" data-field="p4C-4" data-q="[4차시 경로C] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-5" data-q="[4차시 경로C] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4C-6" data-q="[4차시 경로C] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-D" data-p="D" data-l="D">
-      <h3><span class="tag">경로 D · 이온 해설가</span> 재설계 ④ — 세 결과 종합과 재설계 심사</h3>
-      <p class="lead">A·B·C의 재설계안을 견주어 모둠이 다시 해 볼 실험 하나를 고릅니다.</p>
-      <div class="qlabel"><span class="b">1</span> 세 중화점(A·B·C)의 값과 차이를 정리해 보세요 (활동 4의 표 활용)</div>
-      <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] 세 중화점(A·B·C)의 값과 차이를 정리해 보세요 (활동 4의 표 활용)" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 값이 다르게 나온 가장 큰 원인 한 가지와 그 근거</div>
-      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 값이 다르게 나온 가장 큰 원인 한 가지와 그 근거" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 세 재설계안 중 모둠이 먼저 다시 해 볼 것 하나와 고른 이유</div>
-      <div class="write" contenteditable="true" data-field="p4D-3" data-q="[4차시 경로D] 세 재설계안 중 모둠이 먼저 다시 해 볼 것 하나와 고른 이유" data-ph=""></div>
+    <div class="act pm" id="pm4-D-post" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 이온 해설가</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-3" data-q="[4차시 경로D] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 가장 큰 오차 원인 하나를 골라 줄이는 실험)</div>
+      <div class="write" contenteditable="true" data-field="p4D-4" data-q="[4차시 경로D] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-5" data-q="[4차시 경로D] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4D-6" data-q="[4차시 경로D] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
     <div class="act team-only">
       <h3><span class="tag">활동 5</span> 결과물 ① — 모둠 탐구 보고서 작성</h3>
       <p class="lead">아래 항목을 순서대로 채우면, [답안 복사] 또는 [인쇄·PDF]로 그대로 하나의 보고서가 됩니다.</p>
       <div class="qlabel"><span class="b">제목</span> 우리 모둠의 탐구 제목</div>
-      <div class="write" contenteditable="true" data-field="c4r-title" data-q="[보고서] 제목" data-ph="예: PASCO 다중 센서로 찾는 중화점 — pH·온도·전도도 교차 검증"></div>
+      <div class="write" contenteditable="true" data-field="c4r-title" data-q="[보고서] 제목" data-ph=""></div>
       <div class="qlabel"><span class="b">연구 목적·가설</span></div>
       <div class="write" contenteditable="true" data-field="c4r-purpose" data-q="[보고서] 연구 목적과 가설" data-ph=""></div>
       <div class="qlabel"><span class="b">실험 방법 요약</span> (센서 구성, 첨가량, 측정 방법)</div>
@@ -844,7 +936,7 @@ img{max-width:100%}
         <li><label><input type="checkbox" data-field="c4i-4"></label><div>한 줄 결론</div></li>
       </ul>
       <div class="qlabel"><span class="b">기획</span> 위 네 가지를 실제 문구로 적어보기</div>
-      <div class="write" contenteditable="true" data-field="c4i-plan" data-q="[인포그래픽] 기획 내용" data-ph="제목: … / 대표 그래프: … / 핵심 수치: … / 한 줄 결론: …" style="min-height:4.5em"></div>
+      <div class="write" contenteditable="true" data-field="c4i-plan" data-q="[인포그래픽] 기획 내용" data-ph="" style="min-height:4.5em"></div>
       <div class="hint">시간이 부족하면 기획표까지만 완성하고, 실제 인포그래픽 파일은 다음 시간 전까지 모둠별로 제출합니다.</div>
     </div>
 

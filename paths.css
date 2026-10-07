@@ -75,3 +75,19 @@ body.showall .nopath-note{display:none!important}
   .cycle .cy,.pathsel{box-shadow:none;break-inside:avoid}
   .nopath-note{display:none!important}
 }
+
+/* ---- 탐구형 보강: 단계별 산출물, 이어받기, 도구함, 참고값 가리기 ---- */
+.cycle .cy .out{display:block;margin-top:6px;font-size:11.5px;font-weight:600;color:var(--ink)}
+.thread{margin:10px 0 2px;padding:10px 13px;border:1px dashed var(--field-line);border-radius:9px;background:var(--field);font-size:13px}
+.thread .thsub{font-size:12px;color:var(--ink-soft)}
+.thread ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+.thread li em{display:block;font-style:normal;font-size:11.5px;color:var(--ink-soft)}
+.thread .tv{display:block;white-space:pre-wrap;word-break:break-word}
+.thread .tv.empty{color:var(--ink-soft);font-size:12.5px}
+.toolbox-note{margin:14px 2px 0;padding:9px 13px;border-left:4px solid var(--ink-soft);background:var(--card);border-radius:0 8px 8px 0;font-size:13px;color:var(--ink-soft);line-height:1.6}
+.toolbox-note b{color:var(--ink)}
+.refbar{margin:-4px 0 12px}
+.refbtn{font-family:var(--f-body);font-size:12.5px;padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.refbtn:hover{border-color:var(--focus)}
+.tbl-wrap:not(.show-ref) td.ref{color:transparent!important;user-select:none;background-image:repeating-linear-gradient(135deg,transparent 0 5px,var(--line) 5px 6px)}
+@media print{.refbar{display:none!important}.tbl-wrap:not(.show-ref) td.ref{background-image:none}}

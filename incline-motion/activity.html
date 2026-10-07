@@ -236,10 +236,10 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <label>모둠 / 역할 <input id="w-team" data-field="w-team" autocomplete="off"></label>
     </div>
     <div class="cycle" aria-label="4단계 탐구 사이클">
-      <div class="cy"><b>① 문제 발견</b><span>같은 운동을 두 방법으로 재면 같을까? 확인할 질문 만들기</span><em>1차시</em></div>
-      <div class="cy"><b>② 직접 측정</b><span>센서·영상·기하 측정으로 같은 빗면 운동의 데이터 얻기</span><em>2차시 · 3차시</em></div>
-      <div class="cy"><b>③ 데이터 해석</b><span>기울기(미분)·넓이(적분)로 속도·가속도·변위를 구하고 견주기</span><em>3차시 · 4차시</em></div>
-      <div class="cy"><b>④ 재설계</b><span>오차의 원인을 바탕으로 측정과 모형을 고쳐 다시 설계하기</span><em>4차시</em></div>
+      <div class="cy"><b>① 문제 발견</b><span>같은 운동을 두 방법으로 재면 같을까? 확인할 질문 만들기</span><span class="out">내 산출물 : 탐구 질문 · 예상</span><em>1차시</em></div>
+      <div class="cy"><b>② 직접 측정</b><span>센서·영상·기하 측정으로 같은 빗면 운동의 데이터 얻기</span><span class="out">내 산출물 : 측정 계획 · 원자료</span><em>2차시 · 3차시</em></div>
+      <div class="cy"><b>③ 데이터 해석</b><span>기울기(미분)·넓이(적분)로 속도·가속도·변위를 구하고 견주기</span><span class="out">내 산출물 : 주장 · 근거 · 한계</span><em>3차시 · 4차시</em></div>
+      <div class="cy"><b>④ 재설계</b><span>오차의 원인을 바탕으로 측정과 모형을 고쳐 다시 설계하기</span><span class="out">내 산출물 : 재설계안 · 시도 기록</span><em>4차시</em></div>
     </div>
     <div class="pathsel" id="pathsel">
       <h2>나의 경로 선택</h2>
@@ -433,7 +433,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <li><span class="n">4</span><label><input type="checkbox" data-field="m2p-4"></label><div>가장 깨끗한 1회를 대표로 골라 아래 표(활동 4)의 <code>x(PASCO)</code> 칸에 옮겨 적는다.</div></li>
       </ol>
       <div class="qlabel"><span class="b">기록</span> 대표 회차 번호와 고른 이유</div>
-      <div class="write" contenteditable="true" data-field="m2-pasco-pick" data-q="대표 회차 선택" data-ph="예: 2회차 — 출발 순간이 깔끔하고 튀는 값이 없어서"></div>
+      <div class="write" contenteditable="true" data-field="m2-pasco-pick" data-q="대표 회차 선택" data-ph=""></div>
     </div>
 
     <div class="act" data-p="B">
@@ -444,7 +444,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <li><span class="n">3</span><label><input type="checkbox" data-field="m2t-3"></label><div><b>보정 막대(calibration stick)</b>를 화면 속 기준자 양 끝에 맞추고 <b>실제 길이</b> 입력 <span class="hint">1차시에 정한 값, 예 0.30 m</span></div></li>
       </ol>
       <div class="qlabel"><span class="b">기록</span> 프레임률(fps), 척도 실제 길이, 분석 구간(초)</div>
-      <div class="write" contenteditable="true" data-field="m2-tracker-setup" data-q="Tracker 설정값" data-ph="60 fps / 척도 0.30 m / 0.00 s ~ 0.60 s"></div>
+      <div class="write" contenteditable="true" data-field="m2-tracker-setup" data-q="Tracker 설정값" data-ph=""></div>
     </div>
 
     <div class="act" data-p="B">
@@ -476,18 +476,20 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
             <tr><th>x — Tracker</th>
               <td><input data-field="m2x-t0"></td><td><input data-field="m2x-t1"></td><td><input data-field="m2x-t2"></td><td><input data-field="m2x-t3"></td><td><input data-field="m2x-t4"></td><td><input data-field="m2x-t5"></td><td><input data-field="m2x-t6"></td></tr>
             <tr><th>x — 이론(참고)</th>
-              <td class="fixed">0</td><td class="fixed">0.009</td><td class="fixed">0.034</td><td class="fixed">0.077</td><td class="fixed">0.136</td><td class="fixed">0.213</td><td class="fixed">0.306</td></tr>
+              <td class="fixed ref">0</td><td class="fixed ref">0.009</td><td class="fixed ref">0.034</td><td class="fixed ref">0.077</td><td class="fixed ref">0.136</td><td class="fixed ref">0.213</td><td class="fixed ref">0.306</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="refbar"><button type="button" class="refbtn" aria-expanded="false">참고값 확인 (먼저 내 값을 쓰고 눌러 보세요)</button></div>
       <div class="qlabel"><span class="b">직접 확인</span> 위 방법으로 <b>t = 0.4 s</b>의 이론값을 직접 계산해 표의 값과 맞는지 확인하기</div>
-      <div class="write" contenteditable="true" data-field="m2-theory-check" data-q="t=0.4 s 이론값 직접 계산" data-ph="x = ½ × 1.70 × 0.4² = ½ × 1.70 × 0.16 = 0.136 m  → 표의 값과 같다"></div>
+      <div class="write" contenteditable="true" data-field="m2-theory-check" data-q="t=0.4 s 이론값 직접 계산" data-ph=""></div>
       <div class="callout">측정값이 이론값과 조금 달라도 괜찮습니다. <b>왜 다른지</b>를 3·4차시에서 따져 봅니다.</div>
     </div>
 
     <div class="act pm" id="pm2-A" data-p="A" data-l="A">
       <h3><span class="tag">경로 A · 센서 경로</span> 센서 측정 실행</h3>
       <p class="lead">SPARKvue로 3회 측정하고 가장 깨끗한 회차를 골라 x(PASCO) 줄을 채웁니다.</p>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 대표 회차와 그때 센서가 보여 준 가속도 값(또는 그래프 읽은 값)</div>
       <div class="write" contenteditable="true" data-field="p2A-1" data-q="[2차시 경로A] 대표 회차와 그때 센서가 보여 준 가속도 값(또는 그래프 읽은 값)" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> 회차마다 결과가 달랐다면 그 원인은?</div>
@@ -499,6 +501,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm2-B" data-p="B" data-l="B">
       <h3><span class="tag">경로 B · 영상 경로</span> 영상 분석 실행</h3>
       <p class="lead">Tracker로 좌표축·척도를 맞추고 프레임마다 점을 찍어 x(Tracker) 줄을 채웁니다.</p>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> Tracker 설정값과 추적한 프레임 수</div>
       <div class="write" contenteditable="true" data-field="p2B-1" data-q="[2차시 경로B] Tracker 설정값과 추적한 프레임 수" data-ph="예: 60 fps, 척도 0.30 m, 36프레임"></div>
       <div class="qlabel"><span class="b">2</span> 튀는 점(잘못 찍힌 프레임)은 어떻게 고쳤나요?</div>
@@ -510,6 +513,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm2-C" data-p="C" data-l="C">
       <h3><span class="tag">경로 C · 이론 경로</span> 기하 측정과 이론 표 만들기</h3>
       <p class="lead">실험 빗면의 높이 h와 길이 L을 직접 재고, 이론 이동거리 표를 만듭니다.</p>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> h, L과 sinθ = h/L 값, 각도기로 잰 θ의 sin 값과 비교한 결과</div>
       <div class="write" contenteditable="true" data-field="p2C-1" data-q="[2차시 경로C] h, L과 sinθ = h/L 값, 각도기로 잰 θ의 sin 값과 비교한 결과" data-ph="예: h = 0.087 m, L = 0.50 m → sinθ = 0.174"></div>
       <div class="qlabel"><span class="b">2</span> 내 θ로 이동거리 x = ½·a·t²을 t = 0.2, 0.4, 0.6 s에서 계산해 보세요</div>
@@ -521,6 +525,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm2-D" data-p="D" data-l="D">
       <h3><span class="tag">경로 D · 변인 경로</span> 각도를 바꿔 센서 측정하기</h3>
       <p class="lead">센서 경로 친구의 설정을 빌려 각도만 바꾸어 측정합니다. (다른 조건은 같게!)</p>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 바꾼 θ와, 센서로 얻은 가속도 2회 값</div>
       <div class="write" contenteditable="true" data-field="p2D-1" data-q="[2차시 경로D] 바꾼 θ와, 센서로 얻은 가속도 2회 값" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> 처음 θ(10°) 대비 가속도의 비(a₂/a₁)와 sinθ의 비(sinθ₂/sinθ₁)</div>
@@ -567,6 +572,50 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 그래프의 <b>기울기</b>로 순간 속도·가속도를 구한다.
       ② 센서·영상·이론 세 가지 가속도 값을 비교한다.</p>
 
+    <div class="act pm" id="pm3-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 센서 경로</span> 센서 그래프로 내 질문에 답하기</h3>
+      <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p2A-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 센서 데이터의 핵심 결과 — x–t 그래프 모양, 구한 가속도(대략)</div>
+      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] 센서 데이터의 핵심 결과 — x–t 그래프 모양, 구한 가속도(대략)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내 질문에 답하려면 무엇을 계산·비교할까요? 기울기를 구할 구간과 방법, 비교할 이론값 등을 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] 내 질문에 답하려면 무엇을 계산·비교할까요? 기울기를 구할 구간과 방법, 비교할 이론값" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 영상 경로</span> 영상 그래프로 내 질문에 답하기</h3>
+      <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p2B-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 영상 분석의 핵심 결과 — x–t 그래프 모양, 구간을 좁혀 얻은 순간 속도(대략)</div>
+      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 영상 분석의 핵심 결과 — x–t 그래프 모양, 구간을 좁혀 얻은 순간 속도(대략)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내 질문에 답하려면 영상 데이터에서 무엇을 계산·비교할까요? 구간 크기(Δt)와 비교 대상을 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] 내 질문에 답하려면 영상 데이터에서 무엇을 계산·비교할까요? 구간 크기(Δt)와 비교 " data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 이론 경로</span> 이론 그래프를 기준으로 삼기</h3>
+      <p class="lead">이론 곡선을 기준 삼아 친구들의 측정값을 평가하는 방법을 스스로 정합니다.</p>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p2C-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 내 θ로 직접 계산한 이론 값(이동거리·속도·가속도)의 핵심</div>
+      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 내 θ로 직접 계산한 이론 값(이동거리·속도·가속도)의 핵심" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 친구들의 측정값을 이론과 어떻게 견줄까요? 오차율 기준과 허용 범위를 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] 친구들의 측정값을 이론과 어떻게 견줄까요? 오차율 기준과 허용 범위를 먼저 정하세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm3-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 변인 경로</span> 각도 실험으로 내 질문에 답하기</h3>
+      <p class="lead">각도에 따라 가속도가 어떻게 달라지는지 확인하는 방법을 스스로 정합니다.</p>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p2D-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 내 각도 실험의 핵심 결과 — (θ, a) 값과 처음 각도와의 비교</div>
+      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 내 각도 실험의 핵심 결과 — (θ, a) 값과 처음 각도와의 비교" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> a와 sinθ의 관계를 어떻게 확인할까요? 비율·그래프·친구 데이터 합치기 중 방법을 먼저 정하세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] a와 sinθ의 관계를 어떻게 확인할까요? 비율·그래프·친구 데이터 합치기 중 방법을 " data-ph=""></div>
+    </div>
+
+    <div class="toolbox-note"><b>도구함</b> — 아래 활동은 순서대로 모두 할 필요가 없어요. 위 미션 카드에서 정한 방법에 필요한 도구를 골라 쓰고, 쓴 도구와 결과는 아래 정리 카드에서 근거로 말하세요. ([A·D 경로]처럼 표시된 활동은 해당 경로의 도구입니다.)</div>
+
+
+
     <div class="act">
       <h3><span class="tag">알아보기</span> 기울기 = 변화율</h3>
       <div class="callout">두 점 사이 <b>평균 속도</b> = <code>(x₂ − x₁) / (t₂ − t₁)</code> = 그 두 점을 잇는 <b>직선(할선)의 기울기</b>.
@@ -612,10 +661,11 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
             <tr><th>평균 속도 (m/s)</th>
               <td><input data-field="m3v-1"></td><td><input data-field="m3v-2"></td><td><input data-field="m3v-3"></td><td><input data-field="m3v-4"></td><td><input data-field="m3v-5"></td></tr>
             <tr><th>이론값(참고)</th>
-              <td class="fixed">0.17</td><td class="fixed">0.34</td><td class="fixed">0.51</td><td class="fixed">0.68</td><td class="fixed">0.85</td></tr>
+              <td class="fixed ref">0.17</td><td class="fixed ref">0.34</td><td class="fixed ref">0.51</td><td class="fixed ref">0.68</td><td class="fixed ref">0.85</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="refbar"><button type="button" class="refbtn" aria-expanded="false">참고값 확인 (먼저 내 값을 쓰고 눌러 보세요)</button></div>
       <div class="hint">이론값 = 각 구간의 <b>가운데 시각</b>에서 <code>v = a·t</code> (2차시 활동 4 ②식). 예: 0.0→0.2 구간의 가운데 0.1 s → 1.70 × 0.1 = 0.17</div>
     </div>
 
@@ -630,7 +680,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         </table>
       </div>
       <div class="qlabel"><span class="b">관찰</span> 구간을 좁힐수록 값이 어디로 수렴하나요? 이론값 v = 1.70 × 0.30 = 0.51 m/s와 비교</div>
-      <div class="write" contenteditable="true" data-field="m3-limit" data-q="구간 좁히기 관찰 (순간 속도)" data-ph="구간을 좁힐수록 약 0.5x m/s로 모인다. 이것이 t=0.3 s에서의 순간 속도(접선의 기울기)이다."></div>
+      <div class="write" contenteditable="true" data-field="m3-limit" data-q="구간 좁히기 관찰 (순간 속도)" data-ph=""></div>
     </div>
 
     <div class="act">
@@ -651,51 +701,43 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <p class="plot-hint">가로 = 시간(눈금 0.05 s, 숫자 0.1 s), 세로 = 속도 v(m/s). 모눈을 클릭해 점을 찍고 <b>완료</b>.</p>
       </div>
       <div class="qlabel"><span class="b">계산</span> 고른 두 점과 가속도 계산 과정</div>
-      <div class="write" contenteditable="true" data-field="m3-acc-calc" data-q="v-t 기울기로 가속도 계산" data-ph="(0.1 s, 0.17 m/s), (0.5 s, 0.85 m/s) → a = (0.85−0.17)/(0.5−0.1) = 1.7 m/s²"></div>
+      <div class="write" contenteditable="true" data-field="m3-acc-calc" data-q="v-t 기울기로 가속도 계산" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-A" data-p="A" data-l="A">
-      <h3><span class="tag">경로 A · 센서 경로</span> 센서 그래프의 기울기</h3>
-      <p class="lead">내 센서 데이터로 x–t, v–t 그래프를 읽고 기울기로 가속도를 구합니다.</p>
-      <div class="qlabel"><span class="b">1</span> v–t 그래프의 기울기로 구한 가속도와, 이론값 대비 오차율</div>
-      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] v–t 그래프의 기울기로 구한 가속도와, 이론값 대비 오차율" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 그래프가 직선에서 벗어난 부분과 그 까닭</div>
-      <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] 그래프가 직선에서 벗어난 부분과 그 까닭" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 영상·이론 경로의 값과 견주어 보니 어떤가요?</div>
-      <div class="write" contenteditable="true" data-field="p3A-3" data-q="[3차시 경로A] 영상·이론 경로의 값과 견주어 보니 어떤가요?" data-ph=""></div>
+    <div class="act pm" id="pm3-A-post" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 센서 경로</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3A-3" data-q="[3차시 경로A] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 출발 순간 노이즈, 표본율, 트랙 기울어짐)</div>
+      <div class="write" contenteditable="true" data-field="p3A-4" data-q="[3차시 경로A] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-B" data-p="B" data-l="B">
-      <h3><span class="tag">경로 B · 영상 경로</span> 영상 그래프의 기울기</h3>
-      <p class="lead">내 Tracker 데이터로 x–t 그래프를 그리고 구간을 좁혀 순간 속도를 구합니다.</p>
-      <div class="qlabel"><span class="b">1</span> 내가 잡은 구간(Δt)과 구한 순간 속도 (t = 0.30 s)</div>
-      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 내가 잡은 구간(Δt)과 구한 순간 속도 (t = 0.30 s)" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 구간을 좁히면 값이 어디로 모이나요?</div>
-      <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] 구간을 좁히면 값이 어디로 모이나요?" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 센서·이론 경로의 값과 견주어 보니 어떤가요?</div>
-      <div class="write" contenteditable="true" data-field="p3B-3" data-q="[3차시 경로B] 센서·이론 경로의 값과 견주어 보니 어떤가요?" data-ph=""></div>
+    <div class="act pm" id="pm3-B-post" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 영상 경로</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3B-3" data-q="[3차시 경로B] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 프레임률, 척도 보정, 렌즈 왜곡, 잘못 찍은 점)</div>
+      <div class="write" contenteditable="true" data-field="p3B-4" data-q="[3차시 경로B] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-C" data-p="C" data-l="C">
-      <h3><span class="tag">경로 C · 이론 경로</span> 이론 그래프와 기준값</h3>
-      <p class="lead">이론 곡선을 기준 삼아 센서·영상 데이터가 어느 쪽으로 벗어나는지 봅니다.</p>
-      <div class="qlabel"><span class="b">1</span> 이론 x–t, v–t 값 3개 점과 이론 가속도</div>
-      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 이론 x–t, v–t 값 3개 점과 이론 가속도" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 친구들의 측정값은 이론보다 큰가요, 작은가요? (방향)</div>
-      <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] 친구들의 측정값은 이론보다 큰가요, 작은가요? (방향)" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 벗어남을 설명할 수 있는 후보 한 가지(예: 마찰)와 확인할 방법</div>
-      <div class="write" contenteditable="true" data-field="p3C-3" data-q="[3차시 경로C] 벗어남을 설명할 수 있는 후보 한 가지(예: 마찰)와 확인할 방법" data-ph=""></div>
+    <div class="act pm" id="pm3-C-post" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 이론 경로</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3C-3" data-q="[3차시 경로C] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 이론이 틀릴 수 있는 이유 — 마찰, 바퀴의 회전)</div>
+      <div class="write" contenteditable="true" data-field="p3C-4" data-q="[3차시 경로C] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm3-D" data-p="D" data-l="D">
-      <h3><span class="tag">경로 D · 변인 경로</span> a와 sinθ의 관계 찾기</h3>
-      <p class="lead">내 각도 결과와 친구들의 10° 결과를 합쳐 가속도가 sinθ에 비례하는지 살펴봅니다.</p>
-      <div class="qlabel"><span class="b">1</span> (sinθ, a) 순서쌍 2개 이상</div>
-      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] (sinθ, a) 순서쌍 2개 이상" data-ph="예: (0.174, 1.68), (0.259, 2.49)"></div>
-      <div class="qlabel"><span class="b">2</span> a ÷ sinθ 값이 거의 일정한가요? 그 값은 g(9.8)에 가까운가요?</div>
-      <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] a ÷ sinθ 값이 거의 일정한가요? 그 값은 g(9.8)에 가까운가요?" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 다른 모둠원 데이터를 받아 점 하나를 더 추가해 보세요</div>
-      <div class="write" contenteditable="true" data-field="p3D-3" data-q="[3차시 경로D] 다른 모둠원 데이터를 받아 점 하나를 더 추가해 보세요" data-ph=""></div>
+    <div class="act pm" id="pm3-D-post" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 변인 경로</span> 정리 — 주장·근거·한계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그래프)를 함께 적으세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-3" data-q="[3차시 경로D] 내 질문에 대한 지금의 답(주장)을 한두 문장으로 쓰고, 근거가 되는 내 데이터(값·그" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 '무엇 때문에 아직 확신하기 어려운지'를 적으세요 (예: 각도 말고 달라진 조건은 없었나?)</div>
+      <div class="write" contenteditable="true" data-field="p3D-4" data-q="[3차시 경로D] 주장과 어긋나거나 믿기 어려운 데이터가 있나요? 있다면 그 까닭을, 없다면 &#x27;무엇 때문" data-ph=""></div>
     </div>
 
     <div class="act team-only">
@@ -705,11 +747,12 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
           <caption>가속도 a (m/s²) 비교 · 오차율 = |측정 − 이론| ÷ 이론 × 100</caption>
           <thead><tr><th></th><th>PASCO 센서</th><th>Tracker 영상</th><th>이론 (g·sinθ)</th></tr></thead>
           <tbody>
-            <tr><th>가속도 a</th><td><input data-field="m3c-p"></td><td><input data-field="m3c-t"></td><td><input data-field="m3c-th" placeholder="예 1.70"></td></tr>
+            <tr><th>가속도 a</th><td><input data-field="m3c-p"></td><td><input data-field="m3c-t"></td><td><input data-field="m3c-th"></td></tr>
             <tr><th>이론 대비 오차율 (%)</th><td><input data-field="m3c-pe"></td><td><input data-field="m3c-te"></td><td class="fixed">—</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="refbar"><button type="button" class="refbtn" aria-expanded="false">참고값 확인 (먼저 내 값을 쓰고 눌러 보세요)</button></div>
       <div class="qlabel"><span class="b">해석</span> 어느 방법이 이론값에 더 가까웠나요? 그렇게 생각한 까닭은?</div>
       <div class="write" contenteditable="true" data-field="m3-compare" data-q="가속도 비교 해석" data-ph=""></div>
     </div>
@@ -752,6 +795,50 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <p class="lead" style="padding:0 2px">오늘의 목표 — ① 그래프 <b>아래 넓이</b>로 변위·속도 변화를 구한다.
       ② 두 측정 방법을 비교해 오차를 분석하고 결론을 낸다.</p>
 
+    <div class="act pm" id="pm4-A" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 센서 경로</span> 센서 데이터를 적분의 눈으로 보기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p3A-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-A-post&quot;], [&quot;p3A-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-A-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 넓이로 변위·속도 변화를 구하려면 구간을 어떻게 나눌까요? 방법을 정하고 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] 넓이로 변위·속도 변화를 구하려면 구간을 어떻게 나눌까요? 방법을 정하고 이유를 쓰세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 3차시에서 센서값이 이론과 어긋난 부분 한 가지 — 오늘 원인을 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 3차시에서 센서값이 이론과 어긋난 부분 한 가지 — 오늘 원인을 따져 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-B" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 영상 경로</span> 영상 데이터를 적분의 눈으로 보기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p3B-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-B-post&quot;], [&quot;p3B-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-B-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 넓이로 변위·속도 변화를 구하려면 구간을 어떻게 나눌까요? 방법을 정하고 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 넓이로 변위·속도 변화를 구하려면 구간을 어떻게 나눌까요? 방법을 정하고 이유를 쓰세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 3차시에서 영상값이 이론·센서와 어긋난 부분 한 가지 — 오늘 원인을 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 3차시에서 영상값이 이론·센서와 어긋난 부분 한 가지 — 오늘 원인을 따져 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-C" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 이론 경로</span> 이론 모형을 측정으로 고치기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p3C-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-C-post&quot;], [&quot;p3C-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-C-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 측정이 이론과 다르다면 어떤 요인을 모형에 넣을까요? 고려할 요인을 고르고 이유를 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] 측정이 이론과 다르다면 어떤 요인을 모형에 넣을까요? 고려할 요인을 고르고 이유를 쓰세" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 측정과 이론이 가장 크게 어긋난 부분 한 가지 — 오늘 원인을 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 측정과 이론이 가장 크게 어긋난 부분 한 가지 — 오늘 원인을 따져 보세요" data-ph=""></div>
+    </div>
+
+    <div class="act pm" id="pm4-D" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 변인 경로</span> 변인 실험을 설계하고 검증하기</h3>
+      <p class="lead">처음 질문에서 출발해 해석 방법을 직접 고르고, 얻은 결과를 근거로 다시 설계해 봅니다.</p>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p3D-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-D-post&quot;], [&quot;p3D-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-D-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> a–sinθ 결과를 근거로 다음에 바꿀 변인을 정하세요. 어떤 변인을, 왜 고르나요?</div>
+      <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] a–sinθ 결과를 근거로 다음에 바꿀 변인을 정하세요. 어떤 변인을, 왜 고르나요?" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 각도 실험에서 아직 설명되지 않은 점 한 가지 — 오늘 풀어 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 각도 실험에서 아직 설명되지 않은 점 한 가지 — 오늘 풀어 보세요" data-ph=""></div>
+    </div>
+
+    <div class="toolbox-note"><b>도구함</b> — 아래 활동은 순서대로 모두 할 필요가 없어요. 위 미션 카드에서 정한 방법에 필요한 도구를 골라 쓰고, 쓴 도구와 결과는 아래 정리 카드에서 근거로 말하세요. ([A·D 경로]처럼 표시된 활동은 해당 경로의 도구입니다.)</div>
+
+
+
     <div class="act">
       <h3><span class="tag">알아보기</span> 넓이 = 쌓인 양</h3>
       <div class="callout"><b>v–t 그래프 아래 넓이 = 이동 거리(변위)</b>입니다.
@@ -784,7 +871,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         </table>
       </div>
       <div class="qlabel"><span class="b">비교</span> 넓이로 구한 변위와 이론값 x = ½ × 1.70 × 0.5² = <b>0.213 m</b>, 그리고 2차시 표의 t=0.5 s 측정값을 비교</div>
-      <div class="write" contenteditable="true" data-field="m4-disp" data-q="넓이로 구한 변위와 비교" data-ph="넓이 합 ≈ 0.2x m ≈ 이론값 0.213 m ≈ 측정값 …"></div>
+      <div class="write" contenteditable="true" data-field="m4-disp" data-q="넓이로 구한 변위와 비교" data-ph=""></div>
     </div>
 
     <div class="act">
@@ -803,51 +890,59 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       </div>
       <div class="fml">0 ~ 0.5 s 넓이 = a × 0.5 = (3차시에서 구한 a) × 0.5 = ?  →  이 값 = v(0.5) − v(0)</div>
       <div class="qlabel"><span class="b">계산·확인</span> 위 값과, v–t 그래프에서 읽은 v(0.5) − v(0)이 같은가?</div>
-      <div class="write" contenteditable="true" data-field="m4-dv" data-q="a-t 넓이 = 속도 변화 확인" data-ph="a × 0.5 ≈ 1.70 × 0.5 = 0.85 m/s. v-t 그래프의 v(0.5) − v(0)도 약 0.85 m/s로 일치."></div>
+      <div class="write" contenteditable="true" data-field="m4-dv" data-q="a-t 넓이 = 속도 변화 확인" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-A" data-p="A" data-l="A">
-      <h3><span class="tag">경로 A · 센서 경로</span> 재설계 ④ — 센서 측정 고치기</h3>
-      <p class="lead">넓이(적분)로 구한 변위와 센서값을 견주고, 오차를 줄이도록 측정을 다시 설계합니다.</p>
-      <div class="qlabel"><span class="b">1</span> 넓이로 구한 변위와 센서가 알려 준 변위 비교 결과</div>
-      <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] 넓이로 구한 변위와 센서가 알려 준 변위 비교 결과" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 오차를 줄일 수 있는 설정·장치 변경 2가지 (구체적으로)</div>
-      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 오차를 줄일 수 있는 설정·장치 변경 2가지 (구체적으로)" data-ph="예: 표본율 20 → 50 Hz, 트랙 수평 확인"></div>
-      <div class="qlabel"><span class="b">3</span> 고친 설계의 기대 오차율</div>
-      <div class="write" contenteditable="true" data-field="p4A-3" data-q="[4차시 경로A] 고친 설계의 기대 오차율" data-ph=""></div>
+    <div class="act pm" id="pm4-A-post" data-p="A" data-l="A">
+      <h3><span class="tag">경로 A · 센서 경로</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-3" data-q="[4차시 경로A] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 표본율·설정·장치 변경)</div>
+      <div class="write" contenteditable="true" data-field="p4A-4" data-q="[4차시 경로A] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-5" data-q="[4차시 경로A] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4A-6" data-q="[4차시 경로A] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-B" data-p="B" data-l="B">
-      <h3><span class="tag">경로 B · 영상 경로</span> 재설계 ④ — 영상 측정 고치기</h3>
-      <p class="lead">넓이로 구한 변위와 영상값을 견주고, 오차를 줄이도록 촬영·분석을 다시 설계합니다.</p>
-      <div class="qlabel"><span class="b">1</span> 넓이로 구한 변위와 영상 분석 변위 비교 결과</div>
-      <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 넓이로 구한 변위와 영상 분석 변위 비교 결과" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 오차를 줄일 수 있는 촬영·분석 변경 2가지 (구체적으로)</div>
-      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 오차를 줄일 수 있는 촬영·분석 변경 2가지 (구체적으로)" data-ph="예: 60 → 120 fps, 기준자를 수레와 같은 평면에"></div>
-      <div class="qlabel"><span class="b">3</span> 고친 설계의 기대 오차율</div>
-      <div class="write" contenteditable="true" data-field="p4B-3" data-q="[4차시 경로B] 고친 설계의 기대 오차율" data-ph=""></div>
+    <div class="act pm" id="pm4-B-post" data-p="B" data-l="B">
+      <h3><span class="tag">경로 B · 영상 경로</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-3" data-q="[4차시 경로B] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: fps·기준자 위치·촬영 각도)</div>
+      <div class="write" contenteditable="true" data-field="p4B-4" data-q="[4차시 경로B] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-5" data-q="[4차시 경로B] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4B-6" data-q="[4차시 경로B] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-C" data-p="C" data-l="C">
-      <h3><span class="tag">경로 C · 이론 경로</span> 재설계 ④ — 이론 모형 고치기</h3>
-      <p class="lead">측정 가속도가 이론보다 작다면 마찰을 넣어 모형을 고쳐 봅니다.</p>
-      <div class="qlabel"><span class="b">1</span> 측정 가속도와 θ로 마찰계수를 추정: a = g(sinθ − μ·cosθ) 에서 μ ≈ ?</div>
-      <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] 측정 가속도와 θ로 마찰계수를 추정: a = g(sinθ − μ·cosθ) 에서 μ ≈" data-ph="예: a = 1.55, θ = 10° → μ ≈ 0.09"></div>
-      <div class="qlabel"><span class="b">2</span> 고친 식으로 다시 계산한 가속도와, 처음 이론값·측정값의 비교</div>
-      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 고친 식으로 다시 계산한 가속도와, 처음 이론값·측정값의 비교" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 고친 모형으로도 설명하지 못하는 부분</div>
-      <div class="write" contenteditable="true" data-field="p4C-3" data-q="[4차시 경로C] 고친 모형으로도 설명하지 못하는 부분" data-ph=""></div>
+    <div class="act pm" id="pm4-C-post" data-p="C" data-l="C">
+      <h3><span class="tag">경로 C · 이론 경로</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-3" data-q="[4차시 경로C] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 마찰계수를 추정해 식 고치기)</div>
+      <div class="write" contenteditable="true" data-field="p4C-4" data-q="[4차시 경로C] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-5" data-q="[4차시 경로C] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4C-6" data-q="[4차시 경로C] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
-    <div class="act pm" id="pm4-D" data-p="D" data-l="D">
-      <h3><span class="tag">경로 D · 변인 경로</span> 재설계 ④ — 새 변인 실험 설계</h3>
-      <p class="lead">각도 실험의 결론을 쓰고, 다음에 바꿀 변인을 정해 실험을 다시 설계합니다.</p>
-      <div class="qlabel"><span class="b">1</span> 각도 실험의 결론 한 줄 (a와 sinθ의 관계)</div>
-      <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] 각도 실험의 결론 한 줄 (a와 sinθ의 관계)" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 다음에 바꿀 변인 한 가지의 설계표 — 바꿀 것 / 고정할 것 / 측정할 것 / 예상 결과</div>
-      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 다음에 바꿀 변인 한 가지의 설계표 — 바꿀 것 / 고정할 것 / 측정할 것 / 예상 " data-ph="예: 질량(바꿀 것), 각도·트랙(고정), 가속도(측정), 거의 같음(예상)"></div>
-      <div class="qlabel"><span class="b">3</span> A·B·C의 재설계안 중 먼저 해 볼 것 하나와 이유</div>
-      <div class="write" contenteditable="true" data-field="p4D-3" data-q="[4차시 경로D] A·B·C의 재설계안 중 먼저 해 볼 것 하나와 이유" data-ph=""></div>
+    <div class="act pm" id="pm4-D-post" data-p="D" data-l="D">
+      <h3><span class="tag">경로 D · 변인 경로</span> 정리 — 최종 주장과 재설계</h3>
+      <p class="lead">도구 활동을 마친 뒤, 지금까지 내가 얻은 결과를 근거로 정리합니다.</p>
+      <div class="qlabel"><span class="b">3</span> 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자 근거와 함께 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-3" data-q="[4차시 경로D] 최종 주장 — 처음 예상(1차시)과 달라진 점을 포함해, 내 경로가 가리키는 답을 숫자" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 (예: 질량·마찰면을 바꾸는 실험 설계표)</div>
+      <div class="write" contenteditable="true" data-field="p4D-4" data-q="[4차시 경로D] 재설계안 — 바꿀 것 / 그대로 둘 것 / 바꾸면 기대하는 결과를 이유와 함께 쓰세요 " data-ph=""></div>
+      <div class="qlabel"><span class="b">5</span> 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적용), 한 일과 결과를 기대와 견주어 쓰세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-5" data-q="[4차시 경로D] 재설계 시도 기록 — 지금 할 수 있는 만큼 직접 해 보고(재계산·재측정·다른 방법 적" data-ph=""></div>
+      <div class="qlabel"><span class="b">6</span> 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것</div>
+      <div class="write" contenteditable="true" data-field="p4D-6" data-q="[4차시 경로D] 모둠 결론에 내 경로가 기여한 점과, 다른 경로에 부탁하고 싶은 것" data-ph=""></div>
     </div>
 
     <div class="act team-only">
@@ -857,12 +952,13 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
           <caption>t = 0.5 s에서의 변위 x · 속도 v · 가속도 a</caption>
           <thead><tr><th></th><th>PASCO</th><th>Tracker</th><th>이론(참고)</th></tr></thead>
           <tbody>
-            <tr><th>변위 x (m)</th><td><input data-field="m4t-xp"></td><td><input data-field="m4t-xt"></td><td class="fixed">0.213</td></tr>
-            <tr><th>속도 v (m/s)</th><td><input data-field="m4t-vp"></td><td><input data-field="m4t-vt"></td><td class="fixed">0.85</td></tr>
-            <tr><th>가속도 a (m/s²)</th><td><input data-field="m4t-ap"></td><td><input data-field="m4t-at"></td><td class="fixed">1.70</td></tr>
+            <tr><th>변위 x (m)</th><td><input data-field="m4t-xp"></td><td><input data-field="m4t-xt"></td><td class="fixed ref">0.213</td></tr>
+            <tr><th>속도 v (m/s)</th><td><input data-field="m4t-vp"></td><td><input data-field="m4t-vt"></td><td class="fixed ref">0.85</td></tr>
+            <tr><th>가속도 a (m/s²)</th><td><input data-field="m4t-ap"></td><td><input data-field="m4t-at"></td><td class="fixed ref">1.70</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="refbar"><button type="button" class="refbtn" aria-expanded="false">참고값 확인 (먼저 내 값을 쓰고 눌러 보세요)</button></div>
     </div>
 
     <div class="act team-only">
@@ -872,7 +968,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="qlabel"><span class="b">2</span> 오차의 원인을 3가지 이상 (마찰·공기저항·트랙 수평·척도 보정·프레임률·클릭 오차·수레 정렬 등)</div>
       <div class="write" contenteditable="true" data-field="m4-q2" data-q="토의2: 오차 원인 3가지 이상" data-ph=""></div>
       <div class="qlabel"><span class="b">3</span> "기울기 = 미분", "넓이 = 적분"이 이 실험에서 각각 무엇을 구하게 해 주었나?</div>
-      <div class="write" contenteditable="true" data-field="m4-q3" data-q="토의3: 미분·적분이 한 일" data-ph="기울기(미분): x–t → 속도, v–t → 가속도 / 넓이(적분): v–t → 변위, a–t → 속도 변화"></div>
+      <div class="write" contenteditable="true" data-field="m4-q3" data-q="토의3: 미분·적분이 한 일" data-ph=""></div>
     </div>
 
     <div class="act">

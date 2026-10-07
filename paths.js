@@ -56,6 +56,35 @@
     if(/[?&]all=1/.test(location.search)){ all.checked=true; applyAll(); }
   }
 
+  /* 지난 차시에 내가 쓴 것을 이어받아 보여 주기 (.thread) */
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function renderThreads(){
+    Array.prototype.forEach.call(document.querySelectorAll(".thread"),function(box){
+      var src; try{ src=JSON.parse(box.getAttribute("data-src")); }catch(e){ return; }
+      var h='<b>내 탐구 이어가기</b> <span class="thsub">— 지난 차시에 내가 쓴 것</span><ul>';
+      src.forEach(function(it){
+        var el=document.querySelector('[data-field="'+it[0]+'"]');
+        var v=el? (el.textContent||"").trim() : "";
+        h+='<li><em>'+esc(it[1])+'</em>'+(v? '<span class="tv">'+esc(v)+'</span>'
+          : '<span class="tv empty">아직 쓰지 않았어요 — <a href="#'+it[2]+'">그 카드로 돌아가기</a></span>')+'</li>';
+      });
+      box.innerHTML=h+'</ul>';
+    });
+  }
+  document.addEventListener("input",function(e){ if(e.target.closest&&e.target.closest("[data-field]")) renderThreads(); });
+  document.addEventListener("steam-path",renderThreads);
+
+  /* 이론·참고 값 가리기 → 눌러서 확인 */
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest(".refbtn"); if(!b) return;
+    var w=b.parentNode.previousElementSibling;
+    while(w&&!w.classList.contains("tbl-wrap")) w=w.previousElementSibling;
+    if(!w) return;
+    var on=w.classList.toggle("show-ref");
+    b.setAttribute("aria-expanded",on?"true":"false");
+    b.textContent= on? "참고값 숨기기" : "참고값 확인 (먼저 내 값을 쓰고 눌러 보세요)";
+  });
+
   var mp=document.getElementById("mypath");
   if(mp) mp.addEventListener("click",function(){
     var t=document.getElementById("pathsel"); if(t) t.scrollIntoView({behavior:"smooth",block:"start"});
