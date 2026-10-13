@@ -441,16 +441,16 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
     <div class="act">
       <h3><span class="tag">활동 3</span> 인과관계 설계하기</h3>
-      <p class="lead">위 변수들을 화살표로 연결한다면, 어떤 변수가 어떤 변수를 증가/감소시킬까요? 이유도 함께 적습니다.</p>
+      <p class="lead">위 변수들을 화살표로 연결한다면, 어떤 변수가 어떤 변수를 증가/감소시킬까요? 화살표마다 <b>근거</b>(어디서 알게 되었나)를 함께 적고, 근거가 약한 화살표는 ‘아직 모름’으로 표시해 두세요 — 3차시에 실제 자료로 확인합니다.</p>
       <div class="tbl-wrap">
         <table>
           <caption>인과관계 표 (Sage Modeler의 화살표·관계와 같은 내용)</caption>
-          <thead><tr><th>원인 변수</th><th>관계</th><th>결과 변수</th><th>이유</th></tr></thead>
+          <thead><tr><th>원인 변수</th><th>관계</th><th>결과 변수</th><th>근거 종류<br><small>1차시 자료 · 교과서 · 찾아본 것 · 아직 모름</small></th><th>근거 내용(이유)</th></tr></thead>
           <tbody>
-            <tr><td><input data-field="k2r1-a"></td><td><input data-field="k2r1-r"></td><td><input data-field="k2r1-b"></td><td><input data-field="k2r1-w"></td></tr>
-            <tr><td><input data-field="k2r2-a"></td><td><input data-field="k2r2-r"></td><td><input data-field="k2r2-b"></td><td><input data-field="k2r2-w"></td></tr>
-            <tr><td><input data-field="k2r3-a"></td><td><input data-field="k2r3-r"></td><td><input data-field="k2r3-b"></td><td><input data-field="k2r3-w"></td></tr>
-            <tr><td><input data-field="k2r4-a"></td><td><input data-field="k2r4-r"></td><td><input data-field="k2r4-b"></td><td><input data-field="k2r4-w"></td></tr>
+            <tr><td><input data-field="k2r1-a"></td><td><input data-field="k2r1-r"></td><td><input data-field="k2r1-b"></td><td><input data-field="k2r1-s"></td><td><input data-field="k2r1-w"></td></tr>
+            <tr><td><input data-field="k2r2-a"></td><td><input data-field="k2r2-r"></td><td><input data-field="k2r2-b"></td><td><input data-field="k2r2-s"></td><td><input data-field="k2r2-w"></td></tr>
+            <tr><td><input data-field="k2r3-a"></td><td><input data-field="k2r3-r"></td><td><input data-field="k2r3-b"></td><td><input data-field="k2r3-s"></td><td><input data-field="k2r3-w"></td></tr>
+            <tr><td><input data-field="k2r4-a"></td><td><input data-field="k2r4-r"></td><td><input data-field="k2r4-b"></td><td><input data-field="k2r4-s"></td><td><input data-field="k2r4-w"></td></tr>
           </tbody>
         </table>
       </div>
@@ -472,16 +472,30 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       </div>
     </div>
 
+    <div class="act">
+      <h3><span class="tag">활동 5</span> 5분 맛보기 — 내 지표의 한 해 값 찾아보기</h3>
+      <p class="lead">본격적인 자료 수집은 3차시에 합니다. 오늘은 내가 그은 화살표가 실제 자료와 크게 어긋나지 않는지, 한 해 값만 가볍게 확인해 봅니다.</p>
+      <ol class="todo">
+        <li><span class="n">1</span><label><input type="checkbox" data-field="k2t-1"></label><div><code>data.kma.go.kr</code>(기상자료개방포털)에 접속해 내 지표(폭염일수·열대야일수·평균기온·강수 중 내 경로의 것)를 찾는다. 메뉴 이름이 다르면 검색창에 지표 이름을 쓴다.</div></li>
+        <li><span class="n">2</span><label><input type="checkbox" data-field="k2t-2"></label><div>우리 지역과 가까운 관측소의 <b>지난해 한 해 값</b>을 조회해 아래에 적는다. (내려받기·로그인이 필요하면 오늘은 화면까지만 확인해도 된다.)</div></li>
+        <li><span class="n">3</span><label><input type="checkbox" data-field="k2t-3"></label><div>그 값이 내 모델의 화살표(예: 온실가스↑ → 기온↑)와 어긋나지 않는지 한 줄로 적는다. 한 해 값만으로는 결론을 낼 수 없으니, <b>3차시에 확인할 것</b>도 함께 적는다.</div></li>
+      </ol>
+      <div class="qlabel"><span class="b">맛보기</span> 내 지표의 지난해 값과, 내 화살표와 어긋나지 않는지 한 줄 (3차시에 확인할 것 포함)</div>
+      <div class="write" contenteditable="true" data-field="k2-taste" data-q="5분 맛보기: 지난해 값과 3차시에 확인할 것" data-ph=""></div>
+    </div>
+
     <div class="act pm" id="pm2-A" data-p="A" data-l="A">
       <h3><span class="tag">경로 A · 폭염 경로</span> 폭염일수를 모델의 변수로</h3>
       <p class="lead">Sage Modeler의 변수와 화살표로 내 지표가 어디에 연결되는지 설계합니다.</p>
       <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 폭염일수를 어떤 변수와 어떤 화살표(증가/감소)로 연결할까요?</div>
       <div class="write" contenteditable="true" data-field="p2A-1" data-q="[2차시 경로A] 폭염일수를 어떤 변수와 어떤 화살표(증가/감소)로 연결할까요?" data-ph="예: 평균기온 → (증가) → 폭염일수"></div>
-      <div class="qlabel"><span class="b">2</span> 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)</div>
-      <div class="write" contenteditable="true" data-field="p2A-2" data-q="[2차시 경로A] 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)</div>
-      <div class="write" contenteditable="true" data-field="p2A-3" data-q="[2차시 경로A] 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 자료 / 교과서 / 직접 찾아본 것 / 아직 모름) ‘아직 모름’인 화살표는 표시해 두세요</div>
+      <div class="write" contenteditable="true" data-field="p2A-2" data-q="[2차시 경로A] 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 " data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)</div>
+      <div class="write" contenteditable="true" data-field="p2A-3" data-q="[2차시 경로A] 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(항목·관측 지점·기간)가 필요한가요?</div>
+      <div class="write" contenteditable="true" data-field="p2A-4" data-q="[2차시 경로A] ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm2-B" data-p="B" data-l="B">
@@ -490,10 +504,12 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 열대야일수를 어떤 변수와 어떤 화살표(증가/감소)로 연결할까요?</div>
       <div class="write" contenteditable="true" data-field="p2B-1" data-q="[2차시 경로B] 열대야일수를 어떤 변수와 어떤 화살표(증가/감소)로 연결할까요?" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)</div>
-      <div class="write" contenteditable="true" data-field="p2B-2" data-q="[2차시 경로B] 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)</div>
-      <div class="write" contenteditable="true" data-field="p2B-3" data-q="[2차시 경로B] 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 자료 / 교과서 / 직접 찾아본 것 / 아직 모름) ‘아직 모름’인 화살표는 표시해 두세요</div>
+      <div class="write" contenteditable="true" data-field="p2B-2" data-q="[2차시 경로B] 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 " data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)</div>
+      <div class="write" contenteditable="true" data-field="p2B-3" data-q="[2차시 경로B] 모델에서 이 관계가 크게 나타나려면 필요한 조건(시나리오)" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(항목·관측 지점·기간)가 필요한가요?</div>
+      <div class="write" contenteditable="true" data-field="p2B-4" data-q="[2차시 경로B] ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm2-C" data-p="C" data-l="C">
@@ -502,10 +518,12 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 평균기온으로 들어오는 화살표와 나가는 화살표를 각각 써 보세요</div>
       <div class="write" contenteditable="true" data-field="p2C-1" data-q="[2차시 경로C] 평균기온으로 들어오는 화살표와 나가는 화살표를 각각 써 보세요" data-ph="예: 배출량 → CO₂ 농도 → 평균기온 → 빙하 면적"></div>
-      <div class="qlabel"><span class="b">2</span> 모델에서 평균기온이 커지는 시나리오를 정해 결과를 예상해 보세요</div>
-      <div class="write" contenteditable="true" data-field="p2C-2" data-q="[2차시 경로C] 모델에서 평균기온이 커지는 시나리오를 정해 결과를 예상해 보세요" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)</div>
-      <div class="write" contenteditable="true" data-field="p2C-3" data-q="[2차시 경로C] 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 자료 / 교과서 / 직접 찾아본 것 / 아직 모름) ‘아직 모름’인 화살표는 표시해 두세요</div>
+      <div class="write" contenteditable="true" data-field="p2C-2" data-q="[2차시 경로C] 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 " data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 모델에서 평균기온이 커지는 시나리오를 정해 결과를 예상해 보세요</div>
+      <div class="write" contenteditable="true" data-field="p2C-3" data-q="[2차시 경로C] 모델에서 평균기온이 커지는 시나리오를 정해 결과를 예상해 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(항목·관측 지점·기간)가 필요한가요?</div>
+      <div class="write" contenteditable="true" data-field="p2C-4" data-q="[2차시 경로C] ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm2-D" data-p="D" data-l="D">
@@ -514,10 +532,12 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 연강수량(또는 호우)을 어떤 변수와 이어 볼 수 있을까요?</div>
       <div class="write" contenteditable="true" data-field="p2D-1" data-q="[2차시 경로D] 연강수량(또는 호우)을 어떤 변수와 이어 볼 수 있을까요?" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 기온과 달리 '증가/감소'로 단순하게 표현하기 어려운 점</div>
-      <div class="write" contenteditable="true" data-field="p2D-2" data-q="[2차시 경로D] 기온과 달리 &#x27;증가/감소&#x27;로 단순하게 표현하기 어려운 점" data-ph=""></div>
-      <div class="qlabel"><span class="b">3</span> 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)</div>
-      <div class="write" contenteditable="true" data-field="p2D-3" data-q="[2차시 경로D] 실제 자료로 이 관계가 맞는지 확인할 방법 (3차시 계획)" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 자료 / 교과서 / 직접 찾아본 것 / 아직 모름) ‘아직 모름’인 화살표는 표시해 두세요</div>
+      <div class="write" contenteditable="true" data-field="p2D-2" data-q="[2차시 경로D] 내가 그은 화살표마다 근거를 한 줄씩 적어 보세요 — 어디서 알게 되었나요? (1차시 " data-ph=""></div>
+      <div class="qlabel"><span class="b">3</span> 기온과 달리 '증가/감소'로 단순하게 표현하기 어려운 점</div>
+      <div class="write" contenteditable="true" data-field="p2D-3" data-q="[2차시 경로D] 기온과 달리 &#x27;증가/감소&#x27;로 단순하게 표현하기 어려운 점" data-ph=""></div>
+      <div class="qlabel"><span class="b">4</span> ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(항목·관측 지점·기간)가 필요한가요?</div>
+      <div class="write" contenteditable="true" data-field="p2D-4" data-q="[2차시 경로D] ‘아직 모름’이거나 근거가 약한 화살표 한 가지를 3차시 자료로 확인하려면 어떤 자료(" data-ph=""></div>
     </div>
 
     <div class="act team-only teamboard">
@@ -561,9 +581,9 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm3-A" data-p="A" data-l="A">
       <h3><span class="tag">경로 A · 폭염 경로</span> 폭염일수 자료로 내 질문에 답하기</h3>
       <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
-      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p2A-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
-      <div class="qlabel"><span class="b">1</span> 폭염일수 그래프의 핵심 결과 — 최대·최소 연도, 전체 모양</div>
-      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] 폭염일수 그래프의 핵심 결과 — 최대·최소 연도, 전체 모양" data-ph=""></div>
+      <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p2A-4&quot;, &quot;2차시 · 내 모델에서 3차시에 확인할 것&quot;, &quot;pm2-A&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 내 질문에 답하려면 어떤 폭염일수 자료(항목·관측 지점·기간)가 필요한가요? 2차시 인과관계 표에서 ‘아직 모름’으로 표시한 화살표 중, 이 자료로 확인할 것도 함께 고르세요</div>
+      <div class="write" contenteditable="true" data-field="p3A-1" data-q="[3차시 경로A] 내 질문에 답하려면 어떤 폭염일수 자료(항목·관측 지점·기간)가 필요한가요? 2차시 인" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> '늘고 있다'를 어떤 근거로 판단할까요? 앞·뒤 기간 평균 비교, 추세선 등 방법과 이유를 먼저 정하세요</div>
       <div class="write" contenteditable="true" data-field="p3A-2" data-q="[3차시 경로A] &#x27;늘고 있다&#x27;를 어떤 근거로 판단할까요? 앞·뒤 기간 평균 비교, 추세선 등 방법과 이" data-ph=""></div>
     </div>
@@ -571,9 +591,9 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm3-B" data-p="B" data-l="B">
       <h3><span class="tag">경로 B · 열대야 경로</span> 열대야일수 자료로 내 질문에 답하기</h3>
       <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
-      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p2B-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
-      <div class="qlabel"><span class="b">1</span> 열대야일수 그래프의 핵심 결과 — 최대·최소 연도, 전체 모양</div>
-      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 열대야일수 그래프의 핵심 결과 — 최대·최소 연도, 전체 모양" data-ph=""></div>
+      <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p2B-4&quot;, &quot;2차시 · 내 모델에서 3차시에 확인할 것&quot;, &quot;pm2-B&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 내 질문에 답하려면 어떤 열대야일수 자료(항목·관측 지점·기간)가 필요한가요? 2차시 인과관계 표에서 ‘아직 모름’으로 표시한 화살표 중, 이 자료로 확인할 것도 함께 고르세요</div>
+      <div class="write" contenteditable="true" data-field="p3B-1" data-q="[3차시 경로B] 내 질문에 답하려면 어떤 열대야일수 자료(항목·관측 지점·기간)가 필요한가요? 2차시 " data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> '늘고 있다'를 어떤 근거로 판단할까요? 앞·뒤 기간 평균 비교, 추세선 등 방법과 이유를 먼저 정하세요</div>
       <div class="write" contenteditable="true" data-field="p3B-2" data-q="[3차시 경로B] &#x27;늘고 있다&#x27;를 어떤 근거로 판단할까요? 앞·뒤 기간 평균 비교, 추세선 등 방법과 이" data-ph=""></div>
     </div>
@@ -581,9 +601,9 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm3-C" data-p="C" data-l="C">
       <h3><span class="tag">경로 C · 평균기온 경로</span> 평균기온 자료로 내 질문에 답하기</h3>
       <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
-      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p2C-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
-      <div class="qlabel"><span class="b">1</span> 연평균기온 그래프의 핵심 결과 — 최대·최소 연도, 전체 모양</div>
-      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 연평균기온 그래프의 핵심 결과 — 최대·최소 연도, 전체 모양" data-ph=""></div>
+      <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p2C-4&quot;, &quot;2차시 · 내 모델에서 3차시에 확인할 것&quot;, &quot;pm2-C&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 내 질문에 답하려면 어떤 평균기온 자료(항목·관측 지점·기간)가 필요한가요? 2차시 인과관계 표에서 ‘아직 모름’으로 표시한 화살표 중, 이 자료로 확인할 것도 함께 고르세요</div>
+      <div class="write" contenteditable="true" data-field="p3C-1" data-q="[3차시 경로C] 내 질문에 답하려면 어떤 평균기온 자료(항목·관측 지점·기간)가 필요한가요? 2차시 인" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> '오르고 있다'고 말하려면 어떤 근거가 필요할까요? 비교할 기간과 쓸 방법, 이유를 먼저 정하세요</div>
       <div class="write" contenteditable="true" data-field="p3C-2" data-q="[3차시 경로C] &#x27;오르고 있다&#x27;고 말하려면 어떤 근거가 필요할까요? 비교할 기간과 쓸 방법, 이유를 먼" data-ph=""></div>
     </div>
@@ -591,9 +611,9 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     <div class="act pm" id="pm3-D" data-p="D" data-l="D">
       <h3><span class="tag">경로 D · 강수 경로</span> 강수 자료로 내 질문에 답하기</h3>
       <p class="lead">내 데이터로 1차시의 질문에 답하기 위해, 분석 방법부터 스스로 정하고 진행합니다.</p>
-      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p2D-1&quot;, &quot;2차시 · 내 측정 계획·기록&quot;, &quot;pm2-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
-      <div class="qlabel"><span class="b">1</span> 연강수량(호우) 그래프의 핵심 결과 — 최대·최소 연도, 해마다 변동의 크기</div>
-      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 연강수량(호우) 그래프의 핵심 결과 — 최대·최소 연도, 해마다 변동의 크기" data-ph=""></div>
+      <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p2D-4&quot;, &quot;2차시 · 내 모델에서 3차시에 확인할 것&quot;, &quot;pm2-D&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
+      <div class="qlabel"><span class="b">1</span> 내 질문에 답하려면 어떤 강수량(또는 호우일수) 자료(항목·관측 지점·기간)가 필요한가요? 2차시 인과관계 표에서 ‘아직 모름’으로 표시한 화살표 중, 이 자료로 확인할 것도 함께 고르세요</div>
+      <div class="write" contenteditable="true" data-field="p3D-1" data-q="[3차시 경로D] 내 질문에 답하려면 어떤 강수량(또는 호우일수) 자료(항목·관측 지점·기간)가 필요한가" data-ph=""></div>
       <div class="qlabel"><span class="b">2</span> 강수의 '변화'를 기온처럼 말할 수 있을까요? 변동이 큰 자료를 어떻게 다룰지 먼저 정하세요</div>
       <div class="write" contenteditable="true" data-field="p3D-2" data-q="[3차시 경로D] 강수의 &#x27;변화&#x27;를 기온처럼 말할 수 있을까요? 변동이 큰 자료를 어떻게 다룰지 먼저 정" data-ph=""></div>
     </div>
@@ -753,8 +773,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1A-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-A&quot;], [&quot;p3A-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-A-post&quot;], [&quot;p3A-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-A-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 변화의 크기를 어떻게 숫자로 나타낼까요? 추세선 기울기·구간 평균 비교 등 방법을 고르고 이유를 쓰세요</div>
       <div class="write" contenteditable="true" data-field="p4A-1" data-q="[4차시 경로A] 변화의 크기를 어떻게 숫자로 나타낼까요? 추세선 기울기·구간 평균 비교 등 방법을 고르" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 오늘 따져 보세요</div>
-      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 오늘 따져 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 그 화살표에 2차시에 적은 근거를 확인하고, 근거의 어느 부분이 틀렸거나 부족했는지 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4A-2" data-q="[4차시 경로A] 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 그 화살표에 2차시에" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm4-B" data-p="B" data-l="B">
@@ -763,8 +783,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1B-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-B&quot;], [&quot;p3B-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-B-post&quot;], [&quot;p3B-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-B-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 변화의 크기를 어떻게 숫자로 나타낼까요? 추세선 기울기·구간 평균 비교 등 방법을 고르고 이유를 쓰세요</div>
       <div class="write" contenteditable="true" data-field="p4B-1" data-q="[4차시 경로B] 변화의 크기를 어떻게 숫자로 나타낼까요? 추세선 기울기·구간 평균 비교 등 방법을 고르" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 오늘 따져 보세요</div>
-      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 오늘 따져 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 그 화살표에 2차시에 적은 근거를 확인하고, 근거의 어느 부분이 틀렸거나 부족했는지 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4B-2" data-q="[4차시 경로B] 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 그 화살표에 2차시에" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm4-C" data-p="C" data-l="C">
@@ -773,8 +793,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1C-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-C&quot;], [&quot;p3C-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-C-post&quot;], [&quot;p3C-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-C-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 평균기온의 변화 속도(℃/년)를 어떻게 구할까요? 쓸 방법을 고르고 이유를 쓰세요</div>
       <div class="write" contenteditable="true" data-field="p4C-1" data-q="[4차시 경로C] 평균기온의 변화 속도(℃/년)를 어떻게 구할까요? 쓸 방법을 고르고 이유를 쓰세요" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 오늘 따져 보세요</div>
-      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 오늘 따져 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 그 화살표에 2차시에 적은 근거를 확인하고, 근거의 어느 부분이 틀렸거나 부족했는지 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4C-2" data-q="[4차시 경로C] 2차시 모델이 말한 관계와 실제 자료가 어긋나는 부분 한 가지 — 그 화살표에 2차시에" data-ph=""></div>
     </div>
 
     <div class="act pm" id="pm4-D" data-p="D" data-l="D">
@@ -783,8 +803,8 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="thread" data-src="[[&quot;p1D-1&quot;, &quot;1차시 · 내 탐구 질문&quot;, &quot;pm1-D&quot;], [&quot;p3D-3&quot;, &quot;3차시 · 내 주장과 근거&quot;, &quot;pm3-D-post&quot;], [&quot;p3D-4&quot;, &quot;3차시 · 어긋남·한계&quot;, &quot;pm3-D-post&quot;]]"><b>내 탐구 이어가기</b> — 지난 차시에 내가 쓴 것</div>
       <div class="qlabel"><span class="b">1</span> 추세가 뚜렷하지 않은 자료를 어떻게 해석할까요? 장기 평균 비교·호우일수 따로 보기 등 방법과 이유를 쓰세요</div>
       <div class="write" contenteditable="true" data-field="p4D-1" data-q="[4차시 경로D] 추세가 뚜렷하지 않은 자료를 어떻게 해석할까요? 장기 평균 비교·호우일수 따로 보기 등" data-ph=""></div>
-      <div class="qlabel"><span class="b">2</span> 기온 자료와 달리 강수 자료가 보여 준 점 한 가지 — 오늘 이유를 따져 보세요</div>
-      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 기온 자료와 달리 강수 자료가 보여 준 점 한 가지 — 오늘 이유를 따져 보세요" data-ph=""></div>
+      <div class="qlabel"><span class="b">2</span> 기온 자료와 달리 강수 자료가 보여 준 점 한 가지 — 2차시에 ‘강수는 모델에 넣기 어렵다’고 적은 이유와 견주어 따져 보세요</div>
+      <div class="write" contenteditable="true" data-field="p4D-2" data-q="[4차시 경로D] 기온 자료와 달리 강수 자료가 보여 준 점 한 가지 — 2차시에 ‘강수는 모델에 넣기 " data-ph=""></div>
     </div>
 
     <div class="toolbox-note"><b>도구함</b> — 아래 활동은 순서대로 모두 할 필요가 없어요. 위 미션 카드에서 정한 방법에 필요한 도구를 골라 쓰고, 쓴 도구와 결과는 아래 정리 카드에서 근거로 말하세요. ([A·D 경로]처럼 표시된 활동은 해당 경로의 도구입니다.)</div>
@@ -842,6 +862,19 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
     <div class="act">
       <h3><span class="tag">활동 3</span> 모델링(2차시) vs 실제 데이터(3·4차시) 비교</h3>
+      <p class="lead">2차시 인과관계 표를 펴 놓고, 내 경로와 관련된 화살표를 실제 자료와 하나씩 견줍니다. 근거 종류가 ‘아직 모름’이었던 화살표는 오늘 자료로 확인되었는지 따져 보세요.</p>
+      <div class="tbl-wrap">
+        <table>
+          <caption>모델 vs 실제 자료 (내 경로 기준)</caption>
+          <thead><tr><th>비교 항목</th><th>모델(2차시)이 말한 것</th><th>실제 자료가 보여 준 것</th><th>일치? 이유는?</th><th>2차시에 적은 근거</th></tr></thead>
+          <tbody>
+            <tr><td class="fixed">방향 (증가/감소)</td><td><input data-field="k4c1-m"></td><td><input data-field="k4c1-d"></td><td><input data-field="k4c1-j"></td><td><input data-field="k4c1-e"></td></tr>
+            <tr><td class="fixed">변화의 크기</td><td><input data-field="k4c2-m"></td><td><input data-field="k4c2-d"></td><td><input data-field="k4c2-j"></td><td><input data-field="k4c2-e"></td></tr>
+            <tr><td class="fixed">빠져 있던 변수</td><td><input data-field="k4c3-m"></td><td><input data-field="k4c3-d"></td><td><input data-field="k4c3-j"></td><td><input data-field="k4c3-e"></td></tr>
+            <tr><td class="fixed">모델을 고친다면</td><td><input data-field="k4c4-m"></td><td><input data-field="k4c4-d"></td><td><input data-field="k4c4-j"></td><td><input data-field="k4c4-e"></td></tr>
+          </tbody>
+        </table>
+      </div>
       <div class="qlabel"><span class="b">Q</span> Sage Modeler 시뮬레이션에서 예상한 경향과, 실제 관측 데이터의 추세가 비슷했나요? 다르다면 왜 다를까요?</div>
       <div class="write" contenteditable="true" data-field="k4-compare" data-q="모델 vs 실측 데이터 비교" data-ph=""></div>
     </div>
