@@ -653,12 +653,13 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
 
     <div class="act">
       <h3><span class="tag">활동 3</span> 데이터를 직접 그래프로 그리기</h3>
-      <p class="lead">먼저 아래에서 <b>연도 범위</b>와 <b>세로축 항목·범위</b>를 우리 데이터에 맞게 설정한 뒤 [적용]을 누르세요.
+      <p class="lead">먼저 아래에서 <b>연도 범위</b>, <b>가로·세로 눈금 간격</b>, <b>세로축 항목·범위</b>를 우리 데이터에 맞게 설정한 뒤 [적용]을 누르세요.
         그다음 모눈을 클릭해 (연도, 관측값) 점을 찍고 <b>완료</b>를 누르면 점이 이어집니다.</p>
       <div class="plot" data-plot="climate">
         <div class="plot-cfg">
           <label>시작 연도 <input type="number" data-cfg="xmin" value="2005" step="1"></label>
           <label>끝 연도 <input type="number" data-cfg="xmax" value="2024" step="1"></label>
+          <label>가로축 눈금 간격 (년) <input type="number" data-cfg="xstep" value="5" step="1" min="1"></label>
           <label>세로축 항목 <input type="text" data-cfg="yunit" value="폭염일수 (일)"></label>
           <label>세로축 최댓값 <input type="number" data-cfg="ymax" value="40" step="1"></label>
           <label>세로축 눈금 간격 <input type="number" data-cfg="ystep" value="5" step="1"></label>
@@ -828,6 +829,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
         <div class="plot-cfg">
           <label>시작 연도 <input type="number" data-cfg="xmin" value="2005" step="1"></label>
           <label>끝 연도 <input type="number" data-cfg="xmax" value="2024" step="1"></label>
+          <label>가로축 눈금 간격 (년) <input type="number" data-cfg="xstep" value="5" step="1" min="1"></label>
           <label>세로축 항목 <input type="text" data-cfg="yunit" value="폭염일수 (일)"></label>
           <label>세로축 최댓값 <input type="number" data-cfg="ymax" value="40" step="1"></label>
           <label>세로축 눈금 간격 <input type="number" data-cfg="ystep" value="5" step="1"></label>
@@ -1133,10 +1135,13 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       xmax: parseFloat(f.querySelector('[data-cfg="xmax"]').value)||2024,
       ymax: parseFloat(f.querySelector('[data-cfg="ymax"]').value)||40,
       ystep: parseFloat(f.querySelector('[data-cfg="ystep"]').value)||5,
+      xstep: parseFloat(f.querySelector('[data-cfg="xstep"]').value)||5,
       yunit: f.querySelector('[data-cfg="yunit"]').value||"관측값"
     };
     saveState(state);
   }
+
+  if(state.cfg && !(state.cfg.xstep>0)) state.cfg.xstep=xTicks(state.cfg.xmin,state.cfg.xmax).label;
 
   var undo=[];
   function pushUndo(){ undo.push(JSON.stringify(state.pts)); if(undo.length>40) undo.shift(); }
@@ -1173,9 +1178,10 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     var xmax=parseFloat(root.querySelector('[data-cfg="xmax"]').value);
     var ymax=parseFloat(root.querySelector('[data-cfg="ymax"]').value);
     var ystep=parseFloat(root.querySelector('[data-cfg="ystep"]').value);
+    var xstep=parseFloat(root.querySelector('[data-cfg="xstep"]').value);
     var yunit=root.querySelector('[data-cfg="yunit"]').value||"관측값";
-    if(!(xmax>xmin)||!(ymax>0)||!(ystep>0)) return;
-    state.cfg={xmin:xmin,xmax:xmax,ymax:ymax,ystep:ystep,yunit:yunit};
+    if(!(xmax>xmin)||!(ymax>0)||!(ystep>0)||!(xstep>0)) return;
+    state.cfg={xmin:xmin,xmax:xmax,ymax:ymax,ystep:ystep,xstep:xstep,yunit:yunit};
     saveState(state); renderAll();
   }
 
@@ -1212,16 +1218,18 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
     var svg=root.querySelector(".plot-svg");
     while(svg.firstChild) svg.removeChild(svg.firstChild);
     var tk=xTicks(c.xmin,c.xmax);
+    var xs=(c.xstep>0)? c.xstep : tk.label;
+    var xminor=Math.min(tk.minor, xs);
 
     for(var gy=0; gy<=c.ymax+1e-9; gy+=c.ystep)
       svg.appendChild(el("line",{"class":"pg",x1:mL,y1:Y(gy),x2:W-mR,y2:Y(gy)}));
-    for(var gx=c.xmin; gx<=c.xmax+1e-9; gx+=tk.minor)
+    for(var gx=c.xmin; gx<=c.xmax+1e-9; gx+=xminor)
       svg.appendChild(el("line",{"class":"pg",x1:X(gx),y1:mT,x2:X(gx),y2:mT+ph}));
 
     svg.appendChild(el("line",{"class":"pax",x1:mL,y1:mT,x2:mL,y2:mT+ph}));
     svg.appendChild(el("line",{"class":"pax",x1:mL,y1:mT+ph,x2:W-mR,y2:mT+ph}));
 
-    for(var lx=c.xmin; lx<=c.xmax+1e-9; lx+=tk.label)
+    for(var lx=c.xmin; lx<=c.xmax+1e-9; lx+=xs)
       svg.appendChild(el("text",{"class":"plb",x:X(Math.round(lx)),y:mT+ph+16,"text-anchor":"middle"}, String(Math.round(lx))));
     for(var ly=0; ly<=c.ymax+1e-9; ly+=c.ystep)
       svg.appendChild(el("text",{"class":"plb",x:mL-8,y:Y(ly)+3,"text-anchor":"end"}, fmt(ly)));
