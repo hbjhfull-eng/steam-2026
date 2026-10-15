@@ -85,6 +85,41 @@
     b.textContent= on? "참고값 숨기기" : "참고값 확인 (먼저 내 값을 쓰고 눌러 보세요)";
   });
 
+  /* 예제 코드: 복사 / 파일로 받기 */
+  function codeText(sel){
+    var el=document.querySelector(sel); if(!el) return "";
+    return (el.textContent||"").replace(/^\n/,"");
+  }
+  function codeMsg(btn,t){
+    var m=btn.parentNode.querySelector(".copymsg"); if(!m) return;
+    m.textContent=t; clearTimeout(m._t); m._t=setTimeout(function(){ m.textContent=""; },3500);
+  }
+  function legacyCopy(text){
+    var ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly","");
+    ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    var ok=false; try{ ok=document.execCommand("copy"); }catch(err){}
+    document.body.removeChild(ta); return ok;
+  }
+  document.addEventListener("click",function(e){
+    var c=e.target.closest&&e.target.closest(".copybtn");
+    var d=e.target.closest&&e.target.closest(".dlbtn");
+    if(c){
+      var text=codeText(c.getAttribute("data-copy"));
+      var ok=function(){ codeMsg(c,"복사했어요! Arduino IDE 편집 창에서 Ctrl+V"); };
+      var fail=function(){ codeMsg(c, legacyCopy(text)? "복사했어요! Arduino IDE 편집 창에서 Ctrl+V" : "복사가 안 돼요 — 코드를 직접 드래그해 Ctrl+C 하세요"); };
+      if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(text).then(ok,fail); } else { fail(); }
+    } else if(d){
+      var t=codeText(d.getAttribute("data-copy"));
+      var blob=new Blob([t],{type:"text/plain;charset=utf-8"});
+      var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+      a.download=d.getAttribute("data-file")||"sketch.ino";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+      codeMsg(d,"파일로 받았어요 — 열면 폴더를 만들겠냐고 물어요, ‘예’");
+    }
+  });
+
   var mp=document.getElementById("mypath");
   if(mp) mp.addEventListener("click",function(){
     var t=document.getElementById("pathsel"); if(t) t.scrollIntoView({behavior:"smooth",block:"start"});

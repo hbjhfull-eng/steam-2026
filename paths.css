@@ -91,3 +91,16 @@ body.showall .nopath-note{display:none!important}
 .refbtn:hover{border-color:var(--focus)}
 .tbl-wrap:not(.show-ref) td.ref{color:transparent!important;user-select:none;background-image:repeating-linear-gradient(135deg,transparent 0 5px,var(--line) 5px 6px)}
 @media print{.refbar{display:none!important}.tbl-wrap:not(.show-ref) td.ref{background-image:none}}
+
+/* 예제 코드 상자 (복사·파일 받기) */
+.codebox{margin:10px 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.codebox>summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:14.5px;color:var(--ink)}
+.codebox[open]>summary{border-bottom:1px solid var(--line)}
+.codebar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 14px 0}
+.copybtn,.dlbtn{font-family:var(--f-body);font-size:13px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--field);color:var(--ink);cursor:pointer}
+.copybtn{background:var(--focus);border-color:var(--focus);color:#fff}
+.copybtn:hover,.dlbtn:hover{filter:brightness(.95)}
+.copymsg{font-size:12.5px;color:var(--ink-soft)}
+.codepre{margin:10px 14px 14px;padding:12px 14px;border-radius:8px;background:var(--field);border:1px solid var(--line);
+  font-family:var(--f-mono);font-size:12.5px;line-height:1.55;overflow:auto;white-space:pre;tab-size:2;max-height:420px}
+@media print{.codebar{display:none!important}.codebox{break-inside:avoid}}

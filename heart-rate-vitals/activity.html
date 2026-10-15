@@ -428,6 +428,177 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <div class="write" contenteditable="true" data-field="h2-creative" data-q="나만의 창의적 요소" data-ph=""></div>
     </div>
 
+    <div class="act codeact">
+      <h3><span class="tag">도구함</span> 예제 코드 — 막혔을 때 열어 보고, 복사해 가요</h3>
+      <p class="lead">코드를 처음부터 쓰기 어려우면 아래 예제를 열어 <b>[코드 복사]</b>를 누르고, Arduino IDE 편집 창에 <b>붙여 넣으세요</b>(Ctrl+V). 복사한 코드는 내 것으로 바꿔 보세요 — 숫자 하나만 바꿔도 결과가 달라져요.
+        집이나 다른 컴퓨터에서도 쓰려면 <b>[파일로 받기]</b>를 눌러 USB·구글 드라이브에 보관하세요.</p>
+      <details class="codebox">
+        <summary>① 센서 값 그대로 보기 (파형 확인)</summary>
+        <div class="codebar">
+          <button type="button" class="copybtn" data-copy="#code1">코드 복사</button>
+          <button type="button" class="dlbtn" data-copy="#code1" data-file="heart_1_signal.ino">파일로 받기(.ino)</button>
+          <span class="copymsg" aria-live="polite"></span>
+        </div>
+        <pre id="code1" class="codepre">const int PULSE_PIN = A0;      // 센서 신호선(S)이 연결된 핀
+
+void setup() {
+  Serial.begin(115200);        // 시리얼 통신 속도
+}
+
+void loop() {
+  int value = analogRead(PULSE_PIN);  // 0~1023 사이 값
+  Serial.println(value);              // 한 줄씩 출력
+  delay(20);                          // 0.02초 쉬기
+}
+</pre>
+      </details>
+      <details class="codebox">
+        <summary>② 심박수(BPM) 계산해서 보기</summary>
+        <div class="codebar">
+          <button type="button" class="copybtn" data-copy="#code2">코드 복사</button>
+          <button type="button" class="dlbtn" data-copy="#code2" data-file="heart_2_bpm.ino">파일로 받기(.ino)</button>
+          <span class="copymsg" aria-live="polite"></span>
+        </div>
+        <pre id="code2" class="codepre">#define USE_ARDUINO_INTERRUPTS true
+#include &lt;PulseSensorPlayground.h&gt;
+
+const int PulseWire = A0;   // 센서 신호 핀
+const int LED = LED_BUILTIN;
+int Threshold = 550;        // 박동 판단 기준값 (파형에 맞게 바꿔 보세요)
+PulseSensorPlayground pulseSensor;
+
+void setup() {
+  Serial.begin(115200);
+  pulseSensor.analogInput(PulseWire);
+  pulseSensor.blinkOnPulse(LED);
+  pulseSensor.setThreshold(Threshold);
+  if (pulseSensor.begin()) Serial.println(&quot;PulseSensor ready&quot;);
+}
+
+void loop() {
+  if (pulseSensor.sawStartOfBeat()) {
+    int myBPM = pulseSensor.getBeatsPerMinute();
+    Serial.print(&quot;BPM: &quot;);
+    Serial.println(myBPM);
+  }
+  delay(20);
+}
+</pre>
+      </details>
+      <details class="codebox">
+        <summary>③ 점검용: 신호·기준값·BPM을 한 그래프로 보기</summary>
+        <div class="codebar">
+          <button type="button" class="copybtn" data-copy="#code3">코드 복사</button>
+          <button type="button" class="dlbtn" data-copy="#code3" data-file="heart_3_signal_threshold_bpm.ino">파일로 받기(.ino)</button>
+          <span class="copymsg" aria-live="polite"></span>
+        </div>
+        <pre id="code3" class="codepre">#define USE_ARDUINO_INTERRUPTS true
+#include &lt;PulseSensorPlayground.h&gt;
+
+const int PulseWire = A0;
+int Threshold = 550;        // 기준값: 파형의 낮은 값과 높은 값의 중간으로
+PulseSensorPlayground pulseSensor;
+
+void setup() {
+  Serial.begin(115200);
+  pulseSensor.analogInput(PulseWire);
+  pulseSensor.blinkOnPulse(LED_BUILTIN);
+  pulseSensor.setThreshold(Threshold);
+  pulseSensor.begin();
+}
+
+void loop() {
+  int sig = pulseSensor.getLatestSample();
+  int bpm = pulseSensor.getBeatsPerMinute();
+  Serial.print(&quot;signal:&quot;);    Serial.print(sig);
+  Serial.print(&quot;,threshold:&quot;); Serial.print(Threshold);
+  Serial.print(&quot;,bpm:&quot;);       Serial.println(bpm);
+  delay(20);
+}
+</pre>
+      </details>
+      <details class="codebox">
+        <summary>④ 기록용: 시간과 BPM을 표로 옮기기 (3차시)</summary>
+        <div class="codebar">
+          <button type="button" class="copybtn" data-copy="#code4">코드 복사</button>
+          <button type="button" class="dlbtn" data-copy="#code4" data-file="heart_4_record_csv.ino">파일로 받기(.ino)</button>
+          <span class="copymsg" aria-live="polite"></span>
+        </div>
+        <pre id="code4" class="codepre">#define USE_ARDUINO_INTERRUPTS true
+#include &lt;PulseSensorPlayground.h&gt;
+
+const int PulseWire = A0;
+int Threshold = 550;
+PulseSensorPlayground pulseSensor;
+unsigned long t0;
+
+void setup() {
+  Serial.begin(115200);
+  pulseSensor.analogInput(PulseWire);
+  pulseSensor.setThreshold(Threshold);
+  pulseSensor.begin();
+  t0 = millis();                 // 시작 시각 저장
+  Serial.println(&quot;time_s,BPM&quot;);  // 열 이름
+}
+
+void loop() {
+  if (pulseSensor.sawStartOfBeat()) {
+    Serial.print((millis() - t0) / 1000.0, 1);
+    Serial.print(&quot;,&quot;);
+    Serial.println(pulseSensor.getBeatsPerMinute());
+  }
+  delay(20);
+}
+</pre>
+      </details>
+      <details class="codebox">
+        <summary>⑤ 센서 개선(D 경로): BPM을 평균 내서 덜 흔들리게</summary>
+        <div class="codebar">
+          <button type="button" class="copybtn" data-copy="#code5">코드 복사</button>
+          <button type="button" class="dlbtn" data-copy="#code5" data-file="heart_5_smooth.ino">파일로 받기(.ino)</button>
+          <span class="copymsg" aria-live="polite"></span>
+        </div>
+        <pre id="code5" class="codepre">#define USE_ARDUINO_INTERRUPTS true
+#include &lt;PulseSensorPlayground.h&gt;
+
+const int PulseWire = A0;
+int Threshold = 550;
+PulseSensorPlayground pulseSensor;
+
+const int N = 5;           // 평균에 쓸 최근 값 개수
+int buf[N];                // 최근 값 저장
+int idx = 0;
+int filled = 0;            // 지금까지 채운 개수
+
+int smooth(int bpm) {
+  buf[idx] = bpm;
+  idx = (idx + 1) % N;
+  if (filled &lt; N) filled++;
+  long sum = 0;
+  for (int i = 0; i &lt; filled; i++) sum += buf[i];
+  return sum / filled;     // 평균
+}
+
+void setup() {
+  Serial.begin(115200);
+  pulseSensor.analogInput(PulseWire);
+  pulseSensor.setThreshold(Threshold);
+  pulseSensor.begin();
+}
+
+void loop() {
+  if (pulseSensor.sawStartOfBeat()) {
+    int myBPM = pulseSensor.getBeatsPerMinute();
+    Serial.print(&quot;raw:&quot;);  Serial.print(myBPM);
+    Serial.print(&quot;,avg:&quot;); Serial.println(smooth(myBPM));
+  }
+  delay(20);
+}
+</pre>
+      </details>
+      <p class="hint">처음엔 ①로 파형을 확인하고, ②로 BPM을 본 뒤, 안 맞으면 ③으로 기준값(Threshold)을 조절해요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
+    </div>
+
     <div class="act pm" id="pm2-A" data-p="A" data-l="A">
       <h3><span class="tag">경로 A · 기준선 경로</span> 기준선 측정 계획</h3>
       <p class="lead">안정 시 심박수를 촉진과 센서로 어떻게 잴지 정합니다.</p>
