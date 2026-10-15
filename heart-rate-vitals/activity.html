@@ -432,6 +432,7 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <h3><span class="tag">도구함</span> 최종 코드 — 이 코드 하나로 점검하고, 측정하고, 기록해요</h3>
       <p class="lead">아래 코드 하나면 됩니다. <b>[코드 복사]</b>를 눌러 Arduino IDE 편집 창에 <b>붙여 넣고</b>(Ctrl+V) 순서대로 따라 하세요.
         집이나 다른 컴퓨터에서도 쓰려면 <b>[파일로 받기(.ino)]</b>로 USB·구글 드라이브에 보관하세요.</p>
+      <p class="lead">코드 위쪽의 <code>const int MODE = 1;</code> <b>숫자 하나만</b> 바꿔 가며 씁니다 — <b>1</b> = 표 만들기(시간,BPM) · <b>2</b> = 실시간 그래프(파형·기준값·BPM) · <b>3</b> = 시트 그래프용(시간,파형,BPM).</p>
       <details class="codebox" open>
         <summary>연결 도면 (필수): 펄스센서 → 아두이노</summary>
         <div style="padding:10px 14px 14px"><img src="img/diag_base.png" alt="펄스센서 연결 도면: S→A0, +→5V, -→GND" style="width:100%;max-width:720px;height:auto;border-radius:8px;border:1px solid var(--line)"><p style="margin:8px 0 0;font-size:13.5px;color:var(--ink-soft)">USB를 뽑은 상태에서 연결해요. 선 색이 달라도 핀 이름(S, +, -)을 기준으로!</p></div>
@@ -439,10 +440,11 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <ol class="todo">
         <li><span class="n">1</span><div>Arduino IDE를 실행한 뒤 <b>빈 스케치 창</b>에서 코드를 붙여 넣는다. (새 스케치·예제를 열면 새 창이 열리므로 그 창에서 다시 설정)</div></li>
         <li><span class="n">2</span><div><b>같은 창</b> 위쪽 보드 선택 칸에서 <b>Arduino Uno</b>와 포트(COM○)를 고르고 <b>✓(확인) → →(업로드)</b>. ‘업로드 완료’를 확인한다.</div></li>
-        <li><span class="n">3</span><div><b>점검(처음 한 번)</b>: 코드의 <code>CHECK_MODE = false</code>를 <code>true</code>로 바꿔 다시 업로드하고 <b>도구 → 시리얼 플로터</b>(115200)를 연다. 손가락을 가볍게 올려 <b>signal</b>이 박동마다 오르내리며 <b>threshold</b> 선을 위로 넘는지 본다. 안 넘으면 <code>Threshold</code>를 낮추고, 두 번 넘으면 올린다.</div></li>
-        <li><span class="n">4</span><div><b>측정</b>: <code>CHECK_MODE</code>를 <code>false</code>로 되돌려 다시 업로드하고 <b>도구 → 시리얼 모니터</b>(115200)를 연다. 손가락을 5~10초 올리면 <code>time_s,BPM</code> 아래로 한 줄씩 쌓인다. (모니터·플로터는 하나만 열 수 있다)</div></li>
+        <li><span class="n">3</span><div><b>점검(처음 한 번)</b>: 코드의 <code>MODE = 1</code>을 <code>MODE = 2</code>로 바꿔 다시 업로드하고 <b>도구 → 시리얼 플로터</b>(115200)를 연다. 손가락을 가볍게 올려 <b>signal</b>이 박동마다 오르내리며 <b>threshold</b> 선을 위로 넘는지, <b>bpm</b> 선이 60~100쯤인지 본다. 안 넘으면 <code>Threshold</code>를 낮추고, 두 번 넘으면 올린다.</div></li>
+        <li><span class="n">4</span><div><b>측정(표 만들기)</b>: <code>MODE</code>를 <code>1</code>로 되돌려 업로드한다(플로터는 먼저 닫기). <b>업로드가 끝난 뒤</b> <b>도구 → 시리얼 모니터</b>(115200)를 열고 손가락을 5~10초 올리면 <code>time_s,BPM</code> 아래로 한 줄씩 쌓인다. 첫 줄이 안 보이면 보드의 <b>RESET 버튼</b>을 누른다. (모니터·플로터는 하나만 열 수 있다)</div></li>
         <li><span class="n">5</span><div><b>복사</b>: 모니터 글자를 클릭 → <b>Ctrl+A → Ctrl+C</b> → 구글 시트 A1에 <b>Ctrl+V</b> → <b>데이터 → 텍스트를 열로 나누기</b>(쉼표).</div></li>
         <li><span class="n">6</span><div><b>그래프</b>: 시간과 BPM 열을 선택 → <b>삽입 → 차트</b>(가로: 시간, 세로: BPM). 운동 직후 <b>RESET 버튼</b>을 눌러 0초부터 재면 회복곡선이 됩니다.</div></li>
+        <li><span class="n">7</span><div><b>도전(선택) · 파형까지 시트에 그리기</b>: <code>MODE = 3</code>으로 올리고 시리얼 모니터에서 <b>1~2분</b>만 기록한다(RESET으로 0초부터). 복사해 시트에 붙이면 A열 <code>time_s</code>, B열 <code>signal</code>(파형), C열 <code>BPM</code>. 세 열을 선택해 차트를 만들고, BPM 계열은 <b>맞춤설정 → 계열 → 축: 오른쪽 축</b>으로 바꾸면 파형과 BPM을 함께 볼 수 있다.</div></li>
       </ol>
       <details class="codebox" open>
         <summary>최종 코드 (심박수 측정 + 점검 + 기록)</summary>
@@ -451,42 +453,62 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
           <button type="button" class="dlbtn" data-copy="#codefinal" data-file="heart_final.ino">파일로 받기(.ino)</button>
           <span class="copymsg" aria-live="polite"></span>
         </div>
-        <pre id="codefinal" class="codepre">// 심박수 측정 + 기록 코드  (펄스센서: S→A0, +→5V, -→GND)
+        <pre id="codefinal" class="codepre">// 심박수 측정·기록 코드 (펄스센서: S→A0, +→5V, -→GND)
 #define USE_ARDUINO_INTERRUPTS true
 #include &lt;PulseSensorPlayground.h&gt;
 
-const int  PulseWire  = A0;      // 센서 신호선(S)이 연결된 핀
-int        Threshold  = 550;     // 기준값: 파형에 맞게 바꿔 보세요
-const bool CHECK_MODE = false;   // true: 파형 점검 모드 / false: 측정·기록 모드
+const int PulseWire = A0;    // 센서 신호선(S)이 연결된 핀
+int Threshold = 550;         // 기준값: 파형에 맞게 바꾸기
+const int MODE = 1;          // 1: 박동마다 &#x27;시간,BPM&#x27; (표 만들기)
+                             // 2: 실시간 그래프 (파형+기준값+BPM) → 시리얼 플로터
+                             // 3: 일정 간격 &#x27;시간,파형,BPM&#x27; (시트 그래프용)
 
 PulseSensorPlayground pulseSensor;
 unsigned long t0;
+unsigned long lastBeatMs = 0;
+int lastBPM = 0;
 
 void setup() {
   Serial.begin(115200);
   pulseSensor.analogInput(PulseWire);
   pulseSensor.blinkOnPulse(LED_BUILTIN);   // 박동마다 보드 LED가 깜빡임
   pulseSensor.setThreshold(Threshold);
-  pulseSensor.begin();
+  if (!pulseSensor.begin()) {
+    Serial.println(&quot;센서를 시작하지 못했어요. 연결(S→A0, +→5V, -→GND)을 확인하세요.&quot;);
+  }
   t0 = millis();                           // 시작 시각 저장
-  if (!CHECK_MODE) Serial.println(&quot;time_s,BPM&quot;);   // 표의 열 이름
+  if (MODE == 1) Serial.println(&quot;time_s,BPM&quot;);
+  if (MODE == 3) Serial.println(&quot;time_s,signal,BPM&quot;);
 }
 
 void loop() {
-  if (CHECK_MODE) {
-    // 점검 모드: 시리얼 플로터에서 신호와 기준값을 함께 봅니다
-    Serial.print(&quot;signal:&quot;);     Serial.print(pulseSensor.getLatestSample());
-    Serial.print(&quot;,threshold:&quot;); Serial.println(Threshold);
-  } else if (pulseSensor.sawStartOfBeat()) {
-    // 측정 모드: 박동마다 &#x27;시간,BPM&#x27; 한 줄을 출력합니다
+  if (pulseSensor.sawStartOfBeat()) {
     int bpm = pulseSensor.getBeatsPerMinute();
     if (bpm &gt;= 40 &amp;&amp; bpm &lt;= 200) {         // 말이 안 되는 값은 버림
-      Serial.print((millis() - t0) / 1000.0, 1);
-      Serial.print(&quot;,&quot;);
-      Serial.println(bpm);
+      lastBPM = bpm;
+      lastBeatMs = millis();
+      if (MODE == 1) {
+        Serial.print((millis() - t0) / 1000.0, 1);
+        Serial.print(&quot;,&quot;);
+        Serial.println(bpm);
+      }
     }
   }
-  delay(20);
+  if (millis() - lastBeatMs &gt; 3000) lastBPM = 0;   // 3초 동안 박동이 없으면 0
+
+  if (MODE == 2) {                         // 플로터: 파형 + 기준값 + BPM
+    Serial.print(&quot;signal:&quot;);     Serial.print(pulseSensor.getLatestSample());
+    Serial.print(&quot;,threshold:&quot;); Serial.print(Threshold);
+    Serial.print(&quot;,bpm:&quot;);       Serial.println(lastBPM);
+  }
+  if (MODE == 3) {                         // 시트용: 일정 간격 CSV
+    Serial.print((millis() - t0) / 1000.0, 2);
+    Serial.print(&quot;,&quot;);
+    Serial.print(pulseSensor.getLatestSample());
+    Serial.print(&quot;,&quot;);
+    Serial.println(lastBPM);
+  }
+  delay(20);                               // 0.02초마다 (1초에 50번)
 }
 </pre>
       </details>
@@ -505,7 +527,7 @@ void loop() {
           <p style="margin:0;color:var(--ink-soft)">LED가 안 켜지면 LED 방향(긴 다리가 12번 쪽)과 저항 연결을 확인하세요. 더 해 보기: LED와 저항(220Ω)을 하나 더 달고 <code>fadeOnPulse(핀번호)</code>로 서서히 밝아졌다 어두워지게(PWM 핀 5·6·9·10).</p>
         </div>
       </details>
-      <p class="hint">쉬고 있는데 BPM이 120보다 높게 나오면 손으로 센 값(15초×4)과 비교하고, 점검 모드에서 파형이 기준선을 두 번 넘는지 확인해 보세요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
+      <p class="hint">쉬고 있는데 BPM이 120보다 높게 나오면 손으로 센 값(15초×4)과 비교하고, MODE 2(그래프)에서 파형이 기준선을 두 번 넘는지 확인해 보세요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
     </div>
 
     <div class="act pm" id="pm2-A" data-p="A" data-l="A">
