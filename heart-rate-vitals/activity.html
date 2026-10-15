@@ -589,14 +589,16 @@ void setup() {
 void loop() {
   if (pulseSensor.sawStartOfBeat()) {
     int myBPM = pulseSensor.getBeatsPerMinute();
-    Serial.print(&quot;raw:&quot;);  Serial.print(myBPM);
-    Serial.print(&quot;,avg:&quot;); Serial.println(smooth(myBPM));
+    if (myBPM &gt;= 40 &amp;&amp; myBPM &lt;= 200) {      // 말이 안 되는 값은 버림
+      Serial.print(&quot;raw:&quot;);  Serial.print(myBPM);
+      Serial.print(&quot;,avg:&quot;); Serial.println(smooth(myBPM));
+    }
   }
   delay(20);
 }
 </pre>
       </details>
-      <p class="hint">처음엔 ①로 파형을 확인하고, ②로 BPM을 본 뒤, 안 맞으면 ③으로 기준값(Threshold)을 조절해요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
+      <p class="hint">처음엔 ①로 파형을 확인하고, ②로 BPM을 본 뒤, 안 맞으면 ③으로 기준값(Threshold)을 조절해요. 쉬고 있는데 BPM이 120보다 높게 나오면 손으로 센 값(15초×4)과 비교하고, 파형이 기준선을 두 번 넘는지 ③으로 확인해 보세요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
     </div>
 
     <div class="act pm" id="pm2-A" data-p="A" data-l="A">
