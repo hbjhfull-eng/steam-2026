@@ -486,6 +486,19 @@ void loop() {
 }
 </pre>
       </details>
+      <details class="codebox">
+        <summary>도전(선택) — LED로 내 박동 확인하기</summary>
+        <div style="padding:10px 14px 14px;font-size:14px;line-height:1.7">
+          <p style="margin:0 0 8px">BPM 측정이 잘 되면 해 보세요. 준비물: LED 1개, <b>저항 220Ω 1개</b>(꼭 필요), 점퍼선 또는 브레드보드.</p>
+          <ol style="margin:0 0 8px 1.2em;padding:0">
+            <li>USB를 뽑는다.</li>
+            <li>12번 핀 → 저항(220Ω) → LED의 <b>+(긴 다리)</b>, LED의 <b>−(짧은 다리)</b> → <b>GND</b>에 연결한다.</li>
+            <li>코드에서 <code>pulseSensor.blinkOnPulse(LED_BUILTIN);</code> 를 <code>pulseSensor.blinkOnPulse(12);</code> 로 바꾼다.</li>
+            <li>다시 업로드하고 손가락을 올리면 박동마다 LED가 깜빡인다.</li>
+          </ol>
+          <p style="margin:0;color:var(--ink-soft)">LED가 안 켜지면 LED 방향(긴 다리가 12번 쪽)과 저항 연결을 확인하세요. 더 해 보기: <code>fadeOnPulse(핀번호)</code>로 서서히 밝아졌다 어두워지게(PWM 핀 5·6·9·10).</p>
+        </div>
+      </details>
       <p class="hint">쉬고 있는데 BPM이 120보다 높게 나오면 손으로 센 값(15초×4)과 비교하고, 점검 모드에서 파형이 기준선을 두 번 넘는지 확인해 보세요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
     </div>
 
