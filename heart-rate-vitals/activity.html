@@ -432,6 +432,10 @@ footer{max-width:900px;margin:30px auto 0;padding:20px;font-size:12px;color:var(
       <h3><span class="tag">도구함</span> 최종 코드 — 이 코드 하나로 점검하고, 측정하고, 기록해요</h3>
       <p class="lead">아래 코드 하나면 됩니다. <b>[코드 복사]</b>를 눌러 Arduino IDE 편집 창에 <b>붙여 넣고</b>(Ctrl+V) 순서대로 따라 하세요.
         집이나 다른 컴퓨터에서도 쓰려면 <b>[파일로 받기(.ino)]</b>로 USB·구글 드라이브에 보관하세요.</p>
+      <details class="codebox" open>
+        <summary>연결 도면 (필수): 펄스센서 → 아두이노</summary>
+        <div style="padding:10px 14px 14px"><img src="img/diag_base.png" alt="펄스센서 연결 도면: S→A0, +→5V, -→GND" style="width:100%;max-width:720px;height:auto;border-radius:8px;border:1px solid var(--line)"><p style="margin:8px 0 0;font-size:13.5px;color:var(--ink-soft)">USB를 뽑은 상태에서 연결해요. 선 색이 달라도 핀 이름(S, +, -)을 기준으로!</p></div>
+      </details>
       <ol class="todo">
         <li><span class="n">1</span><div>Arduino IDE를 실행한 뒤 <b>빈 스케치 창</b>에서 코드를 붙여 넣는다. (새 스케치·예제를 열면 새 창이 열리므로 그 창에서 다시 설정)</div></li>
         <li><span class="n">2</span><div><b>같은 창</b> 위쪽 보드 선택 칸에서 <b>Arduino Uno</b>와 포트(COM○)를 고르고 <b>✓(확인) → →(업로드)</b>. ‘업로드 완료’를 확인한다.</div></li>
@@ -489,6 +493,8 @@ void loop() {
       <details class="codebox">
         <summary>도전(선택) — LED로 내 박동 확인하기</summary>
         <div style="padding:10px 14px 14px;font-size:14px;line-height:1.7">
+          <img src="img/diag_led1.png" alt="LED 1개 연결 도면" style="width:100%;max-width:720px;height:auto;border-radius:8px;border:1px solid var(--line);margin:0 0 10px">
+          <img src="img/diag_led2.png" alt="LED 2개 연결 도면" style="width:100%;max-width:720px;height:auto;border-radius:8px;border:1px solid var(--line);margin:0 0 10px">
           <p style="margin:0 0 8px">BPM 측정이 잘 되면 해 보세요. 준비물: LED 1개, <b>저항 220Ω 1개</b>(꼭 필요, LED를 2개 쓰면 저항도 2개), 점퍼선 또는 브레드보드.</p>
           <ol style="margin:0 0 8px 1.2em;padding:0">
             <li>USB를 뽑는다.</li>
