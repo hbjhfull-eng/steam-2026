@@ -524,7 +524,7 @@ void loop() {
             <li>코드에서 <code>pulseSensor.blinkOnPulse(LED_BUILTIN);</code> 를 <code>pulseSensor.blinkOnPulse(12);</code> 로 바꾼다.</li>
             <li>다시 업로드하고 손가락을 올리면 박동마다 LED가 깜빡인다.</li>
           </ol>
-          <p style="margin:0;color:var(--ink-soft)">LED가 안 켜지면 LED 방향(긴 다리가 12번 쪽)과 저항 연결을 확인하세요. 더 해 보기: LED와 저항(220Ω)을 하나 더 달고 <code>fadeOnPulse(핀번호)</code>로 서서히 밝아졌다 어두워지게(PWM 핀 5·6·9·10).</p>
+          <p style="margin:0;color:var(--ink-soft)">LED가 안 켜지면 LED 방향(긴 다리가 12번 쪽)과 저항 연결을 확인하세요. 더 해 보기: LED와 저항(220Ω)을 하나 더 달고 <code>fadeOnPulse(핀번호)</code>로 서서히 밝아졌다 어두워지게(PWM 핀 ~11·~6·~5·~3, 9·10번은 안 돼요).</p>
         </div>
       </details>
       <p class="hint">쉬고 있는데 BPM이 120보다 높게 나오면 손으로 센 값(15초×4)과 비교하고, MODE 2(그래프)에서 파형이 기준선을 두 번 넘는지 확인해 보세요. 파일(.ino)을 열면 폴더를 만들겠냐고 물어보는데 ‘예’를 누르세요.</p>
